@@ -12,9 +12,8 @@ Service for premises outsourcing, where:
 | REST API | Django REST Framework |
 | SQL Database | PostgreSQL |
 | Containerization | Docker |
-| VPS | DigitalOcean |
 | Task Queue | Celery |
-|Task Worker | Redis |
+| Task Worker | Redis |
 | Frontend client | React.JS |
 | Frontend state manager | Redux |
 | Layout, Markup | HTML5, CSS3, CSS-modules |
