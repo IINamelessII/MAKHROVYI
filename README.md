@@ -17,3 +17,66 @@ Service for premises outsourcing, where:
 | Frontend client | React.JS |
 | Frontend state manager | Redux |
 | Layout, Markup | HTML5, CSS3, CSS-modules |
+
+## Stack description
+
+### Front end
+
+#### Front-end frameworks comparison
+
+The leading front-end development technologies are Angular, ReactJS and Vue.js to date. Below are represented pros and cons of each one.
+
+##### Angular
+
+Advantages:
+- enhanced RxJS, fast compilation, HTTPClient launcher;
+- detailed documentation;
+- two-way data binding that minimizes the risks of possible errors;
+- MVVM (Model-View-ViewModel) pattern, which allows to work separately in one section of the application using the same data set;
+- dependency injection and general modularity.
+
+Disadvantages:
+- need to get used to the documentation;
+- sophisticated syntax that comes from the first version of Angular;
+- migration problems that may occur when moving from an old version to a new one.
+
+##### ReactJS
+
+Advantages:
+- syntax simplicity;
+- high level of flexibility and maximum responsiveness;
+- virtual DOM (Document Object Model) - allows to organize documents into a tree that is best suited for web browsers to analyze various elements of a web application;
+- data linking from large to small - a stream of data in which children cannot influence parent data;
+- 100% open source JavaScript library that receives many daily updates and improvements according to feedback from developers around the world;
+- lightweight, since data that runs on the user side can easily be presented on the server side at the same time;
+- migration between versions is usually very simple. Facebook also provides “codemods” to automate much of this process.
+
+Disadvantages:
+- long time to master - requires a deep understanding of how to integrate the user interface into the MVC (Model-View-Control) framework.
+
+##### Vue.js
+
+Advantages:
+- detailed documentation;
+- adaptability - provides a quick transition period from other frameworks to Vue.js in view of its similarities with Angular and React in terms of design and architecture;
+- good integration - can be used both for creating single-page applications, as well as for more complex web application interfaces;
+- great scaling - helps to develop fairly large reusable templates that can be developed without spending a huge amount of time in view of a simple structure;
+- size - can weigh about 20 KB and at the same time maintain its own speed and flexibility, which allows to achieve much higher performance.
+
+Disadvantages:
+- lack of resources - still has a pretty small market share compared to React or Angular, the exchange of knowledge within the framework is still being formed;
+- risk of excessive flexibility - may have problems integrating into huge projects.
+
+#### Why ReactJS
+
+##### Components for flexibility.
+Component-based development enables easy code reuse through app, but also the writing of small features. Or, in the current case, small e-commerce functionalities. This comes in handy once it start scaling.
+
+##### Virtual DOM for performance.
+React’s virtual DOM provides a more efficient way of updating the view in a web application. Performance is huge in e-commerce.
+
+##### Vast community for peace of mind.
+Any issue has probably already been documented. Also, the ecosystem has spawned dozens of excellent dev tools to optimize React development.
+
+##### Popularity for lightweight development.
+A common E-commerce website usually comprises a plethora of forms to fill, complex filters, elements, which interact with different APIs, maps, etc. ReactJS comes with a whole bunch of ready-made modules for all occasions, not mentioning that it’s easy to test and scale.
