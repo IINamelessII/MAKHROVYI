@@ -5,12 +5,12 @@ Service for premises outsourcing, where:
  - Everybody can rent a place for different needs
  
 ## Project features
- - The main goal of the project is providing a platform for renting of EVERYTHING: people can rent anything from the things they need (for example, a washing machine, hairdryer, projector, or even a car) to living quarters, offices or retail spaces.
- - Users can create pages with a detailed description of their objects that will be rented. On these pages, among other things, you can find out the price, the time for which you can rent this object and also the queue for rent.
- - Also, people can leave requests for things they want to rent.
- - Each owner will have a personal page with rental statistics and reviews.
- - Buyer's actions will remain anonymous and will not be displayed anywhere without his consent.
- - For an additional fee it will be possible to advertise a rental object.
+ - The main goal of the project is providing a platform for ***renting of EVERYTHING***: people can rent anything from the things they need (for example, *a washing machine, hairdryer, projector, or even a car*) to *living quarters, offices or retail spaces*.
+ - Users can **create pages** with a detailed description of their objects that will be rented. On these pages, among other things, you can find out the price, the time for which you can rent this object and also the queue for rent.
+ - Also, people can **leave requests** for things they want to rent.
+ - Each owner will have a **personal page** with rental statistics and reviews.
+ - Buyer's actions will remain **anonymous** and will not be displayed anywhere without his consent.
+ - For an additional fee it will be possible to **advertise** a rental object.
  - ... (as the project develops, opportunities will be added and adjusted)
 
 
