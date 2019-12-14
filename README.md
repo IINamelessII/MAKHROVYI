@@ -90,3 +90,49 @@ Any issue has probably already been documented. Also, the ecosystem has spawned 
 
 ##### Popularity for lightweight development.
 A common E-commerce website usually comprises a plethora of forms to fill, complex filters, elements, which interact with different APIs, maps, etc. ReactJS comes with a whole bunch of ready-made modules for all occasions, not mentioning that it’s easy to test and scale.
+
+#### State management frameworks
+
+##### MobX
+MobX is a battle tested library that makes state management simple and scalable by transparently applying functional reactive programming (TFRP). The philosophy behind MobX is very simple:
+
+_Anything that can be derived from the application state, should be derived. Automatically._
+
+It makes use of such popular design patterns as Observable and Observer and utilizes these in order to create UIs which truly represent data.
+
+Advantages:
+- easy to use - it only takes a few minutes to get used to it;
+- utilizes reactive programming;
+- suitable for small- to middle-sized apps.
+
+Disadvantages:
+- impure - encourages state mutations which can lead to bugs;
+- not scalable.
+
+##### Redux
+Redux is a predictable state container for JavaScript apps. It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test. On top of that, it provides a great developer experience, such as live code editing combined with a time traveling debugger.
+
+Advantages:
+- pure - encourages immutability;
+- centralized data store - data is kept in one place and is not mixed with other layers;
+- easy to maintain - single-responsibility layering model keeps business logic separated and makes code clean and shiny;
+- lightweight (only 2KB);
+- large community.
+
+Disadvantages:
+- needs a lot of boilerplate.
+
+#### Why Redux
+
+##### Logic separation
+The major benefit of Redux is to add direction to decouple “what happened” from “how things change”.
+
+##### Predictable state
+In Redux, the state is always predictable. If the same state and action are passed to a reducer, the same result is always produced as reducers are pure functions. The state is also immutable and is never changed. This makes it possible to implement arduous tasks like infinite undo and redo.
+
+##### Maintainability
+Redux is strict about how code should be organized so it makes it easier for someone with knowledge of Redux to understand the structure of any Redux application. This generally makes it easier to maintain.
+
+##### Ease of testing
+It is easy to test Redux apps as functions used to change the state of pure functions.
+
