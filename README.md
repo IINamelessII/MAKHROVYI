@@ -136,3 +136,54 @@ Redux is strict about how code should be organized so it makes it easier for som
 ##### Ease of testing
 It is easy to test Redux apps as functions used to change the state of pure functions.
 
+
+### Back end
+
+#### Back-end frameworks comparison
+
+Nowadays you can choose among of tons of web-frameworks in search of your development tool. We decided to prefer Python-based one because of it's simplify and correlation to our current experience. Especially, in case when backend developer currently works (as Python Developer, btw).
+
+There are a lot of python backend so-called frameworks. But it should be meantioned that you really have to choose between 2 of them(Really, have you ever seen usage of another Python web framework within big, high load project?):
+
+##### Django
+
+Features:
+- It was designed to help developers take applications from beginning to end as quickly as possible
+- It includes dozens of extras you can use to handle common Web development tasks. Django takes care of user authentication, content administration, site maps, RSS feeds, and many more tasks — right out of the box
+-  It provides security very effectively and helps developers avoid many common security mistakes, such as SQL injection, cross-site scripting, cross-site request forgery, and clickjacking. Its user authentication system provides a secure way to manage user accounts and passwords
+- Some of the busiest sites on the planet use Django’s ability to quickly and flexibly scale to meet the heaviest traffic demands
+
+##### Flask
+
+Features:
+- Has a lightweight and modular design, so it easy to transform it to the web framework you need with a few extensions without weighing it down
+- ORM-agnostic: you can plug in your favourite ORM e.g. SQLAlchemy
+-  Built-in development server and fast debugger
+- Flask documentation is comprehensive, full of examples and well structured. You can even try out some sample application to really get a feel of Flask
+- RESTful request dispatching
+- Support for secure cookies (client side sessions)
+- The configuration is even more flexible than that of Django, giving you plenty of solution for every production need
+
+
+#### Why Django
+
+##### It's fast and simple
+One of Django’s main goals is to simplify work for developers. To do that, the Django framework uses:
+- The principles of rapid development, which means developers can do more than one iteration at a time without starting the whole schedule from scratch
+- DRY philosophy — Don’t Repeat Yourself — which means developers can reuse existing code and focus on the unique one
+
+As a result, it takes a lot less time to get the project to market
+
+##### It's secure
+Security is also a high priority for Django. It has one of the best out-of-the-box security systems out there, and it helps developers avoid common security issues, including:
+- clickjacking,
+- cross-site scripting,and
+- SQL injection.
+
+Django promptly releases new security patches. It’s usually the first one to respond to vulnerabilities and alert other frameworks.
+
+##### It's easy to extend and scale
+It’s fully loaded with extras and scalable, so you can make applications that handle heavy traffic and large volumes of information
+
+##### Flexible databases configuration
+It works with most major databases and allows using a database that is more suitable in a particular project, or even multiple databases at the same time
