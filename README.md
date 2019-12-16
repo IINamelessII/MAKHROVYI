@@ -24,7 +24,7 @@ Service for premises outsourcing, where:
 | Containerization | Docker |
 | Task Queue | Celery |
 | Task Worker | Redis |
-| Frontend client | React.JS |
+| Frontend client | React.JS with TypeScript |
 | Frontend state manager | Redux |
 | Layout, Markup | HTML5, CSS3, CSS-modules |
 
