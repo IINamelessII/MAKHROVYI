@@ -176,9 +176,9 @@ As a result, it takes a lot less time to get the project to market
 
 ##### It's secure
 Security is also a high priority for Django. It has one of the best out-of-the-box security systems out there, and it helps developers avoid common security issues, including:
-- clickjacking,
-- cross-site scripting,and
-- SQL injection.
+- clickjacking
+- cross-site scripting
+- SQL injection
 
 Django promptly releases new security patches. It’s usually the first one to respond to vulnerabilities and alert other frameworks.
 
@@ -188,6 +188,11 @@ It’s fully loaded with extras and scalable, so you can make applications that 
 ##### Flexible databases configuration
 It works with most major databases and allows using a database that is more suitable in a particular project, or even multiple databases at the same time
 
+##### There is Django REST Framework, powerfull Python lib for creating clear and cannonic RESTful API
+- The Web browsable API is a huge usability win for your developers.
+- Authentication policies including packages for OAuth1a and OAuth2.
+- Serialization that supports both ORM and non-ORM data sources.
+- Customizable all the way down - just use regular function-based views if you don't need the more powerful features
 
 ### Extra
 
