@@ -28,6 +28,8 @@ STATICFILES_DIRS = [
     os.path.join(FRONTEND_DIR, 'build', 'static')
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -38,7 +40,6 @@ SECRET_KEY = 'ke1srm_nq0pb*5bj7_%(me9617=#wh-gf8z!%)upuvm*%w)*ff'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
