@@ -20,12 +20,13 @@ def index(request):
     """render SPA"""
     return render(request, 'index.html')
 
+
 def download(request):
     """download instance file by its id"""
     #TODO add custom exceptions and different responses
     try:
         data = json.loads(request.body.decode('utf-8'))
-        instance = Instance.get(pk=data['id'])
+        instance = Instance.objects.get(pk=data['id'])
     except:
         return HttpResponse(status=404)
     else:
