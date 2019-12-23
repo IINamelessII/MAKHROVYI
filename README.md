@@ -220,3 +220,15 @@ To be honest, the main reason is lack of time to learn and try new tools, we cur
 *Built a static version of app*. Create the frontend with all its components before implement state or any other functionalities.
 
 As a first step, a static version of the frontend is being built which is outlined in the mockup. No need to think about any functionalities or state manipulations. Only focus on designing the app. Simply take every component that was previously identified and implement it in app. Placeholders can be used temporarily.
+
+
+### Back end
+
+#### February
+- *Rent app*: app with renting tools: list of rental offers, creating rent pages etc.
+#### March
+- *Personal pages app*: app with user pages tools.
+#### April
+- *Forum/feedback/technical support app*: app with interaction tools.
+#### May
+- (?)
