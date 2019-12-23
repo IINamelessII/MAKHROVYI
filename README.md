@@ -198,7 +198,7 @@ It works with most major databases and allows using a database that is more suit
 
 #### Why PostgreSQL, Docker, Celery, Redis, Nginx, Gunicorn
 
-To be honest, the main reason is lack of time to learn and try new tools, we currently have experience with this tools, especially with Postgres, the backend developer using it as main DB on his work.
+To be honest, the main reason is lack of time to learn and try new tools, we currently have experience with this tools, especially with Postgres.
 
 ## High-level Project Estimation
 
