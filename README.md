@@ -199,3 +199,24 @@ It works with most major databases and allows using a database that is more suit
 #### Why PostgreSQL, Docker, Celery, Redis, Nginx, Gunicorn
 
 To be honest, the main reason is lack of time to learn and try new tools, we currently have experience with this tools, especially with Postgres, the backend developer using it as main DB on his work.
+
+## High-level Project Estimation
+
+### Front end
+
+#### February
+
+1. *Create a mockup*. Splitting the UI into independent elements and thus React components can be done by creating a mockup first.
+1. *Break the UI into components*. Every element should have responsibility for a specific, single part of the functionality provided by the application — not more and not less, a responsibility for some sort of functionality that can be entirely encapsulated too.
+1. *Arrange all components in a hierarchy*. Arranging components in a hierarchy is the next step in planning process. This hierarchy will help later on when data flows are being implemented in application. Additionally, it makes a component’s dependencies clear and thus helps to build the app.
+1. *Define where state should live*. Need to define components which should manage the application’s state. As recommended in the React docs, it is wanted to have a top-down data flow. There is one single source of truth at the top of main application and from this source, all information flows downwards. The source of truth is implemented in the component that needs it for rendering. State is managed in containing app component at the very top. From this app component, data is passed down the component tree via props.
+1. *Project organizing*.
+    * *Have a consistent, though-out folder structure*. Look for structuring patterns that are applicable to project and be consistent with it.
+    * *Write functional components if possible*.
+    * *Use CSS modules*. No need to worry about same class names within project by scoping classes locally to a component.
+
+#### March
+
+*Built a static version of app*. Create the frontend with all its components before implement state or any other functionalities.
+
+As a first step, a static version of the frontend is being built which is outlined in the mockup. No need to think about any functionalities or state manipulations. Only focus on designing the app. Simply take every component that was previously identified and implement it in app. Placeholders can be used temporarily.
