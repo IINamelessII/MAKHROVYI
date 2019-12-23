@@ -224,11 +224,13 @@ As a first step, a static version of the frontend is being built which is outlin
 
 ### Back end
 
-#### February
-- *Rent app*: app with renting tools: list of rental offers, creating rent pages etc.
+####  February
+- Creating use cases, detailed tasks planning, job assignment. 
 #### March
-- *Personal pages app*: app with user pages tools.
+- *Rent app*: app with renting tools: list of rental offers, creating rent pages etc.
 #### April
-- *Forum/feedback/technical support app*: app with interaction tools.
+- *Personal pages app*: app with user pages tools.
 #### May
-- (?)
+- *Forum/feedback/technical support app*: app with interaction tools.
+#### June
+- Test coverage, preparation for project completion.
