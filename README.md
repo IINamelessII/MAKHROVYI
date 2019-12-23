@@ -221,23 +221,28 @@ To be honest, the main reason is lack of time to learn and try new tools, we cur
 
 As a first step, a static version of the frontend is being built which is outlined in the mockup. No need to think about any functionalities or state manipulations. Only focus on designing the app. Simply take every component that was previously identified and implement it in app. Placeholders can be used temporarily.
 
-#### May
-
-Implement Redux data store. Replace placeholders and mocked data with real data from store. Make components stateful where needed. Gradually make UI interactive and responsive.
-
-#### June
-
-Test UI for stability. Improve interactivity and overall User Experience. Polish visual appearance and add animations with further style improvements. Prepare product for release.
 
 ### Back end
 
 ####  February
-- Creating use cases, detailed tasks planning, job assignment. 
+
+1. *Designing use cases*. Creating buisiness models and actually usecases
+1. *Designing API endpoints*.
+1. *Writing docs for API endpoints*. Documenting main HTTP `GET/POST/PATCH`(update) methods for API endpoints.
+
 #### March
-- *Rent app*: app with renting tools: list of rental offers, creating rent pages etc.
+
+1. *Separating buisiness logic from DB logic*.
+1. *Building DB schema*. Designing tables and their relations, prefering datatypes and restrictions
+
 #### April
-- *Personal pages app*: app with user pages tools.
+
+1. *Writing Rent app*. App with renting tools: list of rental offers, creating rent pages etc.
+
 #### May
-- *Forum/feedback/technical support app*: app with interaction tools.
+
+1. *Writing Personal pages app*: App with user pages tools.
+
 #### June
-- Test coverage, preparation for project completion.
+
+1. *Mock billing*. Creating a mock of billing (we will not create actual billing system) and thinking about transaction safety.
