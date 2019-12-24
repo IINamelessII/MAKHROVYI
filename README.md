@@ -221,6 +221,10 @@ To be honest, the main reason is lack of time to learn and try new tools, we cur
 
 As a first step, a static version of the frontend is being built which is outlined in the mockup. No need to think about any functionalities or state manipulations. Only focus on designing the app. Simply take every component that was previously identified and implement it in app. Placeholders can be used temporarily.
 
+#### April
+
+*Implement the minimal state app needs*. Only add data to state that is necessarily needed by app and compute everything else on-demand.
+
 #### May
 
 Implement Redux data store. Replace placeholders and mocked data with real data from store. Make components stateful where needed. Gradually make UI interactive and responsive.
