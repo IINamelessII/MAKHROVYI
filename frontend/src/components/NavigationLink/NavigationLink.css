@@ -1,0 +1,10 @@
+.NavigationLink {
+    border: 1px solid hotpink;
+    /* padding: 40px; */
+    cursor: pointer;
+}
+
+.NavigationLink:hover {
+    background: #eee;
+    border: none;
+}
