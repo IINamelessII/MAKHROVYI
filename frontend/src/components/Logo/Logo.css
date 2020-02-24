@@ -1,0 +1,15 @@
+.Logo {
+    height: 100%;
+    width: 20%;
+    border: 1px solid orange;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.Title{
+    font-size: 30px;
+}
+
+.SubTitle {
+    font-size: 16px;
+}
