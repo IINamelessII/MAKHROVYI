@@ -1,21 +1,16 @@
-import React from 'react';
-import axios from "axios";
-import cookie from "react-cookies";
-import './App.css';
-import InstanceList from './components/InstanceList';
+import React, {Component} from 'react';
 
+import classes from './App.css';
 
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-
-
-function App() {
+class App extends Component {
+  render () {
     return (
-        <div className="App">
-            Hello, World!
-            <InstanceList/>
-        </div>
+      <div className={classes.App}>
+        Hello World
+        Test
+      </div>
     );
+  }
 }
 
 export default App;
