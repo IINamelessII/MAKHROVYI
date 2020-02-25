@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import classes from './FilterList.css';
+import classes from './Solutions.css';
 import Filter from './Filter/Filter';
 
 class FilterList extends Component {

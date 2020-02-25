@@ -9,9 +9,9 @@ class NavigationBar extends Component {
     return (
       <div className={classes.NavigationBar}>
         <Logo />
-        <NavigationLink>Palevo</NavigationLink>
-        <NavigationLink>Tutorial</NavigationLink>
-        <NavigationLink>Upload</NavigationLink>
+        <NavigationLink link="/">Solutions</NavigationLink>
+        <NavigationLink link="/tutorials">Tutorials</NavigationLink>
+        <NavigationLink link="/upload">Upload</NavigationLink>
       </div>
     );
   }
