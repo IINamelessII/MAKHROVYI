@@ -1,19 +1,29 @@
 import React, {Component} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
+import asyncComponent from './hoc/asyncComponent/asyncComponent';
 
 import NavigationBar from './containers/NavigationBar/NavigationBar';
 import Screen from './containers/Screen/Screen';
-import Solutions from './containers/Solutions/Solutions';
-import Tutorials from './containers/Tutorials/Tutorials';
-import Upload from './containers/Upload/Upload';
+
+const asyncSolutions = asyncComponent(() => {
+  return import('./containers/Solutions/Solutions');
+});
+
+const asyncTutorials = asyncComponent(() => {
+  return import('./containers/Tutorials/Tutorials');
+});
+
+const asyncUpload = asyncComponent(() => {
+  return import('./containers/Upload/Upload');
+});
 
 class App extends Component {
   render () {
     let routes = (
       <Switch>
-        <Route path="/tutorials" component={Tutorials} />
-        <Route path="/upload" component={Upload} />
-        <Route path="/" exact component={Solutions} />
+        <Route path="/tutorials" component={asyncTutorials} />
+        <Route path="/upload" component={asyncUpload} />
+        <Route path="/" exact component={asyncSolutions} />
         <Redirect to="/" />
       </Switch>
     )

@@ -6,5 +6,5 @@
 
 .NavigationLink:hover {
     background: #eee;
-    border: none;
+    /* border: none; */
 }
