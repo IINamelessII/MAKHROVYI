@@ -6,13 +6,17 @@ const logo = () => {
   return (
     <NavLink to="/">
       <div className={classes.Logo} >
-      <div className={classes.Title}>
-        MAKHROVYI
+        <div className={classes.Title}>
+          {/* <h3> */}
+            MAKHROVYI
+          {/* </h3> */}
+        </div>
+        <div className={classes.SubTitle}>
+          {/* <h5> */}
+            Ооо, панове...
+          {/* </h5> */}
+        </div>
       </div>
-      <div>
-        Ооо, панове...
-      </div>
-    </div>
     </NavLink>
   );
 }

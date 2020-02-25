@@ -4,10 +4,12 @@ import classes from './NavigationLink.css';
 
 const navigationLink = (props) => {
   return (
-    <div className={classes.NavigationLink} >
       <NavLink
-        to={props.link}>{props.children}</NavLink>
-    </div>
+        to={props.link}><div className={classes.NavigationLink} >
+          {props.children}
+          </div>
+      </NavLink>
+    
   );
 }
 

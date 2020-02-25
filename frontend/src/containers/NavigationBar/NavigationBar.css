@@ -1,8 +1,11 @@
 .NavigationBar {
     border: 1px solid green;
-    height: 60px;
+    height: 80px;
     width: 100%;
     box-sizing: border-box;
     display: flex;
-    /* padding: 10px; */
+}
+
+.NavigationBar > a{
+    text-decoration: none;
 }

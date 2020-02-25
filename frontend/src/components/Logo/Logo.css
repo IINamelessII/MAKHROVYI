@@ -1,13 +1,18 @@
 .Logo {
-    height: 100%;
-    /* width: 20%; */
-    border: 1px solid orange;
+    /* height: 100%; */
+    /* border: 1px solid orange; */
     box-sizing: border-box;
     text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    color: #0D9EDF;
+    margin: 10px 20px;
+    text-shadow: 0 0 3px #00A9D8;
 }
 
 .Title{
     font-size: 30px;
+    font-weight: 700;
 }
 
 .SubTitle {
