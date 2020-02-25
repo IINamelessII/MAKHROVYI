@@ -1,4 +1,4 @@
-export const subjects = {
+export const subjectsData = {
   "ФИВТ": {
     "ВТ": {
       1: [
@@ -38,5 +38,20 @@ export const subjects = {
         "Экология",
       ],
     },
+    "TK": {
+      1: ["EASY", "AnotherEasy"],
+      4: ["EASSSSSSSSY", "TEST"]
+    }
   },
+  "IPSA": {
+    "AE": {
+      1: ["A", "DD", "ASAS"],
+      2: ["ssss", "213s"],
+      4: ["2s21ss", "ssa31"],
+    },
+    "EMP": {
+      2: [],
+      3: [],
+    }
+  }
 }
