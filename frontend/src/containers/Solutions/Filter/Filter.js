@@ -4,17 +4,13 @@ import classes from './Filter.css';
 
 class Filter extends Component {
   render() {
+    const facultiesList = this.props.items.map((item) => {
+      return <div key={item}>{item}</div>
+    })
+
     return (
       <div className={classes.Filter}>
-        <div>
-          Filter option
-        </div>
-        <div>
-          Filter option
-        </div>
-        <div>
-          Filter option
-        </div>
+        {facultiesList}
       </div>
     );
   }

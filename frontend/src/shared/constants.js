@@ -1,4 +1,4 @@
-const subjects = {
+export const subjects = {
   "ФИВТ": {
     "ВТ": {
       1: [
