@@ -10,25 +10,42 @@ class FileBrowser extends Component {
     structure: null,
     hashPath: [],
     path: [],
+    items: [],
   }
 
   componentDidMount() {
-    this.forwardDir(structureData[rootHash].content, rootHash, "/");
+    this.addDirToPath(structureData[rootHash].content, rootHash, "/");
   }
 
-  forwardDir = (structure, hash, name) => {
+  addDirToPath = (structure, hash, name) => {
     const hashPath = [...this.state.hashPath];
     hashPath.push(hash);
+
     const path = [...this.state.path];
     path.push(name);
+
+    const items = [...this.state.items];
+    items.push(structure);
     this.setState({
       structure: structure, 
       hashPath: hashPath,
       path: path,
+      items: items,
     });
   }
 
-  openPath = () => {}
+  openFromPath = (index) => {
+    const hashPath = this.state.hashPath.slice(0, index + 1);
+    const path = this.state.path.slice(0, index + 1);
+    const items = this.state.items.slice(0, index + 1);
+    const structure = items[index];
+    this.setState({
+      structure: structure,
+      hashPath: hashPath,
+      path: path,
+      items: items,
+    });
+  }
 
   render() {
     let items = null;
@@ -44,17 +61,18 @@ class FileBrowser extends Component {
           <Dir
             key={item[0]}
             name={item[1].name}
-            open={() => this.forwardDir(item[1].content, item[0], item[1].name)} />
+            open={() => this.addDirToPath(item[1].content, item[0], item[1].name)} />
           );
       });
     }
     
-    const pathRow = this.state.path.map((name) => {
+    const pathRow = this.state.path.map((name, index) => {
+      // hash = this.state.hashPath[index];
       return (
         <PathPart
           key={name}
           pathPartName={name}
-          goToParh={() => this.openPath()} />
+          goToPath={() => this.openFromPath(index)} />
       );
     });
 
