@@ -4,10 +4,7 @@ import asyncComponent from './hoc/asyncComponent/asyncComponent';
 
 import NavigationBar from './containers/NavigationBar/NavigationBar';
 import Screen from './containers/Screen/Screen';
-
-// const asyncSolutions = asyncComponent(() => {
-//   return import('./containers/Solutions/Solutions');
-// });
+import Layout from './hoc/Layout/Layout';
 
 const asyncTutorials = asyncComponent(() => {
   return import('./containers/Tutorials/Tutorials');
@@ -33,12 +30,12 @@ class App extends Component {
     )
 
     return (
-      <div>
+      <Layout>
         <NavigationBar />
         <Screen>
           {routes}
         </Screen>
-      </div>
+      </Layout>
     );
   }
 }
