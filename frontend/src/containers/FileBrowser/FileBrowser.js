@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {structureData} from '../../shared/constants';
+import {structureData, rootHash} from '../../shared/constants';
 
 import Dir from './Dir/Dir';
 import File from './File/File';
@@ -7,14 +7,24 @@ import File from './File/File';
 class FileBrowser extends Component {
   state = {
     structure: null,
+    hashPath: [],
+    path: [],
   }
 
   componentDidMount() {
-    this.openDir(structureData["aaaa"].content);
+    this.openDir(structureData[rootHash].content, rootHash, "/");
   }
 
-  openDir = (structure) => {
-    this.setState({structure: structure});
+  openDir = (structure, hash, name) => {
+    const hashPath = [...this.state.hashPath];
+    hashPath.push(hash);
+    const path = [...this.state.path];
+    path.push(name);
+    this.setState({
+      structure: structure, 
+      hashPath: hashPath,
+      path: path,
+    });
   }
 
   render() {
@@ -31,10 +41,11 @@ class FileBrowser extends Component {
           <Dir
             key={item[0]}
             name={item[1].name}
-            open={() => this.openDir(item[1].content)} />
+            open={() => this.openDir(item[1].content, item[0], item[1].name)} />
           );
       });
     }
+    
     return (
       <div>
         {items}

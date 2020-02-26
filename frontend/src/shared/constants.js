@@ -56,6 +56,8 @@
 //   }
 // }
 
+export const rootHash = "aaaa";
+
 export const structureData = {
   "aaaa": {
     name: "root",
