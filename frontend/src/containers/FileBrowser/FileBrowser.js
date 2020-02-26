@@ -3,6 +3,7 @@ import {structureData, rootHash} from '../../shared/constants';
 
 import Dir from './Dir/Dir';
 import File from './File/File';
+import PathPart from './PathPart/PathPart';
 
 class FileBrowser extends Component {
   state = {
@@ -12,10 +13,10 @@ class FileBrowser extends Component {
   }
 
   componentDidMount() {
-    this.openDir(structureData[rootHash].content, rootHash, "/");
+    this.forwardDir(structureData[rootHash].content, rootHash, "/");
   }
 
-  openDir = (structure, hash, name) => {
+  forwardDir = (structure, hash, name) => {
     const hashPath = [...this.state.hashPath];
     hashPath.push(hash);
     const path = [...this.state.path];
@@ -26,6 +27,8 @@ class FileBrowser extends Component {
       path: path,
     });
   }
+
+  openPath = () => {}
 
   render() {
     let items = null;
@@ -41,13 +44,23 @@ class FileBrowser extends Component {
           <Dir
             key={item[0]}
             name={item[1].name}
-            open={() => this.openDir(item[1].content, item[0], item[1].name)} />
+            open={() => this.forwardDir(item[1].content, item[0], item[1].name)} />
           );
       });
     }
     
+    const pathRow = this.state.path.map((name) => {
+      return (
+        <PathPart
+          key={name}
+          pathPartName={name}
+          goToParh={() => this.openPath()} />
+      );
+    });
+
     return (
       <div>
+        <div>{pathRow}</div>
         {items}
       </div>
     );
