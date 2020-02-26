@@ -98,3 +98,9 @@ export const structureData = {
     }
   }
 }
+
+export const fileOptions = [
+  {"label": "open", "action":() => {console.log("open")}},
+  {"label": "download", "action":() => {console.log("download")}},
+  {"label": "properties", "action":() => {console.log("properties")}},
+];
