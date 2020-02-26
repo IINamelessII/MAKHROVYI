@@ -7,7 +7,6 @@ import PathPart from './PathPart/PathPart';
 
 class FileBrowser extends Component {
   state = {
-    structure: null,
     hashPath: [],
     path: [],
     items: [],
@@ -27,7 +26,6 @@ class FileBrowser extends Component {
     const items = [...this.state.items];
     items.push(structure);
     this.setState({
-      structure: structure, 
       hashPath: hashPath,
       path: path,
       items: items,
@@ -38,9 +36,7 @@ class FileBrowser extends Component {
     const hashPath = this.state.hashPath.slice(0, index + 1);
     const path = this.state.path.slice(0, index + 1);
     const items = this.state.items.slice(0, index + 1);
-    const structure = items[index];
     this.setState({
-      structure: structure,
       hashPath: hashPath,
       path: path,
       items: items,
@@ -49,8 +45,10 @@ class FileBrowser extends Component {
 
   render() {
     let items = null;
-    if(this.state.structure) {
-      const structure = Object.entries(this.state.structure);
+    //TODO: replace this.state.items.length - 1 with -1 analog
+    let structure = this.state.items[this.state.items.length - 1];
+    if(structure) {
+      structure = Object.entries(structure);
       items = structure.map((item) => {
         return item[1].type === "file" ?
           (<File
