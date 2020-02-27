@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import ContextMenu from '../ContextMenu/ContextMenu';
 import * as actions from '../../../store/actions/index';
 
-import {fileOptions} from '../../../shared/constants';
+import {dirOptions} from '../../../shared/constants';
 
 class Dir extends Component {
   state = {
@@ -30,7 +30,7 @@ class Dir extends Component {
         >It's Dir {this.props.name}</div>
         {this.state.showContextMenu ? (
           <ContextMenu
-            options={fileOptions} />
+            options={dirOptions} />
         ) : null}
       </Fragment>
     );

@@ -1,15 +1,31 @@
 import React, {Component} from 'react';
-import {structureData, rootHash} from '../../shared/constants';
+
+import {connect} from 'react-redux';
 
 import Dir from './Dir/Dir';
 import File from './File/File';
 import PathPart from './PathPart/PathPart';
+import ContextMenu from './ContextMenu/ContextMenu';
+import * as actions from '../../store/actions/index';
+
+import {structureData, rootHash, spaceOptions} from '../../shared/constants';
 
 class FileBrowser extends Component {
   state = {
     hashPath: [],
     path: [],
     items: [],
+    showContextMenu: false,
+  }
+
+  showContextMenu = (event) => {
+    event.preventDefault();
+    this.props.onContextMenuShow(this.hideContextMenu);
+    this.setState({showContextMenu: true});
+  }
+
+  hideContextMenu = (event) => {
+    this.setState({showContextMenu: false});
   }
 
   componentDidMount() {
@@ -76,10 +92,21 @@ class FileBrowser extends Component {
     return (
       <div>
         <div>{pathRow}</div>
-        {items}
+        <div>{items}</div>
+        <div onContextMenu={this.showContextMenu}>SOME FREE SPACE UNDER items</div>
+        {this.state.showContextMenu ? (
+          <ContextMenu
+            options={spaceOptions} />
+        ) : null}
       </div>
     );
   }
 }
 
-export default FileBrowser;
+const mapDispatchToProps = dispatch => {
+  return {
+    onContextMenuShow: (backdropFunction) => dispatch(actions.setBackdrop(backdropFunction)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(FileBrowser);
