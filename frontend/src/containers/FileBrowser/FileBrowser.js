@@ -65,7 +65,6 @@ class FileBrowser extends Component {
     }
     
     const pathRow = this.state.path.map((name, index) => {
-      // hash = this.state.hashPath[index];
       return (
         <PathPart
           key={name}

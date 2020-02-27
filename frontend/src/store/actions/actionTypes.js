@@ -1,1 +1,2 @@
 export const SET_BACKDROP = 'SET_BACKDROP';
+export const HIDE_BACKDROP = 'HIDE_BACKDROP';

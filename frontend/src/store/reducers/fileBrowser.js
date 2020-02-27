@@ -17,9 +17,17 @@ const setBackdrop = (state, action) => {
   });
 };
 
+const hideBackdrop = (state, action) => {
+  return updateObject(state, {
+    showBackdrop: false,
+    backdropFunction: null,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_BACKDROP: return setBackdrop(state, action);
+    case actionTypes.HIDE_BACKDROP: return hideBackdrop(state, action);
     default: return state;
   }
 };

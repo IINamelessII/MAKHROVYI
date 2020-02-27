@@ -6,3 +6,9 @@ export const setBackdrop = (backdropOnClickFunction) => {
     backdropOnClickFunction: backdropOnClickFunction,
   };
 };
+
+export const hideBackdrop = () => {
+  return {
+    type: actionTypes.HIDE_BACKDROP,
+  };
+};
