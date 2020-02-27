@@ -1,22 +1,22 @@
-
-
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 class Backdrop extends Component {
-  state = {
-    show: false,
-  }
-
-  hide = () => {
-    this.setState({show: false});
-  }
-
   render() {
-    return this.state.show ? (
-      <div>
+    return this.props.show ? (
+      <div onClick={this.props.click}>
+        BACKDROP
       </div>
     ) : null;
   }
 }
 
-export default Backdrop;
+const mapStateToProps = state => {
+  return {
+    show: state.fileBrowser.showBackdrop,
+    click: state.fileBrowser.backdropFunction,
+  };
+};
+
+
+export default connect(mapStateToProps)(Backdrop);

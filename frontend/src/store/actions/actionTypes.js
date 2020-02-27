@@ -1,0 +1,1 @@
+export const SET_BACKDROP = 'SET_BACKDROP';
