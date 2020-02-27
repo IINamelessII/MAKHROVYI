@@ -8,6 +8,9 @@ const initialState = {
 };
 
 const setBackdrop = (state, action) => {
+  if (state.backdropFunction) {
+    state.backdropFunction();
+  }
   return updateObject(state, {
     showBackdrop: true,
     backdropFunction: action.backdropOnClickFunction,
