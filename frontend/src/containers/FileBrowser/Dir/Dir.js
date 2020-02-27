@@ -21,11 +21,16 @@ class Dir extends Component {
     this.setState({showContextMenu: false});
   }
 
+  onDirClick = () => {
+    this.props.click();
+    this.props.open();
+  }
+
   render() {
     return (
       <Fragment>
         <div 
-          onClick={this.props.open} 
+          onClick={this.onDirClick}
           onContextMenu={this.showContextMenu}
         >It's Dir {this.props.name}</div>
         {this.state.showContextMenu ? (

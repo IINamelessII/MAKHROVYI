@@ -18,6 +18,9 @@ const setBackdrop = (state, action) => {
 };
 
 const hideBackdrop = (state, action) => {
+  if (state.backdropFunction) {
+    state.backdropFunction();
+  }
   return updateObject(state, {
     showBackdrop: false,
     backdropFunction: null,

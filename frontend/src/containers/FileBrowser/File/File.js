@@ -24,7 +24,9 @@ class File extends Component {
   render() {
     return (
       <Fragment>
-        <div onContextMenu={this.showContextMenu}>It's File {this.props.name}.{this.props.ext}</div>
+        <div 
+          onContextMenu={this.showContextMenu}
+          onClick={this.props.click}>It's File {this.props.name}.{this.props.ext}</div>
         {this.state.showContextMenu ? (
           <ContextMenu
             options={fileOptions} />

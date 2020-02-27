@@ -70,12 +70,14 @@ class FileBrowser extends Component {
           (<File
             key={item[0]}
             name={item[1].name}
-            ext={item[1].ext} />
+            ext={item[1].ext}
+            click={this.props.onBackdropHide} />
           ) : (
           <Dir
             key={item[0]}
             name={item[1].name}
-            open={() => this.addDirToPath(item[1].content, item[0], item[1].name)} />
+            open={() => this.addDirToPath(item[1].content, item[0], item[1].name)}
+            click={this.props.onBackdropHide} />
           );
       });
     }
@@ -89,6 +91,7 @@ class FileBrowser extends Component {
       );
     });
 
+    //TODO: items should on top of(over) free space and even backdrop
     return (
       <div>
         <div>{pathRow}</div>
@@ -106,6 +109,7 @@ class FileBrowser extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onContextMenuShow: (backdropFunction) => dispatch(actions.setBackdrop(backdropFunction)),
+    onBackdropHide: () => dispatch(actions.hideBackdrop()),
   };
 }
 
