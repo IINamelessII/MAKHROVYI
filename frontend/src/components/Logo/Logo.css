@@ -5,11 +5,6 @@
     transition: color .1s linear;
 }
 
-.Logo a:hover {
-    color: aquamarine;
-    
-}
-
 .Title {
     font-size: 36px;
     font-weight: 700;
@@ -18,4 +13,26 @@
 .Subtitle {
     font-size: 24px;
     font-weight: 500;
+    display: flex;
 }
+
+.Logo a:hover {
+    color: aquamarine;
+}
+
+.Face{
+    background: url("../../assets/images/face.png");
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    -webkit-background-size: cover;
+
+    opacity: 0;
+    transition: opacity .1s linear;
+}
+
+.Logo:hover .Face {
+    opacity: 1;
+}
+
+
