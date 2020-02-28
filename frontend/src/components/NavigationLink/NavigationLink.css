@@ -1,0 +1,44 @@
+.NavigationLink{
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 15px;
+    position: relative;
+}
+
+.NavigationLink a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+
+    transition: color .1s linear;
+}
+
+.NavigationLink a:hover {
+    color: aquamarine;
+}
+
+.NavigationLink a::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: aquamarine;
+    
+    opacity: 0;
+    transition: opacity .1s linear;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.NavigationLink a:hover::after,
+.NavigationLink a.active::after,
+.NavigationLink a:active::after {
+    opacity: 1;
+}
+
+.NavigationLink a.active,
+.NavigationLink a:active {
+    color: aquamarine;
+}
