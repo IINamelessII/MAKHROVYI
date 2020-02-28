@@ -14,6 +14,9 @@
     font-size: 24px;
     font-weight: 500;
     display: flex;
+
+    opacity: 0;
+    transition: opacity .1s linear;
 }
 
 .Logo a:hover {
@@ -31,7 +34,8 @@
     transition: opacity .1s linear;
 }
 
-.Logo:hover .Face {
+.Logo:hover .Face,
+.Logo:hover .Subtitle {
     opacity: 1;
 }
 
