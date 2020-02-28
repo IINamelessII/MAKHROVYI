@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import classes from './Solutions.css';
 import Filter from './Filter/Filter';
 import {subjectsData} from '../../shared/constants';
 
@@ -80,7 +79,7 @@ class FilterList extends Component {
     }
 
     return (
-      <div className={classes.FilterList}>
+      <div>
         {facultiesFilter}
         {departmentFilter}
         {semestersFilter}

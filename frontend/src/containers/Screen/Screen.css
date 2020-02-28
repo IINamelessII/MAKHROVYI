@@ -1,8 +1,0 @@
-.Screen {
-    border: 1px solid blue;
-    /* height: 50rem; */
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    margin-left: auto;
-}

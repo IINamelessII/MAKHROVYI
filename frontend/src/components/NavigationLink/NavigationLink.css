@@ -1,9 +1,0 @@
-.NavigationLink {
-    color: #0D9EDF;
-    margin: 10px 20px;
-    cursor: pointer;
-}
-
-.NavigationLink:hover {
-    text-shadow: 0 0 30px #00A9D8;
-}

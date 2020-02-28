@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-import classes from './Filter.css';
-
 class Filter extends Component {
   render() {
     const list = this.props.items.map((item) => {
@@ -12,7 +10,7 @@ class Filter extends Component {
     })
 
     return (
-      <div className={classes.Filter}>
+      <div>
         {list}
       </div>
     );
