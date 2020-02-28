@@ -11,11 +11,11 @@ class Logo extends Component {
           <div className={classes.Title}>
             MAKHROVYI
           </div>
-          <div className={classes.Subtitle}>
+        </NavLink>
+        <div className={classes.Subtitle}>
             Ооо, панове...
             <div className={classes.Face}></div>
           </div>
-        </NavLink>
       </div>
     );
   }
