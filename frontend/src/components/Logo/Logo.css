@@ -20,9 +20,9 @@
     transition: opacity .1s linear;
 }
 
-.Logo a:hover {
+/* .Logo a:hover {
     color: aquamarine;
-}
+} */
 
 .Face{
     background: url("../../assets/images/face.png");
