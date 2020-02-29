@@ -6,4 +6,8 @@
     -webkit-background-size: cover;
 
     color: white;
+
+    justify-content: space-between;
+    display: flex;
+    flex-flow: column;
 }
