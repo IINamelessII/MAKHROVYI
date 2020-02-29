@@ -1,0 +1,31 @@
+.PathPart {
+    /* opacity: 2; */
+    color: white;
+    transition: color .1s linear;
+    cursor: pointer;
+}
+
+.PathPart:hover {
+    color: aquamarine;
+}
+
+.PathPart::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: aquamarine;
+    
+    opacity: 1;
+    transition: opacity .1s linear;
+
+    /* position: absolute; */
+    top: 100%;
+    left: 0;
+}
+
+.PathPart:hover::after {
+    opacity: 1;
+}
+
+

@@ -8,6 +8,8 @@ import PathPart from './PathPart/PathPart';
 import ContextMenu from './ContextMenu/ContextMenu';
 import * as actions from '../../store/actions/index';
 
+import classes from './FileBrowser.css';
+
 import {structureData, rootHash, spaceOptions} from '../../shared/constants';
 
 class FileBrowser extends Component {
@@ -49,6 +51,7 @@ class FileBrowser extends Component {
   }
 
   openFromPath = (index) => {
+    //TODO: Add hiding backdrop
     const hashPath = this.state.hashPath.slice(0, index + 1);
     const path = this.state.path.slice(0, index + 1);
     const items = this.state.items.slice(0, index + 1);
@@ -93,8 +96,8 @@ class FileBrowser extends Component {
 
     //TODO: items should on top of(over) free space and even backdrop
     return (
-      <div>
-        <div>{pathRow}</div>
+      <div className={classes.FileBrowser}>
+        <div className={classes.PathRow}>{pathRow}</div>
         <div>{items}</div>
         <div onContextMenu={this.showContextMenu}>SOME FREE SPACE UNDER items</div>
         {this.state.showContextMenu ? (
