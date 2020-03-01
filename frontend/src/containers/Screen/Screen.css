@@ -4,12 +4,10 @@
     max-height: 800px;
     max-width: 1800px;
     background-color: #00000069;
-    /* opacity: 0.5; */
 
     margin: 0 auto;
 
-    /* position: relative;
-    top: 130px; */
-
     padding: 20px;
+
+    font-family: Anodina;
 }
