@@ -28,7 +28,7 @@ class App extends Component {
         <Route path="/" exact component={asyncFileBrowser} />
         <Redirect to="/" />
       </Switch>
-    )
+    );
 
     return (
       <Layout>

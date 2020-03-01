@@ -1,8 +1,7 @@
 .Dir {
-    /* border: 2px solid aquamarine; */
     cursor: pointer;
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 300px;
 }
 
 .Dir img {
@@ -30,3 +29,7 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+/* TODO: Add ContextMenu Styling */
+/* TODO: Add hover styling */
+/* TODO: Add diference between 1 and 2 clicks */

@@ -13,4 +13,26 @@
 .Items {
     padding-top: 30px;
     display: flex;
+    flex-wrap: wrap;
+    height: 75vh;
+    overflow-y: auto;    
+}
+
+.Items::-webkit-scrollbar {
+    width: 10px;
+}
+  
+  /* Track */
+.Items::-webkit-scrollbar-track {
+    opacity: 0;
+}
+   
+  /* Handle */
+.Items::-webkit-scrollbar-thumb {
+    background: #0000007c; 
+}
+  
+  /* Handle on hover */
+.Items::-webkit-scrollbar-thumb:hover {
+    background: #000000c4; 
 }
