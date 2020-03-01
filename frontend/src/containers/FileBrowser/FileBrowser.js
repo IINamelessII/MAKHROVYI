@@ -98,7 +98,7 @@ class FileBrowser extends Component {
     return (
       <div className={classes.FileBrowser}>
         <div className={classes.PathRow}>{pathRow}</div>
-        <div>{items}</div>
+        <div className={classes.Items}>{items}</div>
         <div onContextMenu={this.showContextMenu}>SOME FREE SPACE UNDER items</div>
         {this.state.showContextMenu ? (
           <ContextMenu

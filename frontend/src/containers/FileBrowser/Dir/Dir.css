@@ -1,0 +1,32 @@
+.Dir {
+    /* border: 2px solid aquamarine; */
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+}
+
+.Dir img {
+    height: 64px;
+    width: 64px;
+}
+
+.ImageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.DirName{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.DirName div{
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

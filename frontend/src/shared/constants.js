@@ -84,7 +84,13 @@ export const structureData = {
               "aaaf": {
                 name: "easyDir",
                 type: "dir",
-                content: {}
+                content: {
+                  "aaah": {
+                    name: "SomeLoooooooooooooooooooooooooooooooooooongName",
+                    type: "dir",
+                    content: {}
+                  }
+                }
               }
             }
           }

@@ -1,8 +1,10 @@
-import React, {Fragment, Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import ContextMenu from '../ContextMenu/ContextMenu';
 import * as actions from '../../../store/actions/index';
+
+import classes from './Dir.css';
 
 import {dirOptions} from '../../../shared/constants';
 
@@ -28,16 +30,25 @@ class Dir extends Component {
 
   render() {
     return (
-      <Fragment>
-        <div 
+      <div 
+        className={classes.Dir}>
+        <div className={classes.ImageContainer}>
+          <img 
+          src={require('../../../assets/images/folder.png')} 
+          alt=""
           onClick={this.onDirClick}
-          onContextMenu={this.showContextMenu}
-        >It's Dir {this.props.name}</div>
+          onContextMenu={this.showContextMenu}/>
+        </div>
+        <div className={classes.DirName}>
+          <div>
+            {this.props.name}
+          </div>
+        </div>
         {this.state.showContextMenu ? (
           <ContextMenu
             options={dirOptions} />
         ) : null}
-      </Fragment>
+      </div>
     );
   }
 }

@@ -6,6 +6,11 @@
 
 .PathRow {
     width: 100%;
-    max-width: 400px;
+    /* max-width: 400px; */
     /* background-color: aqua;  */
+}
+
+.Items {
+    padding-top: 30px;
+    display: flex;
 }

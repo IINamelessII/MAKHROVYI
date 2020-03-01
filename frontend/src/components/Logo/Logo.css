@@ -21,6 +21,7 @@
     font-weight: 500;
     display: flex;
     color: #fff;
+    font-style: italic;
 
     opacity: 0;
     transition: opacity .1s linear;
