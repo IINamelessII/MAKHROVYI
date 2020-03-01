@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-family: Montserrat, sans-serif;
 }
 
 code {
@@ -20,4 +22,45 @@ code {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url('./assets/fonts/Montserrat-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: MontserratBold;
+  src: url('./assets/fonts/Montserrat-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: TheCircousStriped;
+  src: url('./assets/fonts/TheCircous/ttf/TheCircousStriped.ttf') format('truetype'),
+       url('./assets/fonts/TheCircous/otf/TheCircousStriped.otf') format('opentype');
+}
+
+@font-face {
+  font-family: TheCircous;
+  src: url('./assets/fonts/TheCircous/ttf/TheCircous.ttf') format('truetype'),
+       url('./assets/fonts/TheCircous/otf/TheCircous.otf') format('opentype');
+}
+
+@font-face {
+  font-family: TradesmithRegular;
+  src: url('./assets/fonts/TradesmithRegular.otf');
+}
+@font-face {
+  font-family: TradesmithRough;
+  src: url('./assets/fonts/TradesmithRough.otf');
+}
+@font-face {
+  font-family: TradesmithRound;
+  src: url('./assets/fonts/TradesmithRound.otf');
+}
+@font-face {
+  font-family: TradesmithStamp;
+  src: url('./assets/fonts/TradesmithStamp.otf');
 }

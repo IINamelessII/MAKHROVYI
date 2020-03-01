@@ -1,3 +1,7 @@
+.Logo {
+    padding-top: 40px;
+}
+
 .Logo a {
     text-decoration: none;
     color: #fff;
@@ -8,6 +12,8 @@
 .Title {
     font-size: 36px;
     font-weight: 700;
+    font-family: TradesmithStamp;
+    font-size: 72px;
 }
 
 .Subtitle {
