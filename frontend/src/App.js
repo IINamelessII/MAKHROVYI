@@ -3,9 +3,8 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
 
 import NavigationBar from './containers/NavigationBar/NavigationBar';
-import Screen from './containers/Screen/Screen';
+import Screen from './hoc/Screen/Screen';
 import Layout from './hoc/Layout/Layout';
-import Backdrop from './hoc/Layout/Backdrop/Backdrop';
 
 const asyncTutorials = asyncComponent(() => {
   return import('./containers/Tutorials/Tutorials');
@@ -35,7 +34,6 @@ class App extends Component {
         <NavigationBar />
         <Screen>
           {routes}
-          <Backdrop />
         </Screen>
         <div></div>
       </Layout>

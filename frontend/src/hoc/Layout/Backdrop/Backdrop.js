@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import * as action from '../../../store/actions/index';
 
+import classes from './Backdrop.css';
+
 class Backdrop extends Component {
   onBackdropClick = () => {
     this.props.click();
@@ -11,8 +13,9 @@ class Backdrop extends Component {
 
   render() {
     return this.props.show ? (
-      <div onClick={this.onBackdropClick}>
-        BACKDROP
+      <div 
+        onClick={this.onBackdropClick} 
+        className={classes.Backdrop}>
       </div>
     ) : null;
   }

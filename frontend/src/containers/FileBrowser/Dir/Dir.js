@@ -15,6 +15,7 @@ class Dir extends Component {
 
   showContextMenu = (event) => {
     event.preventDefault();
+    event.stopPropagation();
     this.props.onContextMenuShow(this.hideContextMenu);
     this.setState({showContextMenu: true});
   }
