@@ -1,12 +1,17 @@
 .Dir {
-    cursor: pointer;
-    width: 300px;
-    height: 300px;
+    width: 128px;
+    height: 128px;
 }
 
 .Dir img {
     height: 64px;
     width: 64px;
+    cursor: pointer;
+    transition: opacity .1s linear;
+}
+
+.Dir img:hover{
+    opacity: .5;
 }
 
 .ImageContainer {
@@ -31,5 +36,3 @@
 }
 
 /* TODO: Add ContextMenu Styling */
-/* TODO: Add hover styling */
-/* TODO: Add diference between 1 and 2 clicks */
