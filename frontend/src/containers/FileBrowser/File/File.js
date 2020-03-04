@@ -12,12 +12,13 @@ class File extends Component {
   }
 
   render() {
+    //TODO: Add different icons depends on this.props.ext
     return (
       <div 
         className={classes.File}>
         <div className={classes.ImageContainer}>
           <img 
-          src={require('../../../assets/images/folder.png')} 
+          src={require('../../../assets/images/file.png')} 
           alt=""
           onContextMenu={(event) => this.onContextMenu(event)}/>
         </div>

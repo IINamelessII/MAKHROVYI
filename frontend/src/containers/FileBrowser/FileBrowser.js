@@ -20,9 +20,9 @@ class FileBrowser extends Component {
     contextMenuOptions: [],
   }
 
-  onMouseMove = (e) => {
-    const x = e.nativeEvent.offsetX;
-    const y = e.nativeEvent.offsetY;
+  onMouseMove = (event) => {
+    const x = event.pageX;
+    const y = event.pageY;
     this.props.updatePosition(x, y);
   }
 
@@ -104,11 +104,14 @@ class FileBrowser extends Component {
         <div 
           onContextMenu={(event) => this.showContextMenu(event)} 
           className={classes.Items}
-          onMouseMove={this.onMouseMove}>{items}</div>
-        {this.props.showBackdrop ? (
-          <ContextMenu
-            options={this.state.contextMenuOptions} />
-        ) : null}
+          onMouseMove={(event) => this.onMouseMove(event)}
+        >
+          {items}
+          {this.props.showBackdrop ? (
+            <ContextMenu
+              options={this.state.contextMenuOptions} />
+          ) : null}
+        </div>
       </div>
     );
   }
