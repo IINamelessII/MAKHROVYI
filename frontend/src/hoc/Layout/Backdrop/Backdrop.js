@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import * as action from '../../../store/actions/index';
+import * as actions from '../../../store/actions/index';
 
 import classes from './Backdrop.css';
 
@@ -30,7 +30,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onBackdropHide: () => dispatch(action.hideBackdrop()),
+    onBackdropHide: () => dispatch(actions.hideBackdrop()),
   };
 };
 

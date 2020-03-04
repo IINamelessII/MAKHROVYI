@@ -20,6 +20,12 @@ class FileBrowser extends Component {
     showContextMenu: false,
   }
 
+  onMouseMove = (e) => {
+    const x = e.nativeEvent.offsetX;
+    const y = e.nativeEvent.offsetY;
+    this.props.updatePosition(x, y);
+  }
+
   showContextMenu = (event) => {
     event.preventDefault();
     this.props.onContextMenuShow(this.hideContextMenu);
@@ -31,7 +37,7 @@ class FileBrowser extends Component {
   }
 
   componentDidMount() {
-    this.addDirToPath(structureData[rootHash].content, rootHash, "/");
+    this.addDirToPath(structureData[rootHash].content, rootHash, "~/");
   }
 
   addDirToPath = (structure, hash, name) => {
@@ -100,7 +106,8 @@ class FileBrowser extends Component {
         <div className={classes.PathRow}>{pathRow}</div>
         <div 
           onContextMenu={this.showContextMenu} 
-          className={classes.Items}>{items}</div>
+          className={classes.Items}
+          onMouseMove={this.onMouseMove}>{items}</div>
         {this.state.showContextMenu ? (
           <ContextMenu
             options={spaceOptions} />
@@ -114,6 +121,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onContextMenuShow: (backdropFunction) => dispatch(actions.setBackdrop(backdropFunction)),
     onBackdropHide: () => dispatch(actions.hideBackdrop()),
+    updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
   };
 }
 

@@ -5,6 +5,7 @@ import {updateObject} from '../../shared/utility';
 const initialState = {
   showBackdrop: false,
   backdropFunction: null,
+  position: {x: 0, y: 0},
 };
 
 const setBackdrop = (state, action) => {
@@ -27,10 +28,19 @@ const hideBackdrop = (state, action) => {
   });
 };
 
+const getPostion = (state, action) => {
+  const x = action.x;
+  const y = action.y;
+  return updateObject(state, {
+    position: {x: x, y: y},
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_BACKDROP: return setBackdrop(state, action);
     case actionTypes.HIDE_BACKDROP: return hideBackdrop(state, action);
+    case actionTypes.GET_POSITION: return getPostion(state, action);
     default: return state;
   }
 };

@@ -13,6 +13,8 @@
     flex-wrap: wrap;
     height: 75vh;
     overflow-y: auto; 
+
+    position: relative;
 }
 
 .Items::-webkit-scrollbar {

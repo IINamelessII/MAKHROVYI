@@ -1,45 +1,44 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import classes from './ContextMenu.css';
 
 class ContextMenu extends Component {
-  state = {
-    x: 0,
-    y: 0,
-  }
-
-  moveContextMenu = (event) => {
-    const x = event.clientX;
-    const y = event.clientY;
-    this.setState({
-      x: x,
-      y: y,
-    });
+  shouldComponentUpdate() {
+    return false;
   }
 
   render() {
-    //TODO add Redux action, that get coords from root(App) and add styling in ComponentWillRender
-
     const options = this.props.options.map((option) => {
       return (
         <div
           key={option.label}
           onClick={option.action}
-          className={classes.ContextMenu}>{option.label}</div>
+          className={classes.Option}>{option.label}</div>
       );
     })
 
+    const x = this.props.position.x;
+    const y = this.props.position.y;
+
+    console.log([x, y]);
     return (
       <div 
-        className={classes.Option}
-        onMouseMove={this.moveContextMenu}
-        style={{top: this.state.y + 'px', left:this.state.x + 'px',}}>
+        className={classes.ContextMenu}
+        style={{top: y + 'px', left: x + 'px',}}
+        >
         {options}
       </div>
     );
   }
 }
 
-export default ContextMenu;
+const mapStateToProps = state => {
+  return {
+    position: state.fileBrowser.position,
+  };
+};
+
+export default connect(mapStateToProps)(ContextMenu);
 
 //TODO: Add Context menu over backdrop

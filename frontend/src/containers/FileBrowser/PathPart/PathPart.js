@@ -7,7 +7,7 @@ const pathPart = (props) => {
   return (
     <span className={classes.PathPart}>
       <span onClick={props.goToPath}>{props.pathPartName}</span>
-      {props.pathPartName !== '/' ? "/" : ''}
+      {props.pathPartName !== '~/' ? "/" : ''}
     </span>
   );
 }
