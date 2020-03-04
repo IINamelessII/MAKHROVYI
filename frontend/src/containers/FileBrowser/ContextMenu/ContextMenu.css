@@ -1,0 +1,10 @@
+.ContextMenu {
+    background-color: #aaaaaa;
+
+    position: absolute;
+    z-index: 2;
+}
+
+.Option {
+    margin: 5px;
+}
