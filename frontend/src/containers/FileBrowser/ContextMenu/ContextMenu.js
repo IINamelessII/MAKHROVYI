@@ -36,5 +36,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(ContextMenu);
-
-//TODO: Add Context menu over backdrop
