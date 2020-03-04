@@ -1,45 +1,34 @@
-import React, {Fragment, Component} from 'react';
-import {connect} from 'react-redux';
+import React, {Component} from 'react';
 
-import ContextMenu from '../ContextMenu/ContextMenu';
-import * as actions from '../../../store/actions/index';
+import classes from './File.css';
 
 import {fileOptions} from '../../../shared/constants';
 
 class File extends Component {
-  state = {
-    showContextMenu: false,
-  }
-
-  showContextMenu = (event) => {
+  onContextMenu = (event) => {
     event.preventDefault();
-    this.props.onContextMenuShow(this.hideContextMenu);
-    this.setState({showContextMenu: true});
-  }
-
-  hideContextMenu = (event) => {
-    this.setState({showContextMenu: false});
+    event.stopPropagation();
+    this.props.showContextMenu(null, fileOptions); //event = null, options = fileOptions
   }
 
   render() {
     return (
-      <Fragment>
-        <div 
-          onContextMenu={this.showContextMenu}
-          onClick={this.props.click}>It's File {this.props.name}.{this.props.ext}</div>
-        {this.state.showContextMenu ? (
-          <ContextMenu
-            options={fileOptions} />
-        ) : null}
-      </Fragment>
+      <div 
+        className={classes.File}>
+        <div className={classes.ImageContainer}>
+          <img 
+          src={require('../../../assets/images/folder.png')} 
+          alt=""
+          onContextMenu={(event) => this.onContextMenu(event)}/>
+        </div>
+        <div className={classes.FileName}>
+          <div>
+            {this.props.name}.{this.props.ext}
+          </div>
+        </div>
+      </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onContextMenuShow: (backdropFunction) => dispatch(actions.setBackdrop(backdropFunction)),
-  };
-}
-
-export default connect(null, mapDispatchToProps)(File);
+export default File;

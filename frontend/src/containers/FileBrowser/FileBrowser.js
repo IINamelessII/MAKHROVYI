@@ -78,7 +78,7 @@ class FileBrowser extends Component {
             key={item[0]}
             name={item[1].name}
             ext={item[1].ext}
-            click={this.props.onBackdropHide} />
+            showContextMenu={this.showContextMenu} />
           ) : (
           <Dir
             key={item[0]}
