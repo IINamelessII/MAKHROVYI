@@ -1,0 +1,36 @@
+.File {
+    width: 128px;
+    height: 128px;
+}
+
+.File img {
+    height: 64px;
+    width: 64px;
+    cursor: pointer;
+    transition: opacity .1s linear;
+}
+
+.File img:hover{
+    opacity: .5;
+}
+
+.ImageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.FileName{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.FileName div{
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

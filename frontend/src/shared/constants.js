@@ -249,16 +249,26 @@ export const structureData = {
             type: "dir",
             content: {}
           },
-        }
+          "aabq": {
+            name: "IASA",
+            type: "file",
+            ext: "pdf"
+          },
+          "aabo": {
+            name: "IASA",
+            type: "file",
+            ext: "pdf"
+          },
+        },
       },
       "aaag": {
         name: "IASA",
         type: "file",
         ext: "pdf"
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export const fileOptions = [
   {"label": "download", "action":() => {console.log("download")}},
