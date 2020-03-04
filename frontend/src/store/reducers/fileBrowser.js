@@ -4,27 +4,18 @@ import {updateObject} from '../../shared/utility';
 
 const initialState = {
   showBackdrop: false,
-  backdropFunction: null,
   position: {x: 0, y: 0},
 };
 
 const setBackdrop = (state, action) => {
-  if (state.backdropFunction) {
-    state.backdropFunction();
-  }
   return updateObject(state, {
     showBackdrop: true,
-    backdropFunction: action.backdropOnClickFunction,
   });
 };
 
 const hideBackdrop = (state, action) => {
-  if (state.backdropFunction) {
-    state.backdropFunction();
-  }
   return updateObject(state, {
     showBackdrop: false,
-    backdropFunction: null,
   });
 };
 

@@ -21,7 +21,6 @@ class ContextMenu extends Component {
     const x = this.props.position.x;
     const y = this.props.position.y;
 
-    console.log([x, y]);
     return (
       <div 
         className={classes.ContextMenu}

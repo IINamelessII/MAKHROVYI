@@ -6,15 +6,11 @@ import * as actions from '../../../store/actions/index';
 import classes from './Backdrop.css';
 
 class Backdrop extends Component {
-  onBackdropClick = () => {
-    this.props.click();
-    this.props.onBackdropHide();
-  }
-
+  
   render() {
     return this.props.show ? (
       <div 
-        onClick={this.onBackdropClick} 
+        onClick={this.props.onBackdropHide} 
         className={classes.Backdrop}>
       </div>
     ) : null;
@@ -24,7 +20,6 @@ class Backdrop extends Component {
 const mapStateToProps = state => {
   return {
     show: state.fileBrowser.showBackdrop,
-    click: state.fileBrowser.backdropFunction,
   };
 };
 

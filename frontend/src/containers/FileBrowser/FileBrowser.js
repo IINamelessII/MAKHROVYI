@@ -17,7 +17,7 @@ class FileBrowser extends Component {
     hashPath: [],
     path: [],
     items: [],
-    showContextMenu: false,
+    contextMenuOptions: [],
   }
 
   onMouseMove = (e) => {
@@ -26,14 +26,14 @@ class FileBrowser extends Component {
     this.props.updatePosition(x, y);
   }
 
-  showContextMenu = (event) => {
-    event.preventDefault();
-    this.props.onContextMenuShow(this.hideContextMenu);
-    this.setState({showContextMenu: true});
-  }
-
-  hideContextMenu = (event) => {
-    this.setState({showContextMenu: false});
+  showContextMenu = (event, options=spaceOptions) => {
+    if (event) {
+      event.preventDefault();
+    }
+    this.props.onContextMenuShow();
+    this.setState({
+      ContextMenuOptions: options,
+    });
   }
 
   componentDidMount() {
@@ -70,7 +70,6 @@ class FileBrowser extends Component {
 
   render() {
     let items = null;
-    //TODO: replace this.state.items.length - 1 with -1 analog
     let structure = this.state.items[this.state.items.length - 1];
     if(structure) {
       structure = Object.entries(structure);
@@ -86,7 +85,7 @@ class FileBrowser extends Component {
             key={item[0]}
             name={item[1].name}
             open={() => this.addDirToPath(item[1].content, item[0], item[1].name)}
-            click={this.props.onBackdropHide} />
+            showContextMenu={this.showContextMenu} />
           );
       });
     }
@@ -105,24 +104,30 @@ class FileBrowser extends Component {
       <div className={classes.FileBrowser}>
         <div className={classes.PathRow}>{pathRow}</div>
         <div 
-          onContextMenu={this.showContextMenu} 
+          onContextMenu={(event) => this.showContextMenu(event)} 
           className={classes.Items}
           onMouseMove={this.onMouseMove}>{items}</div>
-        {this.state.showContextMenu ? (
+        {this.state.showBackdrop ? (
           <ContextMenu
-            options={spaceOptions} />
+            options={this.state.contextMenuOptions} />
         ) : null}
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    showBackdrop: state.fileBrowser.showBackdrop,
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
-    onContextMenuShow: (backdropFunction) => dispatch(actions.setBackdrop(backdropFunction)),
+    onContextMenuShow: () => dispatch(actions.setBackdrop()),
     onBackdropHide: () => dispatch(actions.hideBackdrop()),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
   };
 }
 
-export default connect(null, mapDispatchToProps)(FileBrowser);
+export default connect(mapStateToProps, mapDispatchToProps)(FileBrowser);

@@ -1,9 +1,8 @@
 import * as actionTypes from './actionTypes';
 
-export const setBackdrop = (backdropOnClickFunction) => {
+export const setBackdrop = () => {
   return {
     type: actionTypes.SET_BACKDROP,
-    backdropOnClickFunction: backdropOnClickFunction,
   };
 };
 
