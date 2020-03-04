@@ -30,10 +30,10 @@ class FileBrowser extends Component {
     if (event) {
       event.preventDefault();
     }
-    this.props.onContextMenuShow();
     this.setState({
-      ContextMenuOptions: options,
+      contextMenuOptions: options,
     });
+    this.props.onContextMenuShow();
   }
 
   componentDidMount() {
@@ -57,7 +57,6 @@ class FileBrowser extends Component {
   }
 
   openFromPath = (index) => {
-    //TODO: Add hiding backdrop
     const hashPath = this.state.hashPath.slice(0, index + 1);
     const path = this.state.path.slice(0, index + 1);
     const items = this.state.items.slice(0, index + 1);
@@ -99,7 +98,6 @@ class FileBrowser extends Component {
       );
     });
 
-    //TODO: items should on top of(over) free space and even backdrop
     return (
       <div className={classes.FileBrowser}>
         <div className={classes.PathRow}>{pathRow}</div>
@@ -107,7 +105,7 @@ class FileBrowser extends Component {
           onContextMenu={(event) => this.showContextMenu(event)} 
           className={classes.Items}
           onMouseMove={this.onMouseMove}>{items}</div>
-        {this.state.showBackdrop ? (
+        {this.props.showBackdrop ? (
           <ContextMenu
             options={this.state.contextMenuOptions} />
         ) : null}

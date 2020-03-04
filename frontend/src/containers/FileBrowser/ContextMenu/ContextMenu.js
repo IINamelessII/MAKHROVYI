@@ -4,9 +4,6 @@ import {connect} from 'react-redux';
 import classes from './ContextMenu.css';
 
 class ContextMenu extends Component {
-  shouldComponentUpdate() {
-    return false;
-  }
 
   render() {
     const options = this.props.options.map((option) => {
@@ -24,10 +21,7 @@ class ContextMenu extends Component {
     return (
       <div 
         className={classes.ContextMenu}
-        style={{top: y + 'px', left: x + 'px',}}
-        >
-        {options}
-      </div>
+        style={{top: y + 'px', left: x + 'px',}}>{options}</div>
     );
   }
 }
