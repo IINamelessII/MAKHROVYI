@@ -4,4 +4,7 @@ export {
   getPostion,
   fetchDirs,
   fetchFiles,
+  prepareStructure,
+  addDirToPath,
+  openFromPath,
 } from './fileBrowser';

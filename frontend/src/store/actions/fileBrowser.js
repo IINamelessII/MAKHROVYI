@@ -88,4 +88,48 @@ export const fetchFiles = () => {
   };
 };
 
-//TODO Inite fetching Files and Dirs in one process
+export const buildStructure = (rootId, dirs) => {
+  return {
+    type: actionTypes.BUILD_STRUCTURE,
+    rootId: rootId,
+    dirs: dirs,
+  };
+};
+
+export const prepareStructure = (rootId) => {
+  return dispatch => {
+    dispatch(fetchFilesStart());
+    axios.get('/api/files/')
+      .then(response => {
+        dispatch(fetchFilesSuccess(response.data));
+        dispatch(fetchDirsStart());
+        axios.get('/api/dirs/')
+          .then(response => {
+            // dispatch(fetchDirsSuccess(response.data));
+            dispatch(buildStructure(rootId, response.data));
+          })
+          .catch(error => {
+            dispatch(fetchDirsFail(error));
+          });
+      })
+      .catch(error => {
+        dispatch(fetchFilesFail(error));
+      });
+  };
+};
+
+export const addDirToPath = (content, hash, name) => {
+  return {
+    type: actionTypes.ADD_DIR_TO_PATH,
+    content: content,
+    hash: hash,
+    name: name,
+  };
+};
+
+export const openFromPath = (index) => {
+  return {
+    type: actionTypes.OPEN_FROM_PATH,
+    index: index,
+  };
+};
