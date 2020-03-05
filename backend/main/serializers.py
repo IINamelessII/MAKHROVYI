@@ -1,8 +1,14 @@
-from main.models import Instance
+from main.models import Dir, File
 from rest_framework import serializers
 
 
-class InstanceSerializer(serializers.ModelSerializer):
+class DirSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Instance
-        fields = ('id', 'name', 'description')
+        model = Dir
+        fields = ('id', 'name', 'dirs', 'files')
+
+
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ('id', 'name', 'extension')

@@ -6,12 +6,19 @@ class User(AbstractUser):
     pass
 
 
-class Instance(models.Model):
+class Dir(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField(null=True, max_length=300)
-    file = models.FileField()
-    #TODO add serving filenames, exclude situations when 
-    #different files have same filenames
+    dirs = models.ManyToManyField('Dir', blank=True)
+    files = models.ManyToManyField('File', blank=True)
 
     def __str__(self):
         return '#{} {}'.format(self.id, self.name)
+
+
+class File(models.Model):
+    name = models.CharField(max_length=100)
+    extension = models.CharField(max_length=10)
+    file = models.FileField()
+
+    def __str__(self):
+        return '#{} {}'.format(self.id, self.name, '.', self.extension)

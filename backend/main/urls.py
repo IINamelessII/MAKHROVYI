@@ -4,7 +4,8 @@ from main import views
 
 
 router = DefaultRouter()
-router.register(r'instances', views.InstanceViewSet)
+router.register(r'dirs', views.DirViewSet)
+router.register(r'files', views.FileViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
