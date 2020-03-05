@@ -56,6 +56,8 @@
 //   }
 // }
 
+export const rootId = 1;
+
 export const rootHash = "aaaa";
 
 export const structureData = {

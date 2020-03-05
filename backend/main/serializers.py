@@ -11,4 +11,4 @@ class DirSerializer(serializers.ModelSerializer):
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = ('id', 'name', 'extension')
+        fields = ('id', 'name', 'ext')

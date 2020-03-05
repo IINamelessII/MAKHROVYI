@@ -35,3 +35,11 @@
 .Items::-webkit-scrollbar-thumb:hover {
     background: #000000; 
 }
+
+.SpinnerContainer{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

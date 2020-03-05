@@ -17,8 +17,8 @@ class Dir(models.Model):
 
 class File(models.Model):
     name = models.CharField(max_length=100)
-    extension = models.CharField(max_length=10)
+    ext = models.CharField(max_length=10)
     file = models.FileField()
 
     def __str__(self):
-        return '#{} {}'.format(self.id, self.name, '.', self.extension)
+        return '#{} {}'.format(self.id, self.name, '.', self.ext)

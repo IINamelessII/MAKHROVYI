@@ -7,6 +7,7 @@ const initialState = {
   position: {x: 0, y: 0},
   options: [],
   loading: false,
+  loadingAsync: false,
   dirs: [],
   files: [],
 };
@@ -48,18 +49,18 @@ const fetchDirsFail = (state, action) => {
 }
 
 const fetchFilesStart = (state, action) => {
-  return updateObject(state, {loading: true});
+  return updateObject(state, {loadingAsync: true});
 };
 
 const fetchFilesSuccess = (state, action) => {
   return updateObject(state, {
-    loading: false,
+    loadingAsync: false,
     files: action.data,
   });
 };
 
 const fetchFilesFail = (state, action) => {
-  return updateObject(state, {loading: false});
+  return updateObject(state, {loadingAsync: false});
 }
 
 const reducer = (state = initialState, action) => {
