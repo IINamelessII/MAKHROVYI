@@ -9,12 +9,12 @@
     cursor: pointer;
     margin: 3px;
     text-transform: uppercase;
-    transition: opacity .1s linear;
+    transition: background-color .1s linear;
+    transition: color .1s linear;
 }
 
 .Option:hover {
     background-color: aquamarine;
-    opacity: .5;
     color: #000;
 }
 

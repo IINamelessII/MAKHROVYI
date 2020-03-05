@@ -5,11 +5,13 @@ import {updateObject} from '../../shared/utility';
 const initialState = {
   showBackdrop: false,
   position: {x: 0, y: 0},
+  options: [],
 };
 
 const setBackdrop = (state, action) => {
   return updateObject(state, {
     showBackdrop: true,
+    options: action.options,
   });
 };
 

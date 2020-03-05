@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import Dir from './Dir/Dir';
 import File from './File/File';
 import PathPart from './PathPart/PathPart';
-import ContextMenu from './ContextMenu/ContextMenu';
 import * as actions from '../../store/actions/index';
 
 import classes from './FileBrowser.css';
@@ -17,7 +16,6 @@ class FileBrowser extends Component {
     hashPath: [],
     path: [],
     items: [],
-    contextMenuOptions: [],
   }
 
   onMouseMove = (event) => {
@@ -30,10 +28,7 @@ class FileBrowser extends Component {
     if (event) {
       event.preventDefault();
     }
-    this.setState({
-      contextMenuOptions: options,
-    });
-    this.props.onContextMenuShow();
+    this.props.onContextMenuShow(options);
   }
 
   componentDidMount() {
@@ -107,10 +102,6 @@ class FileBrowser extends Component {
           onMouseMove={(event) => this.onMouseMove(event)}
         >
           {items}
-          {this.props.showBackdrop ? (
-            <ContextMenu
-              options={this.state.contextMenuOptions} />
-          ) : null}
         </div>
       </div>
     );
@@ -125,8 +116,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onContextMenuShow: () => dispatch(actions.setBackdrop()),
-    onBackdropHide: () => dispatch(actions.hideBackdrop()),
+    onContextMenuShow: (options) => dispatch(actions.setBackdrop(options)),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
   };
 }

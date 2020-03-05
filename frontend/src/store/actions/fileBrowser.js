@@ -1,8 +1,9 @@
 import * as actionTypes from './actionTypes';
 
-export const setBackdrop = () => {
+export const setBackdrop = (options) => {
   return {
     type: actionTypes.SET_BACKDROP,
+    options: options,
   };
 };
 
