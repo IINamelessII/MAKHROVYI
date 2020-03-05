@@ -7,7 +7,8 @@ const initialState = {
   position: {x: 0, y: 0},
   options: [],
   loading: false,
-  data: [],
+  dirs: [],
+  files: [],
 };
 
 const setBackdrop = (state, action) => {
@@ -31,18 +32,33 @@ const getPostion = (state, action) => {
   });
 };
 
-const fetchItemsStart = (state, action) => {
+const fetchDirsStart = (state, action) => {
   return updateObject(state, {loading: true});
 };
 
-const fetchItemsSuccess = (state, action) => {
+const fetchDirsSuccess = (state, action) => {
   return updateObject(state, {
     loading: false,
-    data: action.data,
+    dirs: action.data,
   });
 };
 
-const fetchItemsFail = (state, action) => {
+const fetchDirsFail = (state, action) => {
+  return updateObject(state, {loading: false});
+}
+
+const fetchFilesStart = (state, action) => {
+  return updateObject(state, {loading: true});
+};
+
+const fetchFilesSuccess = (state, action) => {
+  return updateObject(state, {
+    loading: false,
+    files: action.data,
+  });
+};
+
+const fetchFilesFail = (state, action) => {
   return updateObject(state, {loading: false});
 }
 
@@ -51,9 +67,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_BACKDROP: return setBackdrop(state, action);
     case actionTypes.HIDE_BACKDROP: return hideBackdrop(state, action);
     case actionTypes.GET_POSITION: return getPostion(state, action);
-    case actionTypes.FETCH_ITEMS_START: return fetchItemsStart(state, action);
-    case actionTypes.FETCH_ITEMS_SUCCESS: return fetchItemsSuccess(state, action);
-    case actionTypes.FETCH_ITEMS_FAIL: return fetchItemsFail(state, action);
+    case actionTypes.FETCH_DIRS_START: return fetchDirsStart(state, action);
+    case actionTypes.FETCH_DIRS_SUCCESS: return fetchDirsSuccess(state, action);
+    case actionTypes.FETCH_DIRS_FAIL: return fetchDirsFail(state, action);
+    case actionTypes.FETCH_FILES_START: return fetchFilesStart(state, action);
+    case actionTypes.FETCH_FILES_SUCCESS: return fetchFilesSuccess(state, action);
+    case actionTypes.FETCH_FILES_FAIL: return fetchFilesFail(state, action);
     default: return state;
   }
 };

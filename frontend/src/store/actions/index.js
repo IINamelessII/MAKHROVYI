@@ -2,5 +2,6 @@ export {
   setBackdrop,
   hideBackdrop,
   getPostion,
-  fetchItems,
+  fetchDirs,
+  fetchFiles,
 } from './fileBrowser';

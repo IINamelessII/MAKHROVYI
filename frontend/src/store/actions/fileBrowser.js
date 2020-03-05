@@ -22,35 +22,70 @@ export const getPostion = (x, y) => {
   };
 };
 
-export const fetchItemsStart = () => {
+export const fetchDirsStart = () => {
   return {
-    type: actionTypes.FETCH_ITEMS_START,
+    type: actionTypes.FETCH_DIRS_START,
   };
 };
 
-export const fetchItemsSuccess = (data) => {
+export const fetchDirsSuccess = (data) => {
   return {
-    type: actionTypes.FETCH_ITEMS_SUCCESS,
-    data: data
+    type: actionTypes.FETCH_DIRS_SUCCESS,
+    data: data,
   };
 };
 
-export const fetchItemsFail = (error) => {
+export const fetchDirsFail = (error) => {
   return {
-    type: actionTypes.FETCH_ITEMS_FAIL,
+    type: actionTypes.FETCH_DIRS_FAIL,
     error: error,
   };
 };
 
-export const fetchItems = () => {
+export const fetchDirs = () => {
   return dispatch => {
-    dispatch(fetchItemsStart());
-    axios.get('/api/dirs')
+    dispatch(fetchDirsStart());
+    axios.get('/api/dirs/')
       .then(response => {
-        dispatch(fetchItemsSuccess(response.data));
+        dispatch(fetchDirsSuccess(response.data));
       })
       .catch(error => {
-        dispatch(fetchItemsFail(error));
+        dispatch(fetchDirsFail(error));
       });
   };
 };
+
+export const fetchFilesStart = () => {
+  return {
+    type: actionTypes.FETCH_FILES_START,
+  };
+};
+
+export const fetchFilesSuccess = (data) => {
+  return {
+    type: actionTypes.FETCH_FILES_SUCCESS,
+    data: data,
+  };
+};
+
+export const fetchFilesFail = (error) => {
+  return {
+    type: actionTypes.FETCH_FILES_FAIL,
+    error: error,
+  };
+};
+
+export const fetchFiles = () => {
+  return dispatch => {
+    dispatch(fetchFilesStart());
+    axios.get('api/files/')
+      .then(response => {
+        dispatch(fetchFilesSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(fetchFilesFail(error));
+      });
+  };
+};
+
+//TODO Inite fetching Files and Dirs in one process
