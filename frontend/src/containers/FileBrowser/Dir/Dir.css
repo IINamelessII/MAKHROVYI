@@ -26,13 +26,36 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+
+    position: relative;
 }
 
-.DirName div{
+.FlexName{
     font-size: 16px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
-/* TODO: Add ContextMenu Styling */
+.FullName {
+    opacity: 0;
+    transition: opacity .1s linear;
+
+    position: absolute;
+
+    top: 20px;
+    left: 0px;
+
+    background-color: aquamarine;
+    color: black;
+}
+
+.DirName:hover .FullName{
+    opacity: 1;
+}
+
+/* TODO: Fix bug, when FullName is showned via its hovering on top of the space of another items */
+
+.None {
+    display: none;
+}

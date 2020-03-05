@@ -12,6 +12,11 @@ class Dir extends Component {
   }
 
   render() {
+    let fullNameClassName = classes.None;
+    if (this.props.name.length >= 15) {
+      fullNameClassName = classes.FullName;
+    }
+
     return (
       <div 
         className={classes.Dir}>
@@ -23,7 +28,10 @@ class Dir extends Component {
           onContextMenu={(event) => this.onContextMenu(event)}/>
         </div>
         <div className={classes.DirName}>
-          <div>
+          <div className={classes.FlexName}>
+            {this.props.name}
+          </div>
+          <div className={fullNameClassName}>
             {this.props.name}
           </div>
         </div>
