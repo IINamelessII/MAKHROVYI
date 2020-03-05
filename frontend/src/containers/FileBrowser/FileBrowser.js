@@ -33,6 +33,7 @@ class FileBrowser extends Component {
 
   componentDidMount() {
     this.addDirToPath(structureData[rootHash].content, rootHash, "~/");
+    this.props.fetchItems();
   }
 
   addDirToPath = (structure, hash, name) => {
@@ -118,6 +119,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onContextMenuShow: (options) => dispatch(actions.setBackdrop(options)),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
+    fetchItems: () => dispatch(actions.fetchItems()),
   };
 }
 
