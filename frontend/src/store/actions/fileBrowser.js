@@ -30,7 +30,7 @@ export const fetchItemsStart = () => {
 
 export const fetchItemsSuccess = (data) => {
   return {
-    type: actionTypes.FETCH_ITEMS_START,
+    type: actionTypes.FETCH_ITEMS_SUCCESS,
     data: data
   };
 };
