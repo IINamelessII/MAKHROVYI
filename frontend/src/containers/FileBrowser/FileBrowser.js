@@ -50,6 +50,7 @@ class FileBrowser extends Component {
           return item[1].type === "file" ?
             (<File
               key={item[0]}
+              id={item[0]}
               name={item[1].name}
               ext={item[1].ext}
               showContextMenu={this.showContextMenu} />

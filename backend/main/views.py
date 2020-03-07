@@ -31,25 +31,18 @@ def index(request):
 
 
 def download(request):
-    """download instance file by its id"""
+    """download file by its id"""
     pass
     #TODO add custom exceptions and different responses
-    # try:
-    #     data = json.loads(request.body.decode('utf-8'))
-    #     instance = Instance.objects.get(pk=data['id'])
-    # except:
-    #     return HttpResponse(status=404)
-    # else:
-    #     file_path = os.path.join(settings.MEDIA_ROOT, instance.file.name)
-    #     file_wrapper = FileWrapper(open(file_path,'rb'))
-    #     file_mimetype = mimetypes.guess_type(file_path)
-    #     response = HttpResponse(file_wrapper, content_type=file_mimetype )
-    #     response['X-Sendfile'] = file_path
-    #     response['Content-Length'] = os.stat(file_path).st_size
-    #     response['Content-Disposition'] = 'attachment; filename=%s' % instance.file.name
-    #     return response
-    #     # file_path = os.path.join(settings.MEDIA_ROOT, instance.file.name)
-    #     # with open(file_path, 'rb') as f:
-    #     #     response = HttpResponse(f.read(), content_type="application/vnd.ms-excel")
-    #     #     response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-    #     #     return response
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+        the_file = File.objects.get(pk=data['id'])
+    except:
+        return HttpResponse(status=404)
+    else:
+        filename = os.path.basename(the_file.file.name)
+        print(filename)
+        #TODO: Add content_type= mime type of uploaded file
+        response = HttpResponse(the_file.file, content_type='application/json')
+        response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+        return response

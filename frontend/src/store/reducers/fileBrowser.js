@@ -12,7 +12,6 @@ const parseFile = (files, id) => {
 }
 
 const parseDir = (dirs, files, id) => {
-  console.log(dirs, files, id);
   const dir = dirs.find(dir => dir.id === id);
   let content = {};
 
