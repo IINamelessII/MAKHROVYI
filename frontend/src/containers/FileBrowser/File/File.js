@@ -19,9 +19,16 @@ class File extends Component {
   download = () => {
     axios.post('/download/', {id: parseInt(this.props.id)})
       .then(response => {
-        const fileDownload = require('js-file-download');
-        // console.log(response.data);
-        fileDownload(response.data, this.props.name + '.' + this.props.ext);
+        // console.log(response);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = 'http://localhost:8000/media/Resource-Links.txt';
+        // const filename = this.props.name + '.' + this.props.ext;
+        // a.setAttribute('download', 'True');
+        a.download = 'hello.txt';
+        // document.body.appendChild(a);
+        a.click();
+        // document.body.removeChild(a);
       })
       .catch(error => {
         console.log(error);

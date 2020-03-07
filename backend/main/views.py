@@ -36,13 +36,13 @@ def download(request):
     #TODO add custom exceptions and different responses
     try:
         data = json.loads(request.body.decode('utf-8'))
-        the_file = File.objects.get(pk=data['id'])
+        the_file_record = File.objects.get(pk=data['id'])
     except:
         return HttpResponse(status=404)
     else:
-        filename = os.path.basename(the_file.file.name)
-        print(filename)
-        #TODO: Add content_type= mime type of uploaded file
-        response = HttpResponse(the_file.file, content_type='application/json')
-        response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+        filename = os.path.basename(the_file_record.file.name)
+        # mime = mimetypes.guess_type(filename)
+        # response = HttpResponse(the_file_record.file, content_type=mime[0])
+        response = HttpResponse('localhost:8000/media/filename')
+        # response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
         return response
