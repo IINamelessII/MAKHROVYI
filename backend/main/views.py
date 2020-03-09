@@ -1,11 +1,11 @@
 import json
 import os
-import mimetypes
+# import mimetypes
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
-from wsgiref.util import FileWrapper
+# from wsgiref.util import FileWrapper
 from main.models import Dir, File
 from main.serializers import DirSerializer, FileSerializer
 from main.permissions import IsReadOnly
@@ -31,7 +31,7 @@ def index(request):
 
 
 def download(request):
-    """download file by its id"""
+    """get file link by its id"""
     pass
     #TODO add custom exceptions and different responses
     try:
@@ -41,8 +41,6 @@ def download(request):
         return HttpResponse(status=404)
     else:
         filename = os.path.basename(the_file_record.file.name)
-        # mime = mimetypes.guess_type(filename)
-        # response = HttpResponse(the_file_record.file, content_type=mime[0])
-        response = HttpResponse('localhost:8000/media/filename')
-        # response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+        response = HttpResponse(settings.MEDIA_URL + filename)
+        response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
         return response
