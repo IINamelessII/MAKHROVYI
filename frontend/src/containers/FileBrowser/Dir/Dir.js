@@ -17,7 +17,7 @@ class Dir extends Component {
   ]
 
   download = () => {
-    axios.post('/download/', {id: parseInt(this.props.id)})
+    axios.post('/archive/', {id: parseInt(this.props.id)})
       .then(response => {
         const a = document.createElement('a');
         a.style.display = 'none';

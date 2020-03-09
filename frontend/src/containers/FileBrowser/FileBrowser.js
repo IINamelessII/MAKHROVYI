@@ -57,6 +57,7 @@ class FileBrowser extends Component {
             ) : (
             <Dir
               key={item[0]}
+              id={item[0]}
               name={item[1].name}
               open={() => this.props.addDirToPath(item[1].content, item[0], item[1].name)}
               showContextMenu={this.showContextMenu} />

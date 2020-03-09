@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('', views.index, name='index'),
     path('download/', views.download, name='download'),
+    path('archive/', views.archive, name='archive'),
 ]
