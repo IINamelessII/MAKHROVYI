@@ -13,14 +13,14 @@ from main.permissions import IsReadOnly
 
 
 class DirViewSet(viewsets.ModelViewSet):
-    """"List of all dirs in system"""
+    """"API List of all dirs in system"""
     queryset = Dir.objects.all()
     serializer_class = DirSerializer
     permission_classes = (IsReadOnly,)
 
 
 class FileViewSet(viewsets.ModelViewSet):
-    """"List of all files in system"""
+    """"API List of all files in system"""
     queryset = File.objects.all()
     serializer_class = FileSerializer
     permission_classes = (IsReadOnly,)
@@ -47,12 +47,10 @@ def download(request):
 
 
 def prepare_dir(id, space):
+    """"Recursive prepare dirs structure for archiving"""
     dir_record = Dir.objects.get(pk=id)
-    files = list(map(lambda x: x.id, dir_record.files.all()))
-    dirs = list(map(lambda x: x.id, dir_record.dirs.all()))
 
-    for file_id in files:
-        the_file = File.objects.get(pk=file_id)
+    for the_file in dir_record.files.all():
         filename = os.path.basename(the_file.file.name)
 
         file_path = os.path.join(settings.MEDIA_ROOT, filename)
@@ -60,19 +58,18 @@ def prepare_dir(id, space):
 
         shutil.copy(file_path, new_path)
     
-    for dir_id in dirs:
-        the_dir = Dir.objects.get(pk=dir_id)
+    for the_dir in dir_record.dirs.all():
         next_dir_path = os.path.join(space, the_dir.name)
         os.mkdir(next_dir_path)
-        prepare_dir(dir_id, next_dir_path)
+        prepare_dir(the_dir.id, next_dir_path)
        
 
 def archive(request):
     """create archive from dir and return its link by dir's id"""
-    #TODO add oportunity to create zip/tar.xz archives based on archive_type param
     try:
         data = json.loads(request.body.decode('utf-8'))
         the_dir_record = Dir.objects.get(pk=data['id'])
+        #TODO add oportunity to create zip/tar.xz archives based on archive_type param
     except:
         return HttpResponse(status=404)
     else:
@@ -86,7 +83,6 @@ def archive(request):
     
         prepare_dir(data['id'], path_with_token)
 
-        # archive_path = os.path.join(path_with_token, the_dir_record.name)
         shutil.make_archive(path_with_token, 'zip', path_with_token)
         #TODO: Add view to remove archive, request send from front after downloading
 
