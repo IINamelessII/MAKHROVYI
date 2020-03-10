@@ -46,7 +46,7 @@ def download(request):
         return response
 
 
-def archive_dir(id, space):
+def prepare_dir(id, space):
     dir_record = Dir.objects.get(pk=id)
     files = list(map(lambda x: x.id, dir_record.files.all()))
     dirs = list(map(lambda x: x.id, dir_record.dirs.all()))
@@ -64,7 +64,7 @@ def archive_dir(id, space):
         the_dir = Dir.objects.get(pk=dir_id)
         next_dir_path = os.path.join(space, the_dir.name)
         os.mkdir(next_dir_path)
-        archive_dir(dir_id, next_dir_path)
+        prepare_dir(dir_id, next_dir_path)
        
 
 def archive(request):
@@ -76,20 +76,20 @@ def archive(request):
     except:
         return HttpResponse(status=404)
     else:
-        path_with_token = os.path.join(settings.ARCHIVES_ROOT, token_urlsafe(16))
+        token = token_urlsafe(16)
+        path_with_token = os.path.join(settings.ARCHIVES_ROOT, token)
         while os.path.exists(path_with_token):
-            path_with_token = os.path.join(settings.ARCHIVES_ROOT, token_urlsafe(16))
+            token = token_urlsafe(16)
+            path_with_token = os.path.join(settings.ARCHIVES_ROOT, token)
+        
         os.mkdir(path_with_token)
     
-        archive_dir(data['id'], path_with_token)
+        prepare_dir(data['id'], path_with_token)
 
-        archive_path = os.path.join(settings.ARCHIVES_ROOT, the_dir_record.name)
-        shutil.make_archive(archive_path, 'zip', path_with_token)
+        # archive_path = os.path.join(path_with_token, the_dir_record.name)
+        shutil.make_archive(path_with_token, 'zip', path_with_token)
         #TODO: Add view to remove archive, request send from front after downloading
-        #TODO: Create the archive INSIDE of unique dir
 
-        # # filename = os.path.basename(the_file_record.file.name)
-        response = HttpResponse(settings.ARCHIVES_URL + the_dir_record.name + '.zip')
-        response['Content-Disposition'] = 'attachment; filename={}'.format(the_dir_record.name)
+        response = HttpResponse(settings.ARCHIVES_URL + token + '.zip')
+        response['Content-Disposition'] = 'attachment; filename={}'.format(token)
         return response
-        # return HttpResponse(status=200)

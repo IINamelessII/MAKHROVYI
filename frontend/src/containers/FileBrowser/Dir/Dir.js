@@ -19,10 +19,12 @@ class Dir extends Component {
   download = () => {
     axios.post('/archive/', {id: parseInt(this.props.id)})
       .then(response => {
+        console.log(response);
+        console.log()
         const a = document.createElement('a');
         a.style.display = 'none';
         a.href = response.data;
-        const filename = this.props.name + '.' + this.props.ext;
+        const filename = this.props.name + '.zip';
         a.setAttribute('download', filename);
         document.body.appendChild(a);
         a.click();
