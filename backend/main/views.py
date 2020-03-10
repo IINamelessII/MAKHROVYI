@@ -1,6 +1,7 @@
 import json
 import os
 import shutil
+import time
 import zipfile
 from secrets import token_urlsafe
 from django.conf import settings
@@ -88,4 +89,19 @@ def archive(request):
 
         response = HttpResponse(settings.ARCHIVES_URL + token + '.zip')
         response['Content-Disposition'] = 'attachment; filename={}'.format(token)
+        
         return response
+        
+
+def remove_archive(request):
+    """Removing archive with given token after 1 hour after creating"""
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+        token = data['token']
+    except:
+        return HttpResponse(status=404)
+    else:
+        time.sleep(10)
+        archive_path = os.path.join(settings.ARCHIVES_ROOT, token)
+        shutil.rmtree(archive_path)
+        os.remove(archive_path + '.zip')
