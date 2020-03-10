@@ -93,7 +93,7 @@ def archive(request):
         return response
         
 
-def remove_archive(request):
+def archive_received(request):
     """Removing archive with given token after 1 hour after creating"""
     try:
         data = json.loads(request.body.decode('utf-8'))
@@ -101,7 +101,8 @@ def remove_archive(request):
     except:
         return HttpResponse(status=404)
     else:
-        time.sleep(10)
+        time.sleep(3600)
         archive_path = os.path.join(settings.ARCHIVES_ROOT, token)
         shutil.rmtree(archive_path)
         os.remove(archive_path + '.zip')
+        return HttpResponse(status=200)

@@ -12,4 +12,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('download/', views.download, name='download'),
     path('archive/', views.archive, name='archive'),
+    path('archive_received/', views.archive_received, name='archive_received'),
 ]

@@ -19,8 +19,6 @@ class Dir extends Component {
   download = () => {
     axios.post('/archive/', {id: parseInt(this.props.id)})
       .then(response => {
-        console.log(response);
-        console.log()
         const a = document.createElement('a');
         a.style.display = 'none';
         a.href = response.data;
@@ -29,9 +27,11 @@ class Dir extends Component {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+        const token = response.headers['content-disposition'].slice(21);
+        axios.post('/archive_received/', {token: token});
       })
       .catch(error => {
-        console.log(error);
+        alert("Oooops, O_o Please, try again");
       });
   }
 
