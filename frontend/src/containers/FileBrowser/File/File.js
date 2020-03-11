@@ -35,6 +35,11 @@ class File extends Component {
 
   render() {
     //TODO: Add different icons depends on this.props.ext
+    let fullNameClassName = classes.None;
+    if (this.props.name.length + this.props.ext.length >= 14) {
+      fullNameClassName = classes.FullName;
+    }
+
     return (
       <div 
         className={classes.File}>
@@ -45,7 +50,10 @@ class File extends Component {
           onContextMenu={(event) => this.onContextMenu(event)}/>
         </div>
         <div className={classes.FileName}>
-          <div>
+          <div className={classes.FlexName}>
+            {this.props.name}
+          </div>
+          <div className={fullNameClassName}>
             {this.props.name}.{this.props.ext}
           </div>
         </div>
