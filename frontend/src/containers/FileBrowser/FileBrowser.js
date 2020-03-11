@@ -7,12 +7,21 @@ import File from './File/File';
 import PathPart from './PathPart/PathPart';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/Spinner/Spinner';
+import InfoCard from './InfoCard/InfoCard';
 
 import classes from './FileBrowser.css';
 
-import {spaceOptions, rootId} from '../../shared/constants';
+import {rootId} from '../../shared/constants';
 
 class FileBrowser extends Component {
+
+  spaceOptions = [
+    {"label": "add directory", "action":() => {console.log("add directory")}, "holdBackdrop": false},
+    {"label": "upload file", "action":() => {console.log("upload file")}, "holdBackdrop": false},
+    {"label": "upload files", "action":() => {console.log("upload files")}, "holdBackdrop": false},
+    {"label": "upload directory", "action":() => {console.log("upload directory")}, "holdBackdrop": false},
+    {"label": "properties", "action":() => {console.log("properties")}, "holdBackdrop": true},
+  ]
 
   onMouseMove = (event) => {
     const x = event.pageX;
@@ -20,7 +29,7 @@ class FileBrowser extends Component {
     this.props.updatePosition(x, y);
   }
 
-  showContextMenu = (event, options=spaceOptions) => {
+  showContextMenu = (event, options=this.spaceOptions) => {
     if (event) {
       event.preventDefault();
     }
@@ -54,14 +63,16 @@ class FileBrowser extends Component {
               id={item[0]}
               name={item[1].name}
               ext={item[1].ext}
-              showContextMenu={this.showContextMenu} />
+              showContextMenu={this.showContextMenu}
+              info={item[1]} />
             ) : (
             <Dir
               key={item[0]}
               id={item[0]}
               name={item[1].name}
               open={() => this.props.addDirToPath(item[1].content, item[0], item[1].name)}
-              showContextMenu={this.showContextMenu} />
+              showContextMenu={this.showContextMenu}
+              info={item[1]} />
             );
         });
 
@@ -89,10 +100,19 @@ class FileBrowser extends Component {
       );
     }
 
+    let infocard = null;
+    if (this.props.showInfoCard) {
+      infocard = <InfoCard/>;
+    }
+
     return (
-      <div className={classes.FileBrowser}>
-        {fileBrowserContent}
-      </div>
+      <React.Fragment>
+        <div className={classes.FileBrowser}>
+          {fileBrowserContent}
+        </div>
+        {infocard}
+      </React.Fragment>
+      
     );
   }
 }
@@ -100,6 +120,7 @@ class FileBrowser extends Component {
 const mapStateToProps = state => {
   return {
     showBackdrop: state.fileBrowser.showBackdrop,
+    showInfoCard: state.fileBrowser.showInfoCard,
     loading: state.fileBrowser.loading,
     loadingAsync: state.fileBrowser.loadingAsync,
     dirs: state.fileBrowser.dirs,
@@ -114,6 +135,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onSetBackdrop: () => dispatch(actions.setBackdrop()),
     onSetContextMenu: (options) => dispatch(actions.setContextMenu(options)),
+    onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)), //Add call
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
     fetchDirs: () => dispatch(actions.fetchDirs()),
     fetchFiles: () => dispatch(actions.fetchFiles()),

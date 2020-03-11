@@ -1,4 +1,8 @@
 .InfoCard {
-    color:red;
-    font-size: 28px;
+    z-index: 2;
+}
+
+.CloseButton {
+    font-size: 72px;
+    color: red;
 }

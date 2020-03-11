@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import axios from '../../../axios-fileBrowser';
 
 import classes from './File.css';
+import * as actions from '../../../store/actions/index';
 
 
 class File extends Component {
@@ -12,11 +14,11 @@ class File extends Component {
   }
 
   fileOptions = [
-    {"label": "download", "action":() => {this.download()}},
-    {"label": "properties", "action":() => {console.log("properties")}, "holdBackdrop": true},
+    {"label": "download", "action": () => {this.downloadClick()}, "holdBackdrop": false},
+    {"label": "properties", "action": () => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
-  download = () => {
+  downloadClick = () => {
     axios.post('/download/', {id: parseInt(this.props.id)})
       .then(response => {
         const a = document.createElement('a');
@@ -31,6 +33,10 @@ class File extends Component {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  propertiesClick = () => {
+    this.props.onSetInfoCard(this.props.info);
   }
 
   render() {
@@ -62,4 +68,10 @@ class File extends Component {
   }
 }
 
-export default File;
+const mapDispatchToProps = dispatch => {
+  return {
+    onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(File);

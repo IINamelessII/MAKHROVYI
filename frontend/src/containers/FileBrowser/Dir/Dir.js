@@ -11,12 +11,12 @@ class Dir extends Component {
   }
 
   dirOptions = [
-    {"label": "open", "action":() => {this.props.open()}},
-    {"label": "download", "action":() => {this.download()}},
+    {"label": "open", "action":() => {this.props.open()}, "holdBackdrop": false},
+    {"label": "download", "action":() => {this.downloadClick()}, "holdBackdrop": false},
     {"label": "properties", "action":() => {console.log("properties")}, "holdBackdrop": true},
   ]
 
-  download = () => {
+  downloadClick = () => {
     axios.post('/archive/', {id: parseInt(this.props.id)})
       .then(response => {
         const a = document.createElement('a');

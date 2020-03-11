@@ -1,16 +1,44 @@
-import React from 'react';
-import classes from './InfoCarf.css';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
+import classes from './InfoCard.css';
+import * as actions from '../../../store/actions/index';
 
-class InfoCard {
+class InfoCard extends Component {
+
   render() {
+    let name = this.props.data.name;
+    if (this.props.data.ext) {
+      name += '.' + this.props.data.ext;
+    }
+
     return (
       <div className={classes.InfoCard}>
-        {props.name}
+        <div className={classes.Header}>
+          <div className={classes.Title}>{name}</div>
+          <div 
+            className={classes.CloseButton}
+            onClick={this.props.onBackdropHide}>X</div>
+        </div>
+        <div className={classes.Info}>
+          SOME INFO HERE
+        </div>
       </div>
     );
   }
 }
 
-export default InfoCard;
+const mapStateToProps = state => {
+  return {
+    data: state.fileBrowser.infoCardData,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onBackdropHide: () => dispatch(actions.hideBackdrop()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InfoCard);
 
