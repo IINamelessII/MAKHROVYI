@@ -13,15 +13,17 @@ class InfoCard extends Component {
     }
 
     return (
-      <div className={classes.InfoCard}>
-        <div className={classes.Header}>
-          <div className={classes.Title}>{name}</div>
-          <div 
-            className={classes.CloseButton}
-            onClick={this.props.onBackdropHide}>X</div>
-        </div>
-        <div className={classes.Info}>
-          SOME INFO HERE
+      <div className={classes.Container}>
+        <div className={classes.InfoCard}>
+          <div className={classes.Header}>
+            <div className={classes.Title}>Properties of {name}</div>
+            <div 
+              className={classes.CloseButton}
+              onClick={this.props.onBackdropHide}>x</div>
+          </div>
+          <div className={classes.Info}>
+            SOME INFO HERE
+          </div>
         </div>
       </div>
     );
