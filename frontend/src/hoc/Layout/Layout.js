@@ -22,8 +22,9 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
   return {
-    showContextMenu: state.fileBrowser.showBackdrop,
-    options: state.fileBrowser.options,
+    showContextMenu: state.fileBrowser.showContextMenu,
+    options: state.fileBrowser.contextMenuOptions,
+    showInfoCard: state.fileBrowser.showInfoCard,
   };
 };
 

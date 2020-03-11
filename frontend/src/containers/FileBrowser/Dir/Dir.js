@@ -13,7 +13,7 @@ class Dir extends Component {
   dirOptions = [
     {"label": "open", "action":() => {this.props.open()}},
     {"label": "download", "action":() => {this.download()}},
-    {"label": "properties", "action":() => {console.log("properties")}},
+    {"label": "properties", "action":() => {console.log("properties")}, "holdBackdrop": true},
   ]
 
   download = () => {

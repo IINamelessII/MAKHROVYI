@@ -10,9 +10,13 @@ class ContextMenu extends Component {
     return false;
   }
 
-  optionClick = (action) => {
+  optionClick = (action, holdBackdrop) => {
     action();
-    this.props.onBackdropHide();
+    if (!holdBackdrop) {
+      this.props.onBackdropHide();
+    } else {
+      this.props.onContextMenuHide();
+    }
   }
 
   render() {
@@ -20,7 +24,7 @@ class ContextMenu extends Component {
       return (
         <div
           key={option.label}
-          onClick={() => this.optionClick(option.action)}
+          onClick={() => this.optionClick(option.action, option.holdBackdrop)}
           className={classes.Option}>{option.label}</div>
       );
     })
@@ -45,6 +49,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onBackdropHide: () => dispatch(actions.hideBackdrop()),
+    onContextMenuHide: () => dispatch(actions.hideContextMenu()),
   }
 }
 

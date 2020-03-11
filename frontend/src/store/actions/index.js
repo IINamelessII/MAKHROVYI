@@ -1,6 +1,10 @@
 export {
   setBackdrop,
   hideBackdrop,
+  setContextMenu,
+  hideContextMenu,
+  setInfoCard,
+  hideInfoCard,
   getPostion,
   fetchDirs,
   fetchFiles,

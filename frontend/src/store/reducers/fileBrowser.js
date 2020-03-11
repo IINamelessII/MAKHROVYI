@@ -32,8 +32,11 @@ const parseDir = (dirs, files, id) => {
 
 const initialState = {
   showBackdrop: false,
+  showContextMenu: false,
+  showInfoCard: false,
   position: {x: 0, y: 0},
-  options: [],
+  contextMenuOptions: [],
+  infoCardData: {},
   loading: false,
   loadingAsync: false,
   dirs: [],
@@ -47,13 +50,40 @@ const initialState = {
 const setBackdrop = (state, action) => {
   return updateObject(state, {
     showBackdrop: true,
-    options: action.options,
   });
 };
 
 const hideBackdrop = (state, action) => {
   return updateObject(state, {
     showBackdrop: false,
+    showContextMenu: false,
+    showInfoCard: false,
+  });
+};
+
+const setContextMenu = (state, action) => {
+  return updateObject(state, {
+    showContextMenu: true,
+    contextMenuOptions: action.options,
+  });
+};
+
+const hideContextMenu = (state, action) => {
+  return updateObject(state, {
+    showContextMenu: false,
+  });
+};
+
+const setInfoCard = (state, action) => {
+  return updateObject(state, {
+    showInfoCard: true,
+    infoCardData: action.data,
+  });
+};
+
+const hideInfoCard = (state, action) => {
+  return updateObject(state, {
+    showInfoCard: false,
   });
 };
 
@@ -142,6 +172,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_BACKDROP: return setBackdrop(state, action);
     case actionTypes.HIDE_BACKDROP: return hideBackdrop(state, action);
+    case actionTypes.SET_CONTEXTMENU: return setContextMenu(state, action);
+    case actionTypes.HIDE_CONTEXTMENU: return hideContextMenu(state, action);
+    case actionTypes.SET_INFOCARD: return setInfoCard(state, action);
+    case actionTypes.HIDE_INFOCARD: return hideInfoCard(state, action);
     case actionTypes.GET_POSITION: return getPostion(state, action);
     case actionTypes.FETCH_DIRS_START: return fetchDirsStart(state, action);
     case actionTypes.FETCH_DIRS_SUCCESS: return fetchDirsSuccess(state, action);

@@ -1,16 +1,41 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-fileBrowser';
 
-export const setBackdrop = (options) => {
+export const setBackdrop = () => {
   return {
     type: actionTypes.SET_BACKDROP,
-    options: options,
   };
 };
 
 export const hideBackdrop = () => {
   return {
     type: actionTypes.HIDE_BACKDROP,
+  };
+};
+
+export const setContextMenu = (options) => {
+  return {
+    type: actionTypes.SET_CONTEXTMENU,
+    options: options,
+  };
+};
+
+export const hideContextMenu = () => {
+  return {
+    type: actionTypes.HIDE_CONTEXTMENU,
+  };
+};
+
+export const setInfoCard = (data) => {
+  return {
+    type: actionTypes.SET_INFOCARD,
+    data: data
+  };
+};
+
+export const hideInfoCard = () => {
+  return {
+    type: actionTypes.HIDE_INFOCARD,
   };
 };
 
@@ -96,6 +121,7 @@ export const buildStructure = (rootId, dirs) => {
   };
 };
 
+//TODO: Refactor useless action creaters
 export const prepareStructure = (rootId) => {
   return dispatch => {
     dispatch(fetchFilesStart());

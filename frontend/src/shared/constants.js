@@ -3,7 +3,7 @@ export const spaceOptions = [
   {"label": "upload file", "action":() => {console.log("upload file")}},
   {"label": "upload files", "action":() => {console.log("upload files")}},
   {"label": "upload directory", "action":() => {console.log("upload directory")}},
-  {"label": "properties", "action":() => {console.log("properties")}},
+  {"label": "properties", "action":() => {console.log("properties")}, "holdBackdrop": true},
 ];
 
 export const rootId = 1;

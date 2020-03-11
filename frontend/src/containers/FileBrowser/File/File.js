@@ -13,7 +13,7 @@ class File extends Component {
 
   fileOptions = [
     {"label": "download", "action":() => {this.download()}},
-    {"label": "properties", "action":() => {console.log("properties")}},
+    {"label": "properties", "action":() => {console.log("properties")}, "holdBackdrop": true},
   ]
 
   download = () => {

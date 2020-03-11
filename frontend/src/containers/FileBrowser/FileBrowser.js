@@ -24,7 +24,8 @@ class FileBrowser extends Component {
     if (event) {
       event.preventDefault();
     }
-    this.props.onContextMenuShow(options);
+    this.props.onSetContextMenu(options);
+    this.props.onSetBackdrop();
   }
 
   componentDidMount() {
@@ -111,7 +112,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onContextMenuShow: (options) => dispatch(actions.setBackdrop(options)),
+    onSetBackdrop: () => dispatch(actions.setBackdrop()),
+    onSetContextMenu: (options) => dispatch(actions.setContextMenu(options)),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
     fetchDirs: () => dispatch(actions.fetchDirs()),
     fetchFiles: () => dispatch(actions.fetchFiles()),

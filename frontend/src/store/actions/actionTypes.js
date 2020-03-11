@@ -1,6 +1,12 @@
 export const SET_BACKDROP = 'SET_BACKDROP';
 export const HIDE_BACKDROP = 'HIDE_BACKDROP';
 
+export const SET_CONTEXTMENU = 'SET_CONTEXTMENU';
+export const HIDE_CONTEXTMENU = 'HIDE_CONTEXTMENU';
+
+export const SET_INFOCARD = 'SET_INFOCARD';
+export const HIDE_INFOCARD = 'HIDE_INFOCARD';
+
 export const GET_POSITION = 'GET_POSITION';
 
 export const FETCH_DIRS_START = 'FETCH_DIRS_START';
