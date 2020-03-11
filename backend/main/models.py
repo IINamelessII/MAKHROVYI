@@ -17,6 +17,9 @@ class Dir(models.Model):
     def __str__(self):
         return '#{} {}'.format(self.id, self.name)
 
+    def inc_download(self):
+        Dir.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
+
 
 class File(models.Model):
     name = models.CharField(max_length=100)
@@ -27,3 +30,6 @@ class File(models.Model):
 
     def __str__(self):
         return '#{} {}'.format(self.id, self.name, '.', self.ext)
+    
+    def inc_download(self):
+        File.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)

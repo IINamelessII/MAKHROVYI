@@ -34,7 +34,6 @@ def index(request):
 
 def download(request):
     """return file link by its id"""
-    #TODO add custom exceptions and different responses
     try:
         data = json.loads(request.body.decode('utf-8'))
         the_file_record = File.objects.get(pk=data['id'])
@@ -44,14 +43,18 @@ def download(request):
         filename = os.path.basename(the_file_record.file.name)
         response = HttpResponse(settings.MEDIA_URL + filename)
         response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+
+        the_file_record.inc_download()
         return response
 
 
 def prepare_dir(id, space):
     """"Recursive prepare dirs structure for archiving"""
     dir_record = Dir.objects.get(pk=id)
+    dir_record.inc_download()
 
     for the_file in dir_record.files.all():
+        the_file.inc_download()
         filename = os.path.basename(the_file.file.name)
 
         file_path = os.path.join(settings.MEDIA_ROOT, filename)
@@ -85,7 +88,6 @@ def archive(request):
         prepare_dir(data['id'], path_with_token)
 
         shutil.make_archive(path_with_token, 'zip', path_with_token)
-        #TODO: Add view to remove archive, request send from front after downloading
 
         response = HttpResponse(settings.ARCHIVES_URL + token + '.zip')
         response['Content-Disposition'] = 'attachment; filename={}'.format(token)
