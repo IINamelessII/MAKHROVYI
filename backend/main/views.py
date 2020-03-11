@@ -103,7 +103,7 @@ def archive_received(request):
     except:
         return HttpResponse(status=404)
     else:
-        time.sleep(3600)
+        time.sleep(settings.TIME_TO_DELETE)
         archive_path = os.path.join(settings.ARCHIVES_ROOT, token)
         shutil.rmtree(archive_path)
         os.remove(archive_path + '.zip')

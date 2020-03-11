@@ -138,6 +138,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+TIME_TO_DELETE = 3600
+
 AUTH_USER_MODEL = 'main.User'
 
 try:
