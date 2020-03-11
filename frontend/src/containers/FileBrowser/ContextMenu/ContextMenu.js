@@ -2,10 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import classes from './ContextMenu.css';
+import * as actions from '../../../store/actions/index';
 
 class ContextMenu extends Component {
+
   shouldComponentUpdate() {
     return false;
+  }
+
+  optionClick = (action) => {
+    action();
+    this.props.onBackdropHide();
   }
 
   render() {
@@ -13,7 +20,7 @@ class ContextMenu extends Component {
       return (
         <div
           key={option.label}
-          onClick={option.action}
+          onClick={() => this.optionClick(option.action)}
           className={classes.Option}>{option.label}</div>
       );
     })
@@ -35,4 +42,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ContextMenu);
+const mapDispatchToProps = dispatch => {
+  return {
+    onBackdropHide: () => dispatch(actions.hideBackdrop()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContextMenu);
