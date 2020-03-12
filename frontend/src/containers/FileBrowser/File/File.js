@@ -10,7 +10,7 @@ class File extends Component {
   onContextMenu = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    this.props.showContextMenu(null, this.fileOptions); //event = null, options = fileOptions
+    this.props.showContextMenu(null, this.fileOptions);
   }
 
   fileOptions = [
@@ -57,7 +57,7 @@ class File extends Component {
         </div>
         <div className={classes.FileName}>
           <div className={classes.FlexName}>
-            {this.props.name}
+            {this.props.name}.{this.props.ext}
           </div>
           <div className={fullNameClassName}>
             {this.props.name}.{this.props.ext}
