@@ -20,7 +20,7 @@ class FileBrowser extends Component {
     {"label": "upload file", "action":() => {console.log("upload file")}, "holdBackdrop": false},
     {"label": "upload files", "action":() => {console.log("upload files")}, "holdBackdrop": false},
     {"label": "upload directory", "action":() => {console.log("upload directory")}, "holdBackdrop": false},
-    {"label": "properties", "action":() => {console.log("properties")}, "holdBackdrop": true},
+    {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
   onMouseMove = (event) => {
@@ -37,11 +37,20 @@ class FileBrowser extends Component {
     this.props.onSetBackdrop();
   }
 
+  propertiesClick = () => {
+    const id = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
+    const data = this.props.dirs.find(dir => dir.id === id);
+    this.props.onSetInfoCard(data);
+  }
+
   componentDidMount() {
     this.props.prepareStructure(rootId);
   }
 
   render() {
+
+    console.log("DATA");
+    console.log(this.props);
 
     let fileBrowserContent = (
       <div className={classes.SpinnerContainer}>
@@ -135,7 +144,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onSetBackdrop: () => dispatch(actions.setBackdrop()),
     onSetContextMenu: (options) => dispatch(actions.setContextMenu(options)),
-    onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)), //Add call
+    onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
     fetchDirs: () => dispatch(actions.fetchDirs()),
     fetchFiles: () => dispatch(actions.fetchFiles()),

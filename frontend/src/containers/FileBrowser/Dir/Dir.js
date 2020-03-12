@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import axios from '../../../axios-fileBrowser';
 
 import classes from './Dir.css';
+import * as actions from '../../../store/actions/index';
 
 class Dir extends Component {
   onContextMenu = (event) => {
@@ -13,7 +15,7 @@ class Dir extends Component {
   dirOptions = [
     {"label": "open", "action":() => {this.props.open()}, "holdBackdrop": false},
     {"label": "download", "action":() => {this.downloadClick()}, "holdBackdrop": false},
-    {"label": "properties", "action":() => {console.log("properties")}, "holdBackdrop": true},
+    {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
   downloadClick = () => {
@@ -33,6 +35,10 @@ class Dir extends Component {
       .catch(error => {
         alert("Oooops, O_o Please, try again");
       });
+  }
+
+  propertiesClick = () => {
+    this.props.onSetInfoCard(this.props.info);
   }
 
   render() {
@@ -64,4 +70,10 @@ class Dir extends Component {
   }
 }
 
-export default Dir;
+const mapDispatchToProps = dispatch => {
+  return {
+    onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Dir);

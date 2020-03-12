@@ -29,6 +29,8 @@ const parseDir = (dirs, files, id) => {
     name: dir.name,
     type: "dir",
     content: content,
+    downloads: dir.downloads,
+    created_date: dir.created_date,
   };
 }
 
