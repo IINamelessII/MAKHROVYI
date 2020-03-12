@@ -24,6 +24,7 @@ class InfoCard extends Component {
           className={classes.InfoCard}
           onClick={(e) => {e.stopPropagation()}}>
           <div className={classes.Header}>
+            <div></div>
             <div className={classes.Title}>Properties of {name}</div>
             <div 
               className={classes.CloseButton}
@@ -32,22 +33,22 @@ class InfoCard extends Component {
           <div className={classes.Info}>
 
             <div className={classes.Property}>
-              <div className={classes.label}>Name:</div>
+              <div className={classes.Label}>Name:</div>
               <div className={classes.Value}>{this.props.data.name}</div>
             </div>
 
             <div className={classes.Property}>
-              <div className={classes.label}>Type:</div>
+              <div className={classes.Label}>Type:</div>
               <div className={classes.Value}>text/txt</div>
             </div>
 
             <div className={classes.Property}>
-              <div className={classes.label}>Downloaded:</div>
+              <div className={classes.Label}>Downloaded:</div>
               <div className={classes.Value}>{this.props.data.downloads} times</div>
             </div>
 
             <div className={classes.Property}>
-              <div className={classes.label}>Created date</div>
+              <div className={classes.Label}>Created date:</div>
               <div className={classes.Value}>{date_str}</div>
             </div>
 
