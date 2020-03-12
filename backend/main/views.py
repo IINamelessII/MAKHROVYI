@@ -121,8 +121,8 @@ def upload_file(request):
                 file=the_file, 
                 name=the_file.name[:last_dot_index],
                 ext=the_file.name[last_dot_index + 1:],
+                mmtype=the_file.content_type,
             )
-            #TODO: init mmtype from the_file.content_type as field
             instance.save()
             return HttpResponse(status=200)
         except:
