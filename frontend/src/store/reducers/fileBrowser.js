@@ -10,6 +10,7 @@ const parseFile = (files, id) => {
     ext: file.ext,
     downloads: file.downloads,
     created_date: file.created_date,
+    mmtype: file.mmtype,
   };
 }
 

@@ -16,6 +16,11 @@ class InfoCard extends Component {
     let date_str = date_obj.toString();
     date_str = date_str.slice(0, date_str.length - 40);
 
+    let type = 'directory';
+    if (this.props.data.type === 'file') {
+      type = this.props.data.mmtype;
+    }
+
     return (
       <div 
         className={classes.Container}
@@ -39,7 +44,7 @@ class InfoCard extends Component {
 
             <div className={classes.Property}>
               <div className={classes.Label}>Type:</div>
-              <div className={classes.Value}>text/txt</div>
+              <div className={classes.Value}>{type}</div>
             </div>
 
             <div className={classes.Property}>

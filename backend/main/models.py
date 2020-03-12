@@ -1,3 +1,4 @@
+from mimetypes import guess_type
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.timezone import now
@@ -33,3 +34,8 @@ class File(models.Model):
     
     def inc_download(self):
         File.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
+    
+    @property
+    def mmtype(self):
+        "Mime type for the current file"
+        return guess_type(self.file.file.name)[0]
