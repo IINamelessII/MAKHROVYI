@@ -49,16 +49,13 @@ class FileBrowser extends Component {
 
   render() {
 
-    console.log("DATA");
-    console.log(this.props);
-
     let fileBrowserContent = (
       <div className={classes.SpinnerContainer}>
         <Spinner />
       </div>
     );
 
-    if(!this.props.loading && !this.props.loadingAsync) { //If  not loading
+    if(!this.props.loading && !this.props.loadingAsync) {
 
       let items = null;
       let pathRow = null;
