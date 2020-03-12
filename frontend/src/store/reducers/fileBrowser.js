@@ -8,6 +8,8 @@ const parseFile = (files, id) => {
     name: file.name,
     type: 'file',
     ext: file.ext,
+    downloads: file.downloads,
+    created_date: file.created_date,
   };
 }
 

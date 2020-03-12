@@ -103,7 +103,7 @@ export const fetchFilesFail = (error) => {
 export const fetchFiles = () => {
   return dispatch => {
     dispatch(fetchFilesStart());
-    axios.get('api/files/')
+    axios.get('/api/files/')
       .then(response => {
         dispatch(fetchFilesSuccess(response.data));
       })

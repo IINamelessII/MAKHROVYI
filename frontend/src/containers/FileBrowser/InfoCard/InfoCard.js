@@ -12,6 +12,10 @@ class InfoCard extends Component {
       name += '.' + this.props.data.ext;
     }
 
+    const date_obj = new Date(this.props.data.created_date);
+    let date_str = date_obj.toString();
+    date_str = date_str.slice(0, date_str.length - 40);
+
     return (
       <div 
         className={classes.Container}
@@ -26,7 +30,27 @@ class InfoCard extends Component {
               onClick={this.props.onBackdropHide}>x</div>
           </div>
           <div className={classes.Info}>
-            SOME INFO HERE
+
+            <div className={classes.Property}>
+              <div className={classes.label}>Name:</div>
+              <div className={classes.Value}>{this.props.data.name}</div>
+            </div>
+
+            <div className={classes.Property}>
+              <div className={classes.label}>Type:</div>
+              <div className={classes.Value}>text/txt</div>
+            </div>
+
+            <div className={classes.Property}>
+              <div className={classes.label}>Downloaded:</div>
+              <div className={classes.Value}>{this.props.data.downloads} times</div>
+            </div>
+
+            <div className={classes.Property}>
+              <div className={classes.label}>Created date</div>
+              <div className={classes.Value}>{date_str}</div>
+            </div>
+
           </div>
         </div>
       </div>
