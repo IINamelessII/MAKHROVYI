@@ -111,10 +111,9 @@ def archive_received(request):
         return HttpResponse(status=200)
 
 
-def upload_file(request):
+def upload_file(request, id):
     if request.method == 'POST':
         try:
-            #TODO: RECEIVE location (inherit dir)
             the_file = request.FILES['file']
             last_dot_index = the_file.name.rfind('.')
             instance = File(
@@ -124,6 +123,8 @@ def upload_file(request):
                 mmtype=the_file.content_type,
             )
             instance.save()
+            the_dir = Dir.objects.get(pk=id)
+            the_dir.files.add(File.objects.get(pk=instance.id))
             return HttpResponse(status=200)
         except:
             return HttpResponse(status=401)

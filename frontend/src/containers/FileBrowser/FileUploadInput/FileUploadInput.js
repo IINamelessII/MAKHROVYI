@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import axios from '../../../axios-fileBrowser';
 
 import classes from './FileUploadInput.css';
@@ -9,14 +10,13 @@ class FileUploadInput extends Component {
     formRef: React.createRef()
   }
 
-  
-
   uploadFile = (event) => {
     event.preventDefault();
     const data = new FormData(this.state.formRef.current);
+    const dir_id = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     axios({
       method: 'post',
-      url: '/upload_file/',
+      url: '/upload_file/' + dir_id + '/',
       data: data, 
       headers:{"content-type": 'application/form-data'},
     })
@@ -45,4 +45,10 @@ class FileUploadInput extends Component {
   }
 }
 
-export default FileUploadInput;
+const mapStateToProps = state => {
+  return {
+    hashPath: state.fileBrowser.hashPath,
+  };
+};
+
+export default connect(mapStateToProps)(FileUploadInput);
