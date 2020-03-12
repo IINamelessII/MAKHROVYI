@@ -8,16 +8,20 @@ import PathPart from './PathPart/PathPart';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/Spinner/Spinner';
 import InfoCard from './InfoCard/InfoCard';
+import FileUploadInput from './FileUploadInput/FileUploadInput';
 
 import classes from './FileBrowser.css';
 
 import {rootId} from '../../shared/constants';
 
 class FileBrowser extends Component {
+  state = {
+    showFileUpload: false,
+  }
 
   spaceOptions = [
     {"label": "add directory", "action":() => {console.log("add directory")}, "holdBackdrop": false},
-    {"label": "upload file", "action":() => {console.log("upload file")}, "holdBackdrop": false},
+    {"label": "upload file", "action":() => {this.uploadFileClick()}, "holdBackdrop": false},
     {"label": "upload files", "action":() => {console.log("upload files")}, "holdBackdrop": false},
     {"label": "upload directory", "action":() => {console.log("upload directory")}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
@@ -41,6 +45,10 @@ class FileBrowser extends Component {
     const id = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     const data = this.props.dirs.find(dir => dir.id === id);
     this.props.onSetInfoCard(data);
+  }
+
+  uploadFileClick = () => {
+    this.setState({showFileUpload: true});
   }
 
   componentDidMount() {
@@ -111,12 +119,18 @@ class FileBrowser extends Component {
       infocard = <InfoCard/>;
     }
 
+    let fileUploadInput = null;
+    if (this.state.showFileUpload) {
+      fileUploadInput = <FileUploadInput/>
+    }
+
     return (
       <React.Fragment>
         <div className={classes.FileBrowser}>
           {fileBrowserContent}
         </div>
         {infocard}
+        {fileUploadInput}
       </React.Fragment>
       
     );

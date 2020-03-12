@@ -8,9 +8,10 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
+from main.forms import UploadFileForm
 from main.models import Dir, File
-from main.serializers import DirSerializer, FileSerializer
 from main.permissions import IsReadOnly
+from main.serializers import DirSerializer, FileSerializer
 
 
 class DirViewSet(viewsets.ModelViewSet):
@@ -108,3 +109,23 @@ def archive_received(request):
         shutil.rmtree(archive_path)
         os.remove(archive_path + '.zip')
         return HttpResponse(status=200)
+
+
+def upload_file(request):
+    if request.method == 'POST':
+        try:
+            #TODO: RECEIVE location (inherit dir)
+            the_file = request.FILES['file']
+            last_dot_index = the_file.name.rfind('.')
+            instance = File(
+                file=the_file, 
+                name=the_file.name[:last_dot_index],
+                ext=the_file.name[last_dot_index + 1:],
+            )
+            #TODO: init mmtype from the_file.content_type as field
+            instance.save()
+            return HttpResponse(status=200)
+        except:
+            return HttpResponse(status=401)
+    else:
+        return HttpResponse(status=400)
