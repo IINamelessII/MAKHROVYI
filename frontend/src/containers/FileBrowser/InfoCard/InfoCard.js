@@ -13,8 +13,12 @@ class InfoCard extends Component {
     }
 
     return (
-      <div className={classes.Container}>
-        <div className={classes.InfoCard}>
+      <div 
+        className={classes.Container}
+        onClick={this.props.onBackdropHide}>
+        <div 
+          className={classes.InfoCard}
+          onClick={(e) => {e.stopPropagation()}}>
           <div className={classes.Header}>
             <div className={classes.Title}>Properties of {name}</div>
             <div 
