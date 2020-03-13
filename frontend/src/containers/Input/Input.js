@@ -15,22 +15,29 @@ class Input extends Component {
   render() {
     //TODO: Add confirmation
     return (
-      <div className={classes.Input}>
-        <div className={classes.Label}>{this.props.label}</div>
-        <input 
-          type="text"
-          onChange={this.onInputChange}
-          value={this.state.value}
-           />
-        <div className={classes.Buttons}>
-          <div 
-            className={classes.Button + ' ' + classes.Negative}
-            onClick={this.props.onFial
-          }>{this.props.failLabel}</div>
-          <div 
-            className={classes.Button + ' ' + classes.Positive}
-            onClick={() => this.props.onSuccess(this.state.value)}
-          >{this.props.successLabel}</div>
+      <div 
+        className={classes.Container}
+        onClick={this.props.onContainerClick}>
+        <div 
+          className={classes.Input}
+          onClick={(e) => {e.stopPropagation()}}>
+          <div className={classes.Header}>{this.props.label}</div>
+          <input 
+            type="text"
+            onChange={this.onInputChange}
+            value={this.state.value}
+            autoFocus
+            />
+          <div className={classes.Buttons}>
+            <div 
+              className={classes.Button + ' ' + classes.Negative}
+              onClick={this.props.onFail}
+            >{this.props.failLabel}</div>
+            <div 
+              className={classes.Button + ' ' + classes.Positive}
+              onClick={() => this.props.onSuccess(this.state.value)}
+            >{this.props.successLabel}</div>
+          </div>
         </div>
       </div>
     );

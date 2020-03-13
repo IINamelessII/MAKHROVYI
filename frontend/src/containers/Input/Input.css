@@ -1,0 +1,36 @@
+.Container {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Input {
+    z-index: 2;
+    height: 200px;
+    width: 500px;
+    background-color: #7f92ff0a;
+    border: 1px solid #bbbbbb;
+    color: #fff;
+    font-weight: 400;
+}
+
+.Header {
+    width: 100%;
+    
+    height: 60px;
+    border-bottom: 1px solid #bbbbbb;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.Buttons {
+    display: flex;
+    text-transform: uppercase;
+}

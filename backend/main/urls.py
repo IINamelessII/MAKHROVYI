@@ -14,4 +14,5 @@ urlpatterns = [
     path('archive/', views.archive, name='archive'),
     path('archive_received/', views.archive_received, name='archive_received'),
     path('upload_file/<int:id>/', views.upload_file, name='upload_file'),
+    path('newdir/', views.add_new_dir, name='add_new_dir'),
 ]

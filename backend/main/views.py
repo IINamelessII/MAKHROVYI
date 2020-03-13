@@ -112,6 +112,7 @@ def archive_received(request):
 
 
 def upload_file(request, id):
+    """Upload file to dir with given id"""
     if request.method == 'POST':
         try:
             the_file = request.FILES['file']
@@ -123,10 +124,26 @@ def upload_file(request, id):
                 mmtype=the_file.content_type,
             )
             instance.save()
-            the_dir = Dir.objects.get(pk=id)
-            the_dir.files.add(File.objects.get(pk=instance.id))
+            parentDir = Dir.objects.get(pk=id)
+            parentDir.files.add(File.objects.get(pk=instance.id))
             return HttpResponse(status=200)
         except:
             return HttpResponse(status=401)
     else:
         return HttpResponse(status=400)
+
+
+def add_new_dir(request):
+    """Add New Directory with given name to the directory with the given dirId"""
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+        dirId = data['dirId']
+        value = data['value']
+    except:
+        return HttpResponse(status=404)
+    else:
+        instance = Dir(name=value)
+        instance.save()
+        parentDir = Dir.objects.get(pk=dirId)
+        parentDir.dirs.add(Dir.objects.get(pk=instance.id))
+        return HttpResponse(status=200)

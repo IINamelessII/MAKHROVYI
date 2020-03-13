@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-
 import {connect} from 'react-redux';
+
+import axios from '../../axios-fileBrowser';
 
 import Dir from './Dir/Dir';
 import File from './File/File';
@@ -52,8 +53,18 @@ class FileBrowser extends Component {
   }
 
   addNewDir = (value) => {
-    //Sending Request
-    alert(value);
+    const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
+    axios.post('/newdir/', {
+      dirId: dirId,
+      value: value,
+    })
+      .then(response => {
+        //Show Message and save current opened path
+        this.componentDidMount();
+      })
+      .catch(error => {
+        console.log(error);
+      });
     this.props.onHideBackdrop();
   }
 
@@ -142,7 +153,8 @@ class FileBrowser extends Component {
           failLabel="cancel"
           successLabel="add"
           onFail={this.props.onHideBackdrop}
-          onSuccess={(value) => this.addNewDir(value)}/>
+          onSuccess={(value) => this.addNewDir(value)}
+          onContainerClick={this.props.onHideBackdrop}/>
       );
     }
 
