@@ -14,6 +14,7 @@ class Input extends Component {
 
   render() {
     //TODO: Add confirmation
+    //TODO: Add checks such as length and messages
     return (
       <div 
         className={classes.Container}
@@ -21,23 +22,40 @@ class Input extends Component {
         <div 
           className={classes.Input}
           onClick={(e) => {e.stopPropagation()}}>
-          <div className={classes.Header}>{this.props.label}</div>
-          <input 
-            type="text"
-            onChange={this.onInputChange}
-            value={this.state.value}
-            autoFocus
-            />
-          <div className={classes.Buttons}>
-            <div 
-              className={classes.Button + ' ' + classes.Negative}
-              onClick={this.props.onFail}
-            >{this.props.failLabel}</div>
-            <div 
-              className={classes.Button + ' ' + classes.Positive}
-              onClick={() => this.props.onSuccess(this.state.value)}
-            >{this.props.successLabel}</div>
+
+          <div className={classes.Header}>
+            <div className={classes.Label}>{this.props.label}</div>
           </div>
+
+          <div className={classes.Content}>
+            <div></div>
+            <input 
+              type="text"
+              onChange={this.onInputChange}
+              value={this.state.value}
+              autoFocus
+              />
+            <div className={classes.Buttons}>
+              <div 
+                className={classes.Button + ' ' + classes.Negative}
+                onClick={this.props.onFail}
+              >
+                <div className={classes.ButtonLabel}>
+                  {this.props.failLabel}
+                </div>
+              </div>
+              <div 
+                className={classes.Button + ' ' + classes.Positive}
+                onClick={() => this.props.onSuccess(this.state.value)}
+              >
+                <div className={classes.ButtonLabel}>
+                  {this.props.successLabel}
+                </div>
+              </div>
+            </div>
+            <div></div>
+          </div>
+
         </div>
       </div>
     );
