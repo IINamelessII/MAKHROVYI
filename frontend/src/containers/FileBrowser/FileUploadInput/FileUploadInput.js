@@ -7,7 +7,7 @@ import classes from './FileUploadInput.css';
 class FileUploadInput extends Component {
   state = {
     uploading: false,
-    formRef: React.createRef()
+    formRef: React.createRef(),
   }
 
   uploadFile = (event) => {
@@ -37,7 +37,7 @@ class FileUploadInput extends Component {
           <input name="file" type="file"/>
         </form>
         <div
-          onClick={() =>this.state.formRef.current.dispatchEvent(new Event("submit"))}>
+          onClick={() => this.state.formRef.current.dispatchEvent(new Event("submit"))}>
           SEND
         </div>
       </div>
