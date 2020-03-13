@@ -5,6 +5,8 @@ export {
   hideContextMenu,
   setInfoCard,
   hideInfoCard,
+  setNewDir,
+  hideNewDir,
   getPostion,
   fetchDirs,
   fetchFiles,

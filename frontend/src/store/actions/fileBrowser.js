@@ -39,6 +39,18 @@ export const hideInfoCard = () => {
   };
 };
 
+export const setNewDir = () => {
+  return {
+    type: actionTypes.SET_NEW_DIR,
+  };
+};
+
+export const hideNewDir = () => {
+  return {
+    type: actionTypes.HIDE_NEW_DIR,
+  };
+};
+
 export const getPostion = (x, y) => {
   return {
     type: actionTypes.GET_POSITION,

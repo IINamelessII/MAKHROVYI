@@ -9,6 +9,7 @@ import * as actions from '../../store/actions/index';
 import Spinner from '../../components/Spinner/Spinner';
 import InfoCard from './InfoCard/InfoCard';
 import FileUploadInput from './FileUploadInput/FileUploadInput';
+import Input from '../Input/Input';
 
 import classes from './FileBrowser.css';
 
@@ -20,9 +21,8 @@ class FileBrowser extends Component {
   }
 
   spaceOptions = [
-    {"label": "add directory", "action":() => {console.log("add directory")}, "holdBackdrop": false},
+    {"label": "add directory", "action":() => {this.addDirectoryClick()}, "holdBackdrop": true},
     {"label": "upload file", "action":() => {this.uploadFileClick()}, "holdBackdrop": false},
-    {"label": "upload files", "action":() => {console.log("upload files")}, "holdBackdrop": false},
     {"label": "upload directory", "action":() => {console.log("upload directory")}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
   ]
@@ -45,6 +45,16 @@ class FileBrowser extends Component {
     const id = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     const data = this.props.dirs.find(dir => dir.id === id);
     this.props.onSetInfoCard(data);
+  }
+
+  addDirectoryClick = () => {
+    this.props.onSetNewDir();
+  }
+
+  addNewDir = (value) => {
+    //Sending Request
+    alert(value);
+    this.props.onHideBackdrop();
   }
 
   uploadFileClick = () => {
@@ -124,12 +134,25 @@ class FileBrowser extends Component {
       fileUploadInput = <FileUploadInput/>
     }
 
+    let addNewDir = null;
+    if (this.props.showNewDir) {
+      addNewDir = (
+        <Input
+          label="New Directory"
+          failLabel="cancel"
+          successLabel="add"
+          onFail={this.props.onHideBackdrop}
+          onSuccess={(value) => this.addNewDir(value)}/>
+      );
+    }
+
     return (
       <React.Fragment>
         <div className={classes.FileBrowser}>
           {fileBrowserContent}
         </div>
         {infocard}
+        {addNewDir}
         {fileUploadInput}
       </React.Fragment>
       
@@ -141,6 +164,7 @@ const mapStateToProps = state => {
   return {
     showBackdrop: state.fileBrowser.showBackdrop,
     showInfoCard: state.fileBrowser.showInfoCard,
+    showNewDir: state.fileBrowser.showNewDir,
     loading: state.fileBrowser.loading,
     loadingAsync: state.fileBrowser.loadingAsync,
     dirs: state.fileBrowser.dirs,
@@ -148,14 +172,17 @@ const mapStateToProps = state => {
     items: state.fileBrowser.items,
     path: state.fileBrowser.path,
     hashPath: state.fileBrowser.hashPath,
+    newDirName: state.fileBrowser.newDirName,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onSetBackdrop: () => dispatch(actions.setBackdrop()),
+    onHideBackdrop: () => dispatch(actions.hideBackdrop()),
     onSetContextMenu: (options) => dispatch(actions.setContextMenu(options)),
     onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)),
+    onSetNewDir: () => dispatch(actions.setNewDir()),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
     fetchDirs: () => dispatch(actions.fetchDirs()),
     fetchFiles: () => dispatch(actions.fetchFiles()),
