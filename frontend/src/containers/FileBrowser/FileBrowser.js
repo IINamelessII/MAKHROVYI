@@ -19,7 +19,6 @@ import {rootId} from '../../shared/constants';
 class FileBrowser extends Component {
   state = {
     showFileUpload: false,
-    uploadDirFormRef:  React.createRef(),
   }
 
   spaceOptions = [
@@ -28,6 +27,10 @@ class FileBrowser extends Component {
     {"label": "upload directory", "action":() => {this.uploadDirClick()}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
   ]
+
+  uploadDirFormRef = React.createRef()
+
+  uploadDirInputRef = React.createRef()
 
   onMouseMove = (event) => {
     const x = event.pageX;
@@ -60,7 +63,7 @@ class FileBrowser extends Component {
       value: value,
     })
       .then(response => {
-        //Show Message and save current opened path
+        //TODO: Show Message and save current opened path
         this.componentDidMount();
       })
       .catch(error => {
@@ -74,34 +77,29 @@ class FileBrowser extends Component {
   }
 
   uploadDirClick = () => {
-    const form = document.createElement('form');
-    form.style.display = 'none';
-    form.setAttribute('onsubmit', this.uploadDir);
-    form.setAttribute('ref', this.state.uploadDirFormRef);
-    form.setAttribute('enctype', 'multipart/form-data');
-
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('name', 'file');
-    input.setAttribute('webkitdirectory', true);
-    input.setAttribute('mozdirectory', true);
-
-    form.appendChild(input);
-
-    document.body.appendChild(form);
-    input.click();
-    this.state.uploadDirFormRef.current.dispatchEvent(new Event('submit'));
-    document.body.removeChild(form);
+    this.uploadDirInputRef.current.click();
   }
 
   uploadDir = (event) => {
     event.preventDefault();
 
-    const data = new FormData(this.state.uploadDirFormRef.current);
+    const data = new FormData(this.uploadDirFormRef.current);
     const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
 
-    console.log(data);
-    console.log(dirId);
+    axios({
+      method: 'post',
+      url: '/upload_dir/' + dirId + '/',
+      data: data, 
+      headers:{"content-type": 'application/form-data'},
+    })
+      .then(response => {
+        console.log('Nice!');
+        console.log(response);
+      })
+      .catch(error => {
+        console.log('(((');
+        console.log(error);
+      });
   }
 
   componentDidMount() {
@@ -190,6 +188,22 @@ class FileBrowser extends Component {
       );
     }
 
+    const dirUpload = (
+      <form
+        style={{display: 'none'}}
+        ref={this.uploadDirFormRef}
+        encType='multipart/form-data'
+      >
+        <input
+          type='file'
+          name='file'
+          webkitdirectory='true'
+          mozdirectory='true'
+          onChange={this.uploadDir}
+          ref={this.uploadDirInputRef}/>
+      </form>
+    );
+
     return (
       <React.Fragment>
         <div className={classes.FileBrowser}>
@@ -198,6 +212,7 @@ class FileBrowser extends Component {
         {infocard}
         {addNewDir}
         {fileUploadInput}
+        {dirUpload}
       </React.Fragment>
       
     );

@@ -13,10 +13,10 @@ class FileUploadInput extends Component {
   uploadFile = (event) => {
     event.preventDefault();
     const data = new FormData(this.state.formRef.current);
-    const dir_id = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
+    const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     axios({
       method: 'post',
-      url: '/upload_file/' + dir_id + '/',
+      url: '/upload_file/' + dirId + '/',
       data: data, 
       headers:{"content-type": 'application/form-data'},
     })
