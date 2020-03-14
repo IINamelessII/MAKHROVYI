@@ -3,6 +3,7 @@ import os
 import shutil
 import time
 import zipfile
+from pprint import pprint #For dev purposes only TODO:Remove the import and uses
 from secrets import token_urlsafe
 from django.conf import settings
 from django.http import HttpResponse
@@ -147,3 +148,37 @@ def add_new_dir(request):
         parentDir = Dir.objects.get(pk=dirId)
         parentDir.dirs.add(Dir.objects.get(pk=instance.id))
         return HttpResponse(status=200)
+
+
+def upload_dir(request, id):
+    """Upload dir to dir with given id"""
+    if request.method == 'POST':
+        files = request.FILES.getlist('file')
+        relpaths = json.load(request.FILES['relPaths'].file)
+
+        print(files)
+        print(relpaths)
+
+        for f in files:
+            print(pprint(vars(f)))
+
+        # for r in relpaths:
+        #     print(pprint(vars(r)))
+        #     print(json.load(r.file))
+
+        #     print(f)
+        #     print(f.name)
+        #     print('YEA')
+        # last_dot_index = the_file.name.rfind('.')
+        # instance = File(
+        #     file=the_file, 
+        #     name=the_file.name[:last_dot_index],
+        #     ext=the_file.name[last_dot_index + 1:],
+        #     mmtype=the_file.content_type,
+        # )
+        # instance.save()
+        # parentDir = Dir.objects.get(pk=id)
+        # parentDir.files.add(File.objects.get(pk=instance.id))
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
