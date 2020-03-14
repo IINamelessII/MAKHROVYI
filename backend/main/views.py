@@ -155,28 +155,38 @@ def upload_dir(request, id):
     if request.method == 'POST':
         files = request.FILES.getlist('file')
         relpaths = json.load(request.FILES['relPaths'].file)
+        
+        paths = [path.split('/')[:-1] for path in relpaths] #[['root', 'dir1'], ['root'], ['root', 'dir1', 'dir3']]
+        #file_dir_ids = list of dir's ids where files located
+        file_dir_ids = [None] * len(files)
+        max_deep_lvl = max([length(full_path) for full_path in paths])
+        for lvl in range(max_deep_lvl):
+            # prefix = paths[0][lvl + 1].join('/')
+            prefixes = set([paths[i][lvl + 1].join('/') for i in range(len(files))])
 
-        print(files)
-        print(relpaths)
+        for idx, the_file in enumerate(files):
+            #Create File record
+            last_dot_index = the_file.name.rfind('.')
+            instance = File(
+                file=the_file, 
+                name=the_file.name[:last_dot_index],
+                ext=the_file.name[last_dot_index + 1:],
+                mmtype=the_file.content_type,
+            )
+            instance.save()
+            #Create Dirs records
+            # path_parts = reversed(dirs[idx])
+            # for dir_idx, path_part in enumerate(path_parts):
+            #     dir = Dir(name=path_part)
+            #     if dir_idx == 0:
+            #         dir.files.add(File.objects.get(pk=instance.id))
+            #     else:
+            #         dir.dirs.add(Dir.objects.get(pk=))
+            #     dir.save()
+            #Create Dirs recors
 
-        for f in files:
-            print(pprint(vars(f)))
 
-        # for r in relpaths:
-        #     print(pprint(vars(r)))
-        #     print(json.load(r.file))
-
-        #     print(f)
-        #     print(f.name)
-        #     print('YEA')
-        # last_dot_index = the_file.name.rfind('.')
-        # instance = File(
-        #     file=the_file, 
-        #     name=the_file.name[:last_dot_index],
-        #     ext=the_file.name[last_dot_index + 1:],
-        #     mmtype=the_file.content_type,
-        # )
-        # instance.save()
+        
         # parentDir = Dir.objects.get(pk=id)
         # parentDir.files.add(File.objects.get(pk=instance.id))
         return HttpResponse(status=200)
