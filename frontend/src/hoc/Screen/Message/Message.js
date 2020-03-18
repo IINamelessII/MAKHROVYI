@@ -19,6 +19,7 @@ class Message extends Component {
       messageContent = (
         <div className={classes.Message}>
           <div className={classes.HeaderContainer}>
+            <div></div>
             <div className={classes.Header}>
               {message.header}
             </div>
