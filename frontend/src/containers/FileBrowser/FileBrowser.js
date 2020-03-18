@@ -103,7 +103,7 @@ class FileBrowser extends Component {
     })
       .then(response => {
         console.log('Nice!');
-        console.log(response);
+        this.componentDidMount();
       })
       .catch(error => {
         console.log('(((');

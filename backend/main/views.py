@@ -155,17 +155,50 @@ def upload_dir(request, id):
     if request.method == 'POST':
         files = request.FILES.getlist('file')
         relpaths = json.load(request.FILES['relPaths'].file)
+        #TODO: Move this function to Dir model
+        paths = [path.split('/')[:-1] for path in relpaths]
+        #file_dir_ids is a list of dir's ids where files located
+        file_dir_ids = []
         
-        paths = [path.split('/')[:-1] for path in relpaths] #[['root', 'dir1'], ['root'], ['root', 'dir1', 'dir3']]
-        #file_dir_ids = list of dir's ids where files located
-        file_dir_ids = [None] * len(files)
-        max_deep_lvl = max([length(full_path) for full_path in paths])
-        for lvl in range(max_deep_lvl):
-            # prefix = paths[0][lvl + 1].join('/')
-            prefixes = set([paths[i][lvl + 1].join('/') for i in range(len(files))])
+        dir_inst = Dir(name=paths[0][0])
+        dir_inst.save()
+        d = [{
+            dir_inst.id: {
+                'name': dir_inst.name,
+                'cont': []
+            }
+        }]
+        Dir.objects.get(pk=id).dirs.add(Dir.objects.get(pk=dir_inst.id))
+        saved_id = dir_inst.id #Currently root id
 
-        for idx, the_file in enumerate(files):
-            #Create File record
+        for path in paths:
+            d_link = d #Linking object behind d variable
+            for part in path:
+                id = 0
+                # for key, value in d_link.items():
+                for index, i in enumerate(d_link):
+                    key, value = list(i.items())[0]
+                    if value['name'] == part:
+                        id = key
+                        break
+                if id: #if part was finded
+                    d_link = d_link[index][id]['cont']
+                    saved_id = id
+                else: #Create new Dir Record
+                    dir_inst = Dir(name=part)
+                    dir_inst.save()
+                    Dir.objects.get(pk=saved_id).dirs.add(Dir.objects.get(pk=dir_inst.id))
+                    d_link.append({dir_inst.id: {
+                        'name': part,
+                        'cont': []
+                    }})
+                    d_link = d_link[-1][dir_inst.id]['cont']
+                    saved_id = dir_inst.id
+            
+            file_dir_ids.append(saved_id)
+                     
+        for id, the_file in enumerate(files):
+            #Creating File record
             last_dot_index = the_file.name.rfind('.')
             instance = File(
                 file=the_file, 
@@ -174,21 +207,10 @@ def upload_dir(request, id):
                 mmtype=the_file.content_type,
             )
             instance.save()
-            #Create Dirs records
-            # path_parts = reversed(dirs[idx])
-            # for dir_idx, path_part in enumerate(path_parts):
-            #     dir = Dir(name=path_part)
-            #     if dir_idx == 0:
-            #         dir.files.add(File.objects.get(pk=instance.id))
-            #     else:
-            #         dir.dirs.add(Dir.objects.get(pk=))
-            #     dir.save()
-            #Create Dirs recors
+            #Adding File to the parent Dir
+            parent_dir = Dir.objects.get(pk=file_dir_ids[id])
+            parent_dir.files.add(File.objects.get(pk=instance.id))
 
-
-        
-        # parentDir = Dir.objects.get(pk=id)
-        # parentDir.files.add(File.objects.get(pk=instance.id))
         return HttpResponse(status=200)
     else:
         return HttpResponse(status=400)
