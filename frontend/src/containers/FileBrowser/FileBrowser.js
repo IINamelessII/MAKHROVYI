@@ -123,7 +123,7 @@ class FileBrowser extends Component {
       </div>
     );
 
-    if(!this.props.loading && !this.props.loadingAsync) {
+    if(!this.props.loading && !this.props.loadingAsync) { 
 
       let items = null;
       let pathRow = null;
