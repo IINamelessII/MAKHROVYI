@@ -5,6 +5,12 @@
 
 .PathRow {
     width: 100%;
+
+    display: flex;
+    /* flex-wrap: wrap; */
+    overflow-x: auto; 
+
+    position: relative;
 }
 
 .Items {
@@ -20,20 +26,28 @@
 .Items::-webkit-scrollbar {
     width: 10px;
 }
+
+.PathRow::-webkit-scrollbar {
+    height: 10px;
+}
   
   /* Track */
-.Items::-webkit-scrollbar-track {
+.Items::-webkit-scrollbar-track,
+.PathRow::-webkit-scrollbar-track {
     opacity: 0;
 }
    
   /* Handle */
-.Items::-webkit-scrollbar-thumb {
-    background: #0000007c; 
+.Items::-webkit-scrollbar-thumb,
+.PathRow::-webkit-scrollbar-thumb {
+    background-color: #5858587c; 
+    transition: background-color .1s linear;
 }
   
   /* Handle on hover */
-.Items::-webkit-scrollbar-thumb:hover {
-    background: #000000; 
+.Items::-webkit-scrollbar-thumb:hover,
+.PathRow::-webkit-scrollbar-thumb:hover {
+    background-color: #9c9c9c; 
 }
 
 .SpinnerContainer{

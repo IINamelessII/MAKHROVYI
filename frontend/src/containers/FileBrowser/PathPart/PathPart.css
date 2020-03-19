@@ -3,6 +3,8 @@
     transition: color .1s linear;
     cursor: pointer;
     font-size: 24px;
+
+    display: flex;
 }
 
 .PathPart:hover {
