@@ -93,7 +93,6 @@ class FileBrowser extends Component {
       type: 'application/json',
     });
     data.append('relPaths', blob);
-    //TODO: clear input.value after request;
 
     axios({
       method: 'post',
@@ -103,9 +102,11 @@ class FileBrowser extends Component {
     })
       .then(response => {
         console.log('Nice!');
+        this.uploadDirInputRef.current.value = null;
         this.componentDidMount();
       })
       .catch(error => {
+        this.uploadDirInputRef.current.value = null;
         console.log('(((');
         console.log(error);
       });
@@ -213,6 +214,13 @@ class FileBrowser extends Component {
           ref={this.uploadDirInputRef}/>
       </form>
     );
+    
+    console.log('OUTPUT');
+    console.log(this.props.items);
+    console.log(this.props.match.params.dirHash);
+    console.log(this.props.match.params.fileHash);
+    console.log(this.props.dirs);
+    console.log(this.props.files);
 
     return (
       <React.Fragment>
