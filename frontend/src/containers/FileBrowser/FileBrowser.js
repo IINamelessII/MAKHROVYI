@@ -77,7 +77,6 @@ class FileBrowser extends Component {
   }
 
   uploadDirClick = () => {
-    //TODO: show Message that empty dirs will be skipped
     this.uploadDirInputRef.current.click();
   }
 
@@ -85,8 +84,11 @@ class FileBrowser extends Component {
     event.preventDefault();
 
     const data = new FormData(this.uploadDirFormRef.current);
+    if (data.getAll('file').length === 0) {
+      //TODO: show Message that empty dirs will be skipped
+      return
+    } 
     const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
-    console.log(data.getAll('file'));
     const relPaths = data.getAll('file').map(f => f.webkitRelativePath);
     const json = JSON.stringify(relPaths);
     const blob = new Blob([json], {
