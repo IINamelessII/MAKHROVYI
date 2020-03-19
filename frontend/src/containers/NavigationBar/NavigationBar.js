@@ -12,7 +12,7 @@ class NavigationBar extends Component {
         <div className={classes.Container}>
           <Logo />
           <nav>
-            <NavigationLink exact link="/">Solutions</NavigationLink>
+            <NavigationLink exact link="/solutions">Solutions</NavigationLink>
             <NavigationLink link="/tutorials">Tutorials</NavigationLink>
             <NavigationLink link="/upload">Upload</NavigationLink>
           </nav>

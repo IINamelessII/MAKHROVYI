@@ -24,8 +24,8 @@ class App extends Component {
       <Switch>
         <Route path="/tutorials" component={asyncTutorials} />
         <Route path="/upload" component={asyncUpload} />
-        <Route path="/" exact component={asyncFileBrowser} />
-        <Redirect to="/" />
+        <Route path="/solutions" exact component={asyncFileBrowser} />
+        <Redirect to="/solutions" />
       </Switch>
     );
 
