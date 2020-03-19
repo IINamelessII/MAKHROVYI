@@ -133,8 +133,29 @@ export const buildStructure = (rootId, dirs) => {
   };
 };
 
+export const selectDir = (dirHash) => {
+  return {
+    type: actionTypes.SELECT_DIR,
+    dirHash: dirHash,
+  };
+};
+
+// export const selectFile = (fileHash) => {
+//   return {
+//     type: actionTypes.SELECT_FILE,
+//     fileHash: fileHash,
+//   };
+// };
+
+// export const findDir = (fileHash) => {
+//   return {
+//     type: actionTypes.FIND_DIR,
+//     fileHash: fileHash,
+//   };
+// };
+
 //TODO: Refactor useless action creaters
-export const prepareStructure = (rootId) => {
+export const prepareStructure = (rootId, dirHash, fileHash) => {
   return dispatch => {
     dispatch(fetchFilesStart());
     axios.get('/api/files/')
@@ -143,8 +164,12 @@ export const prepareStructure = (rootId) => {
         dispatch(fetchDirsStart());
         axios.get('/api/dirs/')
           .then(response => {
-            // dispatch(fetchDirsSuccess(response.data));
             dispatch(buildStructure(rootId, response.data));
+            if (dirHash) {
+              dispatch(selectDir(dirHash));
+            } else if (fileHash) {
+              
+            }
           })
           .catch(error => {
             dispatch(fetchDirsFail(error));
@@ -171,3 +196,5 @@ export const openFromPath = (index) => {
     index: index,
   };
 };
+
+// export const openFromId = ()

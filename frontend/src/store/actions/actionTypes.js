@@ -25,3 +25,7 @@ export const PREPARE_STRUCTURE = 'PREPARE_STRUCTURE';
 
 export const ADD_DIR_TO_PATH = 'ADD_DIR_TO_PATH';
 export const OPEN_FROM_PATH = 'OPEN_FROM_PATH';
+
+export const SELECT_DIR = 'SELECT_DIR';
+// export const SELECT_FILE = 'SELECT_FILE';
+// export const FIND_DIR = 'FIND_DIR';

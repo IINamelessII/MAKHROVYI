@@ -103,7 +103,6 @@ class FileBrowser extends Component {
       headers:{"content-type": 'application/form-data'},
     })
       .then(response => {
-        console.log('Nice!');
         this.uploadDirInputRef.current.value = null;
         this.componentDidMount();
       })
@@ -115,7 +114,11 @@ class FileBrowser extends Component {
   }
 
   componentDidMount() {
-    this.props.prepareStructure(rootId);
+    this.props.prepareStructure(
+      rootId, 
+      this.props.match.params.dirHash, 
+      this.props.match.params.fileHash
+    );
   }
 
   render() {
@@ -131,7 +134,8 @@ class FileBrowser extends Component {
       let items = null;
       let pathRow = null;
 
-      if (this.props.items.length >= 1) {
+      if (this.props.items.length > 0) {
+
         const structure = Object.entries(this.props.items[this.props.items.length - 1]);
         items = structure.map((item) => {
           return item[1].type === "file" ?
@@ -217,13 +221,6 @@ class FileBrowser extends Component {
       </form>
     );
     
-    console.log('OUTPUT');
-    console.log(this.props.items);
-    console.log(this.props.match.params.dirHash);
-    console.log(this.props.match.params.fileHash);
-    console.log(this.props.dirs);
-    console.log(this.props.files);
-
     return (
       <React.Fragment>
         <div className={classes.FileBrowser}>
@@ -265,7 +262,7 @@ const mapDispatchToProps = dispatch => {
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
     fetchDirs: () => dispatch(actions.fetchDirs()),
     fetchFiles: () => dispatch(actions.fetchFiles()),
-    prepareStructure: (rootId) => dispatch(actions.prepareStructure(rootId)),
+    prepareStructure: (rootId, dirHash, fileHash) => dispatch(actions.prepareStructure(rootId, dirHash, fileHash)),
     addDirToPath: (content, hash, name) => dispatch(actions.addDirToPath(content, hash, name)),
     openFromPath: (index) => dispatch(actions.openFromPath(index)),
   };
