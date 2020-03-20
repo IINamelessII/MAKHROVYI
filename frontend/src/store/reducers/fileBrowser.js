@@ -160,6 +160,32 @@ const buildStructure = (state, action) => {
   });
 };
 
+const findDir = (items, dirHash, hashPath) => {
+  const dirKeys = Object.keys(items).filter(key => key[key.length - 1] === 'd');
+  const arr = [...hashPath];
+  if (dirKeys.length) {
+    for (let key of dirKeys) {
+      if (parseInt(key) === dirHash) {
+        return hashPath.concat([key]);
+      } else if (items[key].content.length){
+        // arr.concat()
+      }
+    }
+  }
+}
+
+const selectDir = (state, action) => {
+  const hashPath = findDir(state.items[0], action.dirHash, [action.rootId])
+  //creating new items, path
+  let items = [];
+  let path = [];
+  return updateObject(state, {
+    items: items,
+    path: path,
+    hashPath: hashPath,
+  });
+};
+
 const addDirToPath = (state, action) => {
   const hashPath = [...state.hashPath];
   hashPath.push(action.hash);
@@ -207,6 +233,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.BUILD_STRUCTURE: return buildStructure(state, action);
     case actionTypes.ADD_DIR_TO_PATH: return addDirToPath(state, action);
     case actionTypes.OPEN_FROM_PATH: return openFromPath(state, action);
+    case actionTypes.SELECT_DIR: return selectDir(state, action);
     default: return state;
   }
 };

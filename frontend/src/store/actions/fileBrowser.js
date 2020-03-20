@@ -133,10 +133,11 @@ export const buildStructure = (rootId, dirs) => {
   };
 };
 
-export const selectDir = (dirHash) => {
+export const selectDir = (dirHash, rootId) => {
   return {
     type: actionTypes.SELECT_DIR,
     dirHash: dirHash,
+    rootId: rootId,
   };
 };
 
@@ -165,8 +166,8 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
         axios.get('/api/dirs/')
           .then(response => {
             dispatch(buildStructure(rootId, response.data));
-            if (dirHash) {
-              dispatch(selectDir(dirHash));
+            if (dirHash && dirHash !== rootId) {
+              dispatch(selectDir(dirHash, rootId));
             } else if (fileHash) {
               
             }
