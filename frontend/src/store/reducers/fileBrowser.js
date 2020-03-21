@@ -175,21 +175,28 @@ const selectDir = (state, action) => {
     }
   }
 
-  let hashPathRes;
-  findDir(state.items[0], action.dirHash, [action.rootId]);
+  let hashPathRes = [...state.hashPath];
+  findDir(state.items[0], action.dirHash, hashPathRes);
   let data = {};
-  
+
   if (hashPathRes) {
-    //creating new items, path
-    let items = [];
-    let path = [];
+    let items = [...state.items];
+    let path = [...state.path];
+
+    for (let hash of hashPathRes.slice(1)) {
+      path.push(items[items.length - 1][hash].name);
+      items.push(parseDir(state.dirs, state.files, parseInt(hash)).content);
+    }
+    
     data = {
       items: items,
       path: path,
       hashPath: hashPathRes,
     };
+  } else {
+    //TODO: Add message and clear URL
   }
-  
+
   return updateObject(state, data);
 };
 
