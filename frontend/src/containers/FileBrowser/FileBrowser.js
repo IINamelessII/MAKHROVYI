@@ -122,7 +122,7 @@ class FileBrowser extends Component {
   }
 
   render() {
-
+    // console.log(this.props.hashPath);
     let fileBrowserContent = (
       <div className={classes.SpinnerContainer}>
         <Spinner />

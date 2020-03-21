@@ -166,9 +166,11 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
         axios.get('/api/dirs/')
           .then(response => {
             dispatch(buildStructure(rootId, response.data));
-            if (dirHash && dirHash !== rootId) {
-              dispatch(selectDir(dirHash, rootId));
-            } else if (fileHash) {
+            const intDirHash = parseInt(dirHash);
+            const intFileHash = parseInt(fileHash);
+            if (intDirHash && intDirHash !== rootId) {
+              dispatch(selectDir(intDirHash, rootId));
+            } else if (intFileHash) {
               
             }
           })

@@ -160,30 +160,37 @@ const buildStructure = (state, action) => {
   });
 };
 
-const findDir = (items, dirHash, hashPath) => {
-  const dirKeys = Object.keys(items).filter(key => key[key.length - 1] === 'd');
-  const arr = [...hashPath];
-  if (dirKeys.length) {
-    for (let key of dirKeys) {
-      if (parseInt(key) === dirHash) {
-        return hashPath.concat([key]);
-      } else if (items[key].content.length){
-        // arr.concat()
+const selectDir = (state, action) => {
+
+  const findDir = (items, dirHash, hashPath) => {
+    const dirKeys = Object.keys(items).filter(key => key[key.length - 1] === 'd');
+    if (dirKeys.length) {
+      for (let key of dirKeys) {
+        if (parseInt(key) === dirHash) {
+          hashPathRes = hashPath.concat([key]);
+        } else {
+          findDir(items[key].content, dirHash, hashPath.concat([key]));
+        }
       }
     }
   }
-}
 
-const selectDir = (state, action) => {
-  const hashPath = findDir(state.items[0], action.dirHash, [action.rootId])
-  //creating new items, path
-  let items = [];
-  let path = [];
-  return updateObject(state, {
-    items: items,
-    path: path,
-    hashPath: hashPath,
-  });
+  let hashPathRes;
+  findDir(state.items[0], action.dirHash, [action.rootId]);
+  let data = {};
+  
+  if (hashPathRes) {
+    //creating new items, path
+    let items = [];
+    let path = [];
+    data = {
+      items: items,
+      path: path,
+      hashPath: hashPathRes,
+    };
+  }
+  
+  return updateObject(state, data);
 };
 
 const addDirToPath = (state, action) => {
