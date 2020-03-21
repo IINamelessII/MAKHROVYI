@@ -141,20 +141,6 @@ export const selectDir = (dirHash, rootId) => {
   };
 };
 
-// export const selectFile = (fileHash) => {
-//   return {
-//     type: actionTypes.SELECT_FILE,
-//     fileHash: fileHash,
-//   };
-// };
-
-// export const findDir = (fileHash) => {
-//   return {
-//     type: actionTypes.FIND_DIR,
-//     fileHash: fileHash,
-//   };
-// };
-
 //TODO: Refactor useless action creaters
 export const prepareStructure = (rootId, dirHash, fileHash) => {
   return dispatch => {
@@ -171,7 +157,12 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
             if (intDirHash && intDirHash !== rootId) {
               dispatch(selectDir(intDirHash, rootId));
             } else if (intFileHash) {
-              
+              const parentDir = response.data.find(dir => dir.files.includes(intFileHash));
+              if (parentDir) {
+                dispatch(selectDir(parentDir.id, rootId));
+              } else {
+                //TODO: Show message and clear URL
+              }
             }
           })
           .catch(error => {
@@ -199,5 +190,3 @@ export const openFromPath = (index) => {
     index: index,
   };
 };
-
-// export const openFromId = ()
