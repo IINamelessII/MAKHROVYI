@@ -17,11 +17,21 @@ export const removeMessage = (key) => {
 
 export const loadMessages = () => {
   return dispatch => {
-    dispatch('/messages/')
+    axios.get('/messages/')
       .then(response => {
-        for (let message of response.data) {
-          dispatch(addMessage(message));
-        }
+        console.log(response.data);
+        // for (let message of response.data) {
+        //   dispatch(addMessage(message));
+        // }
+      });
+  };
+};
+
+export const unsetMessage = (key) => {
+  return dispatch => {
+    axios.get('/unset_message/' + key)
+      .then(response => {
+        dispatch(removeMessage(key));
       });
   };
 };
