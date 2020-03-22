@@ -17,4 +17,17 @@ class Messages extends Component {
   }
 }
 
-export default Messages;
+const mapStateToProps = state => {
+  return {
+    messages: state.messages.messages,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removeMessage: (key) => dispatch(actions.removeMessage(key)),
+    unsetMessage: (key) => dispatch(actions.unsetMessage(key)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Messages);

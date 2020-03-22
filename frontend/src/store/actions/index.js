@@ -19,4 +19,5 @@ export {
   addMessage,
   removeMessage,
   loadMessages,
+  unsetMessage,
 } from './messages';
