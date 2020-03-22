@@ -165,6 +165,7 @@ const selectDir = (state, action) => {
   const findDir = (items, dirHash, hashPath) => {
     const dirKeys = Object.keys(items).filter(key => key[key.length - 1] === 'd');
     if (dirKeys.length) {
+      // eslint-disable-next-line
       for (let key of dirKeys) {
         if (parseInt(key) === dirHash) {
           hashPathRes = hashPath.concat([key]);
@@ -183,6 +184,7 @@ const selectDir = (state, action) => {
     let items = [...state.items];
     let path = [...state.path];
 
+    // eslint-disable-next-line
     for (let hash of hashPathRes.slice(1)) {
       path.push(items[items.length - 1][hash].name);
       items.push(parseDir(state.dirs, state.files, parseInt(hash)).content);

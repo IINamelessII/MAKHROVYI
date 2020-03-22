@@ -5,6 +5,7 @@ import asyncComponent from './hoc/asyncComponent/asyncComponent';
 import NavigationBar from './containers/NavigationBar/NavigationBar';
 import Screen from './hoc/Screen/Screen';
 import Layout from './hoc/Layout/Layout';
+import Messages from './containers/Messages/Messages';
 
 const asyncTutorials = asyncComponent(() => {
   return import('./containers/Tutorials/Tutorials');
@@ -37,6 +38,7 @@ class App extends Component {
         <Screen>
           {routes}
         </Screen>
+        <Messages />
         <div></div>
       </Layout>
     );

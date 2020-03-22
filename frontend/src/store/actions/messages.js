@@ -19,6 +19,7 @@ export const loadMessages = () => {
   return dispatch => {
     axios.get('/messages/')
       .then(response => {
+        // eslint-disable-next-line
         for (let key in response.data) {
           dispatch(addMessage(response.data[key]));
         }
