@@ -15,5 +15,7 @@ urlpatterns = [
     path('upload_file/<int:id>/', views.upload_file, name='upload_file'),
     path('newdir/', views.add_new_dir, name='add_new_dir'),
     path('upload_dir/<int:id>/', views.upload_dir, name='upload_dir'),
+    path('messages/', views.messages, name='messages'),
+    path('unset_message/<int:key>/', views.unset_message, name='unset_message'),
     re_path(r'^.*', views.index, name='index'), #All another urls served by front
 ]

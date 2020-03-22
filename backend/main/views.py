@@ -200,3 +200,11 @@ def upload_dir(request, id):
         parent_dir.files.add(File.objects.get(pk=instance.id))
 
     return HttpResponse(status=200)
+
+
+def messages(request):
+    return HttpResponse(request.session['messages'])
+
+def unset_message(request, key):
+    del request.session['messages'][key]
+    return HttpResponse(status=200)
