@@ -4,6 +4,7 @@ import axios from '../../../axios-fileBrowser';
 
 import classes from './File.css';
 import * as actions from '../../../store/actions/index';
+import {baseUrl} from '../../../shared/constants';
 
 
 class File extends Component {
@@ -20,6 +21,7 @@ class File extends Component {
 
   fileOptions = [
     {"label": "download", "action": () => {this.downloadClick()}, "holdBackdrop": false},
+    {"label": "copy link to the file", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action": () => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
@@ -42,6 +44,15 @@ class File extends Component {
 
   propertiesClick = () => {
     this.props.onSetInfoCard(this.props.info);
+  }
+
+  copyLinkClick = () => {
+    const copyText = document.getElementById('link');
+    copyText.focus();
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); //For Mobile Devices
+    document.execCommand('copy');
+    //TODO: Add mesage
   }
 
   touchSelected = () => {
@@ -81,6 +92,11 @@ class File extends Component {
             {this.props.name}.{this.props.ext}
           </div>
         </div>
+        <input
+          type="text"
+          id="link"
+          value={baseUrl + '/files/' + parseInt(this.props.id)}
+          style={{position: 'absolute', left: '-9999px'}} />
       </div>
     );
   }
