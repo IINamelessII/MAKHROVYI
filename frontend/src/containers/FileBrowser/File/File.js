@@ -36,8 +36,10 @@ class File extends Component {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+        //TODO: Add Message
       })
       .catch(error => {
+        //TODO: Add Message
         console.log(error);
       });
   }
@@ -52,7 +54,8 @@ class File extends Component {
     copyText.select();
     copyText.setSelectionRange(0, 99999); //For Mobile Devices
     document.execCommand('copy');
-    //TODO: Add mesage
+    
+    this.props.addMessage('Link was successfully copied to clipboard.');
   }
 
   touchSelected = () => {
@@ -106,6 +109,9 @@ class File extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)),
+    addMessage: (message) => dispatch(actions.addMessage(message)),
+    loadMessages: () => dispatch(actions.loadMessages()),
+    
   }
 }
 

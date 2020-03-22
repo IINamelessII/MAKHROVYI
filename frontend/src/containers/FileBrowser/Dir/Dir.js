@@ -23,6 +23,7 @@ class Dir extends Component {
   downloadClick = () => {
     axios.post('/archive/', {id: parseInt(this.props.id)})
       .then(response => {
+        //TODO: Add Message
         const a = document.createElement('a');
         a.style.display = 'none';
         a.href = response.data;
@@ -35,6 +36,7 @@ class Dir extends Component {
         axios.post('/archive_received/', {token: token});
       })
       .catch(error => {
+        //TODO: Add Message
         alert("Oooops, O_o Please, try again");
       });
   }
@@ -49,7 +51,8 @@ class Dir extends Component {
     copyText.select();
     copyText.setSelectionRange(0, 99999); //For Mobile Devices
     document.execCommand('copy');
-    //TODO: Add mesage
+
+    this.props.addMessage('Link was successfully copied to clipboard.');
   }
 
   render() {
@@ -90,6 +93,8 @@ class Dir extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)),
+    addMessage: (message) => dispatch(actions.addMessage(message)),
+    loadMessages: () => dispatch(actions.loadMessages()),
   }
 }
 

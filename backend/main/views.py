@@ -135,6 +135,7 @@ def add_new_dir(request, data):
     instance.save()
     parentDir = Dir.objects.get(pk=data['dirId'])
     parentDir.dirs.add(Dir.objects.get(pk=instance.id))
+    #TODO: Add message
     return HttpResponse(status=200)
 
 

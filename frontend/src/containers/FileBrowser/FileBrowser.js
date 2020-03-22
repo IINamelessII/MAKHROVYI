@@ -65,7 +65,6 @@ class FileBrowser extends Component {
       value: value,
     })
       .then(response => {
-        //TODO: Show Message and save current opened path
         this.componentDidMount();
       })
       .catch(error => {
@@ -136,7 +135,8 @@ class FileBrowser extends Component {
     copyText.select();
     copyText.setSelectionRange(0, 99999); //For Mobile Devices
     document.execCommand('copy');
-    //TODO: Add mesage
+
+    this.props.addMessage('Link was successfully copied to clipboard.');
   }
 
   componentDidMount() {
@@ -145,11 +145,7 @@ class FileBrowser extends Component {
       this.props.match.params.dirHash, 
       this.props.match.params.fileHash
     );
-    //DEV ONLY
-    this.props.addMessage('TEST MessAGE');
     this.props.loadMessages();
-    this.props.addMessage('Another One');
-    this.props.addMessage('Another One'.repeat(20));
   }
 
   render() {
