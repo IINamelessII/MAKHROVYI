@@ -1,20 +1,63 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import classes from './Input.css';
+import * as actions from '../../store/actions/index';
 
 class Input extends Component {
   state = {
     value: '',
+    messages: {},
+    valid: true,
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.messages !== nextState.messages || this.state.value !== nextState.value;
+  }
+
+  checkValidation = (newValue) => {
+    let isValid = true;
+    let check;
+    const messages = {...this.state.messages};
+
+    if (this.props.validation.length) {
+      check = newValue.length <= this.props.validation.length;
+      isValid = isValid && check;
+      if (!check && !('length' in messages)) {
+        messages['length'] = 'Value should be no longer than ' + this.props.validation.length + ' symbols';
+      } 
+    }
+
+    this.setState({
+      messages: messages,
+      valid: isValid,
+      value: newValue,
+    });
+  } 
 
   onInputChange = (event) => {
     const newValue = event.target.value;
-    this.setState({value: newValue});
+    this.checkValidation(newValue);
+  }
+
+  invalidClick = () => {
+    // eslint-disable-next-line
+    for (let item of Object.entries(this.state.messages)) {
+      this.props.addMessage(item[1]);
+    }
+    
+    this.setState({messages: {}});
   }
 
   render() {
-    //TODO: Add confirmation
-    //TODO: Add checks such as length and messages
+    const inputClasses = [classes.InputInput];
+    const buttonClasses = [classes.Button, classes.Positive];
+
+    if (!this.state.valid) {
+      inputClasses.push(classes.Invalid);
+      buttonClasses.push(classes.Disable);
+    }
+
     return (
       <div 
         className={classes.Container}
@@ -29,7 +72,8 @@ class Input extends Component {
 
           <div className={classes.Content}>
             <div></div>
-            <input 
+            <input
+              className={inputClasses.join(' ')} 
               type="text"
               onChange={this.onInputChange}
               value={this.state.value}
@@ -45,8 +89,8 @@ class Input extends Component {
                 </div>
               </div>
               <div 
-                className={classes.Button + ' ' + classes.Positive}
-                onClick={() => this.props.onSuccess(this.state.value)}
+                className={buttonClasses.join(' ')}
+                onClick={!this.state.valid ? this.invalidClick : () => this.props.onSuccess(this.state.value)}
               >
                 <div className={classes.ButtonLabel}>
                   {this.props.successLabel}
@@ -62,4 +106,10 @@ class Input extends Component {
   }
 }
 
-export default Input;
+const mapDispatchToProps = dispatch => {
+  return {
+    addMessage: (message) => dispatch(actions.addMessage(message)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Input);

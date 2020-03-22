@@ -71,12 +71,16 @@
     margin-top: 2px;
 }
 
-input {
+.InputInput {
     font-size: 18px;
     height: 40px;
     width: 100%;
     background-color: #00007900;
     color: #fff;
+}
+
+.Invalid {
+    background-color: #7900009c;
 }
 
 .Negative:hover {
@@ -85,4 +89,8 @@ input {
 
 .Positive:hover {
     background-color: #0000b633;
+}
+
+.Disable {
+    cursor: not-allowed;
 }

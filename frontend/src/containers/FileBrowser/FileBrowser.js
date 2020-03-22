@@ -231,7 +231,10 @@ class FileBrowser extends Component {
           successLabel="add"
           onFail={this.props.onHideBackdrop}
           onSuccess={(value) => this.addNewDir(value)}
-          onContainerClick={this.props.onHideBackdrop}/>
+          onContainerClick={this.props.onHideBackdrop}
+          validation={{
+            length: 30,
+          }}/>
       );
     }
 
