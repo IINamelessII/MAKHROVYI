@@ -31,6 +31,19 @@ class FileViewSet(viewsets.ModelViewSet):
     permission_classes = (IsReadOnly,)
 
 
+def add_message_to_session(request, message):
+    i = 0
+
+    if 'messages' in request.session:
+        while i in request.session['messages']:
+            i += 1
+    else:
+        request.session['messages'] = dict()
+
+    request.session['messages'][i] = message
+    return request
+
+
 def index(request):
     """render SPA"""
     return render(request, 'index.html')
@@ -131,11 +144,14 @@ def upload_file(request, id):
 @load_data('dirId', 'value')
 def add_new_dir(request, data):
     """Add New Directory with given name to the directory with the given dirId"""
-    instance = Dir(name=data['value'])
-    instance.save()
-    parentDir = Dir.objects.get(pk=data['dirId'])
-    parentDir.dirs.add(Dir.objects.get(pk=instance.id))
-    #TODO: Add message
+    if len(data['value']) > 30:
+        add_message_to_session(request, 'Value should be no longer than 30 symbols')
+    else:
+        instance = Dir(name=data['value'])
+        instance.save()
+        parentDir = Dir.objects.get(pk=data['dirId'])
+        parentDir.dirs.add(Dir.objects.get(pk=instance.id))
+
     return HttpResponse(status=200)
 
 
@@ -204,9 +220,7 @@ def upload_dir(request, id):
 
 
 def messages(request):
-    #DEV ONLY
-    request.session['messages'] = {0: 'Hello World', 22: 'WOW', 256: 'IT is cool!'}
-    return HttpResponse(json.dumps(request.session['messages']))
+    return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
 
 def unset_message(request, key):
     del request.session['messages'][key]
