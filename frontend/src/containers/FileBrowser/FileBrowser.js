@@ -19,6 +19,7 @@ import {rootId} from '../../shared/constants';
 class FileBrowser extends Component {
   state = {
     showFileUpload: false,
+    selectedFileHash: parseInt(this.props.match.params.fileHash),
   }
 
   spaceOptions = [
@@ -138,6 +139,10 @@ class FileBrowser extends Component {
     this.props.addMessage('TEST MessAGE');
     this.props.loadMessages();
     this.props.addMessage('Another One');
+    // console.log(this.props);
+    // if (this.props.match.params.fileHash) {
+
+    // }
   }
 
   render() {
@@ -153,6 +158,9 @@ class FileBrowser extends Component {
       let pathRow = null;
 
       if (this.props.items.length > 0) {
+        const redirectToDir = () => {
+          this.props.history.push('/directories/' + parseInt(this.props.hashPath[this.props.hashPath.length - 1]));
+        }
 
         const structure = Object.entries(this.props.items[this.props.items.length - 1]);
         items = structure.map((item) => {
@@ -163,7 +171,9 @@ class FileBrowser extends Component {
               name={item[1].name}
               ext={item[1].ext}
               showContextMenu={this.showContextMenu}
-              info={item[1]} />
+              info={item[1]}
+              selected={this.state.selectedFileHash === parseInt(item[0])}
+              redirectToDir={redirectToDir} />
             ) : (
             <Dir
               key={item[0]}

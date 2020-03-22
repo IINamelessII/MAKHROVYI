@@ -7,9 +7,14 @@ import * as actions from '../../../store/actions/index';
 
 
 class File extends Component {
+  state = {
+    selected: this.props.selected,
+  }
+
   onContextMenu = (event) => {
     event.preventDefault();
     event.stopPropagation();
+    this.touchSelected();
     this.props.showContextMenu(null, this.fileOptions);
   }
 
@@ -39,7 +44,19 @@ class File extends Component {
     this.props.onSetInfoCard(this.props.info);
   }
 
+  touchSelected = () => {
+    if (this.state.selected) {
+      this.setState({selected: false});
+      this.props.redirectToDir();
+    }
+  }
+
   render() {
+    let styleClasses = [classes.File];
+    if (this.state.selected) {
+      styleClasses.push(classes.Selected);
+    }
+
     //TODO: Add different icons depends on this.props.ext
     let fullNameClassName = classes.None;
     if (this.props.name.length + this.props.ext.length >= 14) {
@@ -48,12 +65,13 @@ class File extends Component {
 
     return (
       <div 
-        className={classes.File}>
+        className={styleClasses.join(' ')}>
         <div className={classes.ImageContainer}>
           <img 
           src={require('../../../assets/images/file.png')} 
           alt=""
-          onContextMenu={(event) => this.onContextMenu(event)}/>
+          onContextMenu={(event) => this.onContextMenu(event)}
+          onClick={this.touchSelected}/>
         </div>
         <div className={classes.FileName}>
           <div className={classes.FlexName}>
