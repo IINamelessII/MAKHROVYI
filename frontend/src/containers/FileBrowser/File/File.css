@@ -3,13 +3,10 @@
     height: 128px;
 }
 
-.Selected {
-    animation: blink-animation 1s steps(10, start) infinite;
-    -webkit-animation: blink-animation 1s steps(10, start) infinite;
-}
-
 .Selected .ImageContainer img {
     background-color: #7fffff34;
+    animation: blink-animation 1s steps(10, start) infinite;
+    -webkit-animation: blink-animation 1s steps(10, start) infinite;
 }
 @keyframes blink-animation {
     to {
