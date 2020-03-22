@@ -7,6 +7,8 @@ import Screen from './hoc/Screen/Screen';
 import Layout from './hoc/Layout/Layout';
 import Messages from './containers/Messages/Messages';
 
+import {rootId} from './shared/constants';
+
 const asyncTutorials = asyncComponent(() => {
   return import('./containers/Tutorials/Tutorials');
 });
@@ -26,6 +28,7 @@ class App extends Component {
         <Route path="/tutorials" component={asyncTutorials} />
         <Route path="/upload" component={asyncUpload} />
         <Route path="/" exact component={asyncFileBrowser} />
+        <Redirect from={"/directories/" + rootId} to="/" />
         <Route path="/directories/:dirHash" component={asyncFileBrowser} />
         <Route path="/files/:fileHash" component={asyncFileBrowser} />
         <Redirect to="/" />
