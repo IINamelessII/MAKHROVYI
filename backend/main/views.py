@@ -223,5 +223,7 @@ def messages(request):
     return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
 
 def unset_message(request, key):
-    del request.session['messages'][key]
+    d = request.session['messages']
+    del d[key]
+    request.session['messages'] = d
     return HttpResponse(status=200)

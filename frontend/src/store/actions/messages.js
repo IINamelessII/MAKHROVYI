@@ -44,7 +44,7 @@ export const loadMessages = () => {
 
 export const unsetMessage = (key) => {
   return dispatch => {
-    axios.get('/unset_message/' + key)
+    axios.get('/unset_message/' + key + '/')
       .then(response => {
         dispatch(removeSessionMessage(key));
       });
