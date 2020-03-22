@@ -7,6 +7,7 @@ import classes from './NavigationBar.css';
 
 class NavigationBar extends Component {
   render() {
+    
     return (
       <div className={classes.NavigationBar}>
         <div className={classes.Container}>

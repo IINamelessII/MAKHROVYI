@@ -108,9 +108,24 @@ class FileBrowser extends Component {
       })
       .catch(error => {
         this.uploadDirInputRef.current.value = null;
-        console.log('(((');
         console.log(error);
       });
+  }
+
+  openDir = (content, hash, name) => {
+    this.props.addDirToPath(content, hash, name);
+
+    this.props.history.push('/directories/' + parseInt(hash));
+  }
+
+  openPath = (index) => {
+    this.props.openFromPath(index);
+
+    let path = '/';
+    if (index) {
+      path = '/directories/' + parseInt(this.props.hashPath[index]);
+    }
+    this.props.history.push(path);
   }
 
   componentDidMount() {
@@ -154,7 +169,7 @@ class FileBrowser extends Component {
               key={item[0]}
               id={item[0]}
               name={item[1].name}
-              open={() => this.props.addDirToPath(item[1].content, item[0], item[1].name)}
+              open={() => this.openDir(item[1].content, item[0], item[1].name)}
               showContextMenu={this.showContextMenu}
               info={item[1]} />
             );
@@ -165,7 +180,7 @@ class FileBrowser extends Component {
             <PathPart
               key={name}
               pathPartName={name}
-              goToPath={() => this.props.openFromPath(index)} />
+              goToPath={() => this.openPath(index)} />
           );
         });
       }
