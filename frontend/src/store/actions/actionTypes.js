@@ -27,3 +27,6 @@ export const ADD_DIR_TO_PATH = 'ADD_DIR_TO_PATH';
 export const OPEN_FROM_PATH = 'OPEN_FROM_PATH';
 
 export const SELECT_DIR = 'SELECT_DIR';
+
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';

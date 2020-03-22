@@ -10,11 +10,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import fileBrowserReducer from './store/reducers/fileBrowser';
+import messagesReducer from './store/reducers/messages';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
   fileBrowser: fileBrowserReducer,
+  messages: messagesReducer,
 });
 
 const store = createStore(rootReducer, composeEnhancers(

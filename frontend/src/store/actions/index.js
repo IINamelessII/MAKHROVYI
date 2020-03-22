@@ -14,3 +14,9 @@ export {
   addDirToPath,
   openFromPath,
 } from './fileBrowser';
+
+export {
+  addMessage,
+  removeMessage,
+  loadMessage,
+} from './messages';
