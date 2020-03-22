@@ -18,7 +18,7 @@ class Messages extends Component {
           <Message
             key={item[0]} 
             message={item[1]}
-            click={this.props.removeMessage(item[0])}/>
+            click={() => this.props.removeMessage(item[0])}/>
         );
       });
     }
@@ -30,7 +30,7 @@ class Messages extends Component {
           <Message 
             key={item[0]}
             message={item[1]}
-            click={this.props.unsetMessage(item[0])}/>
+            click={() => this.props.unsetMessage(item[0])}/>
         );
       });
     }

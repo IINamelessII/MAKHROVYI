@@ -13,17 +13,13 @@ const addMessage = (state, action) => {
     i++;
   }
   return updateObject(state, {
-    messages: {...state.messages, i: action.message},
+    messages: {...state.messages, [i]: action.message},
   });
 };
 
 const addSessionMessage = (state, action) => {
-  const key = action.key;
   return updateObject(state, {
-    sessionMessages: {
-      ...state.sessionMessages, 
-      key: action.message,
-    },
+    sessionMessages: {...state.sessionMessages, [action.key]: action.message},
   });
 };
 

@@ -119,6 +119,10 @@ class FileBrowser extends Component {
       this.props.match.params.dirHash, 
       this.props.match.params.fileHash
     );
+    //DEV ONLY
+    this.props.addMessage('TEST MessAGE');
+    this.props.loadMessages();
+    this.props.addMessage('Another One');
   }
 
   render() {
@@ -264,6 +268,8 @@ const mapDispatchToProps = dispatch => {
     prepareStructure: (rootId, dirHash, fileHash) => dispatch(actions.prepareStructure(rootId, dirHash, fileHash)),
     addDirToPath: (content, hash, name) => dispatch(actions.addDirToPath(content, hash, name)),
     openFromPath: (index) => dispatch(actions.openFromPath(index)),
+    addMessage: (message) => dispatch(actions.addMessage(message)),
+    loadMessages: () => dispatch(actions.loadMessages()),
   };
 }
 

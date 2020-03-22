@@ -203,7 +203,8 @@ def upload_dir(request, id):
 
 
 def messages(request):
-    # request.session['messages'] = {0: 'Hello World', 22: 'WOW', 256: 'IT is cool!'}
+    #DEV ONLY
+    request.session['messages'] = {0: 'Hello World', 22: 'WOW', 256: 'IT is cool!'}
     return HttpResponse(json.dumps(request.session['messages']))
 
 def unset_message(request, key):
