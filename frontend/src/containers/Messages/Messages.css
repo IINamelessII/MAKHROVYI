@@ -1,3 +1,7 @@
 .Messages {
-    
+    position: absolute;
+    top: 0;
+    right: 50px;
+    height: 400px;
+    overflow-y: auto;
 }
