@@ -149,10 +149,7 @@ class FileBrowser extends Component {
     this.props.addMessage('TEST MessAGE');
     this.props.loadMessages();
     this.props.addMessage('Another One');
-    // console.log(this.props);
-    // if (this.props.match.params.fileHash) {
-
-    // }
+    this.props.addMessage('Another One'.repeat(20));
   }
 
   render() {

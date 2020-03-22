@@ -2,10 +2,23 @@
     height: 100px;
     width: 300px;
 
-    border: 1px solid white;
+    border: 1px solid #ffffff71;
+    transition: border .1s linear;
 
-    font-size: 20px;
+    font-size: 16px;
     position: relative;
+
+    margin: 10px 0;    
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: #0000004f;
+}
+
+.Message:hover {
+    border: 1px solid #ffffff;
 }
 
 .CloseButton {
@@ -15,10 +28,19 @@
     font-weight: 700;
 
     position: absolute;
-    top: 0;
-    right:  0;
+    top: -8px;
+    right:  5px;
 }
 
 .Text {
-    
+    margin: 0 auto;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+
+    overflow-y: auto;
+}
+
+.Text::-webkit-scrollbar {
+    display: none;
 }
