@@ -47,6 +47,7 @@ class FileBrowser extends Component {
   }
 
   propertiesClick = () => {
+    this.props.loadMessages();
     const id = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     const data = this.props.dirs.find(dir => dir.id === id);
     this.props.onSetInfoCard(data);
@@ -264,6 +265,7 @@ const mapDispatchToProps = dispatch => {
     prepareStructure: (rootId, dirHash, fileHash) => dispatch(actions.prepareStructure(rootId, dirHash, fileHash)),
     addDirToPath: (content, hash, name) => dispatch(actions.addDirToPath(content, hash, name)),
     openFromPath: (index) => dispatch(actions.openFromPath(index)),
+    loadMessages: () => dispatch(actions.loadMessages()), //DEV
   };
 }
 

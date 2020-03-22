@@ -19,10 +19,9 @@ export const loadMessages = () => {
   return dispatch => {
     axios.get('/messages/')
       .then(response => {
-        console.log(response.data);
-        // for (let message of response.data) {
-        //   dispatch(addMessage(message));
-        // }
+        for (let key in response.data) {
+          dispatch(addMessage(response.data[key]));
+        }
       });
   };
 };

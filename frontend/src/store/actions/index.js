@@ -18,5 +18,5 @@ export {
 export {
   addMessage,
   removeMessage,
-  loadMessage,
+  loadMessages,
 } from './messages';
