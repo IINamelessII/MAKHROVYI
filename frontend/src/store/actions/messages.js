@@ -15,13 +15,27 @@ export const removeMessage = (key) => {
   };
 };
 
+export const addSessionMessage = (message) => {
+  return {
+    type: actionTypes.ADD_SESSION_MESSAGE,
+    message: message,
+  };
+};
+
+export const removeSessionMessage = (key) => {
+  return {
+    type: actionTypes.REMOVE_SESSION_MESSAGE,
+    key: key,
+  };
+};
+
 export const loadMessages = () => {
   return dispatch => {
     axios.get('/messages/')
       .then(response => {
         // eslint-disable-next-line
         for (let key in response.data) {
-          dispatch(addMessage(response.data[key]));
+          dispatch(addSessionMessage(response.data[key]));
         }
       });
   };
@@ -31,7 +45,7 @@ export const unsetMessage = (key) => {
   return dispatch => {
     axios.get('/unset_message/' + key)
       .then(response => {
-        dispatch(removeMessage(key));
+        dispatch(removeSessionMessage(key));
       });
   };
 };
