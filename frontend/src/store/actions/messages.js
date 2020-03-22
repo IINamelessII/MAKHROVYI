@@ -15,10 +15,11 @@ export const removeMessage = (key) => {
   };
 };
 
-export const addSessionMessage = (message) => {
+export const addSessionMessage = (message, key) => {
   return {
     type: actionTypes.ADD_SESSION_MESSAGE,
     message: message,
+    key: key,
   };
 };
 
@@ -35,7 +36,7 @@ export const loadMessages = () => {
       .then(response => {
         // eslint-disable-next-line
         for (let key in response.data) {
-          dispatch(addSessionMessage(response.data[key]));
+          dispatch(addSessionMessage(response.data[key], key));
         }
       });
   };

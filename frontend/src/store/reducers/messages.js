@@ -18,12 +18,12 @@ const addMessage = (state, action) => {
 };
 
 const addSessionMessage = (state, action) => {
-  let i = 0;
-  while (i in state.sessionMessages) {
-    i++;
-  }
+  const key = action.key;
   return updateObject(state, {
-    sessionMessages: {...state.sessionMessages, i: action.message},
+    sessionMessages: {
+      ...state.sessionMessages, 
+      key: action.message,
+    },
   });
 };
 

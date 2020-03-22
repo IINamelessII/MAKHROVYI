@@ -20,6 +20,7 @@ class Messages extends Component {
 const mapStateToProps = state => {
   return {
     messages: state.messages.messages,
+    sessionMessages: state.messages.sessionMessages,
   };
 };
 
