@@ -9,9 +9,36 @@ import Message from './Message/Message';
 class Messages extends Component {
   render() {
     let messages = null;
+    let alsoMessages = null;
+
+    if (this.props.messages) {
+      messages = Object.entries(this.props.messages);
+      messages = messages.map(item => {
+        return (
+          <Message
+            key={item[0]} 
+            message={item[1]}
+            click={this.props.removeMessage(item[0])}/>
+        );
+      });
+    }
+
+    if (this.props.sessionMessages) {
+      alsoMessages = Object.entries(this.props.sessionMessages);
+      alsoMessages = alsoMessages.map(item => {
+        return (
+          <Message 
+            key={item[0]}
+            message={item[1]}
+            click={this.props.unsetMessage(item[0])}/>
+        );
+      });
+    }
+
     return (
       <div className={classes.Messages}>
         {messages}
+        {alsoMessages}
       </div>
     );
   }
