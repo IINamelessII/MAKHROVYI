@@ -4,6 +4,7 @@ import axios from '../../../axios-fileBrowser';
 
 import classes from './Dir.css';
 import * as actions from '../../../store/actions/index';
+import {baseUrl} from '../../../shared/constants';
 
 class Dir extends Component {
   onContextMenu = (event) => {
@@ -15,6 +16,7 @@ class Dir extends Component {
   dirOptions = [
     {"label": "open", "action":() => {this.props.open()}, "holdBackdrop": false},
     {"label": "download", "action":() => {this.downloadClick()}, "holdBackdrop": false},
+    {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
@@ -41,6 +43,15 @@ class Dir extends Component {
     this.props.onSetInfoCard(this.props.info);
   }
 
+  copyLinkClick = () => {
+    const copyText = document.getElementById('dir-link' + this.props.id);
+    copyText.focus();
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); //For Mobile Devices
+    document.execCommand('copy');
+    //TODO: Add mesage
+  }
+
   render() {
     let fullNameClassName = classes.None;
     if (this.props.name.length >= 15) {
@@ -65,6 +76,12 @@ class Dir extends Component {
             {this.props.name}
           </div>
         </div>
+        <input
+          type="text"
+          id={'dir-link' + this.props.id}
+          value={baseUrl + '/directories/' + parseInt(this.props.id)}
+          style={{position: 'absolute', left: '-9999px', top: '0'}}
+          readOnly />
       </div>
     );
   }

@@ -21,7 +21,7 @@ class File extends Component {
 
   fileOptions = [
     {"label": "download", "action": () => {this.downloadClick()}, "holdBackdrop": false},
-    {"label": "copy link to the file", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
+    {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action": () => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
@@ -47,7 +47,7 @@ class File extends Component {
   }
 
   copyLinkClick = () => {
-    const copyText = document.getElementById('link');
+    const copyText = document.getElementById('file-link' + this.props.id);
     copyText.focus();
     copyText.select();
     copyText.setSelectionRange(0, 99999); //For Mobile Devices
@@ -94,9 +94,10 @@ class File extends Component {
         </div>
         <input
           type="text"
-          id="link"
+          id={'file-link' + this.props.id}
           value={baseUrl + '/files/' + parseInt(this.props.id)}
-          style={{position: 'absolute', left: '-9999px'}} />
+          style={{position: 'absolute', left: '-9999px', top: '0'}}
+          readOnly />
       </div>
     );
   }

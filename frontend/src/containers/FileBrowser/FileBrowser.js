@@ -14,7 +14,7 @@ import Input from '../Input/Input';
 
 import classes from './FileBrowser.css';
 
-import {rootId} from '../../shared/constants';
+import {baseUrl, rootId} from '../../shared/constants';
 
 class FileBrowser extends Component {
   state = {
@@ -26,6 +26,7 @@ class FileBrowser extends Component {
     {"label": "add directory", "action":() => {this.addDirectoryClick()}, "holdBackdrop": true},
     {"label": "upload file", "action":() => {this.uploadFileClick()}, "holdBackdrop": false},
     {"label": "upload directory", "action":() => {this.uploadDirClick()}, "holdBackdrop": false},
+    {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
@@ -127,6 +128,15 @@ class FileBrowser extends Component {
       path = '/directories/' + parseInt(this.props.hashPath[index]);
     }
     this.props.history.push(path);
+  }
+
+  copyLinkClick = () => {
+    const copyText = document.getElementById('dir-link');
+    copyText.focus();
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); //For Mobile Devices
+    document.execCommand('copy');
+    //TODO: Add mesage
   }
 
   componentDidMount() {
@@ -248,6 +258,11 @@ class FileBrowser extends Component {
           ref={this.uploadDirInputRef}/>
       </form>
     );
+
+    let dirUrl = baseUrl;
+    if (parseInt(this.props.hashPath[this.props.hashPath.length - 1]) !== rootId) {
+      dirUrl += this.props.match.url;
+    }
     
     return (
       <React.Fragment>
@@ -258,6 +273,12 @@ class FileBrowser extends Component {
         {addNewDir}
         {fileUploadInput}
         {dirUpload}
+        <input
+          type="text"
+          id={'dir-link'}
+          value={dirUrl}
+          style={{position: 'absolute', left: '-9999px', top: '0'}}
+          readOnly />
       </React.Fragment>
       
     );
