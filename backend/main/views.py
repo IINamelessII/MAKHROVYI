@@ -40,6 +40,7 @@ def add_message_to_session(request, message):
     else:
         request.session['messages'] = dict()
 
+    request.session.modified = True
     request.session['messages'][i] = message
     return request
 
@@ -223,7 +224,6 @@ def messages(request):
     return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
 
 def unset_message(request, key):
-    d = request.session['messages']
-    del d[key]
-    request.session['messages'] = d
+    request.session.modified = True
+    del request.session['messages'][str(key)]
     return HttpResponse(status=200)
