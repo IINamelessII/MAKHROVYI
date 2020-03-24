@@ -28,6 +28,14 @@ class Input extends Component {
       } 
     }
 
+    if (this.props.validation.blackList.values.length) {
+      check = !(this.props.validation.blackList.values.includes(newValue.toLowerCase()));
+      isValid = isValid && check;
+      if (!check && !('unique' in messages)) {
+        messages['unique'] = this.props.validation.blackList.message;
+      } 
+    }
+
     this.setState({
       messages: messages,
       valid: isValid,

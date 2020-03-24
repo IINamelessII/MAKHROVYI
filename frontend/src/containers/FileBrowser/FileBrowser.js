@@ -221,7 +221,13 @@ class FileBrowser extends Component {
     if (this.state.showFileUpload) {
       fileUploadInput = <FileUploadInput/>
     }
-
+    
+    const lastItems = this.props.items[this.props.items.length - 1];
+    let dirNames = [];
+    if (lastItems) {
+      dirNames = Object.values(lastItems).filter(item => item.type === 'dir').map((item) => item.name.toLowerCase());
+    }
+    
     let addNewDir = null;
     if (this.props.showNewDir) {
       addNewDir = (
@@ -234,6 +240,10 @@ class FileBrowser extends Component {
           onContainerClick={this.props.onHideBackdrop}
           validation={{
             length: 30,
+            blackList: {
+              values: dirNames, 
+              message: 'A directory with that name already exists',
+            },
           }}/>
       );
     }
