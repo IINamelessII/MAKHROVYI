@@ -71,6 +71,7 @@ class Dir(models.Model):
 
     @classmethod
     def add_new(self, value, parent_dir_id, add_message):
+        """Creating new record only if name is valid"""
         if len(value) > 30:
             add_message('Value should be no longer than 30 symbols')
         else:
@@ -84,10 +85,12 @@ class Dir(models.Model):
 
     @classmethod
     def correct_name(self, name, parent_dir_id, add_message):
+        """Correcting name for creating new record anyway"""
         parent_dir = self.objects.get(pk=parent_dir_id)
-        if len(name) > 30:
+        existing_names = list(map(lambda x: x.name.lower(), parent_dir.dirs.all()))
+        if len(name) > 30 or name.lower() in existing_names:
             name_with_token = name[:22] + token_urlsafe()[:8]
-            while name_with_token in list(map(lambda x: x.name, parent_dir.dirs.all())):
+            while name_with_token.lower() in existing_names:
                 name_with_token = name[:22] + token_urlsafe()[:8]
             add_message(f'Directory name was changed to {name_with_token}')
             return name_with_token
@@ -160,10 +163,12 @@ class File(models.Model):
 
     @classmethod
     def correct_name(self, name, parent_dir_id, add_message):
+        """Correcting for creating new record anyway"""
         parent_dir = Dir.objects.get(pk=parent_dir_id)
-        if len(name) > 30:
+        existing_names = list(map(lambda x: x.name.lower(), parent_dir.files.all()))
+        if len(name) > 30 or name.lower() in existing_names:
             name_with_token = name[:22] + token_urlsafe()[:8]
-            while name_with_token in list(map(lambda x: x.name, parent_dir.files.all())):
+            while name_with_token.lower() in existing_names:
                 name_with_token = name[:22] + token_urlsafe()[:8]
             add_message(f'File name was changed to {name_with_token}')
             return name_with_token
