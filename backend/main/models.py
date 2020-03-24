@@ -85,3 +85,16 @@ class File(models.Model):
     
     def inc_download(self):
         File.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
+    
+    @classmethod
+    def upload(self, the_file, parent_dir_id):
+        last_dot_index = the_file.name.rfind('.')
+        instance = self(
+            file=the_file, 
+            name=the_file.name[:last_dot_index],
+            ext=the_file.name[last_dot_index + 1:],
+            mmtype=the_file.content_type,
+        )
+        instance.save()
+        parentDir = Dir.objects.get(pk=parent_dir_id)
+        parentDir.files.add(self.objects.get(pk=instance.id))

@@ -89,20 +89,10 @@ def archive_received(request, data):
 def upload_file(request, id):
     """Upload file to dir with given id"""
     try:
-        the_file = request.FILES['file']
-        last_dot_index = the_file.name.rfind('.')
-        instance = File(
-            file=the_file, 
-            name=the_file.name[:last_dot_index],
-            ext=the_file.name[last_dot_index + 1:],
-            mmtype=the_file.content_type,
-        )
-        instance.save()
-        parentDir = Dir.objects.get(pk=id)
-        parentDir.files.add(File.objects.get(pk=instance.id))
-        return HttpResponse(status=200)
+        File.upload(request.FILES['file'], id)
     except:
         return HttpResponse(status=401)
+    return HttpResponse(status=200)
 
 
 @post_only
