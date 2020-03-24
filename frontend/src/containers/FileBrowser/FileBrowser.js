@@ -86,7 +86,6 @@ class FileBrowser extends Component {
 
     const data = new FormData(this.uploadDirFormRef.current);
     if (data.getAll('file').length === 0) {
-      //TODO: show Message that empty dirs will be skipped
       return
     } 
     const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
@@ -148,6 +147,13 @@ class FileBrowser extends Component {
     this.props.loadMessages();
   }
 
+  componentDidUpdate() {
+    if (this.props.shouldRedirect) {
+      this.props.history.push('/');
+      this.props.setShouldRedirect(false);
+    }
+  }
+
   render() {
     let fileBrowserContent = (
       <div className={classes.SpinnerContainer}>
@@ -196,6 +202,7 @@ class FileBrowser extends Component {
               goToPath={() => this.openPath(index)} />
           );
         });
+
       }
 
       fileBrowserContent = (
@@ -304,6 +311,7 @@ const mapStateToProps = state => {
     path: state.fileBrowser.path,
     hashPath: state.fileBrowser.hashPath,
     newDirName: state.fileBrowser.newDirName,
+    shouldRedirect: state.fileBrowser.shouldRedirect,
   };
 };
 
@@ -322,6 +330,7 @@ const mapDispatchToProps = dispatch => {
     openFromPath: (index) => dispatch(actions.openFromPath(index)),
     addMessage: (message) => dispatch(actions.addMessage(message)),
     loadMessages: () => dispatch(actions.loadMessages()),
+    setShouldRedirect: (should) => dispatch(actions.setShouldRedirect(should)),
   };
 }
 

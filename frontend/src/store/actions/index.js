@@ -13,6 +13,7 @@ export {
   prepareStructure,
   addDirToPath,
   openFromPath,
+  setShouldRedirect,
 } from './fileBrowser';
 
 export {

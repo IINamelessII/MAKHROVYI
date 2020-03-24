@@ -162,6 +162,7 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
                 dispatch(selectDir(intDirHash));
               } else {
                 dispatch(messageActions.addMessage('Directory was not founded'));
+                dispatch(setShouldRedirect(true));
               }
             } else if (intFileHash) {
               const parentDir = response.data.find(dir => dir.files.includes(intFileHash));
@@ -169,6 +170,7 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
                 dispatch(selectDir(parentDir.id));
               } else {
                 dispatch(messageActions.addMessage('File was not founded'));
+                dispatch(setShouldRedirect(true));
               }
             }
           })
@@ -195,5 +197,12 @@ export const openFromPath = (index) => {
   return {
     type: actionTypes.OPEN_FROM_PATH,
     index: index,
+  };
+};
+
+export const setShouldRedirect = (should) => {
+  return {
+    type: actionTypes.SET_SHOULD_REDIRECT,
+    should: should
   };
 };

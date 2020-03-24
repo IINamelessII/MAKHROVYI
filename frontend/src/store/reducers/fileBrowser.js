@@ -51,6 +51,7 @@ const initialState = {
   path: [],
   items: [],
   error: null,
+  shouldRedirect: false,
 };
 
 const setBackdrop = (state, action) => {
@@ -232,6 +233,10 @@ const openFromPath = (state, action) => {
   });
 };
 
+const setShouldRedirect = (state, action) => {
+  return updateObject(state, {shouldRedirect: action.should});
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_BACKDROP: return setBackdrop(state, action);
@@ -253,6 +258,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_DIR_TO_PATH: return addDirToPath(state, action);
     case actionTypes.OPEN_FROM_PATH: return openFromPath(state, action);
     case actionTypes.SELECT_DIR: return selectDir(state, action);
+    case actionTypes.SET_SHOULD_REDIRECT: return setShouldRedirect(state, action);
     default: return state;
   }
 };
