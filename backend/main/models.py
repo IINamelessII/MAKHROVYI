@@ -55,6 +55,8 @@ class Dir(models.Model):
             new_path = os.path.join(space, filename)
 
             shutil.copy(file_path, new_path)
+            if filename != the_file.full_name:
+                os.rename(new_path, os.path.join(space, the_file.full_name))
         
         for the_dir in dir_record.dirs.all():
             next_dir_path = os.path.join(space, the_dir.name)
@@ -135,7 +137,7 @@ class Dir(models.Model):
             file_dir_ids.append(saved_id)
                         
         for id, the_file in enumerate(files):
-            File.upload(the_file, file_dir_ids[id])
+            File.upload(the_file, file_dir_ids[id], add_message)
 
 
 class File(models.Model):
@@ -155,13 +157,24 @@ class File(models.Model):
     
     def inc_download(self):
         File.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
+
+    @classmethod
+    def correct_name(self, name, parent_dir_id, add_message):
+        parent_dir = Dir.objects.get(pk=parent_dir_id)
+        if len(name) > 30:
+            name_with_token = name[:22] + token_urlsafe()[:8]
+            while name_with_token in list(map(lambda x: x.name, parent_dir.files.all())):
+                name_with_token = name[:22] + token_urlsafe()[:8]
+            add_message(f'File name was changed to {name_with_token}')
+            return name_with_token
+        return name
     
     @classmethod
-    def upload(self, the_file, parent_dir_id):
+    def upload(self, the_file, parent_dir_id, add_message):
         last_dot_index = the_file.name.rfind('.')
         instance = self(
             file=the_file, 
-            name=the_file.name[:last_dot_index],
+            name=self.correct_name(the_file.name[:last_dot_index], parent_dir_id, add_message),
             ext=the_file.name[last_dot_index + 1:],
             mmtype=the_file.content_type,
         )

@@ -99,7 +99,7 @@ def archive_received(request, data):
 def upload_file(request, id):
     """Upload file to dir with given id"""
     try:
-        File.upload(request.FILES['file'], id)
+        File.upload(request.FILES['file'], id, lambda msg: add_message_to_session(request, msg))
     except:
         return HttpResponse(status=401)
     return HttpResponse(status=200)
