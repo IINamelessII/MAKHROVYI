@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-fileBrowser';
+import * as messageActions from './messages';
 
 export const setBackdrop = () => {
   return {
@@ -133,11 +134,12 @@ export const buildStructure = (rootId, dirs) => {
   };
 };
 
-export const selectDir = (dirHash, rootId) => {
+export const selectDir = (dirHash) => {
   return {
     type: actionTypes.SELECT_DIR,
     dirHash: dirHash,
-    rootId: rootId,
+    // rootId: rootId,
+    // messageFunc: messageFunc,
   };
 };
 
@@ -155,13 +157,18 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
             const intDirHash = parseInt(dirHash);
             const intFileHash = parseInt(fileHash);
             if (intDirHash && intDirHash !== rootId) {
-              dispatch(selectDir(intDirHash, rootId));
+              const parentDir = response.data.find(dir => dir.dirs.includes(intDirHash));
+              if (parentDir) {
+                dispatch(selectDir(intDirHash));
+              } else {
+                dispatch(messageActions.addMessage('Directory was not founded'));
+              }
             } else if (intFileHash) {
               const parentDir = response.data.find(dir => dir.files.includes(intFileHash));
               if (parentDir) {
-                dispatch(selectDir(parentDir.id, rootId));
+                dispatch(selectDir(parentDir.id));
               } else {
-                //TODO: Show message and clear URL
+                dispatch(messageActions.addMessage('File was not founded'));
               }
             }
           })

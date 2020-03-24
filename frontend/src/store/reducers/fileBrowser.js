@@ -195,8 +195,11 @@ const selectDir = (state, action) => {
       path: path,
       hashPath: hashPathRes,
     };
-  } else {
-    //TODO: Add message and clear URL
+
+    // if (data.items.length === 1 && data.hashPath[data.hashPath.length - 1] === action.rootId) {
+    //   console.log(action);
+    //   action.messageFunc();
+    // }
   }
 
   return updateObject(state, data);
