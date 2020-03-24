@@ -2,7 +2,7 @@ import json
 import os
 import shutil
 import time
-import zipfile
+# import zipfile
 from secrets import token_urlsafe
 
 from django.conf import settings
@@ -61,60 +61,25 @@ def download(request, data):
     the_file.inc_download()
     return response
 
-
-def prepare_dir(id, space):
-    """"Recursive prepare dirs structure for archiving"""
-    dir_record = Dir.objects.get(pk=id)
-    dir_record.inc_download()
-
-    for the_file in dir_record.files.all():
-        the_file.inc_download()
-        filename = os.path.basename(the_file.file.name)
-
-        file_path = os.path.join(settings.MEDIA_ROOT, filename)
-        new_path = os.path.join(space, filename)
-
-        shutil.copy(file_path, new_path)
-    
-    for the_dir in dir_record.dirs.all():
-        next_dir_path = os.path.join(space, the_dir.name)
-        os.mkdir(next_dir_path)
-        prepare_dir(the_dir.id, next_dir_path)
        
-
 @post_only
 @load_data('id')
 def archive(request, data):
     """create archive from dir and return its link by dir's id"""
-    the_dir_record = Dir.objects.get(pk=data['id'])
-    #TODO add oportunity to create zip/tar.xz archives based on archive_type param
-    token = token_urlsafe(16)
-    path_with_token = os.path.join(settings.ARCHIVES_ROOT, token)
-    while os.path.exists(path_with_token):
-        token = token_urlsafe(16)
-        path_with_token = os.path.join(settings.ARCHIVES_ROOT, token)
-    
-    os.mkdir(path_with_token)
-
-    prepare_dir(data['id'], path_with_token)
-
-    shutil.make_archive(path_with_token, 'zip', path_with_token)
-
+    token = Dir.objects.get(pk=data['id']).archieve_token()
     response = HttpResponse(settings.ARCHIVES_URL + token + '.zip')
     response['Content-Disposition'] = 'attachment; filename={}'.format(token)
-    
+
     return response
         
 
 @post_only
 @load_data('token')
 def archive_received(request, data):
-    """Removing archive with given token after 1 hour after creating"""
+    """Removing archive with given token after receiving it on cliend side"""
     time.sleep(settings.TIME_TO_DELETE)
-    archive_path = os.path.join(settings.ARCHIVES_ROOT, data['token'])
     try:
-        shutil.rmtree(archive_path)
-        os.remove(archive_path + '.zip')
+        Dir.clear_archieve_data(data['token'])
     except:
         return HttpResponse(status=404)
     return HttpResponse(status=200)
