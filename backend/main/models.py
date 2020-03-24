@@ -72,13 +72,70 @@ class Dir(models.Model):
         if len(value) > 30:
             add_message('Value should be no longer than 30 symbols')
         else:
-            parentDir = self.objects.get(pk=parent_dir_id)
-            if (value.lower() in list(map(lambda x: x.name.lower(), parentDir.dirs.all()))):
+            parent_dir = self.objects.get(pk=parent_dir_id)
+            if value.lower() in list(map(lambda x: x.name.lower(), parent_dir.dirs.all())):
                 add_message('A directory with that name already exists')
             else:
                 instance = self(name=value)
                 instance.save()
-                parentDir.dirs.add(self.objects.get(pk=instance.id))
+                parent_dir.dirs.add(self.objects.get(pk=instance.id))
+
+    @classmethod
+    def correct_name(self, name, parent_dir_id, add_message):
+        parent_dir = self.objects.get(pk=parent_dir_id)
+        if len(name) > 30:
+            name_with_token = name[:22] + token_urlsafe()[:8]
+            while name_with_token in list(map(lambda x: x.name, parent_dir.dirs.all())):
+                name_with_token = name[:22] + token_urlsafe()[:8]
+            add_message(f'Directory name was changed to {name_with_token}')
+            return name_with_token
+        return name
+
+    @classmethod
+    def upload(self, files, relpaths, parent_dir_id, add_message):
+        paths = [path.split('/')[:-1] for path in relpaths]
+        #file_dir_ids is a list of dir's ids where files located
+        file_dir_ids = []
+        
+        dir_inst = self(name=self.correct_name(paths[0][0], parent_dir_id, add_message))
+        dir_inst.save()
+        d = [{
+            dir_inst.id: {
+                'name': paths[0][0],
+                'cont': []
+            }
+        }]
+        self.objects.get(pk=parent_dir_id).dirs.add(self.objects.get(pk=dir_inst.id))
+        saved_id = dir_inst.id #Currently root id
+
+        for path in paths:
+            d_link = d #Linking object behind d variable
+            for part in path:
+                id = 0
+                # for key, value in d_link.items():
+                for index, i in enumerate(d_link):
+                    key, value = list(i.items())[0]
+                    if value['name'] == part: 
+                        id = key
+                        break
+                if id: #if part was finded
+                    d_link = d_link[index][id]['cont']
+                    saved_id = id
+                else: #Create new Dir Record
+                    dir_inst = self(name=self.correct_name(part, saved_id, add_message))
+                    dir_inst.save()
+                    self.objects.get(pk=saved_id).dirs.add(self.objects.get(pk=dir_inst.id))
+                    d_link.append({dir_inst.id: {
+                        'name': part,
+                        'cont': []
+                    }})
+                    d_link = d_link[-1][dir_inst.id]['cont']
+                    saved_id = dir_inst.id
+            
+            file_dir_ids.append(saved_id)
+                        
+        for id, the_file in enumerate(files):
+            File.upload(the_file, file_dir_ids[id])
 
 
 class File(models.Model):

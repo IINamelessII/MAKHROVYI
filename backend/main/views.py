@@ -45,6 +45,16 @@ def add_message_to_session(request, message):
     return request
 
 
+def messages(request):
+    return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
+
+
+def unset_message(request, key):
+    request.session.modified = True
+    del request.session['messages'][str(key)]
+    return HttpResponse(status=200)
+
+
 def index(request):
     """render SPA"""
     return render(request, 'index.html')
@@ -106,71 +116,8 @@ def add_new_dir(request, data):
 @post_only
 def upload_dir(request, id):
     """Upload dir to dir with given id"""
-    files = request.FILES.getlist('file')
-    relpaths = json.load(request.FILES['relPaths'].file)
-    #TODO: Move this function to Dir model
-    paths = [path.split('/')[:-1] for path in relpaths]
-    #file_dir_ids is a list of dir's ids where files located
-    file_dir_ids = []
-    
-    dir_inst = Dir(name=paths[0][0])
-    dir_inst.save()
-    d = [{
-        dir_inst.id: {
-            'name': dir_inst.name,
-            'cont': []
-        }
-    }]
-    Dir.objects.get(pk=id).dirs.add(Dir.objects.get(pk=dir_inst.id))
-    saved_id = dir_inst.id #Currently root id
-
-    for path in paths:
-        d_link = d #Linking object behind d variable
-        for part in path:
-            id = 0
-            # for key, value in d_link.items():
-            for index, i in enumerate(d_link):
-                key, value = list(i.items())[0]
-                if value['name'] == part:
-                    id = key
-                    break
-            if id: #if part was finded
-                d_link = d_link[index][id]['cont']
-                saved_id = id
-            else: #Create new Dir Record
-                dir_inst = Dir(name=part)
-                dir_inst.save()
-                Dir.objects.get(pk=saved_id).dirs.add(Dir.objects.get(pk=dir_inst.id))
-                d_link.append({dir_inst.id: {
-                    'name': part,
-                    'cont': []
-                }})
-                d_link = d_link[-1][dir_inst.id]['cont']
-                saved_id = dir_inst.id
-        
-        file_dir_ids.append(saved_id)
-                    
-    for id, the_file in enumerate(files):
-        #Creating File record
-        last_dot_index = the_file.name.rfind('.')
-        instance = File(
-            file=the_file, 
-            name=the_file.name[:last_dot_index],
-            ext=the_file.name[last_dot_index + 1:],
-            mmtype=the_file.content_type,
-        )
-        instance.save()
-        #Adding File to the parent Dir
-        parent_dir = Dir.objects.get(pk=file_dir_ids[id])
-        parent_dir.files.add(File.objects.get(pk=instance.id))
-
-    return HttpResponse(status=200)
-
-
-def messages(request):
-    return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
-
-def unset_message(request, key):
-    request.session.modified = True
-    del request.session['messages'][str(key)]
+    # try:
+    Dir.upload(request.FILES.getlist('file'), json.load(request.FILES['relPaths'].file), id, lambda msg: add_message_to_session(request, msg))
+    # except:
+    #     return HttpResponse(status=401)
     return HttpResponse(status=200)
