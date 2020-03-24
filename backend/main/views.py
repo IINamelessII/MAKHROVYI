@@ -99,17 +99,7 @@ def upload_file(request, id):
 @load_data('dirId', 'value')
 def add_new_dir(request, data):
     """Add New Directory with given name to the directory with the given dirId"""
-    if len(data['value']) > 30:
-        add_message_to_session(request, 'Value should be no longer than 30 symbols')
-    else:
-        parentDir = Dir.objects.get(pk=data['dirId'])
-        if (data['value'].lower() in list(map(lambda x: x.name.lower(), parentDir.dirs.all()))):
-            add_message_to_session(request, 'A directory with that name already exists')
-        else:
-            instance = Dir(name=data['value'])
-            instance.save()
-            parentDir.dirs.add(Dir.objects.get(pk=instance.id))
-
+    Dir.add_new(data['value'], data['dirId'], lambda msg: add_message_to_session(request, msg))
     return HttpResponse(status=200)
 
 

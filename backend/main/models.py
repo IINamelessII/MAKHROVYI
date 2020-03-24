@@ -67,6 +67,19 @@ class Dir(models.Model):
         shutil.rmtree(archive_path)
         os.remove(archive_path + '.zip')
 
+    @classmethod
+    def add_new(self, value, parent_dir_id, add_message):
+        if len(value) > 30:
+            add_message('Value should be no longer than 30 symbols')
+        else:
+            parentDir = self.objects.get(pk=parent_dir_id)
+            if (value.lower() in list(map(lambda x: x.name.lower(), parentDir.dirs.all()))):
+                add_message('A directory with that name already exists')
+            else:
+                instance = self(name=value)
+                instance.save()
+                parentDir.dirs.add(self.objects.get(pk=instance.id))
+
 
 class File(models.Model):
     name = models.CharField(max_length=100)
