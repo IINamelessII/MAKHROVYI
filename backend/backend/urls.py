@@ -18,7 +18,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-urlpatterns = [
+#static and media urls first to prevent catching /media and /static with client routing
+urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [ 
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
