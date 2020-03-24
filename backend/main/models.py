@@ -29,8 +29,12 @@ class File(models.Model):
     created_date = models.DateTimeField(default=now, editable=False)
     mmtype = models.CharField(max_length=100, default='content/file')
 
+    @property
+    def full_name(self):
+        return f'{self.name}.{self.ext}'
+
     def __str__(self):
-        return '#{} {}'.format(self.id, self.name, '.', self.ext)
+        return f'#{self.id} {self.name}.{self.ext}'
     
     def inc_download(self):
         File.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)

@@ -54,12 +54,11 @@ def index(request):
 @load_data('id')
 def download(request, data):
     """return file link by its id"""
-    the_file_record = File.objects.get(pk=data['id'])
-    filename = os.path.basename(the_file_record.file.name)
-    response = HttpResponse(settings.MEDIA_URL + filename)
-    response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+    the_file = File.objects.get(pk=data['id'])
+    response = HttpResponse(settings.MEDIA_URL + the_file.file.name)
+    response['Content-Disposition'] = f'attachment; filename={the_file.full_name}'
 
-    the_file_record.inc_download()
+    the_file.inc_download()
     return response
 
 
