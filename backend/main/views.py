@@ -148,10 +148,13 @@ def add_new_dir(request, data):
     if len(data['value']) > 30:
         add_message_to_session(request, 'Value should be no longer than 30 symbols')
     else:
-        instance = Dir(name=data['value'])
-        instance.save()
         parentDir = Dir.objects.get(pk=data['dirId'])
-        parentDir.dirs.add(Dir.objects.get(pk=instance.id))
+        if (data['value'].lower() in list(map(lambda x: x.name.lower(), parentDir.dirs.all()))):
+            add_message_to_session(request, 'A directory with that name already exists')
+        else:
+            instance = Dir(name=data['value'])
+            instance.save()
+            parentDir.dirs.add(Dir.objects.get(pk=instance.id))
 
     return HttpResponse(status=200)
 
