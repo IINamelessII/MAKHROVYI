@@ -34,6 +34,8 @@ MEDIA_URL = '/media/'
 ARCHIVES_ROOT = os.path.join(MEDIA_ROOT, 'archives')
 ARCHIVES_URL = '/media/archives/'
 
+MAX_UPLOAD_SIZE = 10485760 #10MB
+MAX_UPLOAD_SIZE_LABEL = '10 MB'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/

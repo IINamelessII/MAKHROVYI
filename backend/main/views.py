@@ -32,10 +32,12 @@ class FileViewSet(viewsets.ModelViewSet):
 
 
 def add_message_to_session(request, message):
+    # print(message)
+    # print(request.session[''])
     i = 0
 
     if 'messages' in request.session:
-        while i in request.session['messages']:
+        while str(i) in request.session['messages']:
             i += 1
     else:
         request.session['messages'] = dict()

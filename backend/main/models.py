@@ -13,7 +13,7 @@ class User(AbstractUser):
 
 
 class Dir(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=30)
     dirs = models.ManyToManyField('Dir', blank=True)
     files = models.ManyToManyField('File', blank=True)
     downloads = models.IntegerField(default=0)
@@ -144,7 +144,7 @@ class Dir(models.Model):
 
 
 class File(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=30)
     ext = models.CharField(max_length=10)
     file = models.FileField()
     downloads = models.IntegerField(default=0)
@@ -176,6 +176,9 @@ class File(models.Model):
     
     @classmethod
     def upload(self, the_file, parent_dir_id, add_message):
+        if the_file.size > settings.MAX_UPLOAD_SIZE:
+            return add_message(f'{the_file.name} wasnt uploaded, its size more than {settings.MAX_UPLOAD_SIZE_LABEL}')
+
         last_dot_index = the_file.name.rfind('.')
         instance = self(
             file=the_file, 
