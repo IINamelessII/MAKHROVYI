@@ -47,8 +47,8 @@
     padding: 2px 18px 7px;
     border-left: 1px solid;
     border-color: rgba(0, 0, 0, 0);
-    transition: border-color .1s linear;
-    transition: background-color .1s linear;
+    transition: border-color .1s linear,
+        background-color .1s linear;
 }
 
 .CloseButton:hover {

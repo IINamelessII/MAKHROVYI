@@ -16,26 +16,28 @@ class FilesUploadInput extends Component {
   uploadFiles = (event) => {
     event.preventDefault();
 
-    const data = new FormData();
-    // eslint-disable-next-line
-    for (let file of this.state.files) {
-      data.append('file', file);
-    }
-    const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
-    axios({
-      method: 'post',
-      url: '/upload_files/' + dirId + '/',
-      data: data, 
-      headers:{"content-type": 'application/form-data'},
-    })
-      .then(response => {
-        this.props.rerender();
-        this.props.hideBackdrop();
+    if (this.state.files.length) {
+      const data = new FormData();
+      // eslint-disable-next-line
+      for (let file of this.state.files) {
+        data.append('file', file);
+      }
+      const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
+      axios({
+        method: 'post',
+        url: '/upload_files/' + dirId + '/',
+        data: data, 
+        headers:{"content-type": 'application/form-data'},
       })
-      .catch(error => {
-        console.log(error);
-        this.props.hideBackdrop();
-      });
+        .then(response => {
+          this.props.rerender();
+          this.props.hideBackdrop();
+        })
+        .catch(error => {
+          console.log(error);
+          this.props.hideBackdrop();
+        });
+    }
   }
 
   onInputChangeHandler = () => {
@@ -64,6 +66,7 @@ class FilesUploadInput extends Component {
 
   render() {
     let filesList = <div className={classes.Holder}>Please Select Files Above</div>;
+    let buttonClasses = [classes.Button];
 
     if (this.state.files.length) {
       filesList = this.state.files.map((file, index) => {
@@ -76,6 +79,8 @@ class FilesUploadInput extends Component {
           </div>
         );
       });
+    } else {
+      buttonClasses.push(classes.Disable);
     }
     
     return (
@@ -104,8 +109,8 @@ class FilesUploadInput extends Component {
           
           <div className={classes.FileList}>{filesList}</div>
           <div className={classes.Buttons}>
-            <div onClick={this.props.hideBackdrop}>cancel</div>
-            <div onClick={() => this.formRef.current.dispatchEvent(new Event("submit"))}>upload</div>
+            <div onClick={this.props.hideBackdrop} className={classes.Button}>cancel</div>
+            <div onClick={() => this.formRef.current.dispatchEvent(new Event("submit"))} className={buttonClasses.join(' ')}>upload</div>
           </div>
 
           <div></div>

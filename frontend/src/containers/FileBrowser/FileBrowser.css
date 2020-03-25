@@ -7,7 +7,6 @@
     width: 100%;
 
     display: flex;
-    /* flex-wrap: wrap; */
     overflow-x: auto; 
 
     position: relative;
@@ -39,7 +38,6 @@
 .Items::-webkit-scrollbar-thumb,
 .PathRow::-webkit-scrollbar-thumb {
     background-color: #5858587c; 
-    transition: background-color .1s linear;
 }
   
   /* Handle on hover */

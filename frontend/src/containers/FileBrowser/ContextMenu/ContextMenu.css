@@ -9,8 +9,8 @@
     cursor: pointer;
     margin: 3px;
     text-transform: uppercase;
-    transition: background-color .1s linear;
-    transition: color .1s linear;
+    transition: background-color .1s linear,
+        color .1s linear;
 }
 
 .Option:hover {

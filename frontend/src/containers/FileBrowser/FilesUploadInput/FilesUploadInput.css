@@ -94,7 +94,7 @@
     justify-content: space-evenly;
 }
 
-.Buttons div {
+.Button {
     text-transform: uppercase;
     cursor: pointer;
     border: 1px solid #fff;
@@ -110,7 +110,7 @@
         color .1s linear;
 }
 
-.Buttons div:hover {
+.Button:hover {
     background-color: aquamarine;
     color: black;
 }
@@ -152,4 +152,13 @@
     margin: 20px 0;
     text-align: center;
     font-size: 20px;
+}
+
+.Disable {
+    cursor: not-allowed;
+}
+
+.Disable:hover {
+    background-color: #0003147e;
+    color: #fff;
 }
