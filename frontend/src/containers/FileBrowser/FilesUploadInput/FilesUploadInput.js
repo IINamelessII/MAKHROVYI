@@ -14,11 +14,11 @@ class FilesUploadInput extends Component {
 
   uploadFiles = (event) => {
     event.preventDefault();
+    
     const data = new FormData();
     for (let file of this.state.files) {
       data.append('file', file);
     }
-    console.log(data.getAll('file'));
     const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     axios({
       method: 'post',

@@ -162,15 +162,15 @@ class File(models.Model):
         File.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
 
     @classmethod
-    def correct_name(self, name, parent_dir_id, add_message):
+    def correct_name(self, name, parent_dir_id, add_message, ext):
         """Correcting for creating new record anyway"""
         parent_dir = Dir.objects.get(pk=parent_dir_id)
-        existing_names = list(map(lambda x: x.name.lower(), parent_dir.files.all()))
-        if len(name) > 30 or name.lower() in existing_names:
+        existing_names = list(map(lambda x: (x.name + x.ext).lower(), parent_dir.files.all()))
+        if len(name) > 30 or (name + ext).lower() in existing_names:
             name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             while name_with_token.lower() in existing_names:
                 name_with_token = name[:21] + '_' + token_urlsafe()[:8]
-            add_message(f'File name was changed to {name_with_token}')
+            add_message(f'File name was changed to {name_with_token}.{ext}')
             return name_with_token
         return name
     
@@ -182,7 +182,7 @@ class File(models.Model):
         last_dot_index = the_file.name.rfind('.')
         instance = self(
             file=the_file, 
-            name=self.correct_name(the_file.name[:last_dot_index], parent_dir_id, add_message),
+            name=self.correct_name(the_file.name[:last_dot_index], parent_dir_id, add_message, the_file.name[last_dot_index + 1:]),
             ext=the_file.name[last_dot_index + 1:],
             mmtype=the_file.content_type,
         )
