@@ -13,12 +13,115 @@
 .FilesUploadInput {
     z-index: 2;
     height: 600px;
-    width: 400px;
-    background-color: #7f92ff0a;
+    width: 340px;
+    background-color: #0003147e;
     border: 1px solid #bbbbbb;
     color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.CloseButton {
+.FilesUploadInput > * {
+    margin: 0 auto;
+}
+
+.Select form {
+    display: none;
+}
+
+.Choose {
+    height: 60px;
+    width: 300px;
+    border: 1px solid;
+    border-color: #fff;
     cursor: pointer;
+
+    transition: border-color .1s linear,
+        background-color .1s linear,
+        color .1s linear;
+
+    display: flex;
+    justify-content: center;
+}
+
+.Choose:hover {
+    background-color: aquamarine;
+    border-color: black;
+    color: black;
+}
+
+.Label {
+    margin: auto 0;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+.FileList {
+    height: 400px;
+    width: 300px;
+    border: 1px solid #fff;
+
+    overflow-x: auto; 
+    position: relative;
+}
+
+.FileList::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+  
+  /* Track */
+.FileList::-webkit-scrollbar-track {
+    opacity: 0;
+}
+   
+  /* Handle */
+.FileList::-webkit-scrollbar-thumb {
+    background-color: #5858587c; 
+    transition: background-color .1s linear;
+}
+  
+  /* Handle on hover */
+.FileList::-webkit-scrollbar-thumb:hover {
+    background-color: #9c9c9c; 
+}
+
+.Buttons {
+    display: flex;
+}
+
+.Buttons > * {
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.FileItem {
+    display: flex;
+    height: 30px;
+    width: 280px;
+    font-size: 20px;
+    margin: 5px;
+
+    justify-content: space-between;
+}
+
+.FileItem:hover{
+    background-color: aquamarine;
+    color: black;
+}
+
+.FileName {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.RemoveFileButton {
+    cursor: pointer;
+}
+
+.RemoveFileButton:hover {
+    color: red;
 }

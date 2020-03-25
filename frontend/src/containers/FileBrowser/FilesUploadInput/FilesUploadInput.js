@@ -16,6 +16,7 @@ class FilesUploadInput extends Component {
     event.preventDefault();
 
     const data = new FormData();
+    // eslint-disable-next-line
     for (let file of this.state.files) {
       data.append('file', file);
     }
@@ -49,15 +50,18 @@ class FilesUploadInput extends Component {
     this.setState({files: files});
   }
 
+  onSelectFilesClick = () => {
+    document.getElementById('SelectFiles').click();
+  }
+
   render() {
-    let filesList = <div>Please Select Files</div>;
+    let filesList = <div>Please Select Files Above</div>;
 
     if (this.state.files.length) {
       filesList = this.state.files.map((file, index) => {
         return (
           <div className={classes.FileItem} key={index}>
             <div className={classes.FileName}>{file.name}</div>
-            <div className={classes.FileSize}>{file.size}</div>
             <div 
               className={classes.RemoveFileButton}
               onClick={() => this.removeFile(index)}>x</div>
@@ -73,25 +77,30 @@ class FilesUploadInput extends Component {
         <div 
           className={classes.FilesUploadInput}
           onClick={(e) => {e.stopPropagation()}}>
-          <div 
-            className={classes.CloseButton}
-            onClick={this.props.hideBackdrop}>x</div> 
 
-          <form onSubmit={this.uploadFiles} ref={this.formRef} encType="multipart/form-data">
-            <input 
-              type='file'
-              multiple={true}
-              name='file'
-              id="SelectFiles"
-              onChange={this.onInputChangeHandler}/>
-          </form>
+          <div></div>
 
-          <div className={classes.FileList}>{filesList}</div>
-
-          <div
-            onClick={() => this.formRef.current.dispatchEvent(new Event("submit"))}>
-            SEND
+          <div className={classes.Select}>
+            <form onSubmit={this.uploadFiles} ref={this.formRef} encType="multipart/form-data">
+              <input 
+                type='file'
+                multiple={true}
+                name='file'
+                id="SelectFiles"
+                onChange={this.onInputChangeHandler}/>
+            </form>
+            <div className={classes.Choose} onClick={this.onSelectFilesClick}>
+              <div className={classes.Label}>Click here to select files</div>
+            </div>
           </div>
+          
+          <div className={classes.FileList}>{filesList}</div>
+          <div className={classes.Buttons}>
+            <div onClick={() => this.formRef.current.dispatchEvent(new Event("submit"))}>send</div>
+            <div onClick={this.props.hideBackdrop}>cancel</div>
+          </div>
+
+          <div></div>
 
         </div>
       </div>
