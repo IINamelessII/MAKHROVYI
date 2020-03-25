@@ -25,9 +25,11 @@
 
 .Items::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 }
 
 .PathRow::-webkit-scrollbar {
+    height: 10px;
     height: 10px;
 }
   

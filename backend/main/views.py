@@ -96,10 +96,11 @@ def archive_received(request, data):
 
 
 @post_only
-def upload_file(request, id):
+def upload_files(request, id):
     """Upload file to dir with given id"""
     try:
-        File.upload(request.FILES['file'], id, lambda msg: add_message_to_session(request, msg))
+        for the_file in request.FILES.getlist('file'):
+            File.upload(the_file, id, lambda msg: add_message_to_session(request, msg))
     except:
         return HttpResponse(status=401)
     return HttpResponse(status=200)

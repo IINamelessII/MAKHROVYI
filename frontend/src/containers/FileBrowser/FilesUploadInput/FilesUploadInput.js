@@ -7,7 +7,6 @@ import * as actions from '../../../store/actions/index';
 
 class FilesUploadInput extends Component {
   state = {
-    uploading: false,
     files: [],
   }
 
@@ -15,11 +14,15 @@ class FilesUploadInput extends Component {
 
   uploadFiles = (event) => {
     event.preventDefault();
-    const data = new FormData(this.formRef.current);
+    const data = new FormData();
+    for (let file of this.state.files) {
+      data.append('file', file);
+    }
+    console.log(data.getAll('file'));
     const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     axios({
       method: 'post',
-      url: '/upload_file/' + dirId + '/',
+      url: '/upload_files/' + dirId + '/',
       data: data, 
       headers:{"content-type": 'application/form-data'},
     })
