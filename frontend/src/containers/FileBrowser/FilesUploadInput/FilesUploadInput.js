@@ -14,7 +14,7 @@ class FilesUploadInput extends Component {
 
   uploadFiles = (event) => {
     event.preventDefault();
-    
+
     const data = new FormData();
     for (let file of this.state.files) {
       data.append('file', file);
@@ -37,9 +37,10 @@ class FilesUploadInput extends Component {
   }
 
   onInputChangeHandler = () => {
-    //Handle copys, allow only unique files, connect messages
     const files = [...this.state.files];
-    this.setState({files: files.concat(Array.from(document.getElementById('SelectFiles').files))});
+    const fileNames = files.map(file => file.name);
+    const newFiles = files.concat(Array.from(document.getElementById('SelectFiles').files).filter(it => !fileNames.includes(it.name)));
+    this.setState({files: newFiles});
   }
 
   removeFile = (index) => {
