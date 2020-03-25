@@ -59,10 +59,12 @@ class Input extends Component {
 
   render() {
     const inputClasses = [classes.InputInput];
-    const buttonClasses = [classes.Button, classes.Positive];
+    const buttonClasses = [classes.Button];
 
     if (!this.state.valid) {
       inputClasses.push(classes.Invalid);
+      buttonClasses.push(classes.Disable);
+    } else if (!this.state.value.length) {
       buttonClasses.push(classes.Disable);
     }
 
@@ -89,7 +91,7 @@ class Input extends Component {
               />
             <div className={classes.Buttons}>
               <div 
-                className={classes.Button + ' ' + classes.Negative}
+                className={classes.Button}
                 onClick={this.props.onFail}
               >
                 <div className={classes.ButtonLabel}>
@@ -98,7 +100,7 @@ class Input extends Component {
               </div>
               <div 
                 className={buttonClasses.join(' ')}
-                onClick={!this.state.valid ? this.invalidClick : () => this.props.onSuccess(this.state.value)}
+                onClick={!this.state.valid || !this.state.value.length ? this.invalidClick : () => this.props.onSuccess(this.state.value)}
               >
                 <div className={classes.ButtonLabel}>
                   {this.props.successLabel}
