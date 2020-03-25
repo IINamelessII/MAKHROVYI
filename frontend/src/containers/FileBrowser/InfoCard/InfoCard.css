@@ -46,14 +46,16 @@
     cursor: pointer;
     padding: 2px 18px 7px;
     border-left: 1px solid;
-    border-color: rgba(0, 0, 0, 0);
-    transition: border-color .1s linear,
-        background-color .1s linear;
+    border-color: #00000000;
+    transition: color .1s linear,
+        background-color .1s linear,
+        border-color .1s linear;
 }
 
 .CloseButton:hover {
-    border-color: #bbbbbb;
-    background-color: #00148318
+    border-color: #fff;
+    background-color: aquamarine;
+    color: black;
 }
 
 .Info {
