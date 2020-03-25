@@ -18,13 +18,12 @@ import {baseUrl, rootId} from '../../shared/constants';
 
 class FileBrowser extends Component {
   state = {
-    showFileUpload: false,
     selectedFileHash: parseInt(this.props.match.params.fileHash),
   }
 
   spaceOptions = [
     {"label": "add directory", "action":() => {this.addDirectoryClick()}, "holdBackdrop": true},
-    {"label": "upload files", "action":() => {this.uploadFileClick()}, "holdBackdrop": false},
+    {"label": "upload files", "action":() => {this.uploadFilesClick()}, "holdBackdrop": true},
     {"label": "upload directory", "action":() => {this.uploadDirClick()}, "holdBackdrop": false},
     {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
@@ -73,8 +72,8 @@ class FileBrowser extends Component {
     this.props.onHideBackdrop();
   }
 
-  uploadFileClick = () => {
-    this.setState({showFileUpload: true});
+  uploadFilesClick = () => {
+    this.props.onSetFilesUpload();
   }
 
   uploadDirClick = () => {
@@ -225,7 +224,7 @@ class FileBrowser extends Component {
     }
 
     let filesUploadInput = null;
-    if (this.state.showFileUpload) {
+    if (this.props.showFilesUpload) {
       filesUploadInput = <FilesUploadInput/>
     }
     
@@ -303,6 +302,7 @@ const mapStateToProps = state => {
     showBackdrop: state.fileBrowser.showBackdrop,
     showInfoCard: state.fileBrowser.showInfoCard,
     showNewDir: state.fileBrowser.showNewDir,
+    showFilesUpload: state.fileBrowser.showFilesUpload,
     loading: state.fileBrowser.loading,
     loadingAsync: state.fileBrowser.loadingAsync,
     dirs: state.fileBrowser.dirs,
@@ -322,6 +322,7 @@ const mapDispatchToProps = dispatch => {
     onSetContextMenu: (options) => dispatch(actions.setContextMenu(options)),
     onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)),
     onSetNewDir: () => dispatch(actions.setNewDir()),
+    onSetFilesUpload: () => dispatch(actions.setFilesUpload()),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
     fetchDirs: () => dispatch(actions.fetchDirs()),
     fetchFiles: () => dispatch(actions.fetchFiles()),

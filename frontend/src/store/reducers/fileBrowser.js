@@ -40,6 +40,7 @@ const initialState = {
   showContextMenu: false,
   showInfoCard: false,
   showNewDir: false,
+  showFilesUpload: false,
   position: {x: 0, y: 0},
   contextMenuOptions: [],
   infoCardData: {},
@@ -66,6 +67,7 @@ const hideBackdrop = (state, action) => {
     showContextMenu: false,
     showInfoCard: false,
     showNewDir: false,
+    showFilesUpload: false,
   });
 };
 
@@ -104,6 +106,12 @@ const setNewDir = (state, action) => {
 const hideNewDir = (state, action) => {
   return updateObject(state, {
     showNewDir: false,
+  });
+};
+
+const setFilesUpload = (state, action) => {
+  return updateObject(state, {
+    showFilesUpload: true,
   });
 };
 
@@ -196,11 +204,6 @@ const selectDir = (state, action) => {
       path: path,
       hashPath: hashPathRes,
     };
-
-    // if (data.items.length === 1 && data.hashPath[data.hashPath.length - 1] === action.rootId) {
-    //   console.log(action);
-    //   action.messageFunc();
-    // }
   }
 
   return updateObject(state, data);
@@ -247,6 +250,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.HIDE_INFOCARD: return hideInfoCard(state, action);
     case actionTypes.SET_NEW_DIR: return setNewDir(state, action);
     case actionTypes.HIDE_NEW_DIR: return hideNewDir(state, action);
+    case actionTypes.SET_FILES_UPLOAD: return setFilesUpload(state, action);
     case actionTypes.GET_POSITION: return getPostion(state, action);
     case actionTypes.FETCH_DIRS_START: return fetchDirsStart(state, action);
     case actionTypes.FETCH_DIRS_SUCCESS: return fetchDirsSuccess(state, action);

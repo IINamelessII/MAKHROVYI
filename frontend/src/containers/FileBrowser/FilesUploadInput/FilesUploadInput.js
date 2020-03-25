@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import axios from '../../../axios-fileBrowser';
 
 import classes from './FilesUploadInput.css';
+import * as actions from '../../../store/actions/index';
 
 class FilesUploadInput extends Component {
   state = {
@@ -22,19 +23,24 @@ class FilesUploadInput extends Component {
       headers:{"content-type": 'application/form-data'},
     })
       .then(response => {
-        console.log('Nice!');
         console.log(response);
       })
       .catch(error => {
-        console.log('(((');
         console.log(error);
       });
   }
 
   render() {
     return (
-      <div className={classes.Container}>
-        <div className={classes.FilesUploadInput}>
+      <div 
+        className={classes.Container}
+        onClick={this.props.hideBackdrop}>
+        <div 
+          className={classes.FilesUploadInput}
+          onClick={(e) => {e.stopPropagation()}}>
+          <div 
+            className={classes.CloseButton}
+            onClick={this.props.hideBackdrop}>x</div> 
 
           <form onSubmit={this.uploadFile} ref={this.formRef} enctype="multipart/form-data">
             <input name="file" type="file"/>
@@ -56,4 +62,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(FilesUploadInput);
+const mapDispatchToProps = dispatch => {
+  return {
+    hideBackdrop: () => dispatch(actions.hideBackdrop()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilesUploadInput);

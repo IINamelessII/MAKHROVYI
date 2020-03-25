@@ -7,6 +7,7 @@ export {
   hideInfoCard,
   setNewDir,
   hideNewDir,
+  setFilesUpload,
   getPostion,
   fetchDirs,
   fetchFiles,

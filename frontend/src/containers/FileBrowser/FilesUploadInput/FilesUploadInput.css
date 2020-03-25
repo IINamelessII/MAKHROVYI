@@ -13,8 +13,12 @@
 .FilesUploadInput {
     z-index: 2;
     height: 600px;
-    width: 40px;
+    width: 400px;
     background-color: #7f92ff0a;
     border: 1px solid #bbbbbb;
     color: #fff;
+}
+
+.CloseButton {
+    cursor: pointer;
 }
