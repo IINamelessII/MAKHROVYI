@@ -4,6 +4,7 @@ import axios from '../../../axios-fileBrowser';
 
 import classes from './FilesUploadInput.css';
 import * as actions from '../../../store/actions/index';
+import {maxUplodSize, maxUploadSizeLabel} from '../../../shared/constants';
 
 class FilesUploadInput extends Component {
   state = {
@@ -40,8 +41,15 @@ class FilesUploadInput extends Component {
   onInputChangeHandler = () => {
     const files = [...this.state.files];
     const fileNames = files.map(file => file.name);
-    const newFiles = files.concat(Array.from(document.getElementById('SelectFiles').files).filter(it => !fileNames.includes(it.name)));
-    this.setState({files: newFiles});
+    const newFiles = Array.from(document.getElementById('SelectFiles').files).filter(it => !fileNames.includes(it.name));
+
+    const removeFile = (name, index) => {
+      newFiles.splice(index, 1);
+      this.props.addMessage('File ' + name + ' won\'t be uploaded, its size more than ' + maxUploadSizeLabel);
+    }
+
+    newFiles.map((file, idx) => file.size > maxUplodSize ? removeFile(file.name, idx) : null);
+    this.setState({files: files.concat(newFiles)});
   }
 
   removeFile = (index) => {
@@ -117,6 +125,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     hideBackdrop: () => dispatch(actions.hideBackdrop()),
+    addMessage: (msg) => dispatch(actions.addMessage(msg)),
   };
 };
 
