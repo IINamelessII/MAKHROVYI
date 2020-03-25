@@ -90,11 +90,29 @@
 
 .Buttons {
     display: flex;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
-.Buttons > * {
+.Buttons div {
     text-transform: uppercase;
     cursor: pointer;
+    border: 1px solid #fff;
+    height: 40px;
+    width: 140px;
+    font-size: 24px;
+
+    display: flex;
+    justify-content: center;
+    padding-top: 2px;
+
+    transition: background-color .1s linear,
+        color .1s linear;
+}
+
+.Buttons div:hover {
+    background-color: aquamarine;
+    color: black;
 }
 
 .FileItem {
@@ -120,8 +138,18 @@
 
 .RemoveFileButton {
     cursor: pointer;
+    transition: color .1s linear,
+        font-weight .1s linear;
 }
 
 .RemoveFileButton:hover {
     color: red;
+    font-weight: 700;
+}
+
+.Holder {
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+    font-size: 20px;
 }

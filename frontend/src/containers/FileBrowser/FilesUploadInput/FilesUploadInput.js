@@ -55,7 +55,7 @@ class FilesUploadInput extends Component {
   }
 
   render() {
-    let filesList = <div>Please Select Files Above</div>;
+    let filesList = <div className={classes.Holder}>Please Select Files Above</div>;
 
     if (this.state.files.length) {
       filesList = this.state.files.map((file, index) => {
@@ -96,8 +96,8 @@ class FilesUploadInput extends Component {
           
           <div className={classes.FileList}>{filesList}</div>
           <div className={classes.Buttons}>
-            <div onClick={() => this.formRef.current.dispatchEvent(new Event("submit"))}>send</div>
             <div onClick={this.props.hideBackdrop}>cancel</div>
+            <div onClick={() => this.formRef.current.dispatchEvent(new Event("submit"))}>upload</div>
           </div>
 
           <div></div>
