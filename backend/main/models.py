@@ -89,9 +89,9 @@ class Dir(models.Model):
         parent_dir = self.objects.get(pk=parent_dir_id)
         existing_names = list(map(lambda x: x.name.lower(), parent_dir.dirs.all()))
         if len(name) > 30 or name.lower() in existing_names:
-            name_with_token = name[:22] + token_urlsafe()[:8]
+            name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             while name_with_token.lower() in existing_names:
-                name_with_token = name[:22] + token_urlsafe()[:8]
+                name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             add_message(f'Directory name was changed to {name_with_token}')
             return name_with_token
         return name
@@ -167,9 +167,9 @@ class File(models.Model):
         parent_dir = Dir.objects.get(pk=parent_dir_id)
         existing_names = list(map(lambda x: x.name.lower(), parent_dir.files.all()))
         if len(name) > 30 or name.lower() in existing_names:
-            name_with_token = name[:22] + token_urlsafe()[:8]
+            name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             while name_with_token.lower() in existing_names:
-                name_with_token = name[:22] + token_urlsafe()[:8]
+                name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             add_message(f'File name was changed to {name_with_token}')
             return name_with_token
         return name
