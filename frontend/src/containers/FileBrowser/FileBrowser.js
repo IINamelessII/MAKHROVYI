@@ -64,7 +64,7 @@ class FileBrowser extends Component {
       value: value,
     })
       .then(response => {
-        this.componentDidMount();
+        this.rerender();
       })
       .catch(error => {
         console.log(error);
@@ -103,7 +103,7 @@ class FileBrowser extends Component {
     })
       .then(response => {
         this.uploadDirInputRef.current.value = null;
-        this.componentDidMount();
+        this.rerender();
       })
       .catch(error => {
         this.uploadDirInputRef.current.value = null;
@@ -135,6 +135,15 @@ class FileBrowser extends Component {
     document.execCommand('copy');
 
     this.props.addMessage('Link was successfully copied to clipboard.');
+  }
+
+  rerender = () => {
+    this.props.prepareStructure(
+      rootId, 
+      this.props.match.params.dirHash, 
+      this.props.match.params.fileHash
+    );
+    this.props.loadMessages();
   }
 
   componentDidMount() {
@@ -225,7 +234,7 @@ class FileBrowser extends Component {
 
     let filesUploadInput = null;
     if (this.props.showFilesUpload) {
-      filesUploadInput = <FilesUploadInput/>
+      filesUploadInput = <FilesUploadInput rerender={this.rerender}/>
     }
     
     const lastItems = this.props.items[this.props.items.length - 1];

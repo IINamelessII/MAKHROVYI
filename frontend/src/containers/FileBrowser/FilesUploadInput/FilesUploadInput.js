@@ -23,10 +23,12 @@ class FilesUploadInput extends Component {
       headers:{"content-type": 'application/form-data'},
     })
       .then(response => {
-        console.log(response);
+        this.props.rerender();
+        this.props.hideBackdrop();
       })
       .catch(error => {
         console.log(error);
+        this.props.hideBackdrop();
       });
   }
 
