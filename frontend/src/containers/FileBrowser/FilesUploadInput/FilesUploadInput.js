@@ -8,11 +8,12 @@ import * as actions from '../../../store/actions/index';
 class FilesUploadInput extends Component {
   state = {
     uploading: false,
+    files: [],
   }
 
   formRef = React.createRef()
 
-  uploadFile = (event) => {
+  uploadFiles = (event) => {
     event.preventDefault();
     const data = new FormData(this.formRef.current);
     const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
@@ -32,7 +33,35 @@ class FilesUploadInput extends Component {
       });
   }
 
+  onInputChangeHandler = () => {
+    //Handle copys, allow only unique files, connect messages
+    const files = [...this.state.files];
+    this.setState({files: files.concat(Array.from(document.getElementById('SelectFiles').files))});
+  }
+
+  removeFile = (index) => {
+    const files = [...this.state.files];
+    files.splice(index, 1);
+    this.setState({files: files});
+  }
+
   render() {
+    let filesList = <div>Please Select Files</div>;
+
+    if (this.state.files.length) {
+      filesList = this.state.files.map((file, index) => {
+        return (
+          <div className={classes.FileItem} key={index}>
+            <div className={classes.FileName}>{file.name}</div>
+            <div className={classes.FileSize}>{file.size}</div>
+            <div 
+              className={classes.RemoveFileButton}
+              onClick={() => this.removeFile(index)}>x</div>
+          </div>
+        );
+      });
+    }
+    
     return (
       <div 
         className={classes.Container}
@@ -44,9 +73,17 @@ class FilesUploadInput extends Component {
             className={classes.CloseButton}
             onClick={this.props.hideBackdrop}>x</div> 
 
-          <form onSubmit={this.uploadFile} ref={this.formRef} enctype="multipart/form-data">
-            <input name="file" type="file"/>
+          <form onSubmit={this.uploadFiles} ref={this.formRef} encType="multipart/form-data">
+            <input 
+              type='file'
+              multiple={true}
+              name='file'
+              id="SelectFiles"
+              onChange={this.onInputChangeHandler}/>
           </form>
+
+          <div className={classes.FileList}>{filesList}</div>
+
           <div
             onClick={() => this.formRef.current.dispatchEvent(new Event("submit"))}>
             SEND
