@@ -2,17 +2,18 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from '../../../axios-fileBrowser';
 
-import classes from './FileUploadInput.css';
+import classes from './FilesUploadInput.css';
 
-class FileUploadInput extends Component {
+class FilesUploadInput extends Component {
   state = {
     uploading: false,
-    formRef: React.createRef(),
   }
+
+  formRef = React.createRef()
 
   uploadFile = (event) => {
     event.preventDefault();
-    const data = new FormData(this.state.formRef.current);
+    const data = new FormData(this.formRef.current);
     const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     axios({
       method: 'post',
@@ -32,13 +33,17 @@ class FileUploadInput extends Component {
 
   render() {
     return (
-      <div className={classes.FileUploadInput}>
-        <form onSubmit={this.uploadFile} ref={this.state.formRef} enctype="multipart/form-data">
-          <input name="file" type="file"/>
-        </form>
-        <div
-          onClick={() => this.state.formRef.current.dispatchEvent(new Event("submit"))}>
-          SEND
+      <div className={classes.Container}>
+        <div className={classes.FilesUploadInput}>
+
+          <form onSubmit={this.uploadFile} ref={this.formRef} enctype="multipart/form-data">
+            <input name="file" type="file"/>
+          </form>
+          <div
+            onClick={() => this.formRef.current.dispatchEvent(new Event("submit"))}>
+            SEND
+          </div>
+
         </div>
       </div>
     );
@@ -51,4 +56,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(FileUploadInput);
+export default connect(mapStateToProps)(FilesUploadInput);

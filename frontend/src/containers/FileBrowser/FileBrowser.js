@@ -9,7 +9,7 @@ import PathPart from './PathPart/PathPart';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/Spinner/Spinner';
 import InfoCard from './InfoCard/InfoCard';
-import FileUploadInput from './FileUploadInput/FileUploadInput';
+import FilesUploadInput from './FilesUploadInput/FilesUploadInput';
 import Input from '../Input/Input';
 
 import classes from './FileBrowser.css';
@@ -24,7 +24,7 @@ class FileBrowser extends Component {
 
   spaceOptions = [
     {"label": "add directory", "action":() => {this.addDirectoryClick()}, "holdBackdrop": true},
-    {"label": "upload file", "action":() => {this.uploadFileClick()}, "holdBackdrop": false},
+    {"label": "upload files", "action":() => {this.uploadFileClick()}, "holdBackdrop": false},
     {"label": "upload directory", "action":() => {this.uploadDirClick()}, "holdBackdrop": false},
     {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
@@ -224,9 +224,9 @@ class FileBrowser extends Component {
       infocard = <InfoCard/>;
     }
 
-    let fileUploadInput = null;
+    let filesUploadInput = null;
     if (this.state.showFileUpload) {
-      fileUploadInput = <FileUploadInput/>
+      filesUploadInput = <FilesUploadInput/>
     }
     
     const lastItems = this.props.items[this.props.items.length - 1];
@@ -284,7 +284,7 @@ class FileBrowser extends Component {
         </div>
         {infocard}
         {addNewDir}
-        {fileUploadInput}
+        {filesUploadInput}
         {dirUpload}
         <input
           type="text"
