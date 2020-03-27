@@ -24,6 +24,15 @@ class Dir(models.Model):
 
     def __str__(self):
         return '#{} {}'.format(self.id, self.name)
+ 
+    def safe_delete(user):
+        if self.owner == user:
+            self.delete()
+    
+    def safe_rename(user, name, parent_dir_id, add_message):
+        if self.owner == user:
+            self.name = self.correct_name(name, parent_dir_id, add_message)
+            self.save()
 
     def inc_download(self):
         Dir.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)

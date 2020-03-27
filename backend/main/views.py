@@ -138,3 +138,20 @@ def upload_dir(request, id):
     except:
         return HttpResponse(status=401)
     return HttpResponse(status=200)
+
+
+@post_only
+@login_required
+@load_data('id')
+def remove_dir(request, data):
+    """Removing directory if its requested by its owner"""
+    Dir.objects.get(pk=data['id']).safe_delete(request.user)
+    return HttpResponse(status=200)
+
+
+@post_only
+@login_required
+@load_data('id', 'dirId', 'name')
+def rename_dir(request, data):
+    Dir.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'] lambda msg: add_message_to_session(request, msg))
+    return HttpResponse(status=200)
