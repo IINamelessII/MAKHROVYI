@@ -176,6 +176,17 @@ class File(models.Model):
     def inc_download(self):
         File.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
 
+    def safe_delete(self, user, add_message):
+        if self.owner == user:
+            self.delete()
+            add_message(f'File {self.full_name} was removed')
+    
+    def safe_rename(self, user, name, parent_dir_id, add_message):
+        if self.owner == user:
+            self.name = self.correct_name(name, parent_dir_id, add_message)
+            self.save()
+            add_message(f'File was renamed to {self.full_name}')
+
     @classmethod
     def correct_name(self, name, parent_dir_id, add_message, ext):
         """Correcting for creating new record anyway"""

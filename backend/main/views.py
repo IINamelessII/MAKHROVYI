@@ -155,3 +155,20 @@ def remove_dir(request, data):
 def rename_dir(request, data):
     Dir.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'], lambda msg: add_message_to_session(request, msg))
     return HttpResponse(status=200)
+
+
+@post_only
+@login_required
+@load_data('id')
+def remove_file(request, data):
+    """Removing file if its requested by its owner"""
+    File.objects.get(pk=data['id']).safe_delete(request.user, lambda msg: add_message_to_session(request, msg))
+    return HttpResponse(status=200)
+
+
+@post_only
+@login_required
+@load_data('id', 'dirId', 'name')
+def rename_file(request, data):
+    File.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'], lambda msg: add_message_to_session(request, msg))
+    return HttpResponse(status=200)

@@ -20,4 +20,6 @@ urlpatterns = [
     path('user_data/', views.user_data, name='user_data'),
     path('remove_dir/', views.remove_dir, name='remove_dir'),
     path('rename_dir/', views.rename_dir, name='rename_dir'),
+    path('remove_file/', views.remove_file, name='remove_file'),
+    path('rename_file/', views.rename_file, name='rename_file'),
 ]
