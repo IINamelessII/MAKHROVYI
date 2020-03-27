@@ -23,3 +23,9 @@ export {
   loadMessages,
   unsetMessage,
 } from './messages';
+
+export {
+  login,
+  logout,
+  loadUserData,
+} from './auth';

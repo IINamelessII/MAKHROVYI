@@ -49,7 +49,7 @@ def messages(request):
     return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
 
 
-def user_info(request):
+def user_data(request):
     if hasattr(request.user, 'socialaccount_set'):
         data = {
             'name': request.user.socialaccount_set.all()[0].extra_data['name'],

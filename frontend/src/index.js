@@ -11,12 +11,14 @@ import * as serviceWorker from './serviceWorker';
 
 import fileBrowserReducer from './store/reducers/fileBrowser';
 import messagesReducer from './store/reducers/messages';
+import authReducer from './store/reducers/auth';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
   fileBrowser: fileBrowserReducer,
   messages: messagesReducer,
+  auth: authReducer,
 });
 
 const store = createStore(rootReducer, composeEnhancers(
