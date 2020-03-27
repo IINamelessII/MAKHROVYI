@@ -25,14 +25,16 @@ class Dir(models.Model):
     def __str__(self):
         return '#{} {}'.format(self.id, self.name)
  
-    def safe_delete(self, user):
+    def safe_delete(self, user, add_message):
         if self.owner == user:
             self.delete()
+            add_message(f'Directory {self.name} was removed')
     
     def safe_rename(self, user, name, parent_dir_id, add_message):
         if self.owner == user:
             self.name = self.correct_name(name, parent_dir_id, add_message)
             self.save()
+            add_message(f'Directory was renamed to {self.name}')
 
     def inc_download(self):
         Dir.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)

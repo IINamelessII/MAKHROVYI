@@ -145,7 +145,7 @@ def upload_dir(request, id):
 @load_data('id')
 def remove_dir(request, data):
     """Removing directory if its requested by its owner"""
-    Dir.objects.get(pk=data['id']).safe_delete(request.user)
+    Dir.objects.get(pk=data['id']).safe_delete(request.user, lambda msg: add_message_to_session(request, msg))
     return HttpResponse(status=200)
 
 
