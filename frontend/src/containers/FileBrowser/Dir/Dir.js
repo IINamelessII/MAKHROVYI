@@ -46,7 +46,7 @@ class Dir extends Component {
   }
 
   removeClick = () => {
-
+    this.props.remove();
   }
 
   propertiesClick = () => {

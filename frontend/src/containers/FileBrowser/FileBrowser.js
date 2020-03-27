@@ -94,6 +94,16 @@ class FileBrowser extends Component {
     this.props.onHideBackdrop();
   }
 
+  removeDir = (hash) => {
+    axios.post('/remove_dir/', {id: parseInt(hash)})
+      .then(response => {
+        this.rerender();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   uploadFilesClick = () => {
     this.props.onSetFilesUpload();
   }
@@ -221,7 +231,8 @@ class FileBrowser extends Component {
               open={() => this.openDir(item[1].content, item[0], item[1].name)}
               showContextMenu={this.showContextMenu}
               info={item[1]}
-              rename={() => this.renameDirClick(item[0])} />
+              rename={() => this.renameDirClick(item[0])}
+              remove={() => this.removeDir(item[0])} />
             );
         });
 
