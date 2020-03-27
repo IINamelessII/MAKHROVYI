@@ -16,6 +16,6 @@ urlpatterns = [
     path('newdir/', views.add_new_dir, name='add_new_dir'),
     path('upload_dir/<int:id>/', views.upload_dir, name='upload_dir'),
     path('messages/', views.messages, name='messages'),
-    path('unset_message/<int:key>/', views.unset_message, name='unset_message'),
+    path('unset_message/', views.unset_message, name='unset_message'),
     path('user_data/', views.user_data, name='user_data'),
 ]

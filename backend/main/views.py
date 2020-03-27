@@ -31,7 +31,6 @@ class FileViewSet(viewsets.ModelViewSet):
     permission_classes = (IsReadOnly,)
 
 
-#TODO: rewrite to use POST only (for security purposes)
 def add_message_to_session(request, message):
     i = 0
 
@@ -61,10 +60,11 @@ def user_data(request):
     return HttpResponse(json.dumps(data), status=200)
 
 
-#TODO: rewrite to use POST only (for security purposes)
-def unset_message(request, key):
+@post_only
+@load_data('key')
+def unset_message(request, data):
     request.session.modified = True
-    del request.session['messages'][str(key)]
+    del request.session['messages'][str(data['key'])]
     return HttpResponse(status=200)
 
 
