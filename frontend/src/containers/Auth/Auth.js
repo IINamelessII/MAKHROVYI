@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import * as actions from '../../store/actions/index';
 import classes from './Auth.css';
+import anonImage from '../../assets/images/anon64-2.png';
 
 class Auth extends Component {
 
@@ -29,7 +30,13 @@ class Auth extends Component {
 
   render() {
     let auth = (
-      <div className={classes.SignIn} onClick={this.onSignInClickHandler}>sign in</div>
+      <div className={classes.Container}>
+          <div className={classes.Photo}>
+            <img src={anonImage} alt="" />
+            <div className={classes.Name}>Anonymous</div>
+          </div>
+          <div className={classes.SignIn} onClick={this.onSignInClickHandler}>sign in</div>
+        </div>
     );
 
     if (this.props.userData) {

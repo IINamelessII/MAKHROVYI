@@ -1,5 +1,4 @@
 .Auth {
-    /* color: red; */
     color: white;
 }
 
@@ -44,6 +43,8 @@
 .Photo img {
     height: 64px;
     width: 64px;
+    background-size: cover;
+    -webkit-background-size: cover;
     border: 1px solid #fff;
     border-radius: 32px;
     cursor: url('../../assets/images/heart.png');
