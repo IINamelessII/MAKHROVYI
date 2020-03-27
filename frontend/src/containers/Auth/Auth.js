@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-// import {Redirect} from 'react-router-dom';
 
 import * as actions from '../../store/actions/index';
 import classes from './Auth.css';
 
 class Auth extends Component {
-  // state = {
-  //   redirect: false,
-  // }
 
   componentDidMount() {
     this.props.loadUserData();
@@ -35,28 +31,30 @@ class Auth extends Component {
     let auth = (
       <div className={classes.SignIn} onClick={this.onSignInClickHandler}>sign in</div>
     );
-    if (this.props.userData) {
+    if (this.props.userData || 1 > 0) {//DEV ONLY
+      // auth = (
+      //   <div className={classes.Container}>
+      //     <div className={classes.Name}>{this.props.userData.name}</div>
+      //     <div className={classes.Photo}>
+      //       <img src={this.props.userData.photo} alt="" />
+      //     </div>
+      //     <div className={classes.SignOut} onClick={this.props.logout}>sign out</div>
+      //   </div>
+      // );
       auth = (
         <div className={classes.Container}>
-          <div className={classes.Name}>{this.props.userData.name}</div>
           <div className={classes.Photo}>
-            <img src={this.props.userData.photo} alt="" />
+            <img src="http://images5.fanpop.com/image/photos/31000000/haters-gonna-hate-random-31076705-550-413.jpg" alt="" />
+            <div className={classes.Name}>Just Nitro</div>
           </div>
           <div className={classes.SignOut} onClick={this.props.logout}>sign out</div>
         </div>
       );
     }
 
-    // let redirect = null;
-    // if (this.state.redirect) {
-    //   redirect = <Redirect to="/accounts/google/login/" />;
-    // }
-    // console.log(this.state.redirect);
-
     return (
       <div className={classes.Auth}>
         {auth}
-        <a id="redirect" href="/accounts/google/login/" style={{display: 'none'}} />
       </div>
     );
   }

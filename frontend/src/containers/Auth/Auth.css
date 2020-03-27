@@ -1,3 +1,73 @@
 .Auth {
-    color: red;
+    /* color: red; */
+    color: white;
+}
+
+.Container {
+    display: flex;
+    position: relative;
+}
+
+.SignIn, .SignOut {
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 28px;
+
+    transition: color .1s linear;
+
+    position: relative;
+}
+
+.SignIn:hover, .SignOut:hover {
+    color: aquamarine;
+}
+
+.SignIn::after, .SignOut::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: aquamarine;
+    
+    opacity: 0;
+    transition: opacity .1s linear;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.SignIn:hover::after, .SignOut:hover::after {
+    opacity: 1;
+}
+
+.Photo img {
+    height: 64px;
+    width: 64px;
+    border: 1px solid #fff;
+    border-radius: 32px;
+    cursor: url('../../assets/images/heart.png');
+}
+
+.Photo {
+    position: absolute;
+    top: -15px;
+    left: 147px;
+}
+
+.Name {
+    position: absolute;
+    top: 69px;
+    left: 0;
+    opacity: 0;
+    transition: opacity .1s linear;
+
+    width: 64px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.Photo:hover .Name {
+    opacity: 1;
 }
