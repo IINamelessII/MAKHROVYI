@@ -2,12 +2,11 @@ import json
 import os
 import shutil
 import time
-# import zipfile
 from secrets import token_urlsafe
 
 from django.conf import settings
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework import viewsets
 
 from main.decorators import load_data, post_only
@@ -121,4 +120,16 @@ def upload_dir(request, id):
     Dir.upload(request.FILES.getlist('file'), json.load(request.FILES['relPaths'].file), id, lambda msg: add_message_to_session(request, msg))
     # except:
     #     return HttpResponse(status=401)
+    return HttpResponse(status=200)
+
+
+# def login(request):
+#     return redirect('/accounts/google/login/')
+
+
+def user_info(request):
+    print(request.user.id)
+    print(request.user.socialaccount_set.all()[0].extra_data['name'])
+    print(request.user.socialaccount_set.all()[0].uid)
+    print(request.user.socialaccount_set.all()[0].extra_data['picture'])
     return HttpResponse(status=200)

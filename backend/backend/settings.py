@@ -58,14 +58,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    # 'django.contrib.sites.models.Site',
+
+    #3rd party apps
     'rest_framework',
-    'main',
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.instagram',
+    
+    #my apps
+    'main',
 ]
 
 SITE_ID = 1
@@ -160,6 +163,9 @@ USE_TZ = True
 TIME_TO_DELETE = 3600
 
 AUTH_USER_MODEL = 'main.User'
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
 
 try:
     from .local_settings import *
