@@ -78,6 +78,11 @@ class FileBrowser extends Component {
     this.props.onSetRenameDir();
   }
 
+  renameFileClick = (hash) => {
+    this.setState({selectedFileHash: hash});
+    this.props.onSetRenameFile();
+  }
+
   renameDir = (value) => {
     const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     axios.post('/rename_dir/', {
@@ -94,8 +99,34 @@ class FileBrowser extends Component {
     this.props.onHideBackdrop();
   }
 
+  renameFile = (value) => {
+    const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
+    axios.post('/rename_file/', {
+      dirId: dirId,
+      name: value,
+      id: parseInt(this.state.selectedFileHash),
+    })
+      .then(response => {
+        this.rerender();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    this.props.onHideBackdrop();
+  }
+
   removeDir = (hash) => {
     axios.post('/remove_dir/', {id: parseInt(hash)})
+      .then(response => {
+        this.rerender();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  removeFile = (hash) => {
+    axios.post('/remove_file/', {id: parseInt(hash)})
       .then(response => {
         this.rerender();
       })
@@ -222,7 +253,9 @@ class FileBrowser extends Component {
               showContextMenu={this.showContextMenu}
               info={item[1]}
               selected={this.state.selectedFileHash === parseInt(item[0])}
-              redirectToDir={redirectToDir} />
+              redirectToDir={redirectToDir}
+              rename={() => this.renameFileClick(item[0])}
+              remove={() => this.removeFile(item[0])} />
             ) : (
             <Dir
               key={item[0]}
@@ -317,6 +350,29 @@ class FileBrowser extends Component {
       );
     }
 
+    let renameFile = null;
+    if (this.props.showRenameFile) {
+      const selectedExt = lastItems[this.state.selectedFileHash].ext;
+      const fileNames = Object.values(lastItems).filter(item => item.type === 'file' && item.ext === selectedExt).map((item) => item.name.toLowerCase());
+
+      renameFile = (
+        <Input
+          label="Rename File"
+          failLabel="cancel"
+          successLabel="rename"
+          onFail={this.props.onHideBackdrop}
+          onSuccess={(value) => this.renameFile(value)}
+          onContainerClick={this.props.onHideBackdrop}
+          validation={{
+            length: 30,
+            blackList: {
+              values: fileNames,
+              message: 'A file with that name already exists',
+            },
+          }}/>
+      );
+    }
+
     const dirUpload = (
       <form
         style={{display: 'none'}}
@@ -349,6 +405,7 @@ class FileBrowser extends Component {
         {filesUploadInput}
         {dirUpload}
         {renameDir}
+        {renameFile}
         <input
           type="text"
           id={'dir-link'}
@@ -368,6 +425,7 @@ const mapStateToProps = state => {
     showNewDir: state.fileBrowser.showNewDir,
     showFilesUpload: state.fileBrowser.showFilesUpload,
     showRenameDir: state.fileBrowser.showRenameDir,
+    showRenameFile: state.fileBrowser.showRenameFile,
     loading: state.fileBrowser.loading,
     loadingAsync: state.fileBrowser.loadingAsync,
     dirs: state.fileBrowser.dirs,
@@ -389,6 +447,7 @@ const mapDispatchToProps = dispatch => {
     onSetNewDir: () => dispatch(actions.setNewDir()),
     onSetFilesUpload: () => dispatch(actions.setFilesUpload()),
     onSetRenameDir: () => dispatch(actions.setRenameDir()),
+    onSetRenameFile: () => dispatch(actions.setRenameFile()),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
     fetchDirs: () => dispatch(actions.fetchDirs()),
     fetchFiles: () => dispatch(actions.fetchFiles()),

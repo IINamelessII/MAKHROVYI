@@ -71,6 +71,7 @@ const hideBackdrop = (state, action) => {
     showNewDir: false,
     showFilesUpload: false,
     showRenameDir: false,
+    showRenameFile: false,
   });
 };
 

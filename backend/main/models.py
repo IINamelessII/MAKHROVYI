@@ -183,7 +183,7 @@ class File(models.Model):
     
     def safe_rename(self, user, name, parent_dir_id, add_message):
         if self.owner == user:
-            self.name = self.correct_name(name, parent_dir_id, add_message)
+            self.name = self.correct_name(name, parent_dir_id, add_message, self.ext)
             self.save()
             add_message(f'File was renamed to {self.full_name}')
 

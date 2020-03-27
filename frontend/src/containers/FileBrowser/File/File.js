@@ -22,6 +22,8 @@ class File extends Component {
   fileOptions = [
     {"label": "download", "action": () => {this.downloadClick()}, "holdBackdrop": false},
     {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
+    {"label": "rename", "action": () => {this.renameClick()}, "holdBackdrop": true},
+    {"label": "remove", "action": () => {this.removeClick()}, "holdBackdrop": false},
     {"label": "properties", "action": () => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
@@ -42,6 +44,14 @@ class File extends Component {
         //TODO: Add Message
         console.log(error);
       });
+  }
+
+  renameClick = () => {
+    this.props.rename();
+  }
+
+  removeClick = () => {
+    this.props.remove();
   }
 
   propertiesClick = () => {
