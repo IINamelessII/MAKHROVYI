@@ -17,13 +17,14 @@ class Dir extends Component {
     {"label": "open", "action":() => {this.props.open()}, "holdBackdrop": false},
     {"label": "download", "action":() => {this.downloadClick()}, "holdBackdrop": false},
     {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
+    {"label": "rename", "action": () => {this.renameClick()}, "holdBackdrop": true},
+    {"label": "remove", "action": () => {this.removeClick()}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
   downloadClick = () => {
     axios.post('/archive/', {id: parseInt(this.props.id)})
       .then(response => {
-        //TODO: Add Message
         const a = document.createElement('a');
         a.style.display = 'none';
         a.href = response.data;
@@ -36,9 +37,16 @@ class Dir extends Component {
         axios.post('/archive_received/', {token: token});
       })
       .catch(error => {
-        //TODO: Add Message
-        alert("Oooops, O_o Please, try again");
+        console.log(error);
       });
+  }
+
+  renameClick = () => {
+    this.props.rename();
+  }
+
+  removeClick = () => {
+
   }
 
   propertiesClick = () => {

@@ -25,11 +25,11 @@ class Dir(models.Model):
     def __str__(self):
         return '#{} {}'.format(self.id, self.name)
  
-    def safe_delete(user):
+    def safe_delete(self, user):
         if self.owner == user:
             self.delete()
     
-    def safe_rename(user, name, parent_dir_id, add_message):
+    def safe_rename(self, user, name, parent_dir_id, add_message):
         if self.owner == user:
             self.name = self.correct_name(name, parent_dir_id, add_message)
             self.save()

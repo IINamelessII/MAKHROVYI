@@ -153,5 +153,5 @@ def remove_dir(request, data):
 @login_required
 @load_data('id', 'dirId', 'name')
 def rename_dir(request, data):
-    Dir.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'] lambda msg: add_message_to_session(request, msg))
+    Dir.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'], lambda msg: add_message_to_session(request, msg))
     return HttpResponse(status=200)

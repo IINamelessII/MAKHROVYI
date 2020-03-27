@@ -19,6 +19,7 @@ import {baseUrl, rootId} from '../../shared/constants';
 class FileBrowser extends Component {
   state = {
     selectedFileHash: parseInt(this.props.match.params.fileHash),
+    selectedDirHash: null,
   }
 
   spaceOptions = [
@@ -62,6 +63,27 @@ class FileBrowser extends Component {
     axios.post('/newdir/', {
       dirId: dirId,
       value: value,
+    })
+      .then(response => {
+        this.rerender();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    this.props.onHideBackdrop();
+  }
+
+  renameDirClick = (hash) => {
+    this.setState({selectedDirHash: hash});
+    this.props.onSetRenameDir();
+  }
+
+  renameDir = (value) => {
+    const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
+    axios.post('/rename_dir/', {
+      dirId: dirId,
+      name: value,
+      id: parseInt(this.state.selectedDirHash),
     })
       .then(response => {
         this.rerender();
@@ -198,7 +220,8 @@ class FileBrowser extends Component {
               name={item[1].name}
               open={() => this.openDir(item[1].content, item[0], item[1].name)}
               showContextMenu={this.showContextMenu}
-              info={item[1]} />
+              info={item[1]}
+              rename={() => this.renameDirClick(item[0])} />
             );
         });
 
@@ -263,6 +286,26 @@ class FileBrowser extends Component {
       );
     }
 
+    let renameDir = null;
+    if (this.props.showRenameDir) {
+      renameDir = (
+        <Input
+          label="Rename Directory"
+          failLabel="cancel"
+          successLabel="rename"
+          onFail={this.props.onHideBackdrop}
+          onSuccess={(value) => this.renameDir(value)}
+          onContainerClick={this.props.onHideBackdrop}
+          validation={{
+            length: 30,
+            blackList: {
+              values: dirNames, 
+              message: 'A directory with that name already exists',
+            },
+          }}/>
+      );
+    }
+
     const dirUpload = (
       <form
         style={{display: 'none'}}
@@ -294,6 +337,7 @@ class FileBrowser extends Component {
         {addNewDir}
         {filesUploadInput}
         {dirUpload}
+        {renameDir}
         <input
           type="text"
           id={'dir-link'}
@@ -312,6 +356,7 @@ const mapStateToProps = state => {
     showInfoCard: state.fileBrowser.showInfoCard,
     showNewDir: state.fileBrowser.showNewDir,
     showFilesUpload: state.fileBrowser.showFilesUpload,
+    showRenameDir: state.fileBrowser.showRenameDir,
     loading: state.fileBrowser.loading,
     loadingAsync: state.fileBrowser.loadingAsync,
     dirs: state.fileBrowser.dirs,
@@ -332,6 +377,7 @@ const mapDispatchToProps = dispatch => {
     onSetInfoCard: (data) => dispatch(actions.setInfoCard(data)),
     onSetNewDir: () => dispatch(actions.setNewDir()),
     onSetFilesUpload: () => dispatch(actions.setFilesUpload()),
+    onSetRenameDir: () => dispatch(actions.setRenameDir()),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
     fetchDirs: () => dispatch(actions.fetchDirs()),
     fetchFiles: () => dispatch(actions.fetchFiles()),

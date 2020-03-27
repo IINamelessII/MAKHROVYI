@@ -8,6 +8,7 @@ export {
   setNewDir,
   hideNewDir,
   setFilesUpload,
+  setRenameDir,
   getPostion,
   fetchDirs,
   fetchFiles,

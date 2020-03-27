@@ -58,6 +58,12 @@ export const setFilesUpload = () => {
   };
 };
 
+export const setRenameDir = () => {
+  return {
+    type: actionTypes.SET_RENAME_DIR,
+  };
+};
+
 export const getPostion = (x, y) => {
   return {
     type: actionTypes.GET_POSITION,

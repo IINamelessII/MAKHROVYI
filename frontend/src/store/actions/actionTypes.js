@@ -12,6 +12,8 @@ export const HIDE_NEW_DIR = 'HIDE_NEW_DIR';
 
 export const SET_FILES_UPLOAD = 'SET_FILES_UPLOAD';
 
+export const SET_RENAME_DIR = 'SET_RENAME_DIR';
+
 export const GET_POSITION = 'GET_POSITION';
 
 export const FETCH_DIRS_START = 'FETCH_DIRS_START';
