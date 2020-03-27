@@ -23,7 +23,7 @@ class FileBrowser extends Component {
   }
 
   spaceOptions = [
-    {"label": "add directory", "action":() => {this.addDirectoryClick()}, "holdBackdrop": true},
+    {"label": "create directory", "action":() => {this.addDirectoryClick()}, "holdBackdrop": true},
     {"label": "upload files", "action":() => {this.uploadFilesClick()}, "holdBackdrop": true},
     {"label": "upload directory", "action":() => {this.uploadDirClick()}, "holdBackdrop": false},
     {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
@@ -55,7 +55,11 @@ class FileBrowser extends Component {
   }
 
   addDirectoryClick = () => {
-    this.props.onSetNewDir();
+    if (this.props.userData) {
+      this.props.onSetNewDir();
+    } else {
+      this.props.addMessage('You must be authenticated to create new directory');
+    }
   }
 
   addNewDir = (value) => {
@@ -136,11 +140,19 @@ class FileBrowser extends Component {
   }
 
   uploadFilesClick = () => {
-    this.props.onSetFilesUpload();
+    if (this.props.userData) {
+      this.props.onSetFilesUpload();
+    } else {
+      this.props.addMessage('You must be authenticated to upload files');
+    }
   }
 
   uploadDirClick = () => {
-    this.uploadDirInputRef.current.click();
+    if (this.props.userData) {
+      this.uploadDirInputRef.current.click();
+    } else {
+      this.props.addMessage('You must be authenticated to upload directory with files');
+    }
   }
 
   uploadDir = (event) => {
