@@ -31,21 +31,13 @@ class Auth extends Component {
     let auth = (
       <div className={classes.SignIn} onClick={this.onSignInClickHandler}>sign in</div>
     );
-    if (this.props.userData || 1 > 0) {//DEV ONLY
-      // auth = (
-      //   <div className={classes.Container}>
-      //     <div className={classes.Name}>{this.props.userData.name}</div>
-      //     <div className={classes.Photo}>
-      //       <img src={this.props.userData.photo} alt="" />
-      //     </div>
-      //     <div className={classes.SignOut} onClick={this.props.logout}>sign out</div>
-      //   </div>
-      // );
+
+    if (this.props.userData) {
       auth = (
         <div className={classes.Container}>
           <div className={classes.Photo}>
-            <img src="http://images5.fanpop.com/image/photos/31000000/haters-gonna-hate-random-31076705-550-413.jpg" alt="" />
-            <div className={classes.Name}>Just Nitro</div>
+            <img src={this.props.userData.photo} alt="" />
+            <div className={classes.Name}>{this.props.userData.name}</div>
           </div>
           <div className={classes.SignOut} onClick={this.props.logout}>sign out</div>
         </div>

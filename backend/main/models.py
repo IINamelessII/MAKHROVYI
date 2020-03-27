@@ -180,6 +180,9 @@ class File(models.Model):
             return add_message(f'{the_file.name} wasnt uploaded, its size more than {settings.MAX_UPLOAD_SIZE_LABEL}')
 
         last_dot_index = the_file.name.rfind('.')
+        if len(the_file.name[last_dot_index + 1:]) > 10:
+            return add_message(f'{the_file.name} wasnt uploaded, it has cumbersome extension')
+
         instance = self(
             file=the_file, 
             name=self.correct_name(the_file.name[:last_dot_index], parent_dir_id, add_message, the_file.name[last_dot_index + 1:]),
