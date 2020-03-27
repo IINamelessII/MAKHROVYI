@@ -56,7 +56,7 @@ class Dir extends Component {
   copyLinkClick = () => {
     const copyText = document.getElementById('dir-link' + this.props.id);
     copyText.focus();
-    copyText.select();
+    // copyText.select();
     copyText.setSelectionRange(0, 99999); //For Mobile Devices
     document.execCommand('copy');
 

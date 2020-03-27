@@ -6,13 +6,17 @@ import * as actions from '../../store/actions/index';
 
 class Input extends Component {
   state = {
-    value: '',
+    value: this.props.value,
     messages: {},
     valid: true,
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.messages !== nextState.messages || this.state.value !== nextState.value;
+  }
+
+  componentDidMount() {
+    document.getElementById('input').setSelectionRange(0, 99999); //For Mobile Devices
   }
 
   checkValidation = (newValue) => {
@@ -83,6 +87,7 @@ class Input extends Component {
           <div className={classes.Content}>
             <div></div>
             <input
+              id="input"
               className={inputClasses.join(' ')} 
               type="text"
               onChange={this.onInputChange}

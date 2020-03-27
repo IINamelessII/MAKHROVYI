@@ -326,7 +326,8 @@ class FileBrowser extends Component {
               values: dirNames, 
               message: 'A directory with that name already exists',
             },
-          }}/>
+          }}
+          value=""/>
       );
     }
 
@@ -346,7 +347,8 @@ class FileBrowser extends Component {
               values: dirNames, 
               message: 'A directory with that name already exists',
             },
-          }}/>
+          }}
+          value={lastItems[this.state.selectedDirHash].name}/>
       );
     }
 
@@ -369,7 +371,8 @@ class FileBrowser extends Component {
               values: fileNames,
               message: 'A file with that name already exists',
             },
-          }}/>
+          }}
+          value={lastItems[this.state.selectedFileHash].name}/>
       );
     }
 
