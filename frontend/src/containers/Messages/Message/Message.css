@@ -1,6 +1,6 @@
 .Message {
     height: 100px;
-    width: 300px;
+    width: 400px;
 
     border: 1px solid #ffffff71;
     transition: border .1s linear;
@@ -34,7 +34,7 @@
 
 .Text {
     margin: 0 auto;
-    width: 250px;
+    width: 350px;
     display: flex;
     justify-content: center;
 
