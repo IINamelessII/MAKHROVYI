@@ -15,15 +15,16 @@ class Auth extends Component {
   }
 
   onSignInClickHandler = () => {
-    const wnd = window.open('/accounts/google/login/', 'Sign In', 'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=350');
+    const left = (window.screen.width / 2) - 200;
+    const top = (window.screen.height / 2) - 175; 
+    const wnd = window.open('/accounts/google/login/', 'Sign In', `directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=350,top=${top},left=${left}`);
 
-    //TODO: move window close and client page reloading to the wnd handler instead of using interval
     const interval = setInterval(() => {
       try {
         if (wnd.location.pathname === '/') {
-          console.log('SSS');
           wnd.close();
           clearInterval(interval);
+          window.location.reload();
         }
       } catch (error) {
       }
@@ -32,7 +33,7 @@ class Auth extends Component {
 
   render() {
     let auth = (
-      <div className={classes.SignIn} onClick={this.onSignInClickHandler}>SIGN IN</div>
+      <div className={classes.SignIn} onClick={this.onSignInClickHandler}>sign in</div>
     );
     if (this.props.userData) {
       auth = (
@@ -41,7 +42,7 @@ class Auth extends Component {
           <div className={classes.Photo}>
             <img src={this.props.userData.photo} alt="" />
           </div>
-          <div className={classes.SignOut} onClick={this.props.logout}>SIGN OUT</div>
+          <div className={classes.SignOut} onClick={this.props.logout}>sign out</div>
         </div>
       );
     }
