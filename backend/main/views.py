@@ -30,6 +30,7 @@ class FileViewSet(viewsets.ModelViewSet):
     permission_classes = (IsReadOnly,)
 
 
+#TODO: rewrite to use POST only (for security purposes)
 def add_message_to_session(request, message):
     i = 0
 
@@ -48,6 +49,18 @@ def messages(request):
     return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
 
 
+def user_info(request):
+    if hasattr(request.user, 'socialaccount_set'):
+        data = {
+            'name': request.user.socialaccount_set.all()[0].extra_data['name'],
+            'photo': request.user.socialaccount_set.all()[0].extra_data['picture']
+        }
+    else:
+        data = None
+    return HttpResponse(json.dumps(data), status=200)
+
+
+#TODO: rewrite to use POST only (for security purposes)
 def unset_message(request, key):
     request.session.modified = True
     del request.session['messages'][str(key)]
@@ -123,13 +136,4 @@ def upload_dir(request, id):
     return HttpResponse(status=200)
 
 
-# def login(request):
-#     return redirect('/accounts/google/login/')
-
-
-def user_info(request):
-    print(request.user.id)
-    print(request.user.socialaccount_set.all()[0].extra_data['name'])
-    print(request.user.socialaccount_set.all()[0].uid)
-    print(request.user.socialaccount_set.all()[0].extra_data['picture'])
-    return HttpResponse(status=200)
+#POST to /accounts/logout/
