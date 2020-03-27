@@ -255,7 +255,8 @@ class FileBrowser extends Component {
               selected={this.state.selectedFileHash === parseInt(item[0])}
               redirectToDir={redirectToDir}
               rename={() => this.renameFileClick(item[0])}
-              remove={() => this.removeFile(item[0])} />
+              remove={() => this.removeFile(item[0])}
+              permission={this.props.userData ? (item[1].owner_id === this.props.userData.id) : false} />
             ) : (
             <Dir
               key={item[0]}
@@ -265,7 +266,8 @@ class FileBrowser extends Component {
               showContextMenu={this.showContextMenu}
               info={item[1]}
               rename={() => this.renameDirClick(item[0])}
-              remove={() => this.removeDir(item[0])} />
+              remove={() => this.removeDir(item[0])}
+              permission={this.props.userData ? (item[1].owner_id === this.props.userData.id) : false} />
             );
         });
 
@@ -438,6 +440,7 @@ const mapStateToProps = state => {
     hashPath: state.fileBrowser.hashPath,
     newDirName: state.fileBrowser.newDirName,
     shouldRedirect: state.fileBrowser.shouldRedirect,
+    userData: state.auth.userData,
   };
 };
 

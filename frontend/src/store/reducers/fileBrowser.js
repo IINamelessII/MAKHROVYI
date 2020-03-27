@@ -11,6 +11,7 @@ const parseFile = (files, id) => {
     downloads: file.downloads,
     created_date: file.created_date,
     mmtype: file.mmtype,
+    owner_id: file.owner_id,
   };
 }
 
@@ -32,6 +33,7 @@ const parseDir = (dirs, files, id) => {
     content: content,
     downloads: dir.downloads,
     created_date: dir.created_date,
+    owner_id: dir.owner_id,
   };
 }
 

@@ -53,7 +53,8 @@ def user_data(request):
     if hasattr(request.user, 'socialaccount_set') and len(request.user.socialaccount_set.all()):
         data = {
             'name': request.user.socialaccount_set.all()[0].extra_data['name'],
-            'photo': request.user.socialaccount_set.all()[0].extra_data['picture']
+            'photo': request.user.socialaccount_set.all()[0].extra_data['picture'],
+            'id': request.user.id,
         }
     else:
         data = None

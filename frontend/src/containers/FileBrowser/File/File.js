@@ -19,11 +19,15 @@ class File extends Component {
     this.props.showContextMenu(null, this.fileOptions);
   }
 
-  fileOptions = [
+  fileOptions = this.props.permission ? [
     {"label": "download", "action": () => {this.downloadClick()}, "holdBackdrop": false},
     {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "rename", "action": () => {this.renameClick()}, "holdBackdrop": true},
     {"label": "remove", "action": () => {this.removeClick()}, "holdBackdrop": false},
+    {"label": "properties", "action": () => {this.propertiesClick()}, "holdBackdrop": true},
+  ] : [
+    {"label": "download", "action": () => {this.downloadClick()}, "holdBackdrop": false},
+    {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action": () => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
@@ -61,7 +65,6 @@ class File extends Component {
   copyLinkClick = () => {
     const copyText = document.getElementById('file-link' + this.props.id);
     copyText.focus();
-    // copyText.select();
     copyText.setSelectionRange(0, 99999); //For Mobile Devices
     document.execCommand('copy');
     

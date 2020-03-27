@@ -13,12 +13,17 @@ class Dir extends Component {
     this.props.showContextMenu(null, this.dirOptions);
   }
 
-  dirOptions = [
+  dirOptions = this.props.permission ? [
     {"label": "open", "action":() => {this.props.open()}, "holdBackdrop": false},
     {"label": "download", "action":() => {this.downloadClick()}, "holdBackdrop": false},
     {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "rename", "action": () => {this.renameClick()}, "holdBackdrop": true},
     {"label": "remove", "action": () => {this.removeClick()}, "holdBackdrop": false},
+    {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
+  ] : [
+    {"label": "open", "action":() => {this.props.open()}, "holdBackdrop": false},
+    {"label": "download", "action":() => {this.downloadClick()}, "holdBackdrop": false},
+    {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
   ]
 
@@ -56,7 +61,6 @@ class Dir extends Component {
   copyLinkClick = () => {
     const copyText = document.getElementById('dir-link' + this.props.id);
     copyText.focus();
-    // copyText.select();
     copyText.setSelectionRange(0, 99999); //For Mobile Devices
     document.execCommand('copy');
 
