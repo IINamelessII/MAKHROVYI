@@ -42,6 +42,7 @@ const initialState = {
   showNewDir: false,
   showFilesUpload: false,
   showRenameDir: false,
+  showRenameFile: false,
   position: {x: 0, y: 0},
   contextMenuOptions: [],
   infoCardData: {},
@@ -120,6 +121,12 @@ const setFilesUpload = (state, action) => {
 const setRenameDir = (state, action) => {
   return updateObject(state, {
     showRenameDir: true,
+  });
+};
+
+const setRenameFile = (state, action) => {
+  return updateObject(state, {
+    showRenameFile: true,
   });
 };
 
@@ -260,6 +267,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.HIDE_NEW_DIR: return hideNewDir(state, action);
     case actionTypes.SET_FILES_UPLOAD: return setFilesUpload(state, action);
     case actionTypes.SET_RENAME_DIR: return setRenameDir(state, action);
+    case actionTypes.SET_RENAME_FILE: return setRenameFile(state, action);
     case actionTypes.GET_POSITION: return getPostion(state, action);
     case actionTypes.FETCH_DIRS_START: return fetchDirsStart(state, action);
     case actionTypes.FETCH_DIRS_SUCCESS: return fetchDirsSuccess(state, action);

@@ -64,6 +64,12 @@ export const setRenameDir = () => {
   };
 };
 
+export const setRenameFile = () => {
+  return {
+    type: actionTypes.SET_RENAME_FILE,
+  };
+};
+
 export const getPostion = (x, y) => {
   return {
     type: actionTypes.GET_POSITION,

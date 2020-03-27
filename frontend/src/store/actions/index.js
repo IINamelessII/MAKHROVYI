@@ -9,6 +9,7 @@ export {
   hideNewDir,
   setFilesUpload,
   setRenameDir,
+  setRenameFile,
   getPostion,
   fetchDirs,
   fetchFiles,
