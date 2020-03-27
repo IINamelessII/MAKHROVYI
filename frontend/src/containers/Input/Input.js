@@ -9,6 +9,7 @@ class Input extends Component {
     value: this.props.value,
     messages: {},
     valid: true,
+    wasChanged: false,
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -50,6 +51,7 @@ class Input extends Component {
   onInputChange = (event) => {
     const newValue = event.target.value;
     this.checkValidation(newValue);
+    this.setState({wasChanged: true});
   }
 
   invalidClick = () => {
@@ -68,7 +70,7 @@ class Input extends Component {
     if (!this.state.valid) {
       inputClasses.push(classes.Invalid);
       buttonClasses.push(classes.Disable);
-    } else if (!this.state.value.length) {
+    } else if (!this.state.value.length || !this.state.wasChanged) {
       buttonClasses.push(classes.Disable);
     }
 
@@ -105,7 +107,7 @@ class Input extends Component {
               </div>
               <div 
                 className={buttonClasses.join(' ')}
-                onClick={!this.state.valid || !this.state.value.length ? this.invalidClick : () => this.props.onSuccess(this.state.value)}
+                onClick={(!this.state.valid || !this.state.value.length || !this.state.wasChanged) ? this.invalidClick : () => this.props.onSuccess(this.state.value)}
               >
                 <div className={classes.ButtonLabel}>
                   {this.props.successLabel}

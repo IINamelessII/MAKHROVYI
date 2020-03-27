@@ -32,7 +32,7 @@ class Dir(models.Model):
     
     def safe_rename(self, user, name, parent_dir_id, add_message):
         if self.owner == user:
-            self.name = self.correct_name(name, parent_dir_id, add_message)
+            self.name = self.correct_name(name, parent_dir_id, lambda x: None, self.name) #Func inside args 'disable' messaging inside correct_name
             self.save()
             add_message(f'Directory was renamed to {self.name}')
 
@@ -98,10 +98,10 @@ class Dir(models.Model):
                 parent_dir.dirs.add(self.objects.get(pk=instance.id))
 
     @classmethod
-    def correct_name(self, name, parent_dir_id, add_message):
-        """Correcting name for creating new record anyway"""
+    def correct_name(self, name, parent_dir_id, add_message, exclude=None):
+        """Correcting name"""
         parent_dir = self.objects.get(pk=parent_dir_id)
-        existing_names = list(map(lambda x: x.name.lower(), parent_dir.dirs.all()))
+        existing_names = list(map(lambda x: x.name.lower(), parent_dir.dirs.all().exclude(name=exclude)))
         if len(name) > 30 or name.lower() in existing_names:
             name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             while name_with_token.lower() in existing_names:
@@ -183,15 +183,15 @@ class File(models.Model):
     
     def safe_rename(self, user, name, parent_dir_id, add_message):
         if self.owner == user:
-            self.name = self.correct_name(name, parent_dir_id, add_message, self.ext)
+            self.name = self.correct_name(name, parent_dir_id, self.ext, lambda x: None, self.name) #Func inside args 'disable' messaging inside correct_name
             self.save()
             add_message(f'File was renamed to {self.full_name}')
 
     @classmethod
-    def correct_name(self, name, parent_dir_id, add_message, ext):
-        """Correcting for creating new record anyway"""
+    def correct_name(self, name, parent_dir_id, ext, add_message, exclude=None):
+        """Correcting name"""
         parent_dir = Dir.objects.get(pk=parent_dir_id)
-        existing_names = list(map(lambda x: (x.name + x.ext).lower(), parent_dir.files.all()))
+        existing_names = list(map(lambda x: (x.name + x.ext).lower(), parent_dir.files.all().exclude(name=exclude)))
         if len(name) > 30 or (name + ext).lower() in existing_names:
             name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             while name_with_token.lower() in existing_names:
@@ -211,7 +211,7 @@ class File(models.Model):
 
         instance = self(
             file=the_file, 
-            name=self.correct_name(the_file.name[:last_dot_index], parent_dir_id, add_message, the_file.name[last_dot_index + 1:]),
+            name=self.correct_name(the_file.name[:last_dot_index], parent_dir_id, the_file.name[last_dot_index + 1:], add_message),
             ext=the_file.name[last_dot_index + 1:],
             mmtype=the_file.content_type,
             owner=user
