@@ -9,7 +9,9 @@ from django.utils.timezone import now
 
 
 class User(AbstractUser):
-    pass
+    
+    def __str__(self):
+        return f'#{self.id} {self.username}'
 
 
 class Dir(models.Model):
@@ -18,6 +20,7 @@ class Dir(models.Model):
     files = models.ManyToManyField('File', blank=True)
     downloads = models.IntegerField(default=0)
     created_date = models.DateTimeField(default=now, editable=False)
+    owner = models.ForeignKey('User', related_name='dirs', on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return '#{} {}'.format(self.id, self.name)
@@ -26,7 +29,7 @@ class Dir(models.Model):
         Dir.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
 
     def archieve_token(self):
-        #TODO add oportunity to create zip/tar.xz archives based on archive_type param
+        #TODO add oportunity to create zip/tar.xz/rar archives based on archive_type param
         token = token_urlsafe(16)
         path_with_token = os.path.join(settings.ARCHIVES_ROOT, token)
         while os.path.exists(path_with_token):
@@ -70,7 +73,7 @@ class Dir(models.Model):
         os.remove(archive_path + '.zip')
 
     @classmethod
-    def add_new(self, value, parent_dir_id, add_message):
+    def add_new(self, value, parent_dir_id, user, add_message):
         """Creating new record only if name is valid"""
         if len(value) > 30:
             add_message('Value should be no longer than 30 symbols')
@@ -79,7 +82,7 @@ class Dir(models.Model):
             if value.lower() in list(map(lambda x: x.name.lower(), parent_dir.dirs.all())):
                 add_message('A directory with that name already exists')
             else:
-                instance = self(name=value)
+                instance = self(name=value, owner=user)
                 instance.save()
                 parent_dir.dirs.add(self.objects.get(pk=instance.id))
 
@@ -97,12 +100,12 @@ class Dir(models.Model):
         return name
 
     @classmethod
-    def upload(self, files, relpaths, parent_dir_id, add_message):
+    def upload(self, files, relpaths, parent_dir_id, user, add_message):
         paths = [path.split('/')[:-1] for path in relpaths]
         #file_dir_ids is a list of dir's ids where files located
         file_dir_ids = []
         
-        dir_inst = self(name=self.correct_name(paths[0][0], parent_dir_id, add_message))
+        dir_inst = self(name=self.correct_name(paths[0][0], parent_dir_id, add_message), owner=user)
         dir_inst.save()
         d = [{
             dir_inst.id: {
@@ -127,7 +130,7 @@ class Dir(models.Model):
                     d_link = d_link[index][id]['cont']
                     saved_id = id
                 else: #Create new Dir Record
-                    dir_inst = self(name=self.correct_name(part, saved_id, add_message))
+                    dir_inst = self(name=self.correct_name(part, saved_id, add_message), owner=user)
                     dir_inst.save()
                     self.objects.get(pk=saved_id).dirs.add(self.objects.get(pk=dir_inst.id))
                     d_link.append({dir_inst.id: {
@@ -140,7 +143,7 @@ class Dir(models.Model):
             file_dir_ids.append(saved_id)
                         
         for id, the_file in enumerate(files):
-            File.upload(the_file, file_dir_ids[id], add_message)
+            File.upload(the_file, file_dir_ids[id], user, add_message)
 
 
 class File(models.Model):
@@ -150,6 +153,7 @@ class File(models.Model):
     downloads = models.IntegerField(default=0)
     created_date = models.DateTimeField(default=now, editable=False)
     mmtype = models.CharField(max_length=100, default='content/file')
+    owner = models.ForeignKey('User', related_name='files', on_delete=models.CASCADE, default=1)
 
     @property
     def full_name(self):
@@ -175,7 +179,7 @@ class File(models.Model):
         return name
     
     @classmethod
-    def upload(self, the_file, parent_dir_id, add_message):
+    def upload(self, the_file, parent_dir_id, user, add_message):
         if the_file.size > settings.MAX_UPLOAD_SIZE:
             return add_message(f'{the_file.name} wasnt uploaded, its size more than {settings.MAX_UPLOAD_SIZE_LABEL}')
 
@@ -188,6 +192,7 @@ class File(models.Model):
             name=self.correct_name(the_file.name[:last_dot_index], parent_dir_id, add_message, the_file.name[last_dot_index + 1:]),
             ext=the_file.name[last_dot_index + 1:],
             mmtype=the_file.content_type,
+            owner=user
         )
         instance.save()
         parentDir = Dir.objects.get(pk=parent_dir_id)

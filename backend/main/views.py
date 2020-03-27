@@ -5,6 +5,7 @@ import time
 from secrets import token_urlsafe
 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
@@ -50,7 +51,7 @@ def messages(request):
 
 
 def user_data(request):
-    if hasattr(request.user, 'socialaccount_set'):
+    if hasattr(request.user, 'socialaccount_set') and len(request.user.socialaccount_set.all()):
         data = {
             'name': request.user.socialaccount_set.all()[0].extra_data['name'],
             'photo': request.user.socialaccount_set.all()[0].extra_data['picture']
@@ -108,32 +109,32 @@ def archive_received(request, data):
 
 
 @post_only
+@login_required
 def upload_files(request, id):
     """Upload file to dir with given id"""
     try:
         for the_file in request.FILES.getlist('file'):
-            File.upload(the_file, id, lambda msg: add_message_to_session(request, msg))
+            File.upload(the_file, id, request.user, lambda msg: add_message_to_session(request, msg))
     except:
         return HttpResponse(status=401)
     return HttpResponse(status=200)
 
 
 @post_only
+@login_required
 @load_data('dirId', 'value')
 def add_new_dir(request, data):
     """Add New Directory with given name to the directory with the given dirId"""
-    Dir.add_new(data['value'], data['dirId'], lambda msg: add_message_to_session(request, msg))
+    Dir.add_new(data['value'], data['dirId'], request.user, lambda msg: add_message_to_session(request, msg))
     return HttpResponse(status=200)
 
 
 @post_only
+@login_required
 def upload_dir(request, id):
     """Upload dir to dir with given id"""
-    # try:
-    Dir.upload(request.FILES.getlist('file'), json.load(request.FILES['relPaths'].file), id, lambda msg: add_message_to_session(request, msg))
-    # except:
-    #     return HttpResponse(status=401)
+    try:
+        Dir.upload(request.FILES.getlist('file'), json.load(request.FILES['relPaths'].file), id, request.user, lambda msg: add_message_to_session(request, msg))
+    except:
+        return HttpResponse(status=401)
     return HttpResponse(status=200)
-
-
-#POST to /accounts/logout/
