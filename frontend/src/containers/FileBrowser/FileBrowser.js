@@ -243,6 +243,16 @@ class FileBrowser extends Component {
     }
   }
 
+  compareItems = (a, b) => {
+    if (a.type === b.type) {
+      return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
+    } else if (a.type === 'dir') {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
+
   render() {
     let fileBrowserContent = (
       <div className={classes.SpinnerContainer}>
@@ -261,6 +271,7 @@ class FileBrowser extends Component {
         }
 
         const structure = Object.entries(this.props.items[this.props.items.length - 1]);
+        structure.sort((a, b) => this.compareItems(a[1], b[1]));
         items = structure.map((item) => {
           return item[1].type === "file" ?
             (<File
