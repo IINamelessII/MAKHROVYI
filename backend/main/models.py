@@ -115,7 +115,7 @@ class Dir(models.Model):
             name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             while name_with_token.lower() in existing_names:
                 name_with_token = name[:21] + '_' + token_urlsafe()[:8]
-            add_message(f'Directory name was changed to {name_with_token}')
+            add_message(f'Directory {name} was renamed to {name_with_token}')
             return name_with_token
         return name
 
@@ -184,7 +184,7 @@ class File(models.Model):
     
     def inc_download(self):
         File.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
-        Stats.object.filter(pk=settings.STATS_ID).update(file_downloads=models.F('file_downloads') + 1)
+        Stats.objects.filter(pk=settings.STATS_ID).update(file_downloads=models.F('file_downloads') + 1)
 
     def safe_delete(self, user, add_message):
         if self.owner == user:
@@ -206,7 +206,7 @@ class File(models.Model):
             name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             while name_with_token.lower() in existing_names:
                 name_with_token = name[:21] + '_' + token_urlsafe()[:8]
-            add_message(f'File name was changed to {name_with_token}.{ext}')
+            add_message(f'File {name} was renamed to {name_with_token}.{ext}')
             return name_with_token
         return name
     
@@ -229,7 +229,7 @@ class File(models.Model):
         instance.save()
         parentDir = Dir.objects.get(pk=parent_dir_id)
         parentDir.files.add(self.objects.get(pk=instance.id))
-        Stats.object.filter(pk=settings.STATS_ID).update(file_uploads=models.F('file_uploads') + 1)
+        Stats.objects.filter(pk=settings.STATS_ID).update(file_uploads=models.F('file_uploads') + 1)
 
 
 class Stats(models.Model):
