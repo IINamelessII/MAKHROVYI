@@ -26,15 +26,22 @@ class Dir(models.Model):
         return '#{} {}'.format(self.id, self.name)
  
     def safe_delete(self, user, add_message):
+        """remove only files created by user and dirs that don't containt files/dirs created by other users"""
         if self.owner == user:
-            #TODO: recursive call safe_delete and remove only files created by user and dirs that don't containt files/dirs created by another users
-            #file.safe_delete(user, add_message)
-            self.delete()
-            add_message(f'Directory {self.name} was removed')
+            for file in self.files.all():
+                file.safe_delete(user, lambda x: None)#Do not add messages
+            for dir in self.dirs.all():
+                dir.safe_delete(user, lambda x: None)#Do not add messages
+            updated_dir = Dir.objects.get(pk=self.id)
+            if not len(updated_dir.files.all()) and not len(updated_dir.dirs.all()):
+                self.delete()
+                add_message(f'Directory {self.name} was removed')
+            else:
+                add_message(f'There was only your content removed from {self.name} directory')
     
     def safe_rename(self, user, name, parent_dir_id, add_message):
         if self.owner == user:
-            self.name = self.correct_name(name, parent_dir_id, lambda x: None, self.name) #Func inside args 'disable' messaging inside correct_name
+            self.name = self.correct_name(name, parent_dir_id, lambda x: None, self.name) #Do not add messages
             self.save()
             add_message(f'Directory was renamed to {self.name}')
 
@@ -185,7 +192,7 @@ class File(models.Model):
     
     def safe_rename(self, user, name, parent_dir_id, add_message):
         if self.owner == user:
-            self.name = self.correct_name(name, parent_dir_id, self.ext, lambda x: None, self.name) #Func inside args 'disable' messaging inside correct_name
+            self.name = self.correct_name(name, parent_dir_id, self.ext, lambda x: None, self.name) #Do not add messages
             self.save()
             add_message(f'File was renamed to {self.full_name}')
 
