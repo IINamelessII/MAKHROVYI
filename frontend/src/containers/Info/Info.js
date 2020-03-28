@@ -49,12 +49,27 @@ class Info extends Component {
 
     return (
       <div className={classes.Info}>
-        {stats}
-        <div className={classes.Rules}>
-          <p className={classes.Rule}>Everybody can download solutions as separated files or whole directories.</p>
-          <p className={classes.Rule}>Everybody can upload files and create directories after authentication.</p>
-          <p className={classes.Rule}>Please respect other users and do not duplicate existing directories.</p>
-        </div> 
+        <section>
+          <div className={classes.Title}>Rules:</div>
+          <div className={classes.Rules}>
+            <div className={classes.Rule}>Everybody can download solutions as separated files or whole directories.</div>
+            <div className={classes.Rule}>Everybody can upload files and create directories after authentication.</div>
+            <div className={classes.Rule}>Please respect other users and do not duplicate existing directories.</div>
+          </div>
+        </section>
+        
+        <section>
+          <div className={classes.Title}>Statistic:</div>
+          {stats}
+        </section>
+
+        <section>
+          <div className={classes.Title}>Contacts:</div>
+          <div className={classes.Contacs}>
+            <a href="https://t.me/IINamelessII">If you find a bug or want to help with this project</a>
+          </div>
+        </section>
+        
       </div>
     );
   }

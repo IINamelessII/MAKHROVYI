@@ -1,7 +1,10 @@
 .Info {
-    font-size: 20px;
+    font-size: 28px;
     display: flex;
     flex-direction: column;
+
+    height: 100%;
+    justify-content: space-evenly;
 }
 
 .Rules {
@@ -9,5 +12,34 @@
 }
 
 .Rule {
-    border: 1px solid #fff;
+    /* border: 1px solid #fff; */
+}
+
+.Stat {
+    display: flex;
+}
+
+section {
+    border: 1px solid #000;
+    background-color: #4645453a;
+    width: 80%;
+    height: 30%;
+
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Title {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #000;
+}
+
+.Stats, .Rules, .Contacts {
+    height: 80%;
+    width: 100%;
 }

@@ -26,7 +26,6 @@ class Auth extends Component {
       } catch (error) {
       }
     }, 100);
-    // this.props.setSigninHighlight(false);
   }
 
   render() {
@@ -39,7 +38,6 @@ class Auth extends Component {
       <div className={classes.Container}>
           <div className={classes.Photo}>
             <img src={anonImage} alt="" />
-            <div className={classes.Name}>Anonymous</div>
           </div>
           <div className={signinClasses.join(' ')} onClick={this.onSignInClickHandler}>sign in</div>
         </div>
