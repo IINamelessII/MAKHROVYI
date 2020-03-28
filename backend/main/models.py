@@ -27,6 +27,8 @@ class Dir(models.Model):
  
     def safe_delete(self, user, add_message):
         if self.owner == user:
+            #TODO: recursive call safe_delete and remove only files created by user and dirs that don't containt files/dirs created by another users
+            #file.safe_delete(user, add_message)
             self.delete()
             add_message(f'Directory {self.name} was removed')
     
