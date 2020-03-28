@@ -1,3 +1,13 @@
 .Info {
     font-size: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Rules {
+    
+}
+
+.Rule {
+    border: 1px solid #fff;
 }
