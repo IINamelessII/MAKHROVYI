@@ -22,4 +22,5 @@ urlpatterns = [
     path('rename_dir/', views.rename_dir, name='rename_dir'),
     path('remove_file/', views.remove_file, name='remove_file'),
     path('rename_file/', views.rename_file, name='rename_file'),
+    path('stats/', views.stats, name='stats'),
 ]

@@ -167,6 +167,8 @@ AUTH_USER_MODEL = 'main.User'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
+STATS_ID = 1
+
 try:
     from .local_settings import *
 except ImportError:

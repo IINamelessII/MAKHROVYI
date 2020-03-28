@@ -184,6 +184,7 @@ class File(models.Model):
     
     def inc_download(self):
         File.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
+        Stats.object.filter(pk=settings.STATS_ID).update(file_downloads=models.F('file_downloads') + 1)
 
     def safe_delete(self, user, add_message):
         if self.owner == user:
@@ -228,3 +229,13 @@ class File(models.Model):
         instance.save()
         parentDir = Dir.objects.get(pk=parent_dir_id)
         parentDir.files.add(self.objects.get(pk=instance.id))
+        Stats.object.filter(pk=settings.STATS_ID).update(file_uploads=models.F('file_uploads') + 1)
+
+
+class Stats(models.Model):
+    file_downloads = models.BigIntegerField(default=0)
+    file_uploads = models.BigIntegerField(default=0)
+
+    def __str__(self):
+        return self.id
+  

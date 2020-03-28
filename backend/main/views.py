@@ -12,7 +12,7 @@ from rest_framework import viewsets
 
 from main.decorators import load_data, post_only
 from main.forms import UploadFileForm
-from main.models import Dir, File
+from main.models import Dir, File, Stats
 from main.permissions import IsReadOnly
 from main.serializers import DirSerializer, FileSerializer
 
@@ -47,6 +47,14 @@ def add_message_to_session(request, message):
 
 def messages(request):
     return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
+
+
+def stats(request):
+    data = {
+        'downloads': Stats.objects.get(pk=settings.STATS_ID).file_downloads,
+        'uploads': Stats.objects.get(pk=settings.STATS_ID).file_uploads,
+    }
+    return HttpResponse(json.dumps(data), status=200)
 
 
 def user_data(request):
