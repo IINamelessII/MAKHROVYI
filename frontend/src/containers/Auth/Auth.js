@@ -25,17 +25,23 @@ class Auth extends Component {
         }
       } catch (error) {
       }
-    }, 100)
+    }, 100);
+    // this.props.setSigninHighlight(false);
   }
 
   render() {
+    const signinClasses = [classes.SignIn];
+    if (this.props.signinHighlight) {
+      signinClasses.push(classes.Highlight);
+    }
+
     let auth = (
       <div className={classes.Container}>
           <div className={classes.Photo}>
             <img src={anonImage} alt="" />
             <div className={classes.Name}>Anonymous</div>
           </div>
-          <div className={classes.SignIn} onClick={this.onSignInClickHandler}>sign in</div>
+          <div className={signinClasses.join(' ')} onClick={this.onSignInClickHandler}>sign in</div>
         </div>
     );
 
@@ -62,6 +68,7 @@ class Auth extends Component {
 const mapStateToProps = state => {
   return {
     userData: state.auth.userData,
+    signinHighlight: state.auth.signinHighlight,
   };
 };
 
@@ -70,6 +77,7 @@ const mapDispatchToProps = dispatch => {
     login: () => dispatch(actions.login()),
     logout: () => dispatch(actions.logout()),
     loadUserData: () => dispatch(actions.loadUserData()),
+    // setSigninHighlight: (highlight) => dispatch(actions.setSigninHighlight(highlight)),
   };
 };
 

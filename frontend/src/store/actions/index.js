@@ -30,4 +30,5 @@ export {
   login,
   logout,
   loadUserData,
+  setSigninHighlight,
 } from './auth';

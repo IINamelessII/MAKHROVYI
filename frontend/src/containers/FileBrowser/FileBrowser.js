@@ -59,6 +59,8 @@ class FileBrowser extends Component {
       this.props.onSetNewDir();
     } else {
       this.props.addMessage('You must be authenticated to create new directory');
+      this.props.setSigninHighlight(true);
+      this.props.onHideBackdrop();
     }
   }
 
@@ -144,6 +146,8 @@ class FileBrowser extends Component {
       this.props.onSetFilesUpload();
     } else {
       this.props.addMessage('You must be authenticated to upload files');
+      this.props.setSigninHighlight(true);
+      this.props.onHideBackdrop();
     }
   }
 
@@ -152,6 +156,8 @@ class FileBrowser extends Component {
       this.uploadDirInputRef.current.click();
     } else {
       this.props.addMessage('You must be authenticated to upload directory with files');
+      this.props.setSigninHighlight(true);
+      this.props.onHideBackdrop();
     }
   }
 
@@ -475,6 +481,7 @@ const mapDispatchToProps = dispatch => {
     addMessage: (message) => dispatch(actions.addMessage(message)),
     loadMessages: () => dispatch(actions.loadMessages()),
     setShouldRedirect: (should) => dispatch(actions.setShouldRedirect(should)),
+    setSigninHighlight: (highlight) => dispatch(actions.setSigninHighlight(highlight)),
   };
 }
 

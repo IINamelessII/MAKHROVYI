@@ -37,3 +37,10 @@ export const loadUserData = () => {
       });
   };
 };
+
+export const setSigninHighlight = (highlight) => {
+  return {
+    type: actionTypes.SET_SIGNIN_HIGLIGHT,
+    highlight: highlight,
+  };
+};

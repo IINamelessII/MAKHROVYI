@@ -72,3 +72,29 @@
 .Photo:hover .Name {
     opacity: 1;
 }
+
+.Highlight {
+    -webkit-animation: scale-up-center 1s ease-in-out infinite alternate both;
+    animation: scale-up-center 1s ease-in-out infinite alternate both;
+}
+@-webkit-keyframes scale-up-center {
+    0% {
+      -webkit-transform: scale(0.75);
+              transform: scale(0.75);
+    }
+    100% {
+      -webkit-transform: scale(1.25);
+              transform: scale(1.25);
+    }
+  }
+  @keyframes scale-up-center {
+    0% {
+      -webkit-transform: scale(0.75);
+              transform: scale(0.75);
+    }
+    100% {
+      -webkit-transform: scale(1.25);
+              transform: scale(1.25);
+    }
+  }
+  
