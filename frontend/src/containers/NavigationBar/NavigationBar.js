@@ -16,7 +16,7 @@ class NavigationBar extends Component {
           <nav>
             <NavigationLink exact link="/">Solutions</NavigationLink>
             <NavigationLink link="/tutorials">Tutorials</NavigationLink>
-            <NavigationLink link="/upload">Upload</NavigationLink>
+            <NavigationLink link="/info">Info</NavigationLink>
           </nav>
           <Auth />
         </div>

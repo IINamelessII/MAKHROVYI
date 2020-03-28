@@ -13,8 +13,8 @@ const asyncTutorials = asyncComponent(() => {
   return import('./containers/Tutorials/Tutorials');
 });
 
-const asyncUpload = asyncComponent(() => {
-  return import('./containers/Upload/Upload');
+const asyncInfo = asyncComponent(() => {
+  return import('./containers/Info/Info');
 });
 
 const asyncFileBrowser = asyncComponent(() => {
@@ -26,7 +26,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path="/tutorials" component={asyncTutorials} />
-        <Route path="/upload" component={asyncUpload} />
+        <Route path="/info" component={asyncInfo} />
         <Route path="/" exact component={asyncFileBrowser} />
         <Redirect from={"/directories/" + rootId} to="/" />
         <Route path="/directories/:dirHash" component={asyncFileBrowser} />
