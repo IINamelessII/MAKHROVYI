@@ -1,0 +1,41 @@
+.Footer {
+    width: 100%;
+}
+
+.Labels {
+    max-width: 800px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.Label a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+
+    position: relative;
+}
+
+.Label a:hover{
+    color: aquamarine;
+}
+
+.Label a::after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: aquamarine;
+    
+    opacity: 0;
+    transition: opacity .1s linear;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+.Label a:hover::after {
+    opacity: 1;
+}

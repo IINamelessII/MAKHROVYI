@@ -6,6 +6,7 @@ import NavigationBar from './containers/NavigationBar/NavigationBar';
 import Screen from './hoc/Screen/Screen';
 import Layout from './hoc/Layout/Layout';
 import Messages from './containers/Messages/Messages';
+import Footer from './components/Footer/Footer';
 
 import {rootId} from './shared/constants';
 
@@ -41,6 +42,7 @@ class App extends Component {
         <Screen>
           {routes}
         </Screen>
+        <Footer />
         <Messages />
         <div></div>
       </Layout>

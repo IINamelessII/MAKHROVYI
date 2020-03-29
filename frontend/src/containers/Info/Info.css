@@ -58,20 +58,21 @@ section {
     margin: 0 auto;
 }
 
-a {
+.Contacts a {
     margin: 0 auto;
     color: #ffffff;
     text-decoration: none;
     transition: color .1s linear;
+    cursor: pointer;
 
     position: relative;
 }
 
-a:hover {
+.Contacts a:hover {
     color: aquamarine;
 }
 
-a::after {
+.Contacts a::after {
     content: "";
     display: block;
     width: 100%;
@@ -86,6 +87,6 @@ a::after {
     left: 0;
 }
 
-a:hover::after {
+.Contacts a:hover::after {
     opacity: 1;
 }
