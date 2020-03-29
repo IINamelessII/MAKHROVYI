@@ -29,7 +29,9 @@ class Info extends Component {
   render() {
     let stats = (
       <div className={classes.Stats}>
-        <Spinner />
+        <div className={classes.Loading}>
+          <Spinner />
+        </div>
       </div>
     );
     if (!this.state.loading) {
@@ -51,22 +53,28 @@ class Info extends Component {
       <div className={classes.Info}>
         <section>
           <div className={classes.Title}>Rules:</div>
-          <div className={classes.Rules}>
-            <div className={classes.Rule}>Everybody can download solutions as separated files or whole directories.</div>
-            <div className={classes.Rule}>Everybody can upload files and create directories after authentication.</div>
-            <div className={classes.Rule}>Please respect other users and do not duplicate existing directories.</div>
+          <div className={classes.Container}>
+            <div className={classes.Rules}>
+              <div className={classes.Rule}>Everybody can download solutions as separated files or whole directories.</div>
+              <div className={classes.Rule}>Everybody can upload files and create directories after authentication.</div>
+              <div className={classes.Rule}>Please respect other users and do not duplicate existing directories.</div>
+            </div>
           </div>
+          
         </section>
         
         <section>
           <div className={classes.Title}>Statistic:</div>
-          {stats}
+          <div className={classes.Container}>{stats}</div>
         </section>
 
         <section>
           <div className={classes.Title}>Contacts:</div>
-          <div className={classes.Contacs}>
-            <a href="https://t.me/IINamelessII">If you find a bug or want to help with this project</a>
+          <div className={classes.Container}>
+            <div className={classes.Contacts}>
+              <div className={classes.ContactInfo}>If you find a bug or want to help with this project</div>
+              <a href="https://t.me/IINamelessII">@IINamelessII</a>
+            </div>
           </div>
         </section>
         
