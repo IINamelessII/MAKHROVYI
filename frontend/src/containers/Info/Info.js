@@ -77,6 +77,26 @@ class Info extends Component {
             </div>
           </div>
         </section>
+
+        <section>
+          <div className={classes.Title}>Created by:</div>
+          <div className={classes.Container}>
+            <div className={classes.Creators}>
+              <div className={classes.NeLyublyuVerstku}>
+                <div className={classes.List}>
+                  <div className={classes.Creator}>Design:</div>
+                  <div className={classes.Creator}>Layout:</div>
+                  <div className={classes.Creator}>Frontend:</div>
+                  <div className={classes.Creator}>Backend:</div>
+                  <div className={classes.Creator}>Deploy:</div>
+                </div>
+                <div className={classes.Position}>
+                  <div>ВСЁ САМ :)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         
       </div>
     );

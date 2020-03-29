@@ -7,7 +7,7 @@
     justify-content: space-evenly;
 }
 
-.Rules, .Stats, .Contacts {
+.Rules, .Stats, .Contacts, .Creators {
     height: 100%;
     width: 100%;
 
@@ -33,7 +33,6 @@ section {
     border: 1px solid #000;
     background-color: #4645453a;
     width: 80%;
-    height: 30%;
 
     margin: 0 auto;
     display: flex;
@@ -43,14 +42,14 @@ section {
 
 .Title {
     width: 100%;
-    height: 20%;
+    padding: 5px 0;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #000;
 }
 
 .Container {
-    height: 80%;
+    padding: 5px 0;
     width: 100%;
 }
 
@@ -89,4 +88,21 @@ section {
 
 .Contacts a:hover::after {
     opacity: 1;
+}
+
+.NeLyublyuVerstku {
+    margin: 0 auto;
+    display: flex;
+}
+
+.Position {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Position div {
+    font-weight: 700;
+    font-size: 28px;
+    padding: 0 20px;
 }
