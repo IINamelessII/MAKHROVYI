@@ -17,4 +17,23 @@
 
 .NavigationBar nav {
     text-transform: uppercase;
+    display: flex;
+}
+
+@media only screen and (max-width:600px) {
+    .Container {
+        max-width:none;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .NavigationBar nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .NavigationBar {
+        padding: 10px 0;
+    }
 }

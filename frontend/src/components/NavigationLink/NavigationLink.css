@@ -3,6 +3,10 @@
     vertical-align: top;
     margin: 0 15px;
     position: relative;
+
+    display: flex;
+    justify-content:center;
+    align-items: center;
 }
 
 .NavigationLink a {
