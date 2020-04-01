@@ -50,54 +50,55 @@ class Info extends Component {
     }
 
     return (
-      <div className={classes.Info}>
-        <section>
-          <div className={classes.Title}>Rules:</div>
-          <div className={classes.Container}>
-            <div className={classes.Rules}>
-              <div className={classes.Rule}>Everybody can download solutions as separated files or whole directories.</div>
-              <div className={classes.Rule}>Everybody can upload files and create directories after authentication.</div>
-              <div className={classes.Rule}>Please respect other users and do not duplicate existing directories.</div>
+      <div className={classes.Outer}>
+        <div className={classes.Info}>
+          <section>
+            <div className={classes.Title}>Rules:</div>
+            <div className={classes.Container}>
+              <div className={classes.Rules}>
+                <div className={classes.Rule}>Everybody can download solutions as separated files or whole directories.</div>
+                <div className={classes.Rule}>Everybody can upload files and create directories after authentication.</div>
+                <div className={classes.Rule}>Please respect other users and do not duplicate existing directories.</div>
+              </div>
             </div>
-          </div>
+          </section>
           
-        </section>
-        
-        <section>
-          <div className={classes.Title}>Statistic:</div>
-          <div className={classes.Container}>{stats}</div>
-        </section>
+          <section>
+            <div className={classes.Title}>Statistic:</div>
+            <div className={classes.Container}>{stats}</div>
+          </section>
 
-        <section>
-          <div className={classes.Title}>Contacts:</div>
-          <div className={classes.Container}>
-            <div className={classes.Contacts}>
-              <div className={classes.ContactInfo}>If you find a bug or want to help with this project</div>
-              <a href="https://t.me/IINamelessII">@IINamelessII</a>
+          <section>
+            <div className={classes.Title}>Contacts:</div>
+            <div className={classes.Container}>
+              <div className={classes.Contacts}>
+                <div className={classes.ContactInfo}>If you find a bug or want to help with this project</div>
+                <a href="https://t.me/IINamelessII">@IINamelessII</a>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section>
-          <div className={classes.Title}>Created by:</div>
-          <div className={classes.Container}>
-            <div className={classes.Creators}>
-              <div className={classes.NeLyublyuVerstku}>
-                <div className={classes.List}>
-                  <div className={classes.Creator}>Design:</div>
-                  <div className={classes.Creator}>Layout:</div>
-                  <div className={classes.Creator}>Frontend:</div>
-                  <div className={classes.Creator}>Backend:</div>
-                  <div className={classes.Creator}>Deploy:</div>
-                </div>
-                <div className={classes.Position}>
-                  <div>ВСЁ САМ :)</div>
+          <section>
+            <div className={classes.Title}>Created by:</div>
+            <div className={classes.Container}>
+              <div className={classes.Creators}>
+                <div className={classes.NeLyublyuVerstku}>
+                  <div className={classes.List}>
+                    <div className={classes.Creator}>Design:</div>
+                    <div className={classes.Creator}>Layout:</div>
+                    <div className={classes.Creator}>Frontend:</div>
+                    <div className={classes.Creator}>Backend:</div>
+                    <div className={classes.Creator}>Deploy:</div>
+                  </div>
+                  <div className={classes.Position}>
+                    <div>ВСЁ САМ :)</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        
+          </section>
+          
+        </div>
       </div>
     );
   }

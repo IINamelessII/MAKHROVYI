@@ -3,12 +3,21 @@
     display: flex;
     flex-direction: column;
 
-    height: 100%;
+    margin: auto 0;
     justify-content: space-evenly;
+    width: 100%;
+}
+
+.Outer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
 }
 
 .Rules, .Stats, .Contacts, .Creators {
-    height: 100%;
+    /* height: 100%; */
     width: 100%;
 
     display: flex;
@@ -20,6 +29,14 @@
     margin: 0 auto;
 }
 
+.Rule {
+    border-bottom: 1px solid #6d6d6def;
+}
+
+.Rule:last-child {
+    border-bottom: none;
+}
+
 .Stat {
     margin: 0 auto;
     display: flex;
@@ -29,10 +46,10 @@
     padding: 0 10px;
 }
 
-section {
+.Info section {
     border: 1px solid #000;
     background-color: #4645453a;
-    width: 80%;
+    width: 60%;
 
     margin: 0 auto;
     display: flex;
@@ -42,7 +59,7 @@ section {
 
 .Title {
     width: 100%;
-    padding: 5px 0;
+    padding: 0 0 5px 0;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #000;
@@ -105,4 +122,20 @@ section {
     font-weight: 700;
     font-size: 28px;
     padding: 0 20px;
+}
+
+@media (max-width:1920px) {
+    .Info section {
+        width: 80%;
+    }
+}
+
+@media (max-width:1200px) {
+    .Outer {
+        width: auto;
+    }
+
+    .Info section {
+        width: 100%;
+    }
 }
