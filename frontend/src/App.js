@@ -38,7 +38,7 @@ class App extends Component {
 
     return (
       <Layout>
-        <NavigationBar />
+        {/* <NavigationBar /> */}
         <Screen>
           {routes}
         </Screen>

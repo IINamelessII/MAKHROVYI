@@ -1,14 +1,14 @@
 .Footer {
-    width: 100%;
-    padding: 10px 0;
-}
-
-.Labels {
-    max-width: 800px;
-    width: 80%;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
+}
+
+.Label {
+    margin: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .Label a {
@@ -39,4 +39,14 @@
 }
 .Label a:hover::after {
     opacity: 1;
+}
+
+@media (max-width:600px) {
+    .Footer {
+        flex-direction: column;
+    }
+
+    .Label {
+        margin: 5px 0;
+    }
 }
