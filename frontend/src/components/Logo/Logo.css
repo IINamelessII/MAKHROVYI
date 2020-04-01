@@ -1,5 +1,8 @@
 .Logo {
-    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .Logo a {
@@ -10,7 +13,6 @@
 }
 
 .Title {
-    font-size: 36px;
     font-weight: 700;
     font-family: TradesmithStamp;
     font-size: 72px;
@@ -43,8 +45,8 @@
     opacity: 1;
 }
 
-@media (max-width:600px) {
-    .Logo {
-        padding-top: 0;
+@media (max-width:1200px) {
+    .Title {
+        font-size:48px;
     }
 }

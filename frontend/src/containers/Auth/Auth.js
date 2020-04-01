@@ -18,31 +18,31 @@ class Auth extends Component {
     }
 
     let auth = (
-      <div className={classes.Container}>
-          <div className={classes.Photo}>
-            <img src={anonImage} alt="" />
-          </div>
+      <div className={classes.Auth}>
+        <div className={classes.SubContainer}>
           <div className={signinClasses.join(' ')} onClick={() => {window.location.href = '/accounts/google/login/'}}>sign in</div>
+        </div>
+        <div className={classes.Photo}>
+          <img src={anonImage} alt="" />
+        </div>
         </div>
     );
 
     if (this.props.userData) {
       auth = (
-        <div className={classes.Container}>
+        <div className={classes.Auth}>
+          <div className={classes.SubContainer}>
+            <div className={classes.SignOut} onClick={this.props.logout}>sign out</div>
+          </div>
           <div className={classes.Photo}>
             <img src={this.props.userData.photo} alt="" />
             <div className={classes.Name}>{this.props.userData.name}</div>
           </div>
-          <div className={classes.SignOut} onClick={this.props.logout}>sign out</div>
         </div>
       );
     }
 
-    return (
-      <div className={classes.Auth}>
-        {auth}
-      </div>
-    );
+    return auth;
   }
 }
 

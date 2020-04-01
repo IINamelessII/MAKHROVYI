@@ -1,10 +1,11 @@
 .Auth {
-    color: white;
+    display: flex;
 }
 
-.Container {
+.SubContainer {
     display: flex;
-    position: relative;
+    justify-content: center;
+    align-items: center;
 }
 
 .SignIn, .SignOut {
@@ -13,7 +14,6 @@
     font-size: 28px;
 
     transition: color .1s linear;
-
     position: relative;
 }
 
@@ -51,11 +51,7 @@
 }
 
 .Photo {
-    display: none; /* DEV */
-
-    position: absolute;
-    top: -15px;
-    left: 147px;
+    margin: 0 10px;
 }
 
 .Name {
@@ -98,12 +94,4 @@
     -webkit-transform: scale(1.25);
             transform: scale(1.25);
 }
-}
-
-
-@media (max-width:600px) {
-    .Photo {
-        top: -70px;
-        left: 160px;
-    }
 }

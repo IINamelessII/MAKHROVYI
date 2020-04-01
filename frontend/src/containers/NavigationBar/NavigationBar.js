@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Media from 'react-media';
 
 import Logo from '../../components/Logo/Logo';
 import NavigationLink from '../../components/NavigationLink/NavigationLink';
@@ -10,17 +11,33 @@ class NavigationBar extends Component {
   render() {
     
     return (
-      <div className={classes.NavigationBar}>
-        <div className={classes.Container}>
-          <Logo />
-          <nav>
-            <NavigationLink exact link="/">Solutions</NavigationLink>
-            <NavigationLink link="/tutorials">Tutorials</NavigationLink>
-            <NavigationLink link="/info">Info</NavigationLink>
-          </nav>
-          <Auth />
-        </div>
-      </div>
+      <React.Fragment>
+        <Media query="(max-width: 992px) and (min-width:601px)" render={() =>(
+          <div className={classes.NavigationBar}>
+            <div className={classes.SubContainer}>
+              <Logo />
+              <Auth />
+            </div>
+            <nav>
+              <NavigationLink exact link="/">Solutions</NavigationLink>
+              <NavigationLink link="/tutorials">Tutorials</NavigationLink>
+              <NavigationLink link="/info">Info</NavigationLink>
+            </nav>
+            </div>
+        )} />
+
+        <Media query="(min-width: 993px), (max-width:600px)" render={() => (
+          <div className={classes.NavigationBar}>
+            <Logo />
+            <nav>
+              <NavigationLink exact link="/">Solutions</NavigationLink>
+              <NavigationLink link="/tutorials">Tutorials</NavigationLink>
+              <NavigationLink link="/info">Info</NavigationLink>
+            </nav>
+            <Auth />
+            </div>
+        )} />
+      </React.Fragment>
     );
   }
 }
