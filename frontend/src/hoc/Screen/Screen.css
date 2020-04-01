@@ -10,4 +10,12 @@
     font-family: Anodina;
 
     position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@media (max-width:600px) {
+    .Screen {
+        width: 100%;
+    }
 }
