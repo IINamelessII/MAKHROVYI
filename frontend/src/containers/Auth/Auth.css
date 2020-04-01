@@ -51,6 +51,8 @@
 }
 
 .Photo {
+    display: none; /* DEV */
+
     position: absolute;
     top: -15px;
     left: 147px;

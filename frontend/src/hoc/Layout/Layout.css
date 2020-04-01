@@ -1,7 +1,7 @@
 .Layout {
     background: url('../../assets/images/space-back.jpg');
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     background-size: cover;
     -webkit-background-size: cover;
 

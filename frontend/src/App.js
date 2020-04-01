@@ -44,7 +44,6 @@ class App extends Component {
         </Screen>
         <Footer />
         <Messages />
-        <div></div>
       </Layout>
     );
   }
