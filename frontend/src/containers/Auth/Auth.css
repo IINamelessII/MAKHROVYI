@@ -54,19 +54,6 @@
     margin: 0 10px;
 }
 
-.Name {
-    position: absolute;
-    top: 69px;
-    left: 0;
-    opacity: 0;
-    transition: opacity .1s linear;
-
-    width: 64px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
 .Photo:hover .Name {
     opacity: 1;
 }

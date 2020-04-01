@@ -237,5 +237,5 @@ class Stats(models.Model):
     file_uploads = models.BigIntegerField(default=0)
 
     def __str__(self):
-        return self.id
+        return f'{self.id}'
   

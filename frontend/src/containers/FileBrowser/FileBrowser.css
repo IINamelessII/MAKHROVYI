@@ -9,14 +9,14 @@
     display: flex;
     overflow-x: auto; 
     position: relative;
-    height: 3%;
+    height: 4%;
 }
 
 .Items {
     padding-top: 30px;
     display: flex;
     flex-wrap: wrap;
-    height: 97%;
+    height: 96%;
     position: relative;
 }
 
@@ -30,7 +30,7 @@
 
 @media (max-width: 1920px) {
     .PathRow {
-        height: 5%;
+        height: 6%;
     }
     
     .Items {
@@ -40,11 +40,11 @@
 
 @media (max-width: 1200px) {
     .PathRow {
-        height: 7%;
+        height: 8%;
     }
     
     .Items {
-        height: 93%;
+        height: 92%;
     }
 }
 
@@ -58,12 +58,22 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .PathRow {
-        height: 15%;
+        height: 12%;
     }
     
     .Items {
-        height: 85%;
+        height: 88%;
+    }
+}
+
+@media (max-width: 600px) {
+    .PathRow {
+        height: 14%;
+    }
+    
+    .Items {
+        height: 86%;
     }
 }

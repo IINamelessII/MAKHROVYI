@@ -21,13 +21,13 @@ from django.urls import include, path, re_path
 
 from main import views
 
-#static and media urls first to prevent catching /media and /static with client routing
 urlpatterns = [ 
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     re_path(r'^accounts/', include('allauth.urls')),
 ]
 
+#static and media urls first to prevent catching /media and /static with client routing
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #All another urls served by SPA client
 urlpatterns += [re_path(r'^.*', views.index, name='index')]

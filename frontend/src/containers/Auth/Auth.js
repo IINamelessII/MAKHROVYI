@@ -6,6 +6,22 @@ import classes from './Auth.css';
 import anonImage from '../../assets/images/anon64-2.png';
 
 class Auth extends Component {
+  onSignInClickHandler = () => {
+    const left = (window.screen.width / 2) - 200;
+    const top = (window.screen.height / 2) - 175; 
+    const wnd = window.open('/accounts/google/login/', 'Sign In', `directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=350,top=${top},left=${left}`);
+
+    const interval = setInterval(() => {
+      try {
+        if (wnd.location.pathname === '/') {
+          wnd.close();
+          clearInterval(interval);
+          window.location.reload();
+        }
+      } catch (error) {
+      }
+    }, 100);
+  }
 
   componentDidMount() {
     this.props.loadUserData();
@@ -20,7 +36,7 @@ class Auth extends Component {
     let auth = (
       <div className={classes.Auth}>
         <div className={classes.SubContainer}>
-          <div className={signinClasses.join(' ')} onClick={() => {window.location.href = '/accounts/google/login/'}}>sign in</div>
+          <div className={signinClasses.join(' ')} onClick={this.onSignInClickHandler}>sign in</div>
         </div>
         <div className={classes.Photo}>
           <img src={anonImage} alt="" />
@@ -36,7 +52,6 @@ class Auth extends Component {
           </div>
           <div className={classes.Photo}>
             <img src={this.props.userData.photo} alt="" />
-            <div className={classes.Name}>{this.props.userData.name}</div>
           </div>
         </div>
       );
