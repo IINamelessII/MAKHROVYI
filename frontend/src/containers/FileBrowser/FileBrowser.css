@@ -8,18 +8,15 @@
 
     display: flex;
     overflow-x: auto; 
-
     position: relative;
+    height: 3%;
 }
 
 .Items {
     padding-top: 30px;
     display: flex;
     flex-wrap: wrap;
-    /* height: 75vh;
-    overflow-y: auto; 
-    overflow-x: hidden; */
-
+    height: 97%;
     position: relative;
 }
 
@@ -29,4 +26,44 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 1920px) {
+    .PathRow {
+        height: 5%;
+    }
+    
+    .Items {
+        height: 94%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .PathRow {
+        height: 7%;
+    }
+    
+    .Items {
+        height: 93%;
+    }
+}
+
+@media (max-width: 992px) {
+    .PathRow {
+        height: 10%;
+    }
+    
+    .Items {
+        height: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    .PathRow {
+        height: 15%;
+    }
+    
+    .Items {
+        height: 85%;
+    }
 }
