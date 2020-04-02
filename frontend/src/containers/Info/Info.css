@@ -17,7 +17,6 @@
 }
 
 .Rules, .Stats, .Contacts, .Creators {
-    /* height: 100%; */
     width: 100%;
 
     display: flex;
@@ -118,10 +117,27 @@
     justify-content: center;
 }
 
-.Position div {
+.Position .Self {
     font-weight: 700;
     font-size: 28px;
     padding: 0 20px;
+}
+
+.PtushkinFace {
+    background: url("../../assets/images/Ptushkin.png");
+    width: 64px;
+    height: 64px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    position: relative;
+    left: 54px;
+
+    opacity: 0;
+    transition: opacity .1s linear;
+}
+
+.Position:hover .PtushkinFace {
+    opacity: 1;
 }
 
 @media (max-width:1920px) {

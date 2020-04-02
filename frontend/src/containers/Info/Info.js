@@ -91,7 +91,8 @@ class Info extends Component {
                     <div className={classes.Creator}>Deploy:</div>
                   </div>
                   <div className={classes.Position}>
-                    <div>ВСЁ САМ :)</div>
+                    <div className={classes.Self}>ВСЁ САМ :)</div>
+                    <div className={classes.PtushkinFace}></div>
                   </div>
                 </div>
               </div>
