@@ -13,8 +13,10 @@ class File extends Component {
   }
 
   onContextMenu = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     this.touchSelected();
     this.props.showContextMenu(null, this.fileOptions);
   }
@@ -30,6 +32,17 @@ class File extends Component {
     {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action": () => {this.propertiesClick()}, "holdBackdrop": true},
   ]
+
+  handleButtonPress = () => {
+    this.buttonPressTimer = setTimeout(() => {
+      this.showContextMenu(null);
+    }, 800);
+  }
+
+  handleButtonRelease = () => {
+    clearTimeout(this.buttonPressTimer);
+  }
+
 
   downloadClick = () => {
     axios.post('/download/', {id: parseInt(this.props.id)})
@@ -98,7 +111,9 @@ class File extends Component {
           src={require('../../../assets/images/file.png')} 
           alt=""
           onContextMenu={(event) => this.onContextMenu(event)}
-          onClick={this.touchSelected}/>
+          onClick={this.touchSelected}
+          onTouchStart={this.handleButtonPress}
+          onTouchEnd={this.handleButtonRelease} />
         </div>
         <div className={classes.FileName}>
           <div className={classes.FlexName}>

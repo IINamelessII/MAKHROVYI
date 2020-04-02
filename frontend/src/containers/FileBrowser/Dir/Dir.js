@@ -8,8 +8,10 @@ import {baseUrl} from '../../../shared/constants';
 
 class Dir extends Component {
   onContextMenu = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     this.props.showContextMenu(null, this.dirOptions);
   }
 
@@ -26,6 +28,16 @@ class Dir extends Component {
     {"label": "copy link", "action": () => {this.copyLinkClick()}, "holdBackdrop": false},
     {"label": "properties", "action":() => {this.propertiesClick()}, "holdBackdrop": true},
   ]
+
+  handleButtonPress = () => {
+    this.buttonPressTimer = setTimeout(() => {
+      this.showContextMenu(null);
+    }, 800);
+  }
+
+  handleButtonRelease = () => {
+    clearTimeout(this.buttonPressTimer);
+  }
 
   downloadClick = () => {
     axios.post('/archive/', {id: parseInt(this.props.id)})
@@ -81,7 +93,9 @@ class Dir extends Component {
           src={require('../../../assets/images/folder.png')} 
           alt=""
           onClick={this.props.open}
-          onContextMenu={(event) => this.onContextMenu(event)}/>
+          onContextMenu={(event) => this.onContextMenu(event)}
+          onTouchStart={this.handleButtonPress}
+          onTouchEnd={this.handleButtonRelease} />
         </div>
         <div className={classes.DirName}>
           <div className={classes.FlexName}>

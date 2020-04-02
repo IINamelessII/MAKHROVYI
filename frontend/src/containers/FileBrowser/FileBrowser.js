@@ -48,6 +48,16 @@ class FileBrowser extends Component {
     this.props.onSetBackdrop();
   }
 
+  handleButtonPress = () => {
+    this.buttonPressTimer = setTimeout(() => {
+      this.showContextMenu(null);
+    }, 800);
+  }
+
+  handleButtonRelease = () => {
+    clearTimeout(this.buttonPressTimer);
+  }
+
   propertiesClick = () => {
     const id = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
     const data = this.props.dirs.find(dir => dir.id === id);
@@ -315,7 +325,9 @@ class FileBrowser extends Component {
         <React.Fragment>
           <div className={classes.PathRow}>{pathRow}</div>
           <div 
-            onContextMenu={(event) => this.showContextMenu(event)} 
+            onContextMenu={(event) => this.showContextMenu(event)}
+            onTouchStart={this.handleButtonPress}
+            onTouchEnd={this.handleButtonRelease}
             className={classes.Items}
             onMouseMove={(event) => this.onMouseMove(event)}
           >
