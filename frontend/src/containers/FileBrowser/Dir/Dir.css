@@ -37,6 +37,10 @@
     overflow: hidden;
 }
 
+.None {
+    display: none;
+}
+
 .FullName {
     opacity: 0;
     transition: opacity .1s linear;
@@ -54,8 +58,122 @@
     opacity: 1;
 }
 
-/* TODO: Fix bug, when FullName is showned via its hovering on top of the space of another items */
+@media (max-width:3039px) {
+    .Dir:nth-child(20n) .FullName {
+        left: -160px;
+    }
+}
 
-.None {
-    display: none;
+@media (max-width:2897px) {
+    .Dir:nth-child(19n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2755px) {
+    .Dir:nth-child(18n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2613px) {
+    .Dir:nth-child(17n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2471px) {
+    .Dir:nth-child(16n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2329px) {
+    .Dir:nth-child(15n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2187px) {
+    .Dir:nth-child(14n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2045px) {
+    .Dir:nth-child(13n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1903px) {
+    .Dir:nth-child(12n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1761px) {
+    .Dir:nth-child(11n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1619px) {
+    .Dir:nth-child(10n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1477px) {
+    .Dir:nth-child(9n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1335px) {
+    .Dir:nth-child(8n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1193px) {
+    .Dir:nth-child(7n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1051x) {
+    .Dir:nth-child(6n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:908px) {
+    .Dir:nth-child(5n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:766px) {
+    .Dir:nth-child(4n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:561px) {
+    .Dir:nth-child(3n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:433px) {
+    .Dir:nth-child(2n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:305px) {
+    .Dir:nth-child(1n) .FullName {
+        left: -160px;
+    }
 }

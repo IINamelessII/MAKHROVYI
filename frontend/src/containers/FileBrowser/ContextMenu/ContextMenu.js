@@ -42,7 +42,7 @@ class ContextMenu extends Component {
 
     return (
       <div 
-        className={classes.ContextMenu} id="DEV"
+        className={classes.ContextMenu}
         style={{top: y + 'px', left: x + 'px',}}>{options}</div>
     );
   }

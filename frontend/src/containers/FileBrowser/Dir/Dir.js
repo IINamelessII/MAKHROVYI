@@ -80,9 +80,9 @@ class Dir extends Component {
   }
 
   render() {
-    let fullNameClassName = classes.None;
+    const fullNameClasses = [classes.None];
     if (this.props.name.length >= 15) {
-      fullNameClassName = classes.FullName;
+      fullNameClasses.push(classes.FullName);
     }
 
     return (
@@ -101,7 +101,7 @@ class Dir extends Component {
           <div className={classes.FlexName}>
             {this.props.name}
           </div>
-          <div className={fullNameClassName}>
+          <div className={fullNameClasses.join(' ')}>
             {this.props.name}
           </div>
         </div>

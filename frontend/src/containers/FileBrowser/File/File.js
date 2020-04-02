@@ -98,9 +98,9 @@ class File extends Component {
     }
 
     //TODO: Add different icons depends on this.props.ext
-    let fullNameClassName = classes.None;
+    const fullNameClasses = [classes.None];
     if (this.props.name.length + this.props.ext.length >= 14) {
-      fullNameClassName = classes.FullName;
+      fullNameClasses.push(classes.FullName);
     }
 
     return (
@@ -119,7 +119,7 @@ class File extends Component {
           <div className={classes.FlexName}>
             {this.props.name}.{this.props.ext}
           </div>
-          <div className={fullNameClassName}>
+          <div className={fullNameClasses.join(' ')}>
             {this.props.name}.{this.props.ext}
           </div>
         </div>

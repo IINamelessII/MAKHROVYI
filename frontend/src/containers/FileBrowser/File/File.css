@@ -37,6 +37,11 @@
     width: 100%;
 }
 
+.None {
+    display: none;
+}
+
+
 .FileName{
     display: flex;
     align-items: center;
@@ -54,6 +59,7 @@
 }
 
 .FullName {
+    display: flex;
     opacity: 0;
     transition: opacity .1s linear;
 
@@ -70,8 +76,122 @@
     opacity: 1;
 }
 
-/* TODO: Fix bug, when FullName is showned via its hovering on top of the space of another items */
+@media (max-width:3039px) {
+    .File:nth-child(20n) .FullName {
+        left: -160px;
+    }
+}
 
-.None {
-    display: none;
+@media (max-width:2897px) {
+    .File:nth-child(19n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2755px) {
+    .File:nth-child(18n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2613px) {
+    .File:nth-child(17n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2471px) {
+    .File:nth-child(16n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2329px) {
+    .File:nth-child(15n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2187px) {
+    .File:nth-child(14n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:2045px) {
+    .File:nth-child(13n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1903px) {
+    .File:nth-child(12n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1761px) {
+    .File:nth-child(11n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1619px) {
+    .File:nth-child(10n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1477px) {
+    .File:nth-child(9n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1335px) {
+    .File:nth-child(8n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1193px) {
+    .File:nth-child(7n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:1051x) {
+    .File:nth-child(6n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:908px) {
+    .File:nth-child(5n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:766px) {
+    .File:nth-child(4n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:561px) {
+    .File:nth-child(3n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:433px) {
+    .File:nth-child(2n) .FullName {
+        left: -160px;
+    }
+}
+
+@media (max-width:305px) {
+    .File:nth-child(1n) .FullName {
+        left: -160px;
+    }
 }
