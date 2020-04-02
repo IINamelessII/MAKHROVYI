@@ -29,12 +29,20 @@ class ContextMenu extends Component {
       );
     })
 
-    const x = this.props.position.x;
-    const y = this.props.position.y;
+    let x = this.props.position.x;
+    let y = this.props.position.y;
+    const screen = document.getElementById('Screen').getBoundingClientRect();
+
+    if (y + this.props.options.length * 25 > screen.bottom) {
+      y -= this.props.options.length * 25;
+    }
+    if (x + 180 > screen.right) {
+      x -= 180;
+    }
 
     return (
       <div 
-        className={classes.ContextMenu}
+        className={classes.ContextMenu} id="DEV"
         style={{top: y + 'px', left: x + 'px',}}>{options}</div>
     );
   }

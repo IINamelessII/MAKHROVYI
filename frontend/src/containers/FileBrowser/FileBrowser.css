@@ -18,6 +18,9 @@
     flex-wrap: wrap;
     height: 96%;
     position: relative;
+
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .SpinnerContainer{
