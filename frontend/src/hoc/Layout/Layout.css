@@ -1,5 +1,5 @@
 .Layout {
-    background: url('../../assets/images/space-back.jpg');
+    /* background: url('../../assets/images/space-back.jpg'); */
     height: 100vh;
     width: 100vw;
     background-size: cover;
@@ -12,4 +12,7 @@
     flex-direction: column;
 
     overflow: hidden;
+
+    background-color: rgb(39, 65, 117);
+    color: rgb(186, 190, 197)
 }
