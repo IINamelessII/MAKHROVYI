@@ -81,7 +81,8 @@ class Dir extends Component {
 
   render() {
     const fullNameClasses = [classes.None];
-    if (this.props.name.length >= 15) {
+    console.log(`${this.props.name} ${this.props.name.length}`);
+    if (this.props.name.length >= 10) {
       fullNameClasses.push(classes.FullName);
     }
 

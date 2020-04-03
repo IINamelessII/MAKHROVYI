@@ -99,7 +99,7 @@ class File extends Component {
 
     //TODO: Add different icons depends on this.props.ext
     const fullNameClasses = [classes.None];
-    if (this.props.name.length + this.props.ext.length >= 14) {
+    if (this.props.name.length + this.props.ext.length >= 9) {
       fullNameClasses.push(classes.FullName);
     }
 

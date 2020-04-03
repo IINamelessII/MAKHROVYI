@@ -313,7 +313,7 @@ class FileBrowser extends Component {
         pathRow = this.props.path.map((name, index) => {
           return (
             <PathPart
-              key={name}
+              key={index}
               pathPartName={name}
               goToPath={() => this.openPath(index)} />
           );

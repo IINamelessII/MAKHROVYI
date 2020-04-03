@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-family: Montserrat, sans-serif;
+  font-family: Rubik, sans-serif;
 
     background: url('./assets/images/space-back.jpg');
     height: 100vh;
@@ -57,8 +57,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @font-face {
-  font-family: MontserratBold;
+  font-family: Montserrat;
   src: url('./assets/fonts/Montserrat-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url('./assets/fonts/Rubik-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url('./assets/fonts/Rubik-Bold.ttf');
   font-weight: 700;
 }
 
