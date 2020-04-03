@@ -90,7 +90,7 @@ class Dir extends Component {
         className={classes.Dir}>
         <div className={classes.ImageContainer}>
           <img 
-          src={require('../../../assets/images/folder.png')} 
+          src={require('../../../assets/images/baseline_folder_white_48dp.png')} 
           alt=""
           onClick={this.props.open}
           onContextMenu={(event) => this.onContextMenu(event)}

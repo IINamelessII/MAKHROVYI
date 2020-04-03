@@ -28,14 +28,6 @@
     margin: 0 auto;
 }
 
-.Rule {
-    border-bottom: 1px solid #6d6d6def;
-}
-
-.Rule:last-child {
-    border-bottom: none;
-}
-
 .Stat {
     margin: 0 auto;
     display: flex;
@@ -153,5 +145,15 @@
 
     .Info section {
         width: 100%;
+    }
+}
+
+@media (max-width:992px) {
+    .Rule {
+        border-bottom: 1px solid #6d6d6def;
+    }
+    
+    .Rule:last-child {
+        border-bottom: none;
     }
 }

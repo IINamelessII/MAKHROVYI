@@ -108,7 +108,7 @@ class File extends Component {
         className={styleClasses.join(' ')}>
         <div className={classes.ImageContainer}>
           <img 
-          src={require('../../../assets/images/file.png')} 
+          src={require('../../../assets/images/baseline_description_white_48dp.png')} 
           alt=""
           onContextMenu={(event) => this.onContextMenu(event)}
           onClick={this.touchSelected}
