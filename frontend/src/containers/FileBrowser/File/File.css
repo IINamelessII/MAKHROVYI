@@ -77,115 +77,115 @@
     opacity: 1;
 }
 
-@media (max-width:3039px) {
+@media (max-width:3039px) and (min-width:2898px) {
     .File:nth-child(20n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:2897px) {
+@media (max-width:2897px) and (min-width:2756px) {
     .File:nth-child(19n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:2755px) {
+@media (max-width:2755px) and (min-width:2614px) {
     .File:nth-child(18n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:2613px) {
+@media (max-width:2613px) and (min-width:2472px) {
     .File:nth-child(17n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:2471px) {
+@media (max-width:2471px) and (min-width:2330px) {
     .File:nth-child(16n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:2329px) {
+@media (max-width:2329px) and (min-width:2188px) {
     .File:nth-child(15n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:2187px) {
+@media (max-width:2187px) and (min-width:2046px) {
     .File:nth-child(14n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:2045px) {
+@media (max-width:2045px) and (min-width:1904px) {
     .File:nth-child(13n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:1903px) {
+@media (max-width:1903px) and (min-width:1762px) {
     .File:nth-child(12n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:1761px) {
+@media (max-width:1761px) and (min-width:1620px) {
     .File:nth-child(11n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:1619px) {
+@media (max-width:1619px) and (min-width:1478px) {
     .File:nth-child(10n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:1477px) {
+@media (max-width:1477px) and (min-width:1336px) {
     .File:nth-child(9n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:1335px) {
+@media (max-width:1335px) and (min-width:1194px) {
     .File:nth-child(8n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:1193px) {
+@media (max-width:1193px) and (min-width:1052px) {
     .File:nth-child(7n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:1051x) {
+@media (max-width:1051x) and (min-width:909px) {
     .File:nth-child(6n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:908px) {
+@media (max-width:908px) and (min-width:767px) {
     .File:nth-child(5n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:766px) {
+@media (max-width:766px) and (min-width:562px) {
     .File:nth-child(4n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:561px) {
+@media (max-width:561px) and (min-width:434px) {
     .File:nth-child(3n) .FullName {
         left: -160px;
     }
 }
 
-@media (max-width:433px) {
+@media (max-width:433px) and (min-width:306px) {
     .File:nth-child(2n) .FullName {
         left: -160px;
     }
