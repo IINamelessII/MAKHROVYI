@@ -4,15 +4,11 @@ export {
   setContextMenu,
   hideContextMenu,
   setInfoCard,
-  hideInfoCard,
   setNewDir,
-  hideNewDir,
   setFilesUpload,
   setRenameDir,
   setRenameFile,
   getPostion,
-  fetchDirs,
-  fetchFiles,
   prepareStructure,
   addDirToPath,
   openFromPath,
@@ -27,7 +23,6 @@ export {
 } from './messages';
 
 export {
-  login,
   logout,
   loadUserData,
   setSigninHighlight,

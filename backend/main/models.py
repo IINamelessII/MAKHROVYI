@@ -49,7 +49,6 @@ class Dir(models.Model):
         Dir.objects.filter(pk=self.pk).update(downloads=models.F('downloads') + 1)
 
     def archieve_token(self):
-        #TODO add oportunity to create zip/tar.xz/rar archives based on archive_type param
         token = token_urlsafe(16)
         path_with_token = os.path.join(settings.ARCHIVES_ROOT, token)
         while os.path.exists(path_with_token):

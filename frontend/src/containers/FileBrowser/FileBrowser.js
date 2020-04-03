@@ -84,7 +84,7 @@ class FileBrowser extends Component {
         this.rerender();
       })
       .catch(error => {
-        console.log(error);
+        this.props.addMessage('Something went wrong');
       });
     this.props.onHideBackdrop();
   }
@@ -110,7 +110,7 @@ class FileBrowser extends Component {
         this.rerender();
       })
       .catch(error => {
-        console.log(error);
+        this.props.addMessage('Something went wrong');
       });
     this.props.onHideBackdrop();
   }
@@ -126,7 +126,7 @@ class FileBrowser extends Component {
         this.rerender();
       })
       .catch(error => {
-        console.log(error);
+        this.props.addMessage('Something went wrong');
       });
     this.props.onHideBackdrop();
   }
@@ -137,7 +137,7 @@ class FileBrowser extends Component {
         this.rerender();
       })
       .catch(error => {
-        console.log(error);
+        this.props.addMessage('Something went wrong');
       });
   }
 
@@ -147,7 +147,7 @@ class FileBrowser extends Component {
         this.rerender();
       })
       .catch(error => {
-        console.log(error);
+        this.props.addMessage('Something went wrong');
       });
   }
 
@@ -496,8 +496,6 @@ const mapDispatchToProps = dispatch => {
     onSetRenameDir: () => dispatch(actions.setRenameDir()),
     onSetRenameFile: () => dispatch(actions.setRenameFile()),
     updatePosition: (x, y) => dispatch(actions.getPostion(x, y)),
-    fetchDirs: () => dispatch(actions.fetchDirs()),
-    fetchFiles: () => dispatch(actions.fetchFiles()),
     prepareStructure: (rootId, dirHash, fileHash) => dispatch(actions.prepareStructure(rootId, dirHash, fileHash)),
     addDirToPath: (content, hash, name) => dispatch(actions.addDirToPath(content, hash, name)),
     openFromPath: (index) => dispatch(actions.openFromPath(index)),

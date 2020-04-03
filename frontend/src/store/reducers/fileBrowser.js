@@ -55,7 +55,6 @@ const initialState = {
   hashPath: [],
   path: [],
   items: [],
-  error: null,
   shouldRedirect: false,
 };
 
@@ -97,21 +96,9 @@ const setInfoCard = (state, action) => {
   });
 };
 
-const hideInfoCard = (state, action) => {
-  return updateObject(state, {
-    showInfoCard: false,
-  });
-};
-
 const setNewDir = (state, action) => {
   return updateObject(state, {
     showNewDir: true,
-  });
-};
-
-const hideNewDir = (state, action) => {
-  return updateObject(state, {
-    showNewDir: false,
   });
 };
 
@@ -145,17 +132,9 @@ const fetchDirsStart = (state, action) => {
   return updateObject(state, {loading: true});
 };
 
-const fetchDirsSuccess = (state, action) => {
-  return updateObject(state, {
-    loading: false,
-    dirs: action.data,
-  });
-};
-
 const fetchDirsFail = (state, action) => {
   return updateObject(state, {
     loading: false,
-    error: action.error,
   });
 };
 
@@ -173,7 +152,6 @@ const fetchFilesSuccess = (state, action) => {
 const fetchFilesFail = (state, action) => {
   return updateObject(state, {
     loadingAsync: false,
-    error: action.error,
   });
 };
 
@@ -265,15 +243,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_CONTEXTMENU: return setContextMenu(state, action);
     case actionTypes.HIDE_CONTEXTMENU: return hideContextMenu(state, action);
     case actionTypes.SET_INFOCARD: return setInfoCard(state, action);
-    case actionTypes.HIDE_INFOCARD: return hideInfoCard(state, action);
     case actionTypes.SET_NEW_DIR: return setNewDir(state, action);
-    case actionTypes.HIDE_NEW_DIR: return hideNewDir(state, action);
     case actionTypes.SET_FILES_UPLOAD: return setFilesUpload(state, action);
     case actionTypes.SET_RENAME_DIR: return setRenameDir(state, action);
     case actionTypes.SET_RENAME_FILE: return setRenameFile(state, action);
     case actionTypes.GET_POSITION: return getPostion(state, action);
     case actionTypes.FETCH_DIRS_START: return fetchDirsStart(state, action);
-    case actionTypes.FETCH_DIRS_SUCCESS: return fetchDirsSuccess(state, action);
     case actionTypes.FETCH_DIRS_FAIL: return fetchDirsFail(state, action);
     case actionTypes.FETCH_FILES_START: return fetchFilesStart(state, action);
     case actionTypes.FETCH_FILES_SUCCESS: return fetchFilesSuccess(state, action);

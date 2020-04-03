@@ -5,10 +5,8 @@ export const SET_CONTEXTMENU = 'SET_CONTEXTMENU';
 export const HIDE_CONTEXTMENU = 'HIDE_CONTEXTMENU';
 
 export const SET_INFOCARD = 'SET_INFOCARD';
-export const HIDE_INFOCARD = 'HIDE_INFOCARD';
 
 export const SET_NEW_DIR = 'SET_NEW_DIR';
-export const HIDE_NEW_DIR = 'HIDE_NEW_DIR';
 
 export const SET_FILES_UPLOAD = 'SET_FILES_UPLOAD';
 
@@ -18,7 +16,6 @@ export const SET_RENAME_FILE = 'SET_RENAME_FILE';
 export const GET_POSITION = 'GET_POSITION';
 
 export const FETCH_DIRS_START = 'FETCH_DIRS_START';
-export const FETCH_DIRS_SUCCESS = 'FETCH_DIRS_SUCCESS';
 export const FETCH_DIRS_FAIL = 'FETCH_DIRS_FAIL';
 
 export const FETCH_FILES_START = 'FETCH_FILES_START';

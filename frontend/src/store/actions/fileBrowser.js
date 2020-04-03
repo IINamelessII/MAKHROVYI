@@ -34,21 +34,9 @@ export const setInfoCard = (data) => {
   };
 };
 
-export const hideInfoCard = () => {
-  return {
-    type: actionTypes.HIDE_INFOCARD,
-  };
-};
-
 export const setNewDir = () => {
   return {
     type: actionTypes.SET_NEW_DIR,
-  };
-};
-
-export const hideNewDir = () => {
-  return {
-    type: actionTypes.HIDE_NEW_DIR,
   };
 };
 
@@ -84,30 +72,9 @@ export const fetchDirsStart = () => {
   };
 };
 
-export const fetchDirsSuccess = (data) => {
-  return {
-    type: actionTypes.FETCH_DIRS_SUCCESS,
-    data: data,
-  };
-};
-
-export const fetchDirsFail = (error) => {
+export const fetchDirsFail = () => {
   return {
     type: actionTypes.FETCH_DIRS_FAIL,
-    error: error,
-  };
-};
-
-export const fetchDirs = () => {
-  return dispatch => {
-    dispatch(fetchDirsStart());
-    axios.get('/api/dirs/')
-      .then(response => {
-        dispatch(fetchDirsSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(fetchDirsFail(error));
-      });
   };
 };
 
@@ -124,23 +91,9 @@ export const fetchFilesSuccess = (data) => {
   };
 };
 
-export const fetchFilesFail = (error) => {
+export const fetchFilesFail = () => {
   return {
     type: actionTypes.FETCH_FILES_FAIL,
-    error: error,
-  };
-};
-
-export const fetchFiles = () => {
-  return dispatch => {
-    dispatch(fetchFilesStart());
-    axios.get('/api/files/')
-      .then(response => {
-        dispatch(fetchFilesSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(fetchFilesFail(error));
-      });
   };
 };
 
@@ -159,7 +112,6 @@ export const selectDir = (dirHash) => {
   };
 };
 
-//TODO: Refactor useless action creaters
 export const prepareStructure = (rootId, dirHash, fileHash) => {
   return dispatch => {
     dispatch(fetchFilesStart());
@@ -192,11 +144,13 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
             }
           })
           .catch(error => {
-            dispatch(fetchDirsFail(error));
+            dispatch(fetchDirsFail());
+            dispatch(messageActions.addMessage('Something went wrong'));
           });
       })
       .catch(error => {
-        dispatch(fetchFilesFail(error));
+        dispatch(fetchFilesFail());
+        dispatch(messageActions.addMessage('Something went wrong'));
       });
   };
 };
