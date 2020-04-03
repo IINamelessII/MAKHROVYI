@@ -41,6 +41,10 @@
     opacity: 1;
 }
 
+.Container {
+    display: flex;
+}
+
 @media (max-width:600px) {
     .Footer {
         flex-direction: column;
@@ -48,5 +52,9 @@
 
     .Label {
         margin: 5px 0;
+    }
+
+    .Container .Label {
+        margin: 0 20px 5px;
     }
 }
