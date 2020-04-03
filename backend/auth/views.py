@@ -1,9 +1,6 @@
 import json
 
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
-
-from main.views import add_message_to_session
 
 
 def user_data(request):
@@ -17,17 +14,3 @@ def user_data(request):
         data = None
 
     return HttpResponse(json.dumps(data), status=200)
-
-
-def google_login(request):
-    request.session.modified = True
-
-    if 'auth-requests' in request.session:
-        if request.session['auth-requests'] < 19:
-            request.session['auth-requests'] += 1
-            return redirect('/accounts/google/login/')
-    else:
-        request.session['auth-requests'] = 1
-        return redirect('/accounts/google/login/')
-    
-    add_message_to_session(request, 'Too many login requests!')
