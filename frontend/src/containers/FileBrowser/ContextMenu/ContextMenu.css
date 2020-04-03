@@ -21,3 +21,9 @@
 .Option:active {
     background-color: #fff;
 }
+
+@media (max-width:992px) {
+    .ContextMenu .Option {
+        font-size:18px;
+    }
+}

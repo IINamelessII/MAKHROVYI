@@ -33,11 +33,15 @@ class ContextMenu extends Component {
     let y = this.props.position.y;
     const screen = document.getElementById('Screen').getBoundingClientRect();
 
-    if (y + this.props.options.length * 25 > screen.bottom) {
+    if (window.screen.width > 992 && y + this.props.options.length * 25 > screen.bottom) {
       y -= this.props.options.length * 25;
+    } else if (y + this.props.options.length * 27 > screen.bottom) {
+      y -= this.props.options.length * 27;
     }
-    if (x + 180 > screen.right) {
+    if (window.screen.width > 992 && x + 180 > screen.right) {
       x -= 180;
+    } else if (x + 190 > screen.right) {
+      x -= 190;
     }
 
     return (
