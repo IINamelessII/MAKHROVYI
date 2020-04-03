@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-auth';
+import * as messageActions from './messages';
 
 export const setUserData = (data) => {
   return {
@@ -8,20 +9,14 @@ export const setUserData = (data) => {
   };
 };
 
-export const login = () => {
-  return dispatch => {
-    axios.get('/accounts/google/login/')
-      .then(response => {
-        console.log(response);
-      });
-  };
-};
-
 export const logout = () => {
   return dispatch => {
     axios.post('/accounts/logout/')
       .then(response => {
         dispatch(loadUserData());
+      })
+      .catch(error => {
+        dispatch(messageActions.addMessage('Something went wrong'));
       });
   };
 };
@@ -33,7 +28,7 @@ export const loadUserData = () => {
         dispatch(setUserData(response.data));
       })
       .catch(error => {
-        console.log(error);
+        dispatch(messageActions.addMessage('Something went wrong'));
       });
   };
 };

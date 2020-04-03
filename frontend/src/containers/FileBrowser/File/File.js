@@ -55,11 +55,9 @@ class File extends Component {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        //TODO: Add Message
       })
       .catch(error => {
-        //TODO: Add Message
-        console.log(error);
+        this.props.addMessage('Something went wrong');
       });
   }
 
@@ -97,7 +95,6 @@ class File extends Component {
       styleClasses.push(classes.Selected);
     }
 
-    //TODO: Add different icons depends on this.props.ext
     const fullNameClasses = [classes.None];
     if (this.props.name.length + this.props.ext.length >= 9) {
       fullNameClasses.push(classes.FullName);

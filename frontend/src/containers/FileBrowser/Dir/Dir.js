@@ -54,7 +54,7 @@ class Dir extends Component {
         axios.post('/archive_received/', {token: token});
       })
       .catch(error => {
-        console.log(error);
+        this.props.addMessage('Something went wrong');
       });
   }
 

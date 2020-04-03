@@ -38,6 +38,9 @@ export const loadMessages = () => {
         for (let key in response.data) {
           dispatch(addSessionMessage(response.data[key], key));
         }
+      })
+      .catch(error => {
+        dispatch(addMessage('Something went wrong'));
       });
   };
 };
@@ -47,6 +50,9 @@ export const unsetMessage = (key) => {
     axios.post('/unset_message/', {key: key})
       .then(response => {
         dispatch(removeSessionMessage(key));
+      })
+      .catch(error => {
+        dispatch(addMessage('Something went wrong'));
       });
   };
 };

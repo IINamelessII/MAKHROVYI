@@ -70,7 +70,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: () => dispatch(actions.login()),
     logout: () => dispatch(actions.logout()),
     loadUserData: () => dispatch(actions.loadUserData()),
   };

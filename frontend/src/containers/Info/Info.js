@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import axios from '../../axios-fileBrowser';
 import classes from './Info.css';
 import Spinner from '../../components/Spinner/Spinner';
+import * as actions from '../../store/actions/index';
 
 class Info extends Component {
   state = {
@@ -21,7 +23,7 @@ class Info extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+        this.props.addMessage('Something went wrong');
         this.setState({loading: false});
       });
   }
@@ -105,4 +107,10 @@ class Info extends Component {
   }
 }
 
-export default Info;
+const mapDispatchToProps = dispatch => {
+  return {
+    addMessage: (message) => dispatch(actions.addMessage(message)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Info);

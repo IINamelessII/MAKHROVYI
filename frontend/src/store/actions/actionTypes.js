@@ -40,7 +40,6 @@ export const REMOVE_SESSION_MESSAGE = 'REMOVE_SESSION_MESSAGE';
 
 export const SET_SHOULD_REDIRECT = 'SET_SHOULD_REDIRECT';
 
-export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_USER_DATA = 'SET_USER_DATA';
 
