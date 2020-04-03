@@ -47,3 +47,9 @@
 .NavigationLink a:active {
     color: aquamarine;
 }
+
+@media (max-width: 600px) {
+    .NavigationLink a {
+        font-size: 24px;
+    }
+}
