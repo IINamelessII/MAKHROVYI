@@ -17,7 +17,6 @@ urlpatterns = [
     path('upload_dir/<int:id>/', views.upload_dir, name='upload_dir'),
     path('messages/', views.messages, name='messages'),
     path('unset_message/', views.unset_message, name='unset_message'),
-    path('user_data/', views.user_data, name='user_data'),
     path('remove_dir/', views.remove_dir, name='remove_dir'),
     path('rename_dir/', views.rename_dir, name='rename_dir'),
     path('remove_file/', views.remove_file, name='remove_file'),

@@ -9,7 +9,7 @@ class Auth extends Component {
   onSignInClickHandler = () => {
     const left = (window.screen.width / 2) - 200;
     const top = (window.screen.height / 2) - 175; 
-    const wnd = window.open('/accounts/google/login/', 'Sign In', `directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=350,top=${top},left=${left}`);
+    const wnd = window.open('/auth/google/login/', 'Sign In', `directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=350,top=${top},left=${left}`);
 
     const interval = setInterval(() => {
       try {

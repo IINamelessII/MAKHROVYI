@@ -23,7 +23,7 @@ export const logout = () => {
 
 export const loadUserData = () => {
   return dispatch => {
-    axios.get('/user_data/')
+    axios.get('auth/user_data/')
       .then(response => {
         dispatch(setUserData(response.data));
       })
