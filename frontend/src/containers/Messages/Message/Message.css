@@ -33,15 +33,27 @@
 }
 
 .Text {
+    -ms-word-break: keep-all;
+    word-break: keep-all;
     margin: 0 auto;
     width: 350px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 
-    overflow-y: auto;
+    overflow-x: auto;
     font-size: 18px;
 }
 
 .Text::-webkit-scrollbar {
     display: none;
+}
+
+@media (max-width:400px) {
+    .Message {
+        width: 300px;
+    }
+    .Text {
+        width: 250px;
+    }
 }

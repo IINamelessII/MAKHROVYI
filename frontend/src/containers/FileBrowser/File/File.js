@@ -35,7 +35,7 @@ class File extends Component {
 
   handleButtonPress = () => {
     this.buttonPressTimer = setTimeout(() => {
-      this.showContextMenu(null);
+      this.onContextMenu(null);
     }, 800);
   }
 

@@ -11,3 +11,10 @@
 .Messages::-webkit-scrollbar {
     display: none;
 }
+
+@media (max-width:600px) {
+    .Messages {
+        right: 10px;
+        height: 220px;
+    }
+}
