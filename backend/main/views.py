@@ -57,6 +57,7 @@ def stats(request):
         'downloads': Stats.objects.get(pk=settings.STATS_ID).file_downloads,
         'uploads': Stats.objects.get(pk=settings.STATS_ID).file_uploads,
     }
+
     return HttpResponse(json.dumps(data), status=200)
 
 
@@ -69,6 +70,7 @@ def user_data(request):
         }
     else:
         data = None
+
     return HttpResponse(json.dumps(data), status=200)
 
 
@@ -77,7 +79,12 @@ def user_data(request):
 def unset_message(request, data):
     """Remove message from session"""
     request.session.modified = True
-    del request.session['messages'][str(data['key'])]
+
+    try:
+        del request.session['messages'][str(data['key'])]
+    except:
+        return HttpResponse(status=400)
+
     return HttpResponse(status=200)
 
 
@@ -90,8 +97,12 @@ def index(request):
 @load_data('id')
 def download(request, data):
     """Return link for downloading file by its id"""
-    the_file = File.objects.get(pk=data['id'])
-    response = HttpResponse(settings.MEDIA_URL + the_file.file.name)
+    try:    
+        the_file = File.objects.get(pk=data['id'])
+    except:
+        return HttpResponse(status=400)
+
+    response = HttpResponse(settings.MEDIA_URL + the_file.file.name, status=200)
     response['Content-Disposition'] = f'attachment; filename={the_file.full_name}'
 
     the_file.inc_download()
@@ -102,8 +113,12 @@ def download(request, data):
 @load_data('id')
 def archive(request, data):
     """Create archive from dir and return link for downloading by dir's id"""
-    token = Dir.objects.get(pk=data['id']).archieve_token()
-    response = HttpResponse(settings.ARCHIVES_URL + token + '.zip')
+    try:
+        token = Dir.objects.get(pk=data['id']).archieve_token()
+    except:
+        return HttpResponse(status=400)
+    
+    response = HttpResponse(settings.ARCHIVES_URL + token + '.zip', status=201)
     response['Content-Disposition'] = 'attachment; filename={}'.format(token)
 
     return response
@@ -117,7 +132,8 @@ def archive_received(request, data):
     try:
         Dir.clear_archieve_data(data['token'])
     except:
-        return HttpResponse(status=404)
+        return HttpResponse(status=400)
+    
     return HttpResponse(status=200)
 
 
@@ -129,8 +145,9 @@ def upload_files(request, id):
         for the_file in request.FILES.getlist('file'):
             File.upload(the_file, id, request.user, lambda msg: add_message_to_session(request, msg))
     except:
-        return HttpResponse(status=401)
-    return HttpResponse(status=200)
+        return HttpResponse(status=404)
+    
+    return HttpResponse(status=201)
 
 
 @post_only
@@ -138,8 +155,12 @@ def upload_files(request, id):
 @load_data('dirId', 'value')
 def add_new_dir(request, data):
     """Add New Directory with given name to the directory with the given dirId"""
-    Dir.add_new(data['value'], data['dirId'], request.user, lambda msg: add_message_to_session(request, msg))
-    return HttpResponse(status=200)
+    try:
+        Dir.add_new(data['value'], data['dirId'], request.user, lambda msg: add_message_to_session(request, msg))
+    except:
+        return HttpResponse(status=400)
+    
+    return HttpResponse(status=201)
 
 
 @post_only
@@ -149,8 +170,9 @@ def upload_dir(request, id):
     try:
         Dir.upload(request.FILES.getlist('file'), json.load(request.FILES['relPaths'].file), id, request.user, lambda msg: add_message_to_session(request, msg))
     except:
-        return HttpResponse(status=401)
-    return HttpResponse(status=200)
+        return HttpResponse(status=400)
+
+    return HttpResponse(status=201)
 
 
 @post_only
@@ -158,7 +180,11 @@ def upload_dir(request, id):
 @load_data('id')
 def remove_dir(request, data):
     """Remove directory if it requested by its owner"""
-    Dir.objects.get(pk=data['id']).safe_delete(request.user, lambda msg: add_message_to_session(request, msg))
+    try:
+        Dir.objects.get(pk=data['id']).safe_delete(request.user, lambda msg: add_message_to_session(request, msg))
+    except:
+        return HttpResponse(status=400)
+
     return HttpResponse(status=200)
 
 
@@ -167,7 +193,11 @@ def remove_dir(request, data):
 @load_data('id', 'dirId', 'name')
 def rename_dir(request, data):
     """Rename directory if it requested by its owner"""
-    Dir.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'], lambda msg: add_message_to_session(request, msg))
+    try:
+        Dir.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'], lambda msg: add_message_to_session(request, msg))
+    except:
+        return HttpResponse(status=400)
+
     return HttpResponse(status=200)
 
 
@@ -176,7 +206,11 @@ def rename_dir(request, data):
 @load_data('id')
 def remove_file(request, data):
     """Remove file if it requested by its owner"""
-    File.objects.get(pk=data['id']).safe_delete(request.user, lambda msg: add_message_to_session(request, msg))
+    try:
+        File.objects.get(pk=data['id']).safe_delete(request.user, lambda msg: add_message_to_session(request, msg))
+    except:
+        return HttpResponse(status=400)
+        
     return HttpResponse(status=200)
 
 
@@ -185,5 +219,9 @@ def remove_file(request, data):
 @load_data('id', 'dirId', 'name')
 def rename_file(request, data):
     """Rename file if it requested by its owner"""
-    File.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'], lambda msg: add_message_to_session(request, msg))
+    try:
+        File.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'], lambda msg: add_message_to_session(request, msg))
+    except:
+        return HttpResponse(status=400)
+        
     return HttpResponse(status=200)

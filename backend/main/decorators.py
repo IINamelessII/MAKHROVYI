@@ -11,7 +11,7 @@ def load_data(*keys):
                 for key in keys:
                     data[key] = raw[key]
             except:
-                return HttpResponse(status=404)
+                return HttpResponse(status=400)
             else:
                 return func(request, data, *args, **kwargs)
         return load_data_wrapper
@@ -23,5 +23,5 @@ def post_only(func):
         if request.method == 'POST':
             return func(request, *args, **kwargs)
         else:
-            return HttpResponse(status=400)
+            return HttpResponse(status=403)
     return post_only_wrapper
