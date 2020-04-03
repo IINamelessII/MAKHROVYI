@@ -46,8 +46,6 @@ def add_message_to_session(request, message):
 
 
 def messages(request):
-    #DEV ONLY
-    return HttpResponse(json.dumps({1: 'Some Message like Hello World Baby Long loooooooooooooooooooooooooooooooo', 2: 'Some Message like Hello World', 3: 'Some Message like Hello World', 4: 'Some Message like Hello'}), status=200)
     return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
 
 

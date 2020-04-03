@@ -17,7 +17,6 @@
     background-color: #7f92ff0a;
     border: 1px solid #bbbbbb;
     color: #fff;
-    font-weight: 400;
 }
 
 .Header {
@@ -76,4 +75,26 @@
 
 .Label {
     margin-right: 10px;
+}
+
+
+@media (max-width:600px) {
+    .InfoCard {
+        width: 100%;
+        max-width: 500px;
+        height: 60%;
+        max-height: 300px;
+    }
+
+    .Title {
+        font-size: 16px;
+    }
+
+    .Info {
+        font-size: 14px;
+    }
+
+    .CloseButton {
+        font-size: 24px;
+    }
 }
