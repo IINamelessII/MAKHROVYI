@@ -32,6 +32,7 @@ class FileViewSet(viewsets.ModelViewSet):
 
 
 def add_message_to_session(request, message):
+    """Add a message to the session, used by server side"""
     i = 0
 
     if 'messages' in request.session:
@@ -46,10 +47,12 @@ def add_message_to_session(request, message):
 
 
 def messages(request):
+    """"Return all messages in the session"""
     return HttpResponse(json.dumps(request.session.get('messages', dict())), status=200)
 
 
 def stats(request):
+    """Return all stats"""
     data = {
         'downloads': Stats.objects.get(pk=settings.STATS_ID).file_downloads,
         'uploads': Stats.objects.get(pk=settings.STATS_ID).file_uploads,
@@ -58,6 +61,7 @@ def stats(request):
 
 
 def user_data(request):
+    """Return cureent user photo and id if user is authenticated via OAuth"""
     if hasattr(request.user, 'socialaccount_set') and len(request.user.socialaccount_set.all()):
         data = {
             'photo': request.user.socialaccount_set.all()[0].extra_data['picture'],
@@ -71,20 +75,21 @@ def user_data(request):
 @post_only
 @load_data('key')
 def unset_message(request, data):
+    """Remove message from session"""
     request.session.modified = True
     del request.session['messages'][str(data['key'])]
     return HttpResponse(status=200)
 
 
 def index(request):
-    """render SPA"""
+    """Render SPA"""
     return render(request, 'index.html')
 
 
 @post_only
 @load_data('id')
 def download(request, data):
-    """return file link by its id"""
+    """Return link for downloading file by its id"""
     the_file = File.objects.get(pk=data['id'])
     response = HttpResponse(settings.MEDIA_URL + the_file.file.name)
     response['Content-Disposition'] = f'attachment; filename={the_file.full_name}'
@@ -96,7 +101,7 @@ def download(request, data):
 @post_only
 @load_data('id')
 def archive(request, data):
-    """create archive from dir and return its link by dir's id"""
+    """Create archive from dir and return link for downloading by dir's id"""
     token = Dir.objects.get(pk=data['id']).archieve_token()
     response = HttpResponse(settings.ARCHIVES_URL + token + '.zip')
     response['Content-Disposition'] = 'attachment; filename={}'.format(token)
@@ -107,7 +112,7 @@ def archive(request, data):
 @post_only
 @load_data('token')
 def archive_received(request, data):
-    """Removing archive with given token after receiving it on cliend side"""
+    """Remove archive with given token after specified time"""
     time.sleep(settings.TIME_TO_DELETE)
     try:
         Dir.clear_archieve_data(data['token'])
@@ -152,7 +157,7 @@ def upload_dir(request, id):
 @login_required
 @load_data('id')
 def remove_dir(request, data):
-    """Removing directory if its requested by its owner"""
+    """Remove directory if it requested by its owner"""
     Dir.objects.get(pk=data['id']).safe_delete(request.user, lambda msg: add_message_to_session(request, msg))
     return HttpResponse(status=200)
 
@@ -161,6 +166,7 @@ def remove_dir(request, data):
 @login_required
 @load_data('id', 'dirId', 'name')
 def rename_dir(request, data):
+    """Rename directory if it requested by its owner"""
     Dir.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'], lambda msg: add_message_to_session(request, msg))
     return HttpResponse(status=200)
 
@@ -169,7 +175,7 @@ def rename_dir(request, data):
 @login_required
 @load_data('id')
 def remove_file(request, data):
-    """Removing file if its requested by its owner"""
+    """Remove file if it requested by its owner"""
     File.objects.get(pk=data['id']).safe_delete(request.user, lambda msg: add_message_to_session(request, msg))
     return HttpResponse(status=200)
 
@@ -178,5 +184,6 @@ def remove_file(request, data):
 @login_required
 @load_data('id', 'dirId', 'name')
 def rename_file(request, data):
+    """Rename file if it requested by its owner"""
     File.objects.get(pk=data['id']).safe_rename(request.user, data['name'], data['dirId'], lambda msg: add_message_to_session(request, msg))
     return HttpResponse(status=200)
