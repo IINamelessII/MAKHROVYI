@@ -125,7 +125,7 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
             const intDirHash = parseInt(dirHash);
             const intFileHash = parseInt(fileHash);
             
-            if (intDirHash && intDirHash !== rootId) { //If we have have /directories/someHash(id) in request
+            if (intDirHash && intDirHash !== rootId) { //If we have have specified a directorys hash
               const parentDir = response.data.find(dir => dir.dirs.includes(intDirHash));
               if (parentDir) {
                 dispatch(selectDir(intDirHash));
@@ -133,7 +133,7 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
                 dispatch(messageActions.addMessage('Directory was not founded'));
                 dispatch(setShouldRedirect(true));
               }
-            } else if (intFileHash) { //If we have have /files/someHash(id) in request
+            } else if (intFileHash) { //If we have have specified a file hash
               const parentDir = response.data.find(dir => dir.files.includes(intFileHash));
               if (parentDir) {
                 dispatch(selectDir(parentDir.id));

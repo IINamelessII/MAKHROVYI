@@ -198,7 +198,7 @@ class FileBrowser extends Component {
       })
       .catch(error => {
         this.uploadDirInputRef.current.value = null;
-        console.log(error);
+        this.props.addMessage('Something went wrong');
       });
   }
 

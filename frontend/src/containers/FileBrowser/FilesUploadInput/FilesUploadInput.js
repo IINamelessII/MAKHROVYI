@@ -34,7 +34,7 @@ class FilesUploadInput extends Component {
           this.props.hideBackdrop();
         })
         .catch(error => {
-          console.log(error);
+          this.props.addMessage('Something went wrong');
           this.props.hideBackdrop();
         });
     }
