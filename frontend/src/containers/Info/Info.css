@@ -157,3 +157,9 @@
         border-bottom: none;
     }
 }
+
+@media (max-width:600px) {
+    .Info {
+        font-size: 24px;
+    }
+}
