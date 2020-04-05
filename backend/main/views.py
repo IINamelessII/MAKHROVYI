@@ -15,6 +15,7 @@ from main.forms import UploadFileForm
 from main.models import Dir, File, Stats
 from main.permissions import IsReadOnly
 from main.serializers import DirSerializer, FileSerializer
+from main.tasks import remove_archive
 
 
 class DirViewSet(viewsets.ModelViewSet):
@@ -115,9 +116,8 @@ def archive(request, data):
 @load_data('token')
 def archive_received(request, data):
     """Remove archive with given token after specified time"""
-    time.sleep(settings.TIME_TO_DELETE)
     try:
-        Dir.clear_archieve_data(data['token'])
+        remove_archive.apply_async((data['token'],), countdown=settings.TIME_TO_DELETE)
     except:
         return HttpResponse(status=400)
     

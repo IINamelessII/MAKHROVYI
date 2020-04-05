@@ -60,6 +60,7 @@ class Dir(models.Model):
         self.prepare_dir(self.id, path_with_token)
 
         shutil.make_archive(path_with_token, 'zip', path_with_token)
+        shutil.rmtree(path_with_token)
 
         return token
     
@@ -85,11 +86,11 @@ class Dir(models.Model):
             os.mkdir(next_dir_path)
             self.prepare_dir(the_dir.id, next_dir_path)
 
-    @classmethod
-    def clear_archieve_data(self, token):
-        archive_path = os.path.join(settings.ARCHIVES_ROOT, token)
-        shutil.rmtree(archive_path)
-        os.remove(archive_path + '.zip')
+    # @classmethod
+    # def clear_archieve_data(self, token):
+    #     archive_path = os.path.join(settings.ARCHIVES_ROOT, token)
+    #     shutil.rmtree(archive_path)
+    #     os.remove(archive_path + '.zip')
 
     @classmethod
     def add_new(self, value, parent_dir_id, user, add_message):
