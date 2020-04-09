@@ -12,7 +12,7 @@ services:
 
   web:
     build: .
-    command: bash -c "cd /code/frontend && npm install && npm run build && cd /code/backend/ &&  python /code/backend/manage.py migrate --noinput && python /code/backend/manage.py runserver 0.0.0.0:8000"
+    command: bash -c "cd /code/frontend && npm install && npm run build && cd /code/backend/ &&  python /code/backend/manage.py migrate --noinput && python /code/backend/manage.py collectstatic"
     volumes:
       - .:/code
     ports:
