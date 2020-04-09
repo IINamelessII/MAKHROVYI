@@ -5,13 +5,20 @@ New Palevo is comming...
 
 `git clone https://github.com/IINamelessII/MAKHROVYI.git`
 
+`edit nginx_conf`
+
 `cd MAKHROVYI`
 
 `docker-compose build`
 
 `docker-compose up -d`
 
-`docker-compose run python manage.py createsuperuser`
+`docker-compose run nginx vi /etc/nginx/nginx.conf`
+
+and Add this to the http{} area
+`client_max_body_size 20M;`
+
+`docker-compose run web python manage.py createsuperuser`
 
 go to [http://locahost:8000/admin/](http://locahost:8000/admin/)
 

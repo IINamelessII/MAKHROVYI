@@ -12,7 +12,7 @@ services:
 
   web:
     build: .
-    command: bash -c "cd /code/frontend && npm install && npm run build && cd /code/backend/ &&  python /code/backend/manage.py migrate --noinput && python /code/backend/manage.py collectstatic"
+    command: bash -c "cd /code/frontend && npm install && npm run build && cd /code/backend/ &&  python /code/backend/manage.py migrate --noinput && python /code/backend/manage.py collectstatic && systemctl restart gunicorn"
     volumes:
       - .:/code
     ports:
@@ -20,6 +20,15 @@ services:
     depends_on:
       - db
       - redis
+    
+  nginx:
+    build: ./nginx
+    command: bash -c "systemctl restart nginx"
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/code
+
 
   celery:
     build: .
