@@ -3,7 +3,7 @@ version: '3'
 services:
 
   db:
-    image: postgres:latest
+    image: postgres:alpine:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data/
   
@@ -12,22 +12,26 @@ services:
 
   web:
     build: .
-    command: bash -c "cd /code/frontend && npm install && npm run build && cd /code/backend/ &&  python /code/backend/manage.py migrate --noinput && python /code/backend/manage.py collectstatic && systemctl restart gunicorn"
+    # command: bash -c "cd /code/frontend && npm install && npm run build && cd /code/backend/ &&  python /code/backend/manage.py migrate --noinput && python /code/backend/manage.py collectstatic && systemctl restart gunicorn"
+    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
       - "8000:8000"
+    expose:
+      - 8000
     depends_on:
       - db
       - redis
     
   nginx:
     build: ./nginx
-    command: bash -c "systemctl restart nginx"
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - .:/code
+    depends_on:
+      - web
 
 
   celery:
