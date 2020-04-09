@@ -5,9 +5,9 @@ New Palevo is comming...
 
 `git clone https://github.com/IINamelessII/MAKHROVYI.git`
 
-`edit nginx_conf`
-
 `cd MAKHROVYI`
+
+`edit nginx/nginx_conf`
 
 `docker-compose build`
 
