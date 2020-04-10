@@ -17,7 +17,7 @@ edit `frontend/src/shared/constants.js`
 
 `docker-compose run web python manage.py createsuperuser`
 
-go to http://YOUR_IP_ADDRESS:8000/admin/
+go to http://YOUR_IP_ADDRESS/admin/
 
 authenticate using credentials created before
 
