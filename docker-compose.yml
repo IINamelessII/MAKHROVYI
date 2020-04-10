@@ -30,15 +30,13 @@ services:
     depends_on:
       - web
 
-
   celery:
     build: .
     command: celery -A backend worker -l info
     volumes:
       - .:/code
     depends_on:
-      - db
-      - redis
+      - web
 
 volumes:
   postgres_data:
