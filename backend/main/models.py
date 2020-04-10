@@ -3,15 +3,8 @@ import shutil
 from secrets import token_urlsafe
 
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.timezone import now
-
-
-class User(AbstractUser):
-    
-    def __str__(self):
-        return f'#{self.id} {self.username}'
 
 
 class Dir(models.Model):
@@ -20,7 +13,7 @@ class Dir(models.Model):
     files = models.ManyToManyField('File', blank=True)
     downloads = models.IntegerField(default=0)
     created_date = models.DateTimeField(default=now, editable=False)
-    owner = models.ForeignKey('User', related_name='dirs', on_delete=models.CASCADE, default=1)
+    owner = models.ForeignKey('users.User', related_name='dirs', on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return '#{} {}'.format(self.id, self.name)
@@ -85,12 +78,6 @@ class Dir(models.Model):
             next_dir_path = os.path.join(space, the_dir.name)
             os.mkdir(next_dir_path)
             self.prepare_dir(the_dir.id, next_dir_path)
-
-    # @classmethod
-    # def clear_archieve_data(self, token):
-    #     archive_path = os.path.join(settings.ARCHIVES_ROOT, token)
-    #     shutil.rmtree(archive_path)
-    #     os.remove(archive_path + '.zip')
 
     @classmethod
     def add_new(self, value, parent_dir_id, user, add_message):
@@ -173,7 +160,7 @@ class File(models.Model):
     downloads = models.IntegerField(default=0)
     created_date = models.DateTimeField(default=now, editable=False)
     mmtype = models.CharField(max_length=100, default='content/file')
-    owner = models.ForeignKey('User', related_name='files', on_delete=models.CASCADE, default=1)
+    owner = models.ForeignKey('users.User', related_name='files', on_delete=models.CASCADE, default=1)
 
     @property
     def full_name(self):

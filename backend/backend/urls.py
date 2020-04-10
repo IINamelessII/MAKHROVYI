@@ -24,7 +24,7 @@ from main import views
 urlpatterns = [ 
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
-    path('auth/', include('auth.urls')),
+    path('auth/', include('users.urls')),
     re_path(r'^accounts/', include('allauth.urls')),
 ]
 

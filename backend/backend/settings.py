@@ -44,9 +44,13 @@ MAX_UPLOAD_SIZE_LABEL = '10 MB'
 SECRET_KEY = 'someKeyHere'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '0.0.0.0',
+    'localhost',
+ ]
 
 # Application definition
 
@@ -68,6 +72,7 @@ INSTALLED_APPS = [
     
     #my apps
     'main',
+    'users',
 ]
 
 SITE_ID = 1
@@ -182,7 +187,7 @@ USE_TZ = True
 
 TIME_TO_DELETE = 3600
 
-AUTH_USER_MODEL = 'main.User'
+AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
