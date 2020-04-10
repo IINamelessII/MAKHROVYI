@@ -13,7 +13,9 @@ edit `backend/backend/local_settings.py`
 
 edit `frontend/src/shared/constants.js`
 
-`docker-compose up -d --build`
+`docker-compose build`
+
+`docker-compose up -d`
 
 `docker-compose run web python manage.py createsuperuser`
 
