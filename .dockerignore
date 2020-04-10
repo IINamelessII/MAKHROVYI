@@ -1,6 +1,3 @@
 .git
 .dockerignore
 .vscode
-media
-build
-node_modules

@@ -7,20 +7,17 @@ New Palevo is comming...
 
 `cd MAKHROVYI`
 
-`edit nginx/nginx_conf`
+edit `nginx/nginx_conf`
 
-`docker-compose build`
+edit `backend/backend/local_settings.py`
 
-`docker-compose up -d`
+edit `frontend/src/shared/constants.js`
 
-`docker-compose run nginx vi /etc/nginx/nginx.conf`
-
-and Add this to the http{} area
-`client_max_body_size 20M;`
+`docker-compose up -d --build`
 
 `docker-compose run web python manage.py createsuperuser`
 
-go to [http://locahost:8000/admin/](http://locahost:8000/admin/)
+go to http://YOUR_IP_ADDRESS:8000/admin/
 
 authenticate using credentials created before
 

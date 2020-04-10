@@ -12,12 +12,9 @@ services:
 
   web:
     build: .
-    # command: bash -c "cd /code/frontend && npm install && npm run build && cd /code/backend/ &&  python /code/backend/manage.py migrate --noinput && python /code/backend/manage.py collectstatic && systemctl restart gunicorn"
     command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
-    ports:
-      - "8000:8000"
     expose:
       - 8000
     depends_on:
@@ -27,7 +24,7 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - "80:80"
+      - 1337:80
     volumes:
       - .:/code
     depends_on:
