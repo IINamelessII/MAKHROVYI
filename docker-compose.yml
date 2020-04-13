@@ -12,7 +12,7 @@ services:
 
   web:
     build: .
-    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
+    # command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
     expose:
@@ -21,12 +21,12 @@ services:
       - db
       - redis
     
-  nginx:
-    build: ./nginx
-    volumes:
-      - .:/code
-    depends_on:
-      - web
+  # nginx:
+  #   build: ./nginx
+  #   volumes:
+  #     - .:/code
+  #   depends_on:
+  #     - web
 
   celery:
     build: .
