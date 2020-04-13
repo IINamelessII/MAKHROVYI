@@ -23,8 +23,6 @@ services:
     
   nginx:
     build: ./nginx
-    ports:
-      - 80:80
     volumes:
       - .:/code
     depends_on:
@@ -37,6 +35,8 @@ services:
       - .:/code
     depends_on:
       - web
+      - redis
+      - db
 
 volumes:
   postgres_data:
