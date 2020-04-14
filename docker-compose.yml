@@ -9,13 +9,16 @@ services:
   
   redis:
     image: "redis:alpine"
+    expose:
+      - 6379
 
   web:
     build: .
-    # command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
-    command: bash -c "cd /code/frontend && npm install && npm run build && cd /code/backend/ &&  python /code/backend/manage.py migrate --noinput && python /code/backend/manage.py collectstatic && python manage.py runserver 0.0.0.0:8000 "
+    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - .:/code
+      - static_volume:/code/backend/static
+      - media_volume:/code/backend/media
+      - backend_volume:/code/backend/backend
     expose:
       - 8000
     depends_on:
@@ -25,15 +28,18 @@ services:
   nginx:
     build: ./nginx
     volumes:
-      - .:/code
+      - static_volume:/code/backend/static
+      - media_volume:/code/backend/media
     depends_on:
       - web
+    expose:
+      - 80
 
   celery:
-    build: .
+    build: ./celery
     command: celery -A backend worker -l info
     volumes:
-      - .:/code
+      - backend_volume:/code/backend/backend
     depends_on:
       - web
       - redis
@@ -41,3 +47,6 @@ services:
 
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:
+  backend_volume:
