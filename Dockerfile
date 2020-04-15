@@ -14,11 +14,11 @@ WORKDIR /code/frontend
 COPY ./frontend/package.json ./frontend/package-lock.json /code/frontend/
 RUN npm install
 
-COPY frontend /code
+ADD frontend /code/
 RUN npm run build
 
 WORKDIR /code/backend
-COPY backend /code
+ADD backend /code/
 RUN mkdir -p /code/backend/media/archives
 
 COPY entrypoint.sh /code/entrypoint.sh
