@@ -195,4 +195,4 @@ dmypy.json
 
 .vscode
 
-.rdb
+*.rdb
