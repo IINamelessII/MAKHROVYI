@@ -49,9 +49,6 @@ services:
       - web
       - redis
       - db
-    links:
-      - web
-      - redis
 
 networks:
   nginx_network:
