@@ -17,6 +17,6 @@ RUN npm run build
 WORKDIR /code/backend
 RUN mkdir -p /code/backend/media/archives
 
-COPY entrypoint.sh /code/entrypoint.sh
+# COPY entrypoint.sh /code/entrypoint.sh
 
-ENTRYPOINT /code/entrypoint.sh
+# ENTRYPOINT /code/entrypoint.sh
