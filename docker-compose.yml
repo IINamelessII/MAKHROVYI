@@ -43,8 +43,8 @@ services:
   celery:
     build: .
     command: celery -A backend worker -l info
-    volumes:
-      - backend_volume:/code/backend/backend
+    # volumes:
+    #   - backend_volume:/code/backend/backend
     depends_on:
       - web
       - redis

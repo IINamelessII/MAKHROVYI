@@ -2,9 +2,6 @@ FROM nikolaik/python-nodejs:latest
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV SQL_HOST db
-ENV SQL_PORT 5432
-ENV DATABASE postgres
 
 WORKDIR /code/backend
 COPY requirements.txt /code/backend/
