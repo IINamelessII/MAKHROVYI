@@ -28,7 +28,7 @@ urlpatterns = [
     re_path(r'^accounts/', include('allauth.urls')),
 ]
 
-#static and media urls first to prevent catching /media and /static with client routing
+#static and media urls first to prevent catching /media with client routing
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #All another urls served by SPA client
 urlpatterns += [re_path(r'^.*', views.index, name='index')]

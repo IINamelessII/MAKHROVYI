@@ -5,4 +5,4 @@ ENV PYTHONUNBUFFERED 1
 
 RUN pip install celery
 
-WORKDIR /code/backend/backend
+WORKDIR /code/backend

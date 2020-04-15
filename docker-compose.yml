@@ -8,7 +8,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
   
   redis:
-    image: "redis:alpine"
+    image: redis:alpine
+    command: redis-server
     expose:
       - 6379
 
@@ -19,8 +20,10 @@ services:
       - static_volume:/code/backend/static
       - media_volume:/code/backend/media
       - backend_volume:/code/backend/backend
-    expose:
-      - 8000
+    networks:
+      - nginx_network
+    ports:
+      - 8000:8000
     depends_on:
       - db
       - redis
@@ -30,10 +33,12 @@ services:
     volumes:
       - static_volume:/code/backend/static
       - media_volume:/code/backend/media
+    networks:
+      - nginx_network
     depends_on:
       - web
-    expose:
-      - 80
+    ports:
+      - 8000:80
 
   celery:
     build: ./celery
@@ -44,6 +49,10 @@ services:
       - web
       - redis
       - db
+
+networks:
+  nginx_network:
+    driver: bridge
 
 volumes:
   postgres_data:
