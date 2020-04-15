@@ -38,10 +38,10 @@ services:
     depends_on:
       - web
     ports:
-      - 8000:80
+      - 80:8000
 
   celery:
-    build: ./celery
+    build: .
     command: celery -A backend worker -l info
     volumes:
       - backend_volume:/code/backend/backend
