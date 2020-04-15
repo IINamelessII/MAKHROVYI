@@ -4,7 +4,7 @@ if [ "$DATABASE" = "postgres" ]
 then
     echo "Waiting for postgres..."
 
-    while ! curl $SQL_HOST $SQL_PORT; do
+    while ! curl -s $SQL_HOST:$SQL_PORT; do
       sleep 0.1
     done
 
