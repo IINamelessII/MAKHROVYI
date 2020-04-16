@@ -1,6 +1,9 @@
 # MAKHROVYI
 New Palevo is comming...
 
+## Tech Stack:
+later
+
 ### Deploying on your machine
 
 `git clone https://github.com/IINamelessII/MAKHROVYI.git`
@@ -13,11 +16,7 @@ edit `backend/backend/local_settings.py`
 
 edit `frontend/src/shared/constants.js`
 
-`docker-compose build`
-
-`docker-compose up -d`
-
-###Optional:
+`docker-compose up -d --build`
 
 `docker-compose run web python manage.py createsuperuser`
 
@@ -30,3 +29,5 @@ create instance of Stat
 create instance of Social Application, (Google API)
 
 create instance of Dir (root, for example)
+
+Enjoy your web app!
