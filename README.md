@@ -10,17 +10,13 @@ later
 
 `cd MAKHROVYI`
 
-edit `nginx/nginx_conf`
-
-edit `backend/backend/local_settings.py`
-
-edit `frontend/src/shared/constants.js`
+edit `.env`, `.env.db`, `nginx/nginx_conf`, `backend/backend/local_settings.py`, `frontend/src/shared/constants.js`
 
 `docker-compose up -d --build`
 
 `docker-compose run web python manage.py createsuperuser`
 
-go to http://YOUR_IP_ADDRESS/admin/
+go to http[s]://YOUR_DOMAIN/admin/
 
 authenticate using credentials created before
 
@@ -28,6 +24,6 @@ create instance of Stat
 
 create instance of Social Application, (Google API)
 
-create instance of Dir (root, for example)
+create instance of Dir (`root`, for example)
 
 Enjoy your web app!
