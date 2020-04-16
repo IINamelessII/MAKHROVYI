@@ -10,7 +10,7 @@ later
 
 `cd MAKHROVYI`
 
-edit `.env`, `.env.db`, `nginx/nginx_conf`, `backend/backend/local_settings.py`, `frontend/src/shared/constants.js`
+edit `.env`, `.env.db`, `nginx/nginx.conf`, `backend/backend/local_settings.py`, `frontend/src/shared/constants.js`
 
 `docker-compose up -d --build`
 
