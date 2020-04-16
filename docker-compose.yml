@@ -20,7 +20,6 @@ services:
     volumes:
       - static_volume:/code/backend/static
       - media_volume:/code/backend/media
-      - backend_volume:/code/backend/backend
     networks:
       - nginx_network
     expose:
@@ -58,4 +57,3 @@ volumes:
   postgres_data:
   static_volume:
   media_volume:
-  backend_volume:
