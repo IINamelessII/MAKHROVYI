@@ -18,8 +18,7 @@ services:
 
   web:
     build: .
-    entrypoint: /bin/bash -c "python /code/backend/manage.py migrate && python /code/backend/manage.py collectstatic"
-    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
+    command: /bin/bash -c "python manage.py migrate && python manage.py collectstatic && gunicorn backend.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - static_volume:/code/backend/static
       - media_volume:/code/backend/media
