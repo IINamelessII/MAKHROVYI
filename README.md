@@ -17,6 +17,8 @@ edit `frontend/src/shared/constants.js`
 
 `docker-compose up -d`
 
+###Optional:
+
 `docker-compose run web python manage.py createsuperuser`
 
 go to http://YOUR_IP_ADDRESS/admin/
