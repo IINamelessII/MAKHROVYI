@@ -18,6 +18,7 @@ services:
 
   web:
     build: .
+    entrypoint: /bin/bash -c "python /code/backend/manage.py migrate && python /code/backend/manage.py collectstatic"
     command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/code/backend/static
@@ -30,6 +31,8 @@ services:
     depends_on:
       - db
       - redis
+    ports:
+      - 8000:8000
     
   nginx:
     build: ./nginx
@@ -42,6 +45,8 @@ services:
       - web
     expose:
       - 80
+    ports:
+      - 80:80
 
   celery:
     build: .
