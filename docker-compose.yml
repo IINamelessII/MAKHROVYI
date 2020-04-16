@@ -18,7 +18,7 @@ services:
 
   web:
     build: .
-    command: /bin/bash -c "python manage.py migrate && python manage.py collectstatic && gunicorn backend.wsgi:application --bind 0.0.0.0:8000"
+    command: /bin/bash -c "python manage.py migrate && python manage.py collectstatic --no-input --clear && gunicorn backend.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - static_volume:/code/backend/static
       - media_volume:/code/backend/media
@@ -30,8 +30,6 @@ services:
     depends_on:
       - db
       - redis
-    ports:
-      - 8000:8000
     
   nginx:
     build: ./nginx
