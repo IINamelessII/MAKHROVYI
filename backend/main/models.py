@@ -23,15 +23,18 @@ class Dir(models.Model):
         if self.owner == user:
             for file in self.files.all():
                 file.safe_delete(user, lambda x: None)#Do not add messages
+
             for dir in self.dirs.all():
                 dir.safe_delete(user, lambda x: None)#Do not add messages
+
             updated_dir = Dir.objects.get(pk=self.id)
+
             if not len(updated_dir.files.all()) and not len(updated_dir.dirs.all()):
                 self.delete()
                 add_message(f'Directory {self.name} was removed')
             else:
                 add_message(f'There was only your content removed from {self.name} directory')
-    
+
     def safe_rename(self, user, name, parent_dir_id, add_message):
         if self.owner == user:
             self.name = self.correct_name(name, parent_dir_id, lambda x: None, self.name) #Do not add messages
@@ -44,6 +47,7 @@ class Dir(models.Model):
     def archieve_token(self):
         token = token_urlsafe(16)
         path_with_token = os.path.join(settings.ARCHIVES_ROOT, token)
+
         while os.path.exists(path_with_token):
             token = token_urlsafe(16)
             path_with_token = os.path.join(settings.ARCHIVES_ROOT, token)
@@ -98,12 +102,16 @@ class Dir(models.Model):
         """Correcting name"""
         parent_dir = self.objects.get(pk=parent_dir_id)
         existing_names = list(map(lambda x: x.name.lower(), parent_dir.dirs.all().exclude(name=exclude)))
+
         if len(name) > 30 or name.lower() in existing_names:
             name_with_token = name[:21] + '_' + token_urlsafe()[:8]
+
             while name_with_token.lower() in existing_names:
                 name_with_token = name[:21] + '_' + token_urlsafe()[:8]
+
             add_message(f'Directory {name} was renamed to {name_with_token}')
             return name_with_token
+
         return name
 
     @classmethod
@@ -125,14 +133,17 @@ class Dir(models.Model):
 
         for path in paths:
             d_link = d #Linking object behind d variable
+
             for part in path:
                 id = 0
-                # for key, value in d_link.items():
+
                 for index, i in enumerate(d_link):
                     key, value = list(i.items())[0]
+
                     if value['name'] == part: 
                         id = key
                         break
+
                 if id: #if part was finded
                     d_link = d_link[index][id]['cont']
                     saved_id = id
@@ -189,12 +200,16 @@ class File(models.Model):
         """Correcting name"""
         parent_dir = Dir.objects.get(pk=parent_dir_id)
         existing_names = list(map(lambda x: (x.name + x.ext).lower(), parent_dir.files.all().exclude(name=exclude)))
+
         if len(name) > 30 or (name + ext).lower() in existing_names:
             name_with_token = name[:21] + '_' + token_urlsafe()[:8]
+
             while name_with_token.lower() in existing_names:
                 name_with_token = name[:21] + '_' + token_urlsafe()[:8]
             add_message(f'File {name} was renamed to {name_with_token}.{ext}')
+
             return name_with_token
+
         return name
     
     @classmethod
