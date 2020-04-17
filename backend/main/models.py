@@ -186,6 +186,7 @@ class File(models.Model):
 
     def safe_delete(self, user, add_message):
         if self.owner == user:
+            os.remove(self.file.name)
             self.delete()
             add_message(f'File {self.full_name} was removed')
     
