@@ -23,7 +23,6 @@ from main import views
 
 
 urlpatterns = [ 
-    path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('auth/', include('users.urls')),
     re_path(r'^accounts/', include('allauth.urls')),
@@ -31,5 +30,9 @@ urlpatterns = [
 
 #static and media urls first to prevent catching /media with client routing
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.ADMIN_ENABLED:
+    urlpatterns += [path('admin/', admin.site.urls)]
+
 #All another urls served by SPA client
 urlpatterns += [re_path(r'^.*', views.index, name='index')]
