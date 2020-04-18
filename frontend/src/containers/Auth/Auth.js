@@ -51,7 +51,7 @@ class Auth extends Component {
             <div className={classes.SignOut} onClick={this.props.logout}>sign out</div>
           </div>
           <div className={classes.Photo}>
-            <img src={this.props.userData.photo} alt="" />
+            <img src={this.props.userData.photo} alt="" onClick={alert('Easter Egg!')} />
           </div>
         </div>
       );
