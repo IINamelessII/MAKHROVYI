@@ -6,7 +6,7 @@ import classes from './Footer.css';
 const footer = props => {
   return (
     <div className={classes.Footer}>
-      <span className={classes.Label}>© 2019 Oleh Serikov, Inc</span>
+      <span className={classes.Label}><a href="https://github.com/IINamelessII">© 2019 Oleh Serikov, Inc</a></span>
       <Media query="(max-width: 600px)" render={() => (
         <div className={classes.Container}>
           <span className={classes.Label}><a href="https://github.com/IINamelessII/MAKHROVYI/blob/master/LICENSE">License</a></span>
