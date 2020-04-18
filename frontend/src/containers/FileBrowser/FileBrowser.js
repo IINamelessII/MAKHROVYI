@@ -18,7 +18,8 @@ import {baseUrl, rootId} from '../../shared/constants';
 
 class FileBrowser extends Component {
   state = {
-    selectedFileHash: parseInt(this.props.match.params.fileHash),
+    // selectedFileHash: parseInt(this.props.match.params.fileHash),
+    selectedFileHash: null,
     selectedDirHash: null,
   }
 
@@ -282,18 +283,9 @@ class FileBrowser extends Component {
           this.props.history.push('/directories/' + parseInt(this.props.hashPath[this.props.hashPath.length - 1]));
         }
 
-        console.log(`Match path ${this.props.match.path}`);
-        console.log(`Match dirHash ${this.props.match.params.dirHash}`);
-        console.log(`Match fileHash ${this.props.match.params.fileHash}`);
-        console.log(`props.hashPath ${this.props.hashPath}`);
-        console.log(`state.selectedFileHash ${this.state.selectedFileHash}`);
-        console.log('\n');
-
         const shouldRoot = this.props.match.path === '/' && this.props.hashPath.length > 1;
         const shouldAnotherDir = this.props.match.path === '/directories/:dirHash' && parseInt(this.props.hashPath[this.props.hashPath.length - 1]) !== parseInt(this.props.match.params.dirHash);
-        const shouldAnotherFile = this.props.match.path === '/files/:fileHash' && parseInt(this.props.match.params.fileHash) !== this.state.selectedFileHash;
-        if ((shouldRoot ||shouldAnotherDir || shouldAnotherFile) && this.wasFirstRender) {
-          console.log('RERENDER!');
+        if ((shouldRoot ||shouldAnotherDir) && this.wasFirstRender) {
           this.props.updateStructure(this.props.match.params.dirHash, this.props.match.params.fileHash, this.props.dirs);
         }
 
@@ -310,7 +302,7 @@ class FileBrowser extends Component {
               ext={item[1].ext}
               showContextMenu={this.showContextMenu}
               info={item[1]}
-              selected={this.state.selectedFileHash === parseInt(item[0])}
+              selected={parseInt(this.props.match.params.fileHash) === parseInt(item[0])}
               redirectToDir={redirectToDir}
               rename={() => this.renameFileClick(item[0])}
               remove={() => this.removeFile(item[0])}

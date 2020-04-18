@@ -120,7 +120,6 @@ export const selectDir = (dirHash) => {
 };
 
 export const handleHashes = (rootId, dirHash, fileHash, dirs, dispatch) => {
-  console.log(rootId, dirHash, fileHash, dirs, dispatch);
 
   const intDirHash = parseInt(dirHash);
   const intFileHash = parseInt(fileHash);

@@ -91,7 +91,7 @@ class File extends Component {
 
   render() {
     let styleClasses = [classes.File];
-    if (this.state.selected) {
+    if (this.props.selected) {
       styleClasses.push(classes.Selected);
     }
 
