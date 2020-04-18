@@ -4,6 +4,7 @@ from django.http import HttpResponse
 
 
 def user_data(request):
+    return HttpResponse(json.dumps({'id': 11}), status=200) #DEBUG
     """Return cureent user photo and id if user is authenticated via OAuth"""
     if hasattr(request.user, 'socialaccount_set') and len(request.user.socialaccount_set.all()):
         data = {

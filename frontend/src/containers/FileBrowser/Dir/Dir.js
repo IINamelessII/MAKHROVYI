@@ -40,7 +40,7 @@ class Dir extends Component {
   }
 
   downloadClick = () => {
-    axios.post('/archive/', {id: parseInt(this.props.id)})
+    axios.get('/archive/' + parseInt(this.props.id) + '/')
       .then(response => {
         const a = document.createElement('a');
         a.style.display = 'none';
@@ -51,7 +51,7 @@ class Dir extends Component {
         a.click();
         document.body.removeChild(a);
         const token = response.headers['content-disposition'].slice(21);
-        axios.post('/archive_received/', {token: token});
+        axios.get('/archive_received/' + token + '/');
       })
       .catch(error => {
         this.props.addMessage('Something went wrong');

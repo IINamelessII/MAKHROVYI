@@ -45,7 +45,7 @@ class File extends Component {
 
 
   downloadClick = () => {
-    axios.post('/download/', {id: parseInt(this.props.id)})
+    axios.get('/download/' + parseInt(this.props.id) + '/')
       .then(response => {
         const a = document.createElement('a');
         a.style.display = 'none';

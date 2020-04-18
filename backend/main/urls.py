@@ -9,9 +9,9 @@ router.register(r'files', views.FileViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    path('download/', views.download, name='download'),
-    path('archive/', views.archive, name='archive'),
-    path('archive_received/', views.archive_received, name='archive_received'),
+    path('download/<int:id>/', views.download, name='download'),
+    path('archive/<int:id>/', views.archive, name='archive'),
+    path('archive_received/<str:token>/', views.archive_received, name='archive_received'),
     path('upload_files/<int:id>/', views.upload_files, name='upload_files'),
     path('newdir/', views.add_new_dir, name='add_new_dir'),
     path('upload_dir/<int:id>/', views.upload_dir, name='upload_dir'),

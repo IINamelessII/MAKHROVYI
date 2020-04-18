@@ -81,12 +81,10 @@ def index(request):
     return render(request, 'index.html')
 
 
-@post_only
-@load_data('id')
-def download(request, data):
+def download(request, id):
     """Return link for downloading file by its id"""
     try:    
-        the_file = File.objects.get(pk=data['id'])
+        the_file = File.objects.get(pk=id)
     except:
         return HttpResponse(status=400)
 
@@ -97,12 +95,10 @@ def download(request, data):
     return response
 
        
-@post_only
-@load_data('id')
-def archive(request, data):
+def archive(request, id):
     """Create archive from dir and return link for downloading by dir's id"""
     try:
-        token = Dir.objects.get(pk=data['id']).archieve_token()
+        token = Dir.objects.get(pk=id).archieve_token()
     except:
         return HttpResponse(status=400)
     
@@ -112,12 +108,10 @@ def archive(request, data):
     return response
         
 
-@post_only
-@load_data('token')
-def archive_received(request, data):
+def archive_received(request, token):
     """Remove archive with given token after specified time"""
     try:
-        remove_archive.apply_async((data['token'],), countdown=settings.TIME_TO_DELETE)
+        remove_archive.apply_async((token,), countdown=settings.TIME_TO_DELETE)
     except:
         return HttpResponse(status=400)
     
