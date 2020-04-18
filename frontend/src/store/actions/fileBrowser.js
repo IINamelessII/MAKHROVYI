@@ -105,12 +105,44 @@ export const buildStructure = (rootId, dirs) => {
   };
 };
 
+export const updateStructure = (rootId, dirHash, fileHash, dirs) => {
+  return dispatch => {
+    dispatch(buildStructure(rootId, dirs));
+    handleHashes(rootId, dirHash, fileHash, dirs, (f) => dispatch(f));
+  }
+};
+
 export const selectDir = (dirHash) => {
   return {
     type: actionTypes.SELECT_DIR,
     dirHash: dirHash,
   };
 };
+
+export const handleHashes = (rootId, dirHash, fileHash, dirs, dispatch) => {
+  console.log(rootId, dirHash, fileHash, dirs, dispatch);
+
+  const intDirHash = parseInt(dirHash);
+  const intFileHash = parseInt(fileHash);
+  
+  if (intDirHash && intDirHash !== rootId) { //If we have have specified a directorys hash
+    const parentDir = dirs.find(dir => dir.dirs.includes(intDirHash));
+    if (parentDir) {
+      dispatch(selectDir(intDirHash));
+    } else {
+      dispatch(messageActions.addMessage('Directory was not founded'));
+      dispatch(setShouldRedirect(true));
+    }
+  } else if (intFileHash) { //If we have have specified a file hash
+    const parentDir = dirs.find(dir => dir.files.includes(intFileHash));
+    if (parentDir) {
+      dispatch(selectDir(parentDir.id));
+    } else {
+      dispatch(messageActions.addMessage('File was not founded'));
+      dispatch(setShouldRedirect(true));
+    }
+  }
+}
 
 export const prepareStructure = (rootId, dirHash, fileHash) => {
   return dispatch => {
@@ -122,26 +154,8 @@ export const prepareStructure = (rootId, dirHash, fileHash) => {
         axios.get('/api/dirs/')
           .then(response => {
             dispatch(buildStructure(rootId, response.data));
-            const intDirHash = parseInt(dirHash);
-            const intFileHash = parseInt(fileHash);
             
-            if (intDirHash && intDirHash !== rootId) { //If we have have specified a directorys hash
-              const parentDir = response.data.find(dir => dir.dirs.includes(intDirHash));
-              if (parentDir) {
-                dispatch(selectDir(intDirHash));
-              } else {
-                dispatch(messageActions.addMessage('Directory was not founded'));
-                dispatch(setShouldRedirect(true));
-              }
-            } else if (intFileHash) { //If we have have specified a file hash
-              const parentDir = response.data.find(dir => dir.files.includes(intFileHash));
-              if (parentDir) {
-                dispatch(selectDir(parentDir.id));
-              } else {
-                dispatch(messageActions.addMessage('File was not founded'));
-                dispatch(setShouldRedirect(true));
-              }
-            }
+            handleHashes(rootId, dirHash, fileHash, response.data, (f) => dispatch(f));
           })
           .catch(error => {
             dispatch(fetchDirsFail());

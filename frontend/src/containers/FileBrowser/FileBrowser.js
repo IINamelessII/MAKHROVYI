@@ -263,6 +263,8 @@ class FileBrowser extends Component {
     }
   }
 
+  wasFirstRender = false;
+
   render() {
     let fileBrowserContent = (
       <div className={classes.SpinnerContainer}>
@@ -279,6 +281,23 @@ class FileBrowser extends Component {
         const redirectToDir = () => {
           this.props.history.push('/directories/' + parseInt(this.props.hashPath[this.props.hashPath.length - 1]));
         }
+
+        console.log(`Match path ${this.props.match.path}`);
+        console.log(`Match dirHash ${this.props.match.params.dirHash}`);
+        console.log(`Match fileHash ${this.props.match.params.fileHash}`);
+        console.log(`props.hashPath ${this.props.hashPath}`);
+        console.log(`state.selectedFileHash ${this.state.selectedFileHash}`);
+        console.log('\n');
+
+        const shouldRoot = this.props.match.path === '/' && this.props.hashPath.length > 1;
+        const shouldAnotherDir = this.props.match.path === '/directories/:dirHash' && parseInt(this.props.hashPath[this.props.hashPath.length - 1]) !== parseInt(this.props.match.params.dirHash);
+        const shouldAnotherFile = this.props.match.path === '/files/:fileHash' && parseInt(this.props.match.params.fileHash) !== this.state.selectedFileHash;
+        if ((shouldRoot ||shouldAnotherDir || shouldAnotherFile) && this.wasFirstRender) {
+          console.log('RERENDER!');
+          this.props.updateStructure(this.props.match.params.dirHash, this.props.match.params.fileHash, this.props.dirs);
+        }
+
+        this.wasFirstRender = true;
 
         const structure = Object.entries(this.props.items[this.props.items.length - 1]);
         structure.sort((a, b) => this.compareItems(a[1], b[1]));
@@ -503,6 +522,7 @@ const mapDispatchToProps = dispatch => {
     loadMessages: () => dispatch(actions.loadMessages()),
     setShouldRedirect: (should) => dispatch(actions.setShouldRedirect(should)),
     setSigninHighlight: (highlight) => dispatch(actions.setSigninHighlight(highlight)),
+    updateStructure: (dirHash, fileHash, dirs) => dispatch(actions.updateStructure(rootId, dirHash, fileHash, dirs)),
   };
 }
 
