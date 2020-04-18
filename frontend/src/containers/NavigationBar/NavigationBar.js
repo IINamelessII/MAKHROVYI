@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Media from 'react-media';
 
+import * as actions from '../../store/actions/index';
 import Logo from '../../components/Logo/Logo';
 import NavigationLink from '../../components/NavigationLink/NavigationLink';
 import Auth from '../Auth/Auth';
@@ -8,6 +10,10 @@ import Auth from '../Auth/Auth';
 import classes from './NavigationBar.css';
 
 class NavigationBar extends Component {
+  componentDidMount() {
+    this.props.loadUserData();
+  }
+
   render() {
     
     return (
@@ -42,4 +48,10 @@ class NavigationBar extends Component {
   }
 }
 
-export default NavigationBar;
+const mapDispatchToProps = dispatch => {
+  return {
+    loadUserData: () => dispatch(actions.loadUserData()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NavigationBar);

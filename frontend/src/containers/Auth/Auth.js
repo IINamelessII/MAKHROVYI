@@ -23,10 +23,6 @@ class Auth extends Component {
     }, 100);
   }
 
-  componentDidMount() {
-    this.props.loadUserData();
-  }
-
   render() {
     const signinClasses = [classes.SignIn];
     if (this.props.signinHighlight) {
@@ -71,7 +67,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(actions.logout()),
-    loadUserData: () => dispatch(actions.loadUserData()),
     addMessage: (msg) => dispatch(actions.addMessage(msg)),
   };
 };
