@@ -13,6 +13,10 @@ class FilesUploadInput extends Component {
 
   formRef = React.createRef()
 
+  uploadClickHandler = () => {
+    this.formRef.current.dispatchEvent(new Event("submit"))
+  }
+
   uploadFiles = (event) => {
     event.preventDefault();
 
@@ -22,7 +26,10 @@ class FilesUploadInput extends Component {
       for (let file of this.state.files) {
         data.append('file', file);
       }
+      
       const dirId = parseInt(this.props.hashPath[this.props.hashPath.length - 1]);
+      this.setState({files: []});
+      this.props.hideBackdrop();
       axios({
         method: 'post',
         url: '/upload_files/' + dirId + '/',
@@ -31,12 +38,12 @@ class FilesUploadInput extends Component {
       })
         .then(response => {
           this.props.rerender();
-          this.props.hideBackdrop();
         })
         .catch(error => {
           this.props.addMessage('Something went wrong');
-          this.props.hideBackdrop();
         });
+    } else {
+      this.props.addMessage('Select files first');
     }
   }
 
@@ -110,7 +117,7 @@ class FilesUploadInput extends Component {
           <div className={classes.FileList}>{filesList}</div>
           <div className={classes.Buttons}>
             <div onClick={this.props.hideBackdrop} className={classes.Button}>cancel</div>
-            <div onClick={() => this.formRef.current.dispatchEvent(new Event("submit"))} className={buttonClasses.join(' ')}>upload</div>
+            <div onClick={this.uploadClickHandler} className={buttonClasses.join(' ')}>upload</div>
           </div>
 
           <div></div>
