@@ -39,7 +39,7 @@ class Auth extends Component {
           <div className={signinClasses.join(' ')} onClick={this.onSignInClickHandler}>sign in</div>
         </div>
         <div className={classes.Photo}>
-          <img src={anonImage} alt="" />
+          <img src={anonImage} alt="" onClick={() => this.props.addMessage('We love you, Anon! <3')}/>
         </div>
         </div>
     );
@@ -51,7 +51,7 @@ class Auth extends Component {
             <div className={classes.SignOut} onClick={this.props.logout}>sign out</div>
           </div>
           <div className={classes.Photo}>
-            <img src={this.props.userData.photo} alt="" onClick={() => alert('Easter Egg!')} />
+            <img src={this.props.userData.photo} alt="" onClick={() => this.props.addMessage(`We love you, ${this.props.userData.name.slice(0, 16)}! <3`)} />
           </div>
         </div>
       );
@@ -72,6 +72,7 @@ const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(actions.logout()),
     loadUserData: () => dispatch(actions.loadUserData()),
+    addMessage: (msg) => dispatch(actions.addMessage(msg)),
   };
 };
 
