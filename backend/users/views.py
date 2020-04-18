@@ -9,7 +9,7 @@ def user_data(request):
         data = {
             'photo': request.user.socialaccount_set.all()[0].extra_data['picture'],
             'id': request.user.id,
-            'name': request.user,
+            'name': request.user.username,
         }
     else:
         data = None
