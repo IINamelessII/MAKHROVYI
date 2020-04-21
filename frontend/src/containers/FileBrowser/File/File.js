@@ -108,7 +108,7 @@ class File extends Component {
           src={require('../../../assets/images/baseline_description_white_48dp.png')} 
           alt=""
           onContextMenu={(event) => this.onContextMenu(event)}
-          onClick={this.touchSelected}
+          onClick={this.props.selected ? this.touchSelected : this.downloadClick}
           onTouchStart={this.handleButtonPress}
           onTouchEnd={this.handleButtonRelease} />
         </div>
