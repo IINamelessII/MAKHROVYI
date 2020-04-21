@@ -141,3 +141,35 @@
     background-color: #0003147e;
     color: #fff;
 }
+
+@media (max-width:992px) {
+    .FilesUploadInput {
+        height: 480px;
+    }
+
+    .FileList {
+        height: 300px;
+    }
+}
+
+@media (max-height:800px) {
+    .FilesUploadInput {
+        height: 400px;
+    }
+
+    .FileList {
+        height: 240px;
+    }
+}
+
+@media (max-height:600px) {
+    .FilesUploadInput {
+        height: 300px;
+        width: 300px;
+    }
+
+    .FileList {
+        height: 200px;
+        width: 280px;
+    }
+}
