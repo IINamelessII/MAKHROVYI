@@ -29,7 +29,7 @@ class Input extends Component {
       check = newValue.length <= this.props.validation.length;
       isValid = isValid && check;
       if (!check && !('length' in messages)) {
-        messages['length'] = 'Value should be no longer than ' + this.props.validation.length + ' symbols';
+        messages['length'] = this.props.valueLabel + ' should be no longer than ' + this.props.validation.length + ' symbols';
       } 
     }
 
