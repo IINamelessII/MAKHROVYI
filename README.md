@@ -1,5 +1,9 @@
 # MAKHROVYI
-New Palevo is comming...
+Service for free-to-everyone students solutions exchanges, where:
+
+ - Everybody can download solutions as separated files or whole directories.
+
+ - Everybody can upload files and create directories after authentication.
 
 ## Tech Stack:
 
