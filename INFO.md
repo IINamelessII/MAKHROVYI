@@ -1,17 +1,16 @@
 # AnotherOneProject
-Service for premises outsourcing, where:
+Service for free-to-everyone students solutions exchanges, where:
 
- - Everybody can rent out a premises
- - Everybody can rent a place for different needs
+ - Everybody can download solutions as separated files or whole directories
+ - Everybody can upload files and create directories after authentication
  
 ## Project features
- - The main goal of the project is providing a platform for ***renting of EVERYTHING***: people can rent anything from the things they need (for example, *a washing machine, hairdryer, projector, or even a car*) to *living quarters, offices or retail spaces*.
- - Users can **create pages** with a detailed description of their objects that will be rented. On these pages, among other things, you can find out the price, the time for which you can rent this object and also the queue for rent.
- - Also, people can **leave requests** for things they want to rent.
- - Each owner will have a **personal page** with rental statistics and reviews.
- - Buyer's actions will remain **anonymous** and will not be displayed anywhere without his consent.
- - For an additional fee it will be possible to **advertise** a rental object.
- - ... (as the project develops, opportunities will be added and adjusted)
+ - The main goal of the project is providing a platform for ***saving students' time***: Now you don't need to spend a lot of time on doing work that was done before by other students (for example, doing same laboratory works for 10 generations of students).
+ - Users can **download solutions** that already were uploaded by other students into corresponding directories.
+ - From another side, people can **create directorie's structure** for ease of service usage.
+ - Everyone can share their solutions simply **uploaded it**.
+ - For statistics puprposes everyone can **view files/dirs stats such as number of downloads**.
+ - Also in future, any student will be able to **view tutorials** in according section.
 
 
 ## Tech Stack:
