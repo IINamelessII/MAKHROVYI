@@ -238,7 +238,6 @@ Test UI for stability. Improve interactivity and overall User Experience. Polish
 
 1. *Designing use cases*. Creating buisiness models and actually usecases
 1. *Designing API endpoints*.
-1. *Writing docs for API endpoints*. Documenting main HTTP `GET/POST/PATCH`(update) methods for API endpoints.
 
 #### March
 
@@ -247,12 +246,12 @@ Test UI for stability. Improve interactivity and overall User Experience. Polish
 
 #### April
 
-1. *Writing Rent app*. App with renting tools: list of rental offers, creating rent pages etc.
+1. *Writing main app*: App that works with files and directories on server side.
 
 #### May
 
-1. *Writing Personal pages app*: App with user pages tools.
+1. *Writing users app*: App with user's profiles and authentication.
 
 #### June
 
-1. *Mock billing*. Creating a mock of billing (we will not create actual billing system) and thinking about transaction safety.
+1. *DevOps stuff*. Moving the whole project into Docker image + setting up nginx, redis, celery and env aspects.
